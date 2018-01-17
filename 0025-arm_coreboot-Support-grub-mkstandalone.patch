@@ -1,7 +1,7 @@
 From 3edabad8fefb112cc4b2d43be6e97d43c909ceee Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:59:48 +0200
-Subject: [PATCH 025/194] arm_coreboot: Support grub-mkstandalone.
+Subject: [PATCH 025/225] arm_coreboot: Support grub-mkstandalone.
 
 ---
  include/grub/util/install.h |  6 +++++-
@@ -154,5 +154,5 @@ index 9074d3e9e..75e3e5ba6 100644
      case GRUB_INSTALL_PLATFORM_MIPSEL_ARC:
      case GRUB_INSTALL_PLATFORM_ARM_UBOOT:
 -- 
-2.13.5
+2.14.3
 

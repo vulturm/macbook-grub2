@@ -1,0 +1,74 @@
+From f5f294de1c33334035ef9230f23238b8c7cb0a19 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Thu, 1 Jun 2017 09:59:56 -0400
+Subject: [PATCH 106/225] Add grub_efi_allocate_pool() and grub_efi_free_pool()
+ wrappers.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ grub-core/kern/efi/mm.c | 23 +++++++++++++++++++++++
+ include/grub/efi/efi.h  |  5 +++++
+ 2 files changed, 28 insertions(+)
+
+diff --git a/grub-core/kern/efi/mm.c b/grub-core/kern/efi/mm.c
+index c48e9b5c7..1ef5a42bf 100644
+--- a/grub-core/kern/efi/mm.c
++++ b/grub-core/kern/efi/mm.c
+@@ -165,6 +165,18 @@ grub_efi_allocate_fixed (grub_efi_physical_address_t address,
+ 				       GRUB_EFI_LOADER_DATA);
+ }
+ 
++grub_efi_status_t
++grub_efi_allocate_pool (grub_efi_memory_type_t pool_type,
++			grub_efi_uintn_t buffer_size, void **buffer)
++{
++  grub_efi_boot_services_t *b;
++  grub_efi_status_t status;
++
++  b = grub_efi_system_table->boot_services;
++  status = efi_call_3 (b->allocate_pool, pool_type, buffer_size, buffer);
++  return status;
++}
++
+ /* Free pages starting from ADDRESS.  */
+ void
+ grub_efi_free_pages (grub_efi_physical_address_t address,
+@@ -178,6 +190,17 @@ grub_efi_free_pages (grub_efi_physical_address_t address,
+   grub_efi_drop_alloc (address, pages);
+ }
+ 
++grub_efi_status_t
++grub_efi_free_pool (void *buffer)
++{
++  grub_efi_boot_services_t *b;
++  grub_efi_status_t status;
++
++  b = grub_efi_system_table->boot_services;
++  status = efi_call_1 (b->free_pool, buffer);
++  return status;
++}
++
+ #if defined (__i386__) || defined (__x86_64__)
+ 
+ /* Helper for stop_broadcom.  */
+diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
+index c996913e5..a4d0d9767 100644
+--- a/include/grub/efi/efi.h
++++ b/include/grub/efi/efi.h
+@@ -47,8 +47,13 @@ EXPORT_FUNC(grub_efi_allocate_fixed) (grub_efi_physical_address_t address,
+ 				      grub_efi_uintn_t pages);
+ void *
+ EXPORT_FUNC(grub_efi_allocate_any_pages) (grub_efi_uintn_t pages);
++grub_efi_status_t EXPORT_FUNC(grub_efi_allocate_pool) (
++					grub_efi_memory_type_t pool_type,
++					grub_efi_uintn_t buffer_size,
++					void **buffer);
+ void EXPORT_FUNC(grub_efi_free_pages) (grub_efi_physical_address_t address,
+ 				       grub_efi_uintn_t pages);
++grub_efi_status_t EXPORT_FUNC(grub_efi_free_pool) (void *buffer);
+ int
+ EXPORT_FUNC(grub_efi_get_memory_map) (grub_efi_uintn_t *memory_map_size,
+ 				      grub_efi_memory_descriptor_t *memory_map,
+-- 
+2.14.3
+

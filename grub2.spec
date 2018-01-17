@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	19%{?dist}
+Release:	20%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -454,6 +454,11 @@ fi
 %endif
 
 %changelog
+* Wed Jan 17 2018 Peter Jones <pjones@redhat.com> - 2.02-20
+- Update to newer upstream for F28
+- Pull in patches for Apollo Lake hardware
+  Resolves: rhbz#1519311
+
 * Tue Oct 24 2017 Peter Jones <pjones@redhat.com> - 2.02-19
 - Handle xen module loading (somewhat) better
   Resolves: rhbz#1486002

@@ -1,0 +1,57 @@
+From aafe24fc80167e140326dab914ccc177512ef9b6 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Thu, 20 Apr 2017 13:29:06 -0400
+Subject: [PATCH 124/225] grub-install: Don't mark PPC machines as EFI when
+ /boot/efi/ exists.
+
+Currently when platform == GRUB_INSTALL_PLATFORM_POWERPC_IEEE1275, the
+presence of /boot/efi used to determine if this is an EFI machine.  This
+makes no sense at all, as it's a big-endian ieee1275 platform that's
+never an EFI platform.
+
+Since some OSes (such as Fedora) always put the grubenv at
+/boot/efi/EFI/fedora/grubenv, this code causes it to always make the
+wrong decision on those OSes.
+
+This isn't the right thing at all, and it's difficult to know why you
+might ever want it, especially since Mac PPC machines /don't have EFI/.
+This patch removes the code that does this.  I don't know why it was
+there, and the commit message merely states "Implement better
+integration with Mac firmware.", so there's little hope I'll figure it
+out.  As such, I have not replaced this with some other heuristic or
+other behavior.
+
+Resolves: rhbz#1484474
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ util/grub-install.c | 12 +-----------
+ 1 file changed, 1 insertion(+), 11 deletions(-)
+
+diff --git a/util/grub-install.c b/util/grub-install.c
+index 5e4cdfd2b..86756c884 100644
+--- a/util/grub-install.c
++++ b/util/grub-install.c
+@@ -1154,18 +1154,8 @@ main (int argc, char *argv[])
+ 	  char *d;
+ 
+ 	  is_guess = 1;
+-	  d = grub_util_path_concat (2, bootdir, "macppc");
+-	  if (!grub_util_is_directory (d))
+-	    {
+-	      free (d);
+-	      d = grub_util_path_concat (2, bootdir, "efi");
+-	    }
+ 	  /* Find the Mac HFS(+) System Partition.  */
+-	  if (!grub_util_is_directory (d))
+-	    {
+-	      free (d);
+-	      d = grub_util_path_concat (2, bootdir, "EFI");
+-	    }
++	  d = grub_util_path_concat (2, bootdir, "macppc");
+ 	  if (!grub_util_is_directory (d))
+ 	    {
+ 	      free (d);
+-- 
+2.14.3
+

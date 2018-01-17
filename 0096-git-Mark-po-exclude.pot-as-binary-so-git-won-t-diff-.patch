@@ -1,0 +1,26 @@
+From 13d072ac934f4f5f7861e271080b739f18f5bb91 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Wed, 22 Jul 2015 11:21:01 -0400
+Subject: [PATCH 096/225] git: Mark po/exclude.pot as binary so git won't diff
+ nonprintables.
+
+Right now when we diff the .pot file, things really really don't work.
+This patch adds the "binary" attribute to the file, so that it'll diff
+it as a binary blob instead of ascii/utf-8.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ .gitattributes | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 .gitattributes
+
+diff --git a/.gitattributes b/.gitattributes
+new file mode 100644
+index 000000000..33ffaa404
+--- /dev/null
++++ b/.gitattributes
+@@ -0,0 +1 @@
++po/exclude.pot binary
+-- 
+2.14.3
+

@@ -1,0 +1,34 @@
+From 0d56e5228336aca3c86b87995e4e6635818fa8eb Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Thu, 1 Jun 2017 10:07:50 -0400
+Subject: [PATCH 187/225] Add PRIxGRUB_EFI_STATUS and use it.
+
+This avoids syntax checkers getting confused about if it's llx or lx.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ include/grub/efi/api.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
+index 02488ec35..ddc5ecfb0 100644
+--- a/include/grub/efi/api.h
++++ b/include/grub/efi/api.h
+@@ -527,6 +527,14 @@ typedef grub_uint8_t grub_efi_char8_t;
+ typedef grub_uint16_t grub_efi_char16_t;
+ 
+ typedef grub_efi_intn_t grub_efi_status_t;
++/* Make grub_efi_status_t reasonably printable. */
++#if GRUB_CPU_SIZEOF_VOID_P == 8
++#define PRIxGRUB_EFI_STATUS "lx"
++#define PRIdGRUB_EFI_STATUS "ld"
++#else
++#define PRIxGRUB_EFI_STATUS "llx"
++#define PRIdGRUB_EFI_STATUS "lld"
++#endif
+ 
+ #define GRUB_EFI_ERROR_CODE(value)	\
+   ((((grub_efi_status_t) 1) << (sizeof (grub_efi_status_t) * 8 - 1)) | (value))
+-- 
+2.14.3
+

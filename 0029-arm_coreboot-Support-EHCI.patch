@@ -1,7 +1,7 @@
 From d11ced1e1fb93676942e51618eb53c140f541890 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:14:28 +0200
-Subject: [PATCH 029/194] arm_coreboot: Support EHCI.
+Subject: [PATCH 029/225] arm_coreboot: Support EHCI.
 
 ---
  gentpl.py                    |  2 +-
@@ -119,5 +119,5 @@ index 11d96481f..512ae1dd0 100644
  
  #endif /* GRUB_USB_H */
 -- 
-2.13.5
+2.14.3
 

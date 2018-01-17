@@ -1,7 +1,7 @@
 From fcbb723d4b1f7ad4687191562621dd0eb25f4d9e Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:19:59 +0200
-Subject: [PATCH 020/194] Add support for device-tree-based drivers.
+Subject: [PATCH 020/225] Add support for device-tree-based drivers.
 
 ---
  conf/Makefile.common               |   4 +-
@@ -847,5 +847,5 @@ index 6aa77ed73..e22d82afa 100644
      {
        struct grub_module_header *header;
 -- 
-2.13.5
+2.14.3
 
