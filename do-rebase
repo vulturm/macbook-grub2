@@ -119,7 +119,7 @@ unset LC_ALL
 git rm -q 0*.patch
 
 > grub.patches
-patches=$(othergit format-patch refs/remotes/rhboot/master..refs/remotes/rhboot/${releasever})
+patches=$(othergit format-patch grub-2.02..refs/remotes/rhboot/${releasever})
 for x in $patches ; do
 	echo Patch$(echo ${x} | cut -d- -f1): ${x} >> grub.patches
 done
@@ -130,5 +130,5 @@ git add 0*.patch grub2.spec grub.patches
 if [ -z "$amend" ]; then
 	fedpkg commit -s -c $amend
 else
-	git commit -m "" --amend
+	git commit --amend
 fi
