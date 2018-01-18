@@ -61,15 +61,9 @@
 %global platform ieee1275
 %endif
 
-%ifarch %{ix86}
-%global target_cpu_name %{_arch}
-%global legacy_target_cpu_name i386
-%global legacy_package_arch pc
-%global platform pc
-%endif
 
 %global efi_only aarch64 %{arm}
-%global efi_arch x86_64 ia64 %{efi_only}
+%global efi_arch x86_64 %{ix86} ia64 %{efi_only}
 %ifarch %{efi_arch}
 %global with_efi_arch 1
 %else
@@ -94,6 +88,17 @@
 
 %ifarch aarch64
 %global legacy_provides -l
+%endif
+
+%ifarch %{ix86}
+%global efiarch ia32
+%global target_cpu_name i386
+%global grub_target_name i386-efi
+%global package_arch efi-ia32
+
+%global legacy_target_cpu_name i386
+%global legacy_package_arch pc
+%global platform pc
 %endif
 
 %ifarch x86_64
@@ -140,6 +145,13 @@
 %global grubefiname grub%{efiarch}.efi
 %global grubeficdname gcd%{efiarch}.efi
 %global grubefiarch %{target_cpu_name}-efi
+%ifarch %{ix86}
+%global with_efi_modules 0
+%global without_efi_modules 1
+%else
+%global with_efi_modules 1
+%global without_efi_modules 0
+%endif
 %endif
 
 %if 0%{?alt_efi_arch:1}
@@ -233,16 +245,18 @@ Provides:	%{name}-efi = %{evr}					\
 This subpackage provides support for %{1} systems.			\
 									\
 %{expand:%%{?!buildsubdir:%%define buildsubdir grub-%{1}-%{tarversion}}}\
+%{expand:%if 0%{?with_efi_modules}					\
 %{expand:%%package %{1}-modules}					\
 Summary:	Modules used to build custom grub.efi images		\
 Group:		System Environment/Base					\
 BuildArch:	noarch							\
 Requires:	%{name}-common = %{evr}					\
-%{-p:Provides:	%{name}-efi-modules = %{evr}}				\
-%{-p:Obsoletes:	%{name}-efi-modules < %{evr}}				\
+Provides:	%{name}-efi-modules = %{evr}				\
+Obsoletes:	%{name}-efi-modules < %{evr}				\
 %{expand:%%description %{1}-modules}					\
 %{desc}									\
 This subpackage provides support for rebuilding your own grub.efi.	\
+%endif}									\
 									\
 %{expand:%%package %{1}-cdboot}						\
 Summary:	Files used to boot removeable media with EFI		\
@@ -480,12 +494,18 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 %ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grub.cfg	\
 /boot/grub2/grubenv						\
 %ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grubenv \
+%{expand:%if 0%{?without_efi_modules}				\
+%exclude %{_libdir}/grub/%{6}					\
+%exclude %{_libdir}/grub/%{6}/*					\
+%endif}								\
 								\
+%{expand:%if 0%{?with_efi_modules}				\
 %{expand:%%files %{1}-modules}					\
 %defattr(-,root,root,-)						\
 %dir %{_libdir}/grub/%{6}/					\
 %{_libdir}/grub/%{6}/*						\
 %exclude %{_libdir}/grub/%{6}/*.module				\
+%endif}								\
 								\
 %{expand:%%files %{1}-cdboot}					\
 %defattr(-,root,root,-)						\
