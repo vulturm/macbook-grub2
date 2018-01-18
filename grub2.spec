@@ -314,7 +314,7 @@ fi
 %exclude /boot/%{name}/themes/system/*
 %attr(0700,root,root) %dir /boot/grub2
 %exclude /boot/grub2/*
-%dir %attr(0755,root,root) /boot/efi/EFI/%{efidir}
+%dir %attr(0700,root,root) /boot/efi/EFI/%{efidir}
 %exclude /boot/efi/EFI/%{efidir}/*
 %license COPYING
 %ghost %config(noreplace) /boot/grub2/grubenv
@@ -454,6 +454,10 @@ fi
 %endif
 
 %changelog
+* Thu Jan 18 2018 Peter Jones <pjones@redhat.com> - 2.02-20
+- Make everything under /boot/efi be mode 0700, since that's what FAT will
+  show anyway.
+
 * Wed Jan 17 2018 Peter Jones <pjones@redhat.com> - 2.02-20
 - Update to newer upstream for F28
 - Pull in patches for Apollo Lake hardware
