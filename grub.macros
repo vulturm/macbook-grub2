@@ -18,6 +18,9 @@
 	sed							\\\
 		-e 's/-O. //g'					\\\
 		-e 's/-g /-g3 /g'				\\\
+		-e 's/-fstack-clash-protection //g'		\\\
+		-e 's/-fplugin=annobin //g'			\\\
+		-e 's,-specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 ,,g' \\\
 		-e 's/-fstack-protector[[:alpha:]-]\\+//g'	\\\
 		-e 's/-Wp,-D_FORTIFY_SOURCE=[[:digit:]]\\+//g'	\\\
 		-e 's/--param=ssp-buffer-size=4//g'		\\\
@@ -25,6 +28,7 @@
 		-e 's/-fexceptions//g'				\\\
 		-e 's/-fasynchronous-unwind-tables//g'		\\\
 		-e 's/^/ -fno-strict-aliasing /'		\\\
+		-e 's/^/ -fno-stack-clash-protection /'		\\\
 		%{nil}
 
 %global efi_cflags						\\\
