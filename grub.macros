@@ -18,7 +18,6 @@
 	sed							\\\
 		-e 's/-O. //g'					\\\
 		-e 's/-g /-g3 /g'				\\\
-		-e 's/-fstack-clash-protection //g'		\\\
 		-e 's/-fplugin=annobin //g'			\\\
 		-e 's,-specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 ,,g' \\\
 		-e 's/-fstack-protector[[:alpha:]-]\\+//g'	\\\
@@ -28,7 +27,6 @@
 		-e 's/-fexceptions//g'				\\\
 		-e 's/-fasynchronous-unwind-tables//g'		\\\
 		-e 's/^/ -fno-strict-aliasing /'		\\\
-		-e 's/^/ -fno-stack-clash-protection /'		\\\
 		%{nil}
 
 %global efi_cflags						\\\
@@ -494,7 +492,7 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 %config(noreplace) %{_sysconfdir}/%{name}-efi.cfg		\
 %dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}		\
 %attr(0700,root,root)/boot/efi/EFI/%{efidir}/%{2}		\
-%attr(0755,root,root)/boot/efi/EFI/%{efidir}/fonts		\
+%attr(0700,root,root)/boot/efi/EFI/%{efidir}/fonts		\
 %ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grub.cfg	\
 /boot/grub2/grubenv						\
 %ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grubenv \

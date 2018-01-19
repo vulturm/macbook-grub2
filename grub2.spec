@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	22%{?dist}
+Release:	23%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -454,6 +454,11 @@ fi
 %endif
 
 %changelog
+* Fri Jan 19 2018 Peter Jones <pjones@redhat.com> - 2.02-23
+- Only nerf annobin, not -fstack-crash-protection.
+- Fix a conflict on /boot/efi directory permissions between -cdboot and the
+  normal bootloader.
+
 * Thu Jan 18 2018 Peter Jones <pjones@redhat.com> - 2.02-22
 - Nerf some gcc 7.2.1-6 'features' that cause grub to crash on start.
 
