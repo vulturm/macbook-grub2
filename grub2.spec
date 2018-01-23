@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	23%{?dist}
+Release:	24%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -454,6 +454,12 @@ fi
 %endif
 
 %changelog
+* Tue Jan 23 2018 Peter Jones <pjones@redhat.com> - 2.02-24
+- Fix a merge error from 2.02-21 that affected kernel loading on Aarch64.
+  Related: rhbz#1519311
+  Related: rhbz#1506704
+  Related: rhbz#1502312
+
 * Fri Jan 19 2018 Peter Jones <pjones@redhat.com> - 2.02-23
 - Only nerf annobin, not -fstack-crash-protection.
 - Fix a conflict on /boot/efi directory permissions between -cdboot and the

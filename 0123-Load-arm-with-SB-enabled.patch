@@ -71,7 +71,7 @@ index 746edd104..03ff83563 100644
  
    void *fdt;
  
-@@ -100,6 +103,26 @@ finalize_params_linux (void)
+@@ -100,6 +103,25 @@ finalize_params_linux (void)
    if (grub_fdt_install() != GRUB_ERR_NONE)
      goto failure;
  
@@ -86,8 +86,7 @@ index 746edd104..03ff83563 100644
 +  loaded_image->load_options_size = len =
 +    (grub_strlen (linux_args) + 1) * sizeof (grub_efi_char16_t);
 +  loaded_image->load_options =
-+    grub_efi_allocate_pages_max (0,
-+				 GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
++    grub_efi_allocate_any_pages (GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
 +  if (!loaded_image->load_options)
 +    return grub_error(GRUB_ERR_BAD_OS, "failed to create kernel parameters");
 +
@@ -98,7 +97,7 @@ index 746edd104..03ff83563 100644
    return GRUB_ERR_NONE;
  
  failure:
-@@ -107,72 +130,47 @@ failure:
+@@ -107,72 +129,47 @@ failure:
    return grub_error(GRUB_ERR_BAD_OS, "failed to install/update FDT");
  }
  
@@ -199,7 +198,7 @@ index 746edd104..03ff83563 100644
  }
  
  static grub_err_t
-@@ -249,6 +247,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -249,6 +246,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  {
    grub_file_t file = 0;
    struct grub_arm64_linux_kernel_header lh;
@@ -207,7 +206,7 @@ index 746edd104..03ff83563 100644
  
    grub_dl_ref (my_mod);
  
-@@ -293,6 +292,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -293,6 +291,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    grub_dprintf ("linux", "kernel @ %p\n", kernel_addr);
  
