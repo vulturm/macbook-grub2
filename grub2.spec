@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	24%{?dist}
+Release:	25%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -454,6 +454,9 @@ fi
 %endif
 
 %changelog
+* Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+- Escape macros in %%changelog
+
 * Tue Jan 23 2018 Peter Jones <pjones@redhat.com> - 2.02-24
 - Fix a merge error from 2.02-21 that affected kernel loading on Aarch64.
   Related: rhbz#1519311
@@ -945,8 +948,8 @@ fi
   update README.Fedora (#734090)
   fix comments for the hack for upgrading from grub2 < 1.99-4
   fix sed syntax error preventing use of $RPM_OPT_FLAGS (#704820)
-  make /etc/grub2*.cfg %config(noreplace)
-  make grub.cfg %ghost - an empty file is of no use anyway
+  make /etc/grub2*.cfg %%config(noreplace)
+  make grub.cfg %%ghost - an empty file is of no use anyway
   create /etc/default/grub more like anaconda would create it (#678453)
   don't create rescue entries by default - grubby will not maintain them anyway
   set GRUB_SAVEDEFAULT=true so saved defaults works (rbhz#732058)
@@ -982,7 +985,7 @@ fi
 - Fix upgrades from grub2 < 1.99-4 (#735259)
 
 * Fri Sep 02 2011 Peter Jones <pjones@redhat.com> - 1.99-4
-- Don't do sysadminny things in %preun or %post ever. (#735259)
+- Don't do sysadminny things in %%preun or %%post ever. (#735259)
 - Actually include the changelog in this build (sorry about -3)
 
 * Thu Sep 01 2011 Peter Jones <pjones@redhat.com> - 1.99-2
