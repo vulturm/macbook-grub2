@@ -232,9 +232,6 @@ EOF
 
 %undefine buildsubdir
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %pre tools
 if [ -f /boot/grub2/user.cfg ]; then
     if grep -q '^GRUB_PASSWORD=' /boot/grub2/user.cfg ; then
