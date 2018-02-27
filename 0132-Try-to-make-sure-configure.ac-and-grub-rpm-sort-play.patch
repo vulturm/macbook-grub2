@@ -1,7 +1,7 @@
-From 000e91150ac5831e54e0cd1176c113f5358a7876 Mon Sep 17 00:00:00 2001
+From edefa278bdaefe29877307ab40cc8c8497e5794c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 3 Aug 2015 11:46:42 -0400
-Subject: [PATCH 132/198] Try to make sure configure.ac and grub-rpm-sort play
+Subject: [PATCH 132/206] Try to make sure configure.ac and grub-rpm-sort play
  nice.
 
 Apparently the test for whether to use grub-rpm-sort and also the
@@ -16,7 +16,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 196084004..3c4b9a19b 100644
+index 1960840048f..3c4b9a19b10 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -1795,7 +1795,7 @@ AC_SUBST([LIBDEVMAPPER])
@@ -29,7 +29,7 @@ index 196084004..3c4b9a19b 100644
  fi
  
 diff --git a/util/grub-mkconfig_lib.in b/util/grub-mkconfig_lib.in
-index 954844d2d..9c410eae4 100644
+index 954844d2d95..9c410eae493 100644
 --- a/util/grub-mkconfig_lib.in
 +++ b/util/grub-mkconfig_lib.in
 @@ -33,6 +33,9 @@ fi
@@ -47,15 +47,15 @@ index 954844d2d..9c410eae4 100644
  }
  
 -if [ "x$RPMLIB" = x ]; then
--  kernel_sort=version_sort
 +if [ "x$grub_rpm_sort" != x -a -x "$grub_rpm_sort" ]; then
 +  kernel_sort="$grub_rpm_sort"
- else
++else
+   kernel_sort=version_sort
+-else
 -  kernel_sort="${sbindir}/grub-rpm-sort"
-+  kernel_sort=version_sort
  fi
  
  version_test_numeric ()
 -- 
-2.14.3
+2.15.0
 

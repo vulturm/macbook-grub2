@@ -1,7 +1,7 @@
-From c7fb2b491daae42caa1395d724b956f6f2f892af Mon Sep 17 00:00:00 2001
+From 0155b776ecb917863e1f8d842ff39cdaf56e9131 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 11 May 2017 08:56:57 +0000
-Subject: [PATCH 182/198] Grub not working correctly with btrfs snapshots
+Subject: [PATCH 182/206] Grub not working correctly with btrfs snapshots
  (bsc#1026511)
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 182/198] Grub not working correctly with btrfs snapshots
  1 file changed, 238 insertions(+)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index a5c000805..3cd947219 100644
+index a5c000805a7..3cd9472197c 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
 @@ -2446,6 +2446,238 @@ out:
@@ -272,5 +272,5 @@ index a5c000805..3cd947219 100644
                                 subvol_set_env);
    grub_register_variable_hook ("btrfs_subvolid", subvolid_get_env,
 -- 
-2.14.3
+2.15.0
 

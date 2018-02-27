@@ -1,7 +1,7 @@
 From 8eed7be8a61c295df700e918744a984162378ca9 Mon Sep 17 00:00:00 2001
 From: Fu Wei <fu.wei@linaro.org>
 Date: Sun, 14 May 2017 15:43:45 +0800
-Subject: [PATCH 039/198] arm64: Add "--nounzip" option support in xen_module
+Subject: [PATCH 039/206] arm64: Add "--nounzip" option support in xen_module
  command
 
 This patch adds "--nounzip" option support in order to
@@ -18,7 +18,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 16 insertions(+)
 
 diff --git a/grub-core/loader/arm64/xen_boot.c b/grub-core/loader/arm64/xen_boot.c
-index 8ae43d7e8..27ede46ca 100644
+index 8ae43d7e894..27ede46cac5 100644
 --- a/grub-core/loader/arm64/xen_boot.c
 +++ b/grub-core/loader/arm64/xen_boot.c
 @@ -379,6 +379,20 @@ grub_cmd_xen_module (grub_command_t cmd __attribute__((unused)),
@@ -52,5 +52,5 @@ index 8ae43d7e8..27ede46ca 100644
    if (!file)
      goto fail;
 -- 
-2.14.3
+2.15.0
 

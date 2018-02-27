@@ -1,7 +1,7 @@
 From 35535549324923af7fecf79cc739baba48246f21 Mon Sep 17 00:00:00 2001
 From: Marcel Kolaja <mkolaja@redhat.com>
 Date: Tue, 21 Jan 2014 10:57:08 -0500
-Subject: [PATCH 069/198] Honor a symlink when generating configuration by
+Subject: [PATCH 069/206] Honor a symlink when generating configuration by
  grub2-mkconfig
 
 Honor a symlink when generating configuration by grub2-mkconfig, so that
@@ -11,7 +11,7 @@ the -o option follows it rather than overwriting it with a regular file.
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index f8496d28b..3b070fd76 100644
+index f8496d28bdf..3b070fd7632 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -276,7 +276,8 @@ and /etc/grub.d/* files or please file a bug report with
@@ -25,5 +25,5 @@ index f8496d28b..3b070fd76 100644
  fi
  
 -- 
-2.14.3
+2.15.0
 

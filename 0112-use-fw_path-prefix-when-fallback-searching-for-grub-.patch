@@ -1,7 +1,7 @@
 From acf4cfa6d1691a9476b36949af7e296080c88d25 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Wed, 19 Feb 2014 15:58:43 -0500
-Subject: [PATCH 112/198] use fw_path prefix when fallback searching for grub
+Subject: [PATCH 112/206] use fw_path prefix when fallback searching for grub
  config
 
 When PXE booting via UEFI firmware, grub was searching for grub.cfg
@@ -18,7 +18,7 @@ Signed-off-by: Mark Salter <msalter@redhat.com>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
-index 0ce59fdc3..a3713efcd 100644
+index 0ce59fdc3f0..a3713efcd90 100644
 --- a/grub-core/normal/main.c
 +++ b/grub-core/normal/main.c
 @@ -343,7 +343,7 @@ grub_cmd_normal (struct grub_command *cmd __attribute__ ((unused)),
@@ -41,5 +41,5 @@ index 0ce59fdc3..a3713efcd 100644
          {
            grub_size_t config_len;
 -- 
-2.14.3
+2.15.0
 

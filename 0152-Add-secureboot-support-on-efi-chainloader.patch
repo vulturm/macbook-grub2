@@ -1,7 +1,7 @@
-From cffa3c44d259122720382c8d2c08ff3e57b00de4 Mon Sep 17 00:00:00 2001
+From 8bd6b4f718d84a51b845eb403fe8c95fedfde853 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 13:04:37 -0400
-Subject: [PATCH 152/198] Add secureboot support on efi chainloader
+Subject: [PATCH 152/206] Add secureboot support on efi chainloader
 
 Expand the chainloader to be able to verify the image by means of shim
 lock protocol. The PE/COFF image is loaded and relocated by the
@@ -22,7 +22,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 595 insertions(+), 37 deletions(-)
 
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index 14ce6ddd7..87a91e16f 100644
+index 14ce6ddd7ad..87a91e16f17 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -32,6 +32,8 @@
@@ -758,7 +758,7 @@ index 14ce6ddd7..87a91e16f 100644
  
    return grub_errno;
 diff --git a/include/grub/efi/pe32.h b/include/grub/efi/pe32.h
-index 7d44732d2..6e24dae2c 100644
+index 7d44732d2c3..6e24dae2cb6 100644
 --- a/include/grub/efi/pe32.h
 +++ b/include/grub/efi/pe32.h
 @@ -214,7 +214,11 @@ struct grub_pe64_optional_header
@@ -796,5 +796,5 @@ index 7d44732d2..6e24dae2c 100644
  {
    grub_uint32_t page_rva;
 -- 
-2.14.3
+2.15.0
 

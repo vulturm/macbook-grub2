@@ -1,7 +1,7 @@
-From 24ffe7f751ba5ca1fcaef235f104c385091af25f Mon Sep 17 00:00:00 2001
+From 01f78b61c49b62aeb5cd27f3cbc479d4177ccf7d Mon Sep 17 00:00:00 2001
 From: Dusty Mabe <dusty@dustymabe.com>
 Date: Sat, 18 Jul 2015 15:38:08 +0000
-Subject: [PATCH 180/198] No more "Bootable Snapshot" submenu in grub.cfg.
+Subject: [PATCH 180/206] No more "Bootable Snapshot" submenu in grub.cfg.
 
 This breaks grubby (run on kernel upgrades) because grubby just
 does a search for "menuentry".
@@ -10,7 +10,7 @@ does a search for "menuentry".
  1 file changed, 12 deletions(-)
 
 diff --git a/util/grub.d/00_header.in b/util/grub.d/00_header.in
-index e2a533001..8a16fea34 100644
+index e2a53300126..8a16fea347e 100644
 --- a/util/grub.d/00_header.in
 +++ b/util/grub.d/00_header.in
 @@ -366,15 +366,3 @@ fi
@@ -30,5 +30,5 @@ index e2a533001..8a16fea34 100644
 -EOF
 -fi
 -- 
-2.14.3
+2.15.0
 

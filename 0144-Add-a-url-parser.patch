@@ -1,7 +1,7 @@
-From 283d44e07b5c02cd87a0eec5cdd596306a9c1b41 Mon Sep 17 00:00:00 2001
+From 956b3cd5f9669a0cdbf4607973e12540d09ccc18 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Jun 2016 16:18:44 -0400
-Subject: [PATCH 144/198] Add a url parser.
+Subject: [PATCH 144/206] Add a url parser.
 
 This patch adds a url parser that can parse http, https, tftp, and tftps
 urls, and is easily extensible to handle more types.
@@ -20,7 +20,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  create mode 100644 include/grub/net/url.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 5ae70204c..4857a1e5f 100644
+index 5ae70204cd2..4857a1e5f61 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -2199,6 +2199,7 @@ module = {
@@ -32,7 +32,7 @@ index 5ae70204c..4857a1e5f 100644
  
  module = {
 diff --git a/grub-core/kern/misc.c b/grub-core/kern/misc.c
-index 8344526be..f1fab7000 100644
+index 8344526be7f..f1fab700048 100644
 --- a/grub-core/kern/misc.c
 +++ b/grub-core/kern/misc.c
 @@ -296,6 +296,19 @@ grub_strrchr (const char *s, int c)
@@ -57,7 +57,7 @@ index 8344526be..f1fab7000 100644
  {
 diff --git a/grub-core/net/url.c b/grub-core/net/url.c
 new file mode 100644
-index 000000000..146858284
+index 00000000000..146858284cd
 --- /dev/null
 +++ b/grub-core/net/url.c
 @@ -0,0 +1,861 @@
@@ -923,7 +923,7 @@ index 000000000..146858284
 +}
 +#endif
 diff --git a/include/grub/misc.h b/include/grub/misc.h
-index 062081437..4737da1ea 100644
+index 06208143779..4737da1eaa9 100644
 --- a/include/grub/misc.h
 +++ b/include/grub/misc.h
 @@ -85,6 +85,7 @@ int EXPORT_FUNC(grub_strncmp) (const char *s1, const char *s2, grub_size_t n);
@@ -987,7 +987,7 @@ index 062081437..4737da1ea 100644
  {
 diff --git a/include/grub/net/url.h b/include/grub/net/url.h
 new file mode 100644
-index 000000000..a215fa27d
+index 00000000000..a215fa27d0a
 --- /dev/null
 +++ b/include/grub/net/url.h
 @@ -0,0 +1,28 @@
@@ -1020,5 +1020,5 @@ index 000000000..a215fa27d
 +
 +#endif /* GRUB_URL_HEADER */
 -- 
-2.14.3
+2.15.0
 

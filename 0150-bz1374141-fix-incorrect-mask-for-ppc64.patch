@@ -1,7 +1,7 @@
-From 09a5e37fe9bbe1b7cf7fe0a1211e06de555b0b54 Mon Sep 17 00:00:00 2001
+From 210bb34a3b86403b3109c77e4f4db26b4e6cee95 Mon Sep 17 00:00:00 2001
 From: Masahiro Matsuya <mmatsuya@redhat.com>
 Date: Sat, 29 Oct 2016 08:35:26 +0900
-Subject: [PATCH 150/198] bz1374141 fix incorrect mask for ppc64
+Subject: [PATCH 150/206] bz1374141 fix incorrect mask for ppc64
 
 The netmask configured in firmware is not respected on ppc64 (big endian).
 When 255.255.252.0 is set as netmask in firmware, the following is the value of bootpath string in grub_ieee1275_parse_bootpath().
@@ -30,7 +30,7 @@ The count of zero with __builtin_clz can be 22. (clz counts the number of one bi
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/grub-core/net/drivers/ieee1275/ofnet.c b/grub-core/net/drivers/ieee1275/ofnet.c
-index 002446be1..3df75357a 100644
+index 002446be1c3..3df75357a70 100644
 --- a/grub-core/net/drivers/ieee1275/ofnet.c
 +++ b/grub-core/net/drivers/ieee1275/ofnet.c
 @@ -220,8 +220,7 @@ grub_ieee1275_parse_bootpath (const char *devpath, char *bootpath,
@@ -44,5 +44,5 @@ index 002446be1..3df75357a 100644
  
    if (gateway_addr.ipv4 != 0)
 -- 
-2.14.3
+2.15.0
 

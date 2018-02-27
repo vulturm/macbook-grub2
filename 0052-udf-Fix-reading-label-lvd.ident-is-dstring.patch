@@ -1,7 +1,7 @@
 From 76188809d5ca40c5285b0ab202b5edea7be3f04d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali.rohar@gmail.com>
 Date: Thu, 22 Jun 2017 14:33:17 +0200
-Subject: [PATCH 052/198] udf: Fix reading label, lvd.ident is dstring
+Subject: [PATCH 052/206] udf: Fix reading label, lvd.ident is dstring
 
 UDF dstring has stored length in the last byte of buffer. Therefore last
 byte is not part of recorded characters. And empty string in dstring is
@@ -11,7 +11,7 @@ encoded as empty buffer, including first byte (compression id).
  1 file changed, 20 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/fs/udf.c b/grub-core/fs/udf.c
-index 839bff889..258745633 100644
+index 839bff88963..2587456336e 100644
 --- a/grub-core/fs/udf.c
 +++ b/grub-core/fs/udf.c
 @@ -860,6 +860,25 @@ read_string (const grub_uint8_t *raw, grub_size_t sz, char *outbuf)
@@ -50,5 +50,5 @@ index 839bff889..258745633 100644
      }
    else
 -- 
-2.14.3
+2.15.0
 

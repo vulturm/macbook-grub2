@@ -1,14 +1,14 @@
-From 1e16b840df6b6d1cfb3429fbac8440b507ff07a6 Mon Sep 17 00:00:00 2001
+From fad5bdf5359d1f3e2ad962cc3fe0e15d26a3df6a Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:44:59 -0400
-Subject: [PATCH 188/198] don't use int for efi status
+Subject: [PATCH 188/206] don't use int for efi status
 
 ---
  grub-core/kern/efi/efi.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index 1f3ac5e1d..2b60a6e27 100644
+index 1f3ac5e1d08..2b60a6e27ea 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -157,7 +157,7 @@ grub_efi_get_loaded_image (grub_efi_handle_t image_handle)
@@ -21,5 +21,5 @@ index 1f3ac5e1d..2b60a6e27 100644
    if (retval == 0)
      rc = GRUB_EFI_SUCCESS;
 -- 
-2.14.3
+2.15.0
 

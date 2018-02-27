@@ -1,7 +1,7 @@
 From 435fa75e01ef40917239c7f775e505e86f70d202 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali.rohar@gmail.com>
 Date: Thu, 22 Jun 2017 14:42:16 +0200
-Subject: [PATCH 053/198] * grub-core/fs/udf.c: Add support for UUID
+Subject: [PATCH 053/206] * grub-core/fs/udf.c: Add support for UUID
 
 Use same algorithm as in libblkid from util-linux v2.30.
 
@@ -27,7 +27,7 @@ format.exe set only first 8 as hexadecimal and remaining as fixed
  1 file changed, 120 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/fs/udf.c b/grub-core/fs/udf.c
-index 258745633..00a16098b 100644
+index 2587456336e..00a16098b47 100644
 --- a/grub-core/fs/udf.c
 +++ b/grub-core/fs/udf.c
 @@ -321,6 +321,32 @@ struct grub_udf_partmap
@@ -187,5 +187,5 @@ index 258745633..00a16098b 100644
    .reserved_first_sector = 1,
    .blocklist_install = 1,
 -- 
-2.14.3
+2.15.0
 

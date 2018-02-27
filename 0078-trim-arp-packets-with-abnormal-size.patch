@@ -1,7 +1,7 @@
 From c0fa21c8898437747ce093884e6aba48d45ac329 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Wed, 5 Feb 2014 09:42:42 -0200
-Subject: [PATCH 078/198] trim arp packets with abnormal size
+Subject: [PATCH 078/206] trim arp packets with abnormal size
 
 GRUB uses arp request to create the arp response. If the incoming packet
 is foobared, GRUB needs to trim the arp response packet before sending it.
@@ -10,7 +10,7 @@ is foobared, GRUB needs to trim the arp response packet before sending it.
  1 file changed, 6 insertions(+)
 
 diff --git a/grub-core/net/arp.c b/grub-core/net/arp.c
-index 54306e3b1..2083b5a4b 100644
+index 54306e3b16d..2083b5a4b91 100644
 --- a/grub-core/net/arp.c
 +++ b/grub-core/net/arp.c
 @@ -150,6 +150,12 @@ grub_net_arp_receive (struct grub_net_buff *nb, struct grub_net_card *card,
@@ -27,5 +27,5 @@ index 54306e3b1..2083b5a4b 100644
  	struct grub_net_buff nb_reply;
  	struct arppkt *arp_reply;
 -- 
-2.14.3
+2.15.0
 

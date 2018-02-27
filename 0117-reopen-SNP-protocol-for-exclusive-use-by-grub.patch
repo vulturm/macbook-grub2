@@ -1,14 +1,14 @@
 From debcbbacd18bfbbcbd5fd9dce947f2cbce09c916 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Sat, 15 Feb 2014 15:10:22 -0500
-Subject: [PATCH 117/198] reopen SNP protocol for exclusive use by grub
+Subject: [PATCH 117/206] reopen SNP protocol for exclusive use by grub
 
 ---
  grub-core/net/drivers/efi/efinet.c | 16 ++++++++++++++++
  1 file changed, 16 insertions(+)
 
 diff --git a/grub-core/net/drivers/efi/efinet.c b/grub-core/net/drivers/efi/efinet.c
-index 5388f952b..ea0e0ca36 100644
+index 5388f952ba9..ea0e0ca360e 100644
 --- a/grub-core/net/drivers/efi/efinet.c
 +++ b/grub-core/net/drivers/efi/efinet.c
 @@ -330,6 +330,7 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
@@ -42,5 +42,5 @@ index 5388f952b..ea0e0ca36 100644
    }
  }
 -- 
-2.14.3
+2.15.0
 

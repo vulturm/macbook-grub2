@@ -1,7 +1,7 @@
 From 9e962fd3c42081e2eef1f99a0eaab38fd04d2620 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 7 Aug 2017 18:05:17 +0200
-Subject: [PATCH 054/198] mkrescue: Check xorriso presence before doing
+Subject: [PATCH 054/206] mkrescue: Check xorriso presence before doing
  anything else.
 
 mkrescue can't do anything useful without xorriso, so abort early if it's
@@ -11,7 +11,7 @@ not available.
  1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/util/grub-mkrescue.c b/util/grub-mkrescue.c
-index 238d4840e..38f154397 100644
+index 238d4840e2f..38f1543974e 100644
 --- a/util/grub-mkrescue.c
 +++ b/util/grub-mkrescue.c
 @@ -323,6 +323,7 @@ check_xorriso (const char *val)
@@ -46,5 +46,5 @@ index 238d4840e..38f154397 100644
    grub_hostfs_init ();
    grub_host_init ();
 -- 
-2.14.3
+2.15.0
 

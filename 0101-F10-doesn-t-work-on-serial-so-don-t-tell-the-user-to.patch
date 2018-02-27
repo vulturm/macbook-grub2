@@ -1,7 +1,7 @@
 From f1cb6c5a7640406294b7dffab3c5e4a4afdaf745 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 28 Oct 2013 10:13:27 -0400
-Subject: [PATCH 101/198] F10 doesn't work on serial, so don't tell the user to
+Subject: [PATCH 101/206] F10 doesn't work on serial, so don't tell the user to
  hit it (#987443)
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
@@ -10,7 +10,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/normal/menu_text.c b/grub-core/normal/menu_text.c
-index 537d4bf86..452d55bf9 100644
+index 537d4bf86ff..452d55bf9ff 100644
 --- a/grub-core/normal/menu_text.c
 +++ b/grub-core/normal/menu_text.c
 @@ -157,7 +157,7 @@ print_message (int nested, int edit, struct grub_term_output *term, int dry_run)
@@ -23,5 +23,5 @@ index 537d4bf86..452d55bf9 100644
  					       STANDARD_MARGIN, STANDARD_MARGIN,
  					       term, dry_run);
 -- 
-2.14.3
+2.15.0
 

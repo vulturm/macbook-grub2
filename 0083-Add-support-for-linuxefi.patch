@@ -1,7 +1,7 @@
 From 28136df7d90f865a8030a0ff6513dacb3096dc10 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg@redhat.com>
 Date: Tue, 10 Jul 2012 11:58:52 -0400
-Subject: [PATCH 083/198] Add support for linuxefi
+Subject: [PATCH 083/206] Add support for linuxefi
 
 ---
  grub-core/Makefile.core.def       |   8 +
@@ -13,7 +13,7 @@ Subject: [PATCH 083/198] Add support for linuxefi
  create mode 100644 grub-core/loader/i386/efi/linux.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 1eb86bed3..c653c71c5 100644
+index 1eb86bed33b..c653c71c594 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -1764,6 +1764,14 @@ module = {
@@ -32,7 +32,7 @@ index 1eb86bed3..c653c71c5 100644
    name = chain;
    efi = loader/efi/chainloader.c;
 diff --git a/grub-core/kern/efi/mm.c b/grub-core/kern/efi/mm.c
-index ac2a4c556..f5440cb1d 100644
+index ac2a4c556b8..f5440cb1df9 100644
 --- a/grub-core/kern/efi/mm.c
 +++ b/grub-core/kern/efi/mm.c
 @@ -49,6 +49,38 @@ static grub_efi_uintn_t finish_desc_size;
@@ -76,7 +76,7 @@ index ac2a4c556..f5440cb1d 100644
  grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
 new file mode 100644
-index 000000000..b79e6320b
+index 00000000000..b79e6320ba9
 --- /dev/null
 +++ b/grub-core/loader/i386/efi/linux.c
 @@ -0,0 +1,371 @@
@@ -452,7 +452,7 @@ index 000000000..b79e6320b
 +  grub_unregister_command (cmd_initrd);
 +}
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 3fa082816..91e29ce66 100644
+index 3fa082816ca..91e29ce66f1 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
 @@ -47,6 +47,9 @@ EXPORT_FUNC(grub_efi_allocate_fixed) (grub_efi_physical_address_t address,
@@ -466,7 +466,7 @@ index 3fa082816..91e29ce66 100644
  				       grub_efi_uintn_t pages);
  int
 diff --git a/include/grub/i386/linux.h b/include/grub/i386/linux.h
-index da0ca3b83..fc36bdaf3 100644
+index da0ca3b83cd..fc36bdaf367 100644
 --- a/include/grub/i386/linux.h
 +++ b/include/grub/i386/linux.h
 @@ -139,6 +139,7 @@ struct linux_kernel_header
@@ -478,5 +478,5 @@ index da0ca3b83..fc36bdaf3 100644
  
  /* Boot parameters for Linux based on 2.6.12. This is used by the setup
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
 From 7ca8e2b9e23a3588654d53a8e84bb22743896f80 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 4 Sep 2014 14:23:23 -0400
-Subject: [PATCH 121/198] Generate OS and CLASS in 10_linux from
+Subject: [PATCH 121/206] Generate OS and CLASS in 10_linux from
  /etc/os-release
 
 This makes us use pretty names in the titles we generate in
@@ -15,7 +15,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index a9692a0c2..c6627268c 100644
+index a9692a0c2a2..c6627268cca 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -29,7 +29,8 @@ export TEXTDOMAINDIR="@localedir@"
@@ -29,5 +29,5 @@ index a9692a0c2..c6627268c 100644
    OS="${GRUB_DISTRIBUTOR}"
    CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1|LC_ALL=C sed 's,[^[:alnum:]_],_,g') ${CLASS}"
 -- 
-2.14.3
+2.15.0
 

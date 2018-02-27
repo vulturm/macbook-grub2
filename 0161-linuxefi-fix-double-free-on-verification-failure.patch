@@ -1,7 +1,7 @@
-From 0e8eb89517d9621b2595f7d2b152f711309600ee Mon Sep 17 00:00:00 2001
+From 10ea5c02de8a66720847b46e98fe14e3f7d19199 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Jun 2016 09:50:25 -0400
-Subject: [PATCH 161/198] linuxefi: fix double free on verification failure.
+Subject: [PATCH 161/206] linuxefi: fix double free on verification failure.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 1 deletion(-)
 
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
-index 82f75b7f3..010bf982d 100644
+index 82f75b7f3ab..010bf982d80 100644
 --- a/grub-core/loader/i386/efi/linux.c
 +++ b/grub-core/loader/i386/efi/linux.c
 @@ -191,7 +191,6 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
@@ -21,5 +21,5 @@ index 82f75b7f3..010bf982d 100644
      }
  
 -- 
-2.14.3
+2.15.0
 

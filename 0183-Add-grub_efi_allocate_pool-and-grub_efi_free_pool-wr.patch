@@ -1,7 +1,7 @@
-From ac370b7bd9060c8e2aaaf91c2099ca89b8b65f14 Mon Sep 17 00:00:00 2001
+From 448e9bedfc0b3047ba0ef584c3f1ecffb986ea62 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 1 Jun 2017 09:59:56 -0400
-Subject: [PATCH 183/198] Add grub_efi_allocate_pool() and grub_efi_free_pool()
+Subject: [PATCH 183/206] Add grub_efi_allocate_pool() and grub_efi_free_pool()
  wrappers.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
@@ -10,7 +10,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 32 insertions(+), 4 deletions(-)
 
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 91e29ce66..68326d96f 100644
+index 91e29ce66f1..68326d96f5a 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
 @@ -24,6 +24,10 @@
@@ -71,5 +71,5 @@ index 91e29ce66..68326d96f 100644
  
  struct grub_net_card;
 -- 
-2.14.3
+2.15.0
 

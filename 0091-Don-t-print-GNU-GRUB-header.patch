@@ -1,7 +1,7 @@
 From 95aeba5fe67ad11a995eb8e583708a722b8bdeb9 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Wed, 15 May 2013 13:53:48 -0400
-Subject: [PATCH 091/198] Don't print GNU GRUB header
+Subject: [PATCH 091/206] Don't print GNU GRUB header
 
 No one cares.
 ---
@@ -9,7 +9,7 @@ No one cares.
  1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
-index b2654ef62..f57b7508a 100644
+index b2654ef62e8..f57b7508a76 100644
 --- a/grub-core/normal/main.c
 +++ b/grub-core/normal/main.c
 @@ -202,15 +202,16 @@ read_config_file (const char *config)
@@ -41,5 +41,5 @@ index b2654ef62..f57b7508a 100644
  
  static void
 -- 
-2.14.3
+2.15.0
 

@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	25%{?dist}
+Release:	26%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -451,6 +451,17 @@ fi
 %endif
 
 %changelog
+* Wed Feb 28 2018 Peter Jones <pjones@redhat.com> - 2.02-26
+- Try to fix things for new compiler madness.
+  I really don't know why gcc decided __attribute__((packed)) on a "typedef
+  struct" should imply __attribute__((align (1))) and that it should have a
+  warning that it does so.  The obvious behavior would be to keep the alignment
+  of the first element unless it's used in another object or type that /also/
+  hask the packed attribute.  Why should it change the default alignment at
+  all?
+- Merge in the BLS patches Javier and I wrote.
+- Attempt to fix pmtimer initialization failures to not be super duper slow.
+
 * Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org>
 - Escape macros in %%changelog
 

@@ -1,7 +1,7 @@
-From 79da61bd99b4cd4c817eeb022bd9f7d3e1d38258 Mon Sep 17 00:00:00 2001
+From a7ff45890757a0edbd80fadb0e182d65d980d781 Mon Sep 17 00:00:00 2001
 From: Raymund Will <rw@suse.com>
 Date: Fri, 10 Apr 2015 01:45:02 -0400
-Subject: [PATCH 151/198] Use device part of chainloader target, if present.
+Subject: [PATCH 151/206] Use device part of chainloader target, if present.
 
 Otherwise chainloading is restricted to '$root', which might not even
 be readable by EFI!
@@ -15,7 +15,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index adc856366..14ce6ddd7 100644
+index adc85636633..14ce6ddd7ad 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -223,8 +223,11 @@ grub_cmd_chainloader (grub_command_t cmd __attribute__ ((unused)),
@@ -33,5 +33,5 @@ index adc856366..14ce6ddd7 100644
      goto fail;
  
 -- 
-2.14.3
+2.15.0
 

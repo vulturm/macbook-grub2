@@ -1,7 +1,7 @@
-From e5df22a8207a4b09c7bc89a7ac92719a529c2a63 Mon Sep 17 00:00:00 2001
+From 5a20f597edbd69907a61a361fa8aff918b2c6864 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 7 Apr 2016 10:58:06 -0400
-Subject: [PATCH 143/198] Revert "reopen SNP protocol for exclusive use by
+Subject: [PATCH 143/206] Revert "reopen SNP protocol for exclusive use by
  grub"
 
 I *think* this should have been replaced by upstream's
@@ -15,7 +15,7 @@ This reverts commit 147daeab22db793978f952b6f0d832919a1b0081.
  1 file changed, 39 deletions(-)
 
 diff --git a/grub-core/net/drivers/efi/efinet.c b/grub-core/net/drivers/efi/efinet.c
-index b870d3f19..a3ce4c67c 100644
+index b870d3f1938..a3ce4c67cce 100644
 --- a/grub-core/net/drivers/efi/efinet.c
 +++ b/grub-core/net/drivers/efi/efinet.c
 @@ -465,45 +465,6 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
@@ -65,5 +65,5 @@ index b870d3f19..a3ce4c67c 100644
    }
  }
 -- 
-2.14.3
+2.15.0
 

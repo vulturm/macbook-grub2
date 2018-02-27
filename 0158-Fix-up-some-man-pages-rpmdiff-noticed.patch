@@ -1,7 +1,7 @@
-From c3d456a824ccf8c728cae4f50254239bafaf50a1 Mon Sep 17 00:00:00 2001
+From 908d355bba83df8000b313681e2e0ccdd7b8d1c2 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 23 Sep 2014 09:58:49 -0400
-Subject: [PATCH 158/198] Fix up some man pages rpmdiff noticed.
+Subject: [PATCH 158/206] Fix up some man pages rpmdiff noticed.
 
 ---
  configure.ac             |  2 ++
@@ -13,7 +13,7 @@ Subject: [PATCH 158/198] Fix up some man pages rpmdiff noticed.
  create mode 100644 util/grub-syslinux2cfg.1
 
 diff --git a/configure.ac b/configure.ac
-index 40be70019..ae371a97d 100644
+index 40be70019e2..ae371a97d30 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -80,6 +80,7 @@ grub_TRANSFORM([grub-get-kernel-settings.3])
@@ -34,7 +34,7 @@ index 40be70019..ae371a97d 100644
  if test "x$TARGET_CFLAGS" = x; then
 diff --git a/util/grub-macbless.8 b/util/grub-macbless.8
 new file mode 100644
-index 000000000..ae842f3a6
+index 00000000000..ae842f3a606
 --- /dev/null
 +++ b/util/grub-macbless.8
 @@ -0,0 +1,26 @@
@@ -65,7 +65,7 @@ index 000000000..ae842f3a6
 +.SH SEE ALSO
 +.BR "info grub"
 diff --git a/util/grub-mkimage.1 b/util/grub-mkimage.1
-index 4dea4f545..0eaaafe50 100644
+index 4dea4f54597..0eaaafe505b 100644
 --- a/util/grub-mkimage.1
 +++ b/util/grub-mkimage.1
 @@ -17,7 +17,7 @@
@@ -79,7 +79,7 @@ index 4dea4f545..0eaaafe50 100644
  .TP
 diff --git a/util/grub-syslinux2cfg.1 b/util/grub-syslinux2cfg.1
 new file mode 100644
-index 000000000..853094827
+index 00000000000..85309482718
 --- /dev/null
 +++ b/util/grub-syslinux2cfg.1
 @@ -0,0 +1,65 @@
@@ -149,5 +149,5 @@ index 000000000..853094827
 +.SH SEE ALSO
 +.BR "info grub"
 -- 
-2.14.3
+2.15.0
 

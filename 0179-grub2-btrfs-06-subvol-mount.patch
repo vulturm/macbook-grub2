@@ -1,17 +1,17 @@
-From a27ef49601c7c4c58dc23663df1e0c1c960481af Mon Sep 17 00:00:00 2001
+From 75976884b9382d2445e328d354dad7c78a502d16 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Fri, 22 May 2015 11:45:25 +0000
-Subject: [PATCH 179/198] grub2-btrfs-06-subvol-mount
+Subject: [PATCH 179/206] grub2-btrfs-06-subvol-mount
 
 ---
  grub-core/fs/btrfs.c            | 195 +++++++++++++++++++++++++++++++++++++++-
  grub-core/osdep/linux/getroot.c | 148 +++++++++++++++++++++++++++++-
- include/grub/emu/getroot.h      |   5 ++
  util/grub-install.c             |  49 ++++++++++
+ include/grub/emu/getroot.h      |   5 ++
  4 files changed, 392 insertions(+), 5 deletions(-)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index 2c462584e..d111147e8 100644
+index 2c462584e91..d111147e836 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
 @@ -32,6 +32,7 @@
@@ -277,7 +277,7 @@ index 2c462584e..d111147e8 100644
  					 grub_cmd_btrfs_list_subvols, 0,
  					 "[-p|-n] [-o var] DEVICE",
 diff --git a/grub-core/osdep/linux/getroot.c b/grub-core/osdep/linux/getroot.c
-index 5d50dd6f8..4c5a13022 100644
+index 5d50dd6f8dc..4c5a13022dc 100644
 --- a/grub-core/osdep/linux/getroot.c
 +++ b/grub-core/osdep/linux/getroot.c
 @@ -107,6 +107,14 @@ struct btrfs_ioctl_search_key
@@ -459,24 +459,8 @@ index 5d50dd6f8..4c5a13022 100644
  char *
  grub_make_system_path_relative_to_its_root_os (const char *path)
  {
-diff --git a/include/grub/emu/getroot.h b/include/grub/emu/getroot.h
-index 73fa2d34a..9c642ae3f 100644
---- a/include/grub/emu/getroot.h
-+++ b/include/grub/emu/getroot.h
-@@ -53,6 +53,11 @@ char **
- grub_find_root_devices_from_mountinfo (const char *dir, char **relroot);
- #endif
- 
-+#ifdef __linux__
-+char *
-+grub_util_get_btrfs_subvol (const char *path, char **mount_path);
-+#endif
-+
- /* Devmapper functions provided by getroot_devmapper.c.  */
- void
- grub_util_pull_devmapper (const char *os_dev);
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 036fe1822..cd84a72b9 100644
+index 036fe1822e0..cd84a72b97b 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
 @@ -1534,6 +1534,55 @@ main (int argc, char *argv[])
@@ -535,6 +519,22 @@ index 036fe1822..cd84a72b9 100644
    char mkimage_target[200];
    const char *core_name = NULL;
  
+diff --git a/include/grub/emu/getroot.h b/include/grub/emu/getroot.h
+index 73fa2d34abb..9c642ae3fe3 100644
+--- a/include/grub/emu/getroot.h
++++ b/include/grub/emu/getroot.h
+@@ -53,6 +53,11 @@ char **
+ grub_find_root_devices_from_mountinfo (const char *dir, char **relroot);
+ #endif
+ 
++#ifdef __linux__
++char *
++grub_util_get_btrfs_subvol (const char *path, char **mount_path);
++#endif
++
+ /* Devmapper functions provided by getroot_devmapper.c.  */
+ void
+ grub_util_pull_devmapper (const char *os_dev);
 -- 
-2.14.3
+2.15.0
 

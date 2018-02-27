@@ -1,37 +1,37 @@
 From 24e37a885269bdec9b27babf1da0bba3692d55c0 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 20:53:28 +0200
-Subject: [PATCH 019/198] arm-coreboot: Start new port.
+Subject: [PATCH 019/206] arm-coreboot: Start new port.
 
 ---
  configure.ac                           |   2 +
- gentpl.py                              |   8 ++-
- grub-core/Makefile.am                  |  10 +++
  grub-core/Makefile.core.def            |  18 ++++-
  grub-core/kern/arm/coreboot/cbtable.c  |  40 +++++++++++
- grub-core/kern/arm/coreboot/coreboot.S |  44 ++++++++++++
  grub-core/kern/arm/coreboot/init.c     | 127 +++++++++++++++++++++++++++++++++
  grub-core/kern/arm/coreboot/timer.c    |  65 +++++++++++++++++
- grub-core/kern/arm/startup.S           |   4 ++
  grub-core/kern/coreboot/cbtable.c      |   2 +
  grub-core/lib/dummy/reboot.c           |  32 +++++++++
  grub-core/loader/arm/linux.c           |   3 +
+ util/grub-mkimagexx.c                  |  19 +++--
+ util/mkimage.c                         |  41 ++++++++++-
  include/grub/arm/coreboot/console.h    |  29 ++++++++
  include/grub/arm/coreboot/kernel.h     |  44 ++++++++++++
  include/grub/offsets.h                 |   6 ++
- util/grub-mkimagexx.c                  |  19 +++--
- util/mkimage.c                         |  41 ++++++++++-
+ grub-core/kern/arm/coreboot/coreboot.S |  44 ++++++++++++
+ grub-core/kern/arm/startup.S           |   4 ++
+ gentpl.py                              |   8 ++-
+ grub-core/Makefile.am                  |  10 +++
  17 files changed, 482 insertions(+), 12 deletions(-)
  create mode 100644 grub-core/kern/arm/coreboot/cbtable.c
- create mode 100644 grub-core/kern/arm/coreboot/coreboot.S
  create mode 100644 grub-core/kern/arm/coreboot/init.c
  create mode 100644 grub-core/kern/arm/coreboot/timer.c
  create mode 100644 grub-core/lib/dummy/reboot.c
  create mode 100644 include/grub/arm/coreboot/console.h
  create mode 100644 include/grub/arm/coreboot/kernel.h
+ create mode 100644 grub-core/kern/arm/coreboot/coreboot.S
 
 diff --git a/configure.ac b/configure.ac
-index ee2c86537..571f7a0b5 100644
+index ee2c86537e9..571f7a0b5aa 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -167,6 +167,7 @@ case "$target_cpu"-"$platform" in
@@ -50,69 +50,8 @@ index ee2c86537..571f7a0b5 100644
  AM_CONDITIONAL([COND_arm_efi], [test x$target_cpu = xarm -a x$platform = xefi])
  AM_CONDITIONAL([COND_arm64], [test x$target_cpu = xarm64 ])
  AM_CONDITIONAL([COND_arm64_efi], [test x$target_cpu = xarm64 -a x$platform = xefi])
-diff --git a/gentpl.py b/gentpl.py
-index f08bcc404..ed268178b 100644
---- a/gentpl.py
-+++ b/gentpl.py
-@@ -31,7 +31,8 @@ GRUB_PLATFORMS = [ "emu", "i386_pc", "i386_efi", "i386_qemu", "i386_coreboot",
-                    "i386_xen", "x86_64_xen",
-                    "mips_loongson", "sparc64_ieee1275",
-                    "powerpc_ieee1275", "mips_arc", "ia64_efi",
--                   "mips_qemu_mips", "arm_uboot", "arm_efi", "arm64_efi" ]
-+                   "mips_qemu_mips", "arm_uboot", "arm_efi", "arm64_efi",
-+                   "arm_coreboot"]
- 
- GROUPS = {}
- 
-@@ -44,7 +45,7 @@ GROUPS["x86"]      = GROUPS["i386"] + GROUPS["x86_64"]
- GROUPS["mips"]     = [ "mips_loongson", "mips_qemu_mips", "mips_arc" ]
- GROUPS["sparc64"]  = [ "sparc64_ieee1275" ]
- GROUPS["powerpc"]  = [ "powerpc_ieee1275" ]
--GROUPS["arm"]      = [ "arm_uboot", "arm_efi" ]
-+GROUPS["arm"]      = [ "arm_uboot", "arm_efi", "arm_coreboot" ]
- GROUPS["arm64"]    = [ "arm64_efi" ]
- 
- # Groups based on firmware
-@@ -52,6 +53,7 @@ GROUPS["efi"]  = [ "i386_efi", "x86_64_efi", "ia64_efi", "arm_efi", "arm64_efi"
- GROUPS["ieee1275"]   = [ "i386_ieee1275", "sparc64_ieee1275", "powerpc_ieee1275" ]
- GROUPS["uboot"] = [ "arm_uboot" ]
- GROUPS["xen"]  = [ "i386_xen", "x86_64_xen" ]
-+GROUPS["coreboot"]  = [ "i386_coreboot", "arm_coreboot" ]
- 
- # emu is a special case so many core functionality isn't needed on this platform
- GROUPS["noemu"]   = GRUB_PLATFORMS[:]; GROUPS["noemu"].remove("emu")
-@@ -64,7 +66,7 @@ GROUPS["pci"]      = GROUPS["x86"] + ["mips_loongson"]
- GROUPS["usb"]      = GROUPS["pci"]
- 
- # If gfxterm is main output console integrate it into kernel
--GROUPS["videoinkernel"] = ["mips_loongson", "i386_coreboot" ]
-+GROUPS["videoinkernel"] = ["mips_loongson", "i386_coreboot", "arm_coreboot" ]
- GROUPS["videomodules"]   = GRUB_PLATFORMS[:];
- for i in GROUPS["videoinkernel"]: GROUPS["videomodules"].remove(i)
- 
-diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
-index 781d0ffbf..bec058554 100644
---- a/grub-core/Makefile.am
-+++ b/grub-core/Makefile.am
-@@ -239,6 +239,16 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/lib/arg.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/system.h
- endif
- 
-+if COND_arm_coreboot
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/system.h
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video.h
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video_fb.h
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/gfxterm.h
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/font.h
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/bufio.h
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/coreboot/kernel.h
-+endif
-+
- if COND_arm_efi
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/efi/loader.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/efi/efi.h
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 6540dc951..411dca46b 100644
+index 6540dc951d4..411dca46bf2 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -92,6 +92,8 @@ kernel = {
@@ -199,7 +138,7 @@ index 6540dc951..411dca46b 100644
    sparc64_ieee1275 = lib/ieee1275/cmos.c;
 diff --git a/grub-core/kern/arm/coreboot/cbtable.c b/grub-core/kern/arm/coreboot/cbtable.c
 new file mode 100644
-index 000000000..8a655bb5c
+index 00000000000..8a655bb5cc2
 --- /dev/null
 +++ b/grub-core/kern/arm/coreboot/cbtable.c
 @@ -0,0 +1,40 @@
@@ -243,59 +182,9 @@ index 000000000..8a655bb5c
 +
 +  return table_header;
 +}
-diff --git a/grub-core/kern/arm/coreboot/coreboot.S b/grub-core/kern/arm/coreboot/coreboot.S
-new file mode 100644
-index 000000000..a1104526c
---- /dev/null
-+++ b/grub-core/kern/arm/coreboot/coreboot.S
-@@ -0,0 +1,44 @@
-+/*
-+ *  GRUB  --  GRand Unified Bootloader
-+ *  Copyright (C) 2016  Free Software Foundation, Inc.
-+ *
-+ *  GRUB is free software: you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation, either version 3 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  GRUB is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ *  GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License
-+ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include <grub/symbol.h>
-+
-+	.file	"coreboot.S"
-+	.text
-+	.syntax	unified
-+#if !defined (__thumb2__)
-+	.arch	armv7a
-+	.arm
-+#else
-+	.arch	armv7
-+	.thumb
-+#endif
-+
-+FUNCTION(grub_arm_pfr1)
-+	mrc p15, 0, r0, c0, c1, 1
-+	bx	lr
-+
-+FUNCTION(grub_armv7_get_timer_value)
-+	isb
-+	mrrc p15, 1, r0, r1, c14
-+	bx	lr
-+
-+FUNCTION(grub_armv7_get_timer_frequency)
-+	mrc p15, 0, r0, c14, c0, 0
-+	bx	lr
-+
 diff --git a/grub-core/kern/arm/coreboot/init.c b/grub-core/kern/arm/coreboot/init.c
 new file mode 100644
-index 000000000..51ecaceb0
+index 00000000000..51ecaceb005
 --- /dev/null
 +++ b/grub-core/kern/arm/coreboot/init.c
 @@ -0,0 +1,127 @@
@@ -428,7 +317,7 @@ index 000000000..51ecaceb0
 +}
 diff --git a/grub-core/kern/arm/coreboot/timer.c b/grub-core/kern/arm/coreboot/timer.c
 new file mode 100644
-index 000000000..ebefb99d5
+index 00000000000..ebefb99d58f
 --- /dev/null
 +++ b/grub-core/kern/arm/coreboot/timer.c
 @@ -0,0 +1,65 @@
@@ -497,37 +386,8 @@ index 000000000..ebefb99d5
 +  if (!have_timer)
 +    grub_fatal ("No timer found");
 +}
-diff --git a/grub-core/kern/arm/startup.S b/grub-core/kern/arm/startup.S
-index 640837cba..3946fe8e1 100644
---- a/grub-core/kern/arm/startup.S
-+++ b/grub-core/kern/arm/startup.S
-@@ -24,6 +24,7 @@
-  * GRUB is called from U-Boot as a Linux Kernel type image, which
-  * means among other things that it always enters in ARM state.
-  *
-+ * coreboot starts in ARM mode as well.
-  *
-  * Overview of GRUB image layout:
-  *
-@@ -127,6 +128,8 @@ reloc_done:
- 
- 	str     r1, EXT_C(grub_modbase)
- 
-+	/* Coreboot already places modules at right place.  */
-+#ifndef GRUB_MACHINE_COREBOOT
- 	add	r1, r1, r2
- 	add	r0, r0, r2
- 	sub     r1, r1, #4
-@@ -136,6 +139,7 @@ reloc_done:
- 	str	r3, [r1], #-4			@ *dst-- = r3 
- 	subs	r2, #4				@ remaining -= 4
- 	bne	1b				@ while remaining != 0
-+#endif
- 
- 	@ Since we _are_ the C run-time, we need to manually zero the BSS
- 	@ region before continuing
 diff --git a/grub-core/kern/coreboot/cbtable.c b/grub-core/kern/coreboot/cbtable.c
-index 996d3f407..aec63dbd1 100644
+index 996d3f40738..aec63dbd120 100644
 --- a/grub-core/kern/coreboot/cbtable.c
 +++ b/grub-core/kern/coreboot/cbtable.c
 @@ -23,6 +23,8 @@
@@ -541,7 +401,7 @@ index 996d3f407..aec63dbd1 100644
  grub_linuxbios_check_signature (grub_linuxbios_table_header_t tbl_header)
 diff --git a/grub-core/lib/dummy/reboot.c b/grub-core/lib/dummy/reboot.c
 new file mode 100644
-index 000000000..b8cbed8f8
+index 00000000000..b8cbed8f811
 --- /dev/null
 +++ b/grub-core/lib/dummy/reboot.c
 @@ -0,0 +1,32 @@
@@ -578,7 +438,7 @@ index 000000000..b8cbed8f8
 +  while (1);
 +}
 diff --git a/grub-core/loader/arm/linux.c b/grub-core/loader/arm/linux.c
-index 5b39f02bb..01374ee78 100644
+index 5b39f02bb2e..01374ee78fa 100644
 --- a/grub-core/loader/arm/linux.c
 +++ b/grub-core/loader/arm/linux.c
 @@ -31,6 +31,8 @@
@@ -595,110 +455,8 @@ index 5b39f02bb..01374ee78 100644
    grub_unregister_command (cmd_devicetree);
  }
 +#endif
-diff --git a/include/grub/arm/coreboot/console.h b/include/grub/arm/coreboot/console.h
-new file mode 100644
-index 000000000..13a14b783
---- /dev/null
-+++ b/include/grub/arm/coreboot/console.h
-@@ -0,0 +1,29 @@
-+/*
-+ *  GRUB  --  GRand Unified Bootloader
-+ *  Copyright (C) 2009  Free Software Foundation, Inc.
-+ *
-+ *  GRUB is free software: you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation, either version 3 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  GRUB is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ *  GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License
-+ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef GRUB_MACHINE_CONSOLE_HEADER
-+#define GRUB_MACHINE_CONSOLE_HEADER	1
-+
-+void grub_video_coreboot_fb_init (void);
-+void grub_video_coreboot_fb_early_init (void);
-+void grub_video_coreboot_fb_late_init (void);
-+void grub_video_coreboot_fb_fini (void);
-+
-+extern struct grub_linuxbios_table_framebuffer *grub_video_coreboot_fbtable;
-+
-+#endif /* ! GRUB_MACHINE_CONSOLE_HEADER */
-diff --git a/include/grub/arm/coreboot/kernel.h b/include/grub/arm/coreboot/kernel.h
-new file mode 100644
-index 000000000..09cd7fe32
---- /dev/null
-+++ b/include/grub/arm/coreboot/kernel.h
-@@ -0,0 +1,44 @@
-+/*
-+ *  GRUB  --  GRand Unified Bootloader
-+ *  Copyright (C) 2013 Free Software Foundation, Inc.
-+ *
-+ *  GRUB is free software: you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation, either version 3 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  GRUB is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ *  GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License
-+ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef GRUB_KERNEL_MACHINE_HEADER
-+#define GRUB_KERNEL_MACHINE_HEADER	1
-+
-+#ifndef ASM_FILE
-+
-+#include <grub/symbol.h>
-+#include <grub/types.h>
-+
-+struct grub_fdt_board
-+{
-+  const char *vendor, *part;
-+  const grub_uint8_t *dtb;
-+  grub_size_t dtb_size;
-+};
-+
-+extern struct grub_fdt_board grub_fdt_boards[];
-+void grub_machine_timer_init (void);
-+void grub_pl050_init (void);
-+void
-+grub_cros_init (void);
-+extern grub_addr_t EXPORT_VAR (start_of_ram);
-+#endif /* ! ASM_FILE */
-+
-+#define GRUB_KERNEL_MACHINE_STACK_SIZE GRUB_KERNEL_ARM_STACK_SIZE
-+
-+#endif /* ! GRUB_KERNEL_MACHINE_HEADER */
-diff --git a/include/grub/offsets.h b/include/grub/offsets.h
-index c88c86d4d..bf0689fc9 100644
---- a/include/grub/offsets.h
-+++ b/include/grub/offsets.h
-@@ -122,6 +122,12 @@
- #define GRUB_KERNEL_ARM_UBOOT_MOD_ALIGN 	0x8
- #define GRUB_KERNEL_ARM_UBOOT_TOTAL_MODULE_SIZE	0x4
- 
-+#define GRUB_KERNEL_ARM_COREBOOT_MOD_ALIGN 	0x8
-+#define GRUB_KERNEL_ARM_COREBOOT_TOTAL_MODULE_SIZE	0x4
-+
-+#define GRUB_KERNEL_ARM_STACK_SIZE 0x40000
-+#define GRUB_KERNEL_ARM_COREBOOT_MOD_GAP (GRUB_KERNEL_ARM_STACK_SIZE + 1024)
-+
- /* Minimal gap between _end and the start of the modules.  It's a hack
-    for PowerMac to prevent "CLAIM failed" error.  The real fix is to
-    rewrite grub-mkimage to generate valid ELF files.  */
 diff --git a/util/grub-mkimagexx.c b/util/grub-mkimagexx.c
-index 3fab93e20..a2bb05439 100644
+index 3fab93e2088..a2bb05439f0 100644
 --- a/util/grub-mkimagexx.c
 +++ b/util/grub-mkimagexx.c
 @@ -87,7 +87,8 @@ struct fixup_block_list
@@ -764,7 +522,7 @@ index 3fab93e20..a2bb05439 100644
        {
  	if (grub_target_to_host32 (s->sh_type) == SHT_NOBITS)
 diff --git a/util/mkimage.c b/util/mkimage.c
-index 528166c87..6aa77ed73 100644
+index 528166c87ac..6aa77ed7367 100644
 --- a/util/mkimage.c
 +++ b/util/mkimage.c
 @@ -533,6 +533,45 @@ static const struct grub_install_image_target_desc image_targets[] =
@@ -822,6 +580,248 @@ index 528166c87..6aa77ed73 100644
  	  grub_util_error (_("kernel image is too big (0x%x > 0x%x)"),
  			   (unsigned) layout.kernel_size + (unsigned) layout.bss_size
  			   + GRUB_KERNEL_I386_PC_LINK_ADDR,
+diff --git a/include/grub/arm/coreboot/console.h b/include/grub/arm/coreboot/console.h
+new file mode 100644
+index 00000000000..13a14b78383
+--- /dev/null
++++ b/include/grub/arm/coreboot/console.h
+@@ -0,0 +1,29 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2009  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef GRUB_MACHINE_CONSOLE_HEADER
++#define GRUB_MACHINE_CONSOLE_HEADER	1
++
++void grub_video_coreboot_fb_init (void);
++void grub_video_coreboot_fb_early_init (void);
++void grub_video_coreboot_fb_late_init (void);
++void grub_video_coreboot_fb_fini (void);
++
++extern struct grub_linuxbios_table_framebuffer *grub_video_coreboot_fbtable;
++
++#endif /* ! GRUB_MACHINE_CONSOLE_HEADER */
+diff --git a/include/grub/arm/coreboot/kernel.h b/include/grub/arm/coreboot/kernel.h
+new file mode 100644
+index 00000000000..09cd7fe328c
+--- /dev/null
++++ b/include/grub/arm/coreboot/kernel.h
+@@ -0,0 +1,44 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2013 Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef GRUB_KERNEL_MACHINE_HEADER
++#define GRUB_KERNEL_MACHINE_HEADER	1
++
++#ifndef ASM_FILE
++
++#include <grub/symbol.h>
++#include <grub/types.h>
++
++struct grub_fdt_board
++{
++  const char *vendor, *part;
++  const grub_uint8_t *dtb;
++  grub_size_t dtb_size;
++};
++
++extern struct grub_fdt_board grub_fdt_boards[];
++void grub_machine_timer_init (void);
++void grub_pl050_init (void);
++void
++grub_cros_init (void);
++extern grub_addr_t EXPORT_VAR (start_of_ram);
++#endif /* ! ASM_FILE */
++
++#define GRUB_KERNEL_MACHINE_STACK_SIZE GRUB_KERNEL_ARM_STACK_SIZE
++
++#endif /* ! GRUB_KERNEL_MACHINE_HEADER */
+diff --git a/include/grub/offsets.h b/include/grub/offsets.h
+index c88c86d4d2e..bf0689fc99a 100644
+--- a/include/grub/offsets.h
++++ b/include/grub/offsets.h
+@@ -122,6 +122,12 @@
+ #define GRUB_KERNEL_ARM_UBOOT_MOD_ALIGN 	0x8
+ #define GRUB_KERNEL_ARM_UBOOT_TOTAL_MODULE_SIZE	0x4
+ 
++#define GRUB_KERNEL_ARM_COREBOOT_MOD_ALIGN 	0x8
++#define GRUB_KERNEL_ARM_COREBOOT_TOTAL_MODULE_SIZE	0x4
++
++#define GRUB_KERNEL_ARM_STACK_SIZE 0x40000
++#define GRUB_KERNEL_ARM_COREBOOT_MOD_GAP (GRUB_KERNEL_ARM_STACK_SIZE + 1024)
++
+ /* Minimal gap between _end and the start of the modules.  It's a hack
+    for PowerMac to prevent "CLAIM failed" error.  The real fix is to
+    rewrite grub-mkimage to generate valid ELF files.  */
+diff --git a/grub-core/kern/arm/coreboot/coreboot.S b/grub-core/kern/arm/coreboot/coreboot.S
+new file mode 100644
+index 00000000000..a1104526c15
+--- /dev/null
++++ b/grub-core/kern/arm/coreboot/coreboot.S
+@@ -0,0 +1,44 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2016  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <grub/symbol.h>
++
++	.file	"coreboot.S"
++	.text
++	.syntax	unified
++#if !defined (__thumb2__)
++	.arch	armv7a
++	.arm
++#else
++	.arch	armv7
++	.thumb
++#endif
++
++FUNCTION(grub_arm_pfr1)
++	mrc p15, 0, r0, c0, c1, 1
++	bx	lr
++
++FUNCTION(grub_armv7_get_timer_value)
++	isb
++	mrrc p15, 1, r0, r1, c14
++	bx	lr
++
++FUNCTION(grub_armv7_get_timer_frequency)
++	mrc p15, 0, r0, c14, c0, 0
++	bx	lr
++
+diff --git a/grub-core/kern/arm/startup.S b/grub-core/kern/arm/startup.S
+index 640837cba51..3946fe8e183 100644
+--- a/grub-core/kern/arm/startup.S
++++ b/grub-core/kern/arm/startup.S
+@@ -24,6 +24,7 @@
+  * GRUB is called from U-Boot as a Linux Kernel type image, which
+  * means among other things that it always enters in ARM state.
+  *
++ * coreboot starts in ARM mode as well.
+  *
+  * Overview of GRUB image layout:
+  *
+@@ -127,6 +128,8 @@ reloc_done:
+ 
+ 	str     r1, EXT_C(grub_modbase)
+ 
++	/* Coreboot already places modules at right place.  */
++#ifndef GRUB_MACHINE_COREBOOT
+ 	add	r1, r1, r2
+ 	add	r0, r0, r2
+ 	sub     r1, r1, #4
+@@ -136,6 +139,7 @@ reloc_done:
+ 	str	r3, [r1], #-4			@ *dst-- = r3 
+ 	subs	r2, #4				@ remaining -= 4
+ 	bne	1b				@ while remaining != 0
++#endif
+ 
+ 	@ Since we _are_ the C run-time, we need to manually zero the BSS
+ 	@ region before continuing
+diff --git a/gentpl.py b/gentpl.py
+index f08bcc404f6..ed268178b4d 100644
+--- a/gentpl.py
++++ b/gentpl.py
+@@ -31,7 +31,8 @@ GRUB_PLATFORMS = [ "emu", "i386_pc", "i386_efi", "i386_qemu", "i386_coreboot",
+                    "i386_xen", "x86_64_xen",
+                    "mips_loongson", "sparc64_ieee1275",
+                    "powerpc_ieee1275", "mips_arc", "ia64_efi",
+-                   "mips_qemu_mips", "arm_uboot", "arm_efi", "arm64_efi" ]
++                   "mips_qemu_mips", "arm_uboot", "arm_efi", "arm64_efi",
++                   "arm_coreboot"]
+ 
+ GROUPS = {}
+ 
+@@ -44,7 +45,7 @@ GROUPS["x86"]      = GROUPS["i386"] + GROUPS["x86_64"]
+ GROUPS["mips"]     = [ "mips_loongson", "mips_qemu_mips", "mips_arc" ]
+ GROUPS["sparc64"]  = [ "sparc64_ieee1275" ]
+ GROUPS["powerpc"]  = [ "powerpc_ieee1275" ]
+-GROUPS["arm"]      = [ "arm_uboot", "arm_efi" ]
++GROUPS["arm"]      = [ "arm_uboot", "arm_efi", "arm_coreboot" ]
+ GROUPS["arm64"]    = [ "arm64_efi" ]
+ 
+ # Groups based on firmware
+@@ -52,6 +53,7 @@ GROUPS["efi"]  = [ "i386_efi", "x86_64_efi", "ia64_efi", "arm_efi", "arm64_efi"
+ GROUPS["ieee1275"]   = [ "i386_ieee1275", "sparc64_ieee1275", "powerpc_ieee1275" ]
+ GROUPS["uboot"] = [ "arm_uboot" ]
+ GROUPS["xen"]  = [ "i386_xen", "x86_64_xen" ]
++GROUPS["coreboot"]  = [ "i386_coreboot", "arm_coreboot" ]
+ 
+ # emu is a special case so many core functionality isn't needed on this platform
+ GROUPS["noemu"]   = GRUB_PLATFORMS[:]; GROUPS["noemu"].remove("emu")
+@@ -64,7 +66,7 @@ GROUPS["pci"]      = GROUPS["x86"] + ["mips_loongson"]
+ GROUPS["usb"]      = GROUPS["pci"]
+ 
+ # If gfxterm is main output console integrate it into kernel
+-GROUPS["videoinkernel"] = ["mips_loongson", "i386_coreboot" ]
++GROUPS["videoinkernel"] = ["mips_loongson", "i386_coreboot", "arm_coreboot" ]
+ GROUPS["videomodules"]   = GRUB_PLATFORMS[:];
+ for i in GROUPS["videoinkernel"]: GROUPS["videomodules"].remove(i)
+ 
+diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
+index 781d0ffbf75..bec0585549a 100644
+--- a/grub-core/Makefile.am
++++ b/grub-core/Makefile.am
+@@ -239,6 +239,16 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/lib/arg.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/system.h
+ endif
+ 
++if COND_arm_coreboot
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/system.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video_fb.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/gfxterm.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/font.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/bufio.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/coreboot/kernel.h
++endif
++
+ if COND_arm_efi
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/efi/loader.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/efi/efi.h
 -- 
-2.14.3
+2.15.0
 

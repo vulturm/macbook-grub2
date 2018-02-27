@@ -1,7 +1,7 @@
-From a59984e248881a8c47d0c6035ce3dc062fa2113f Mon Sep 17 00:00:00 2001
+From de9e4f818527846f4a9cbfeb3d0bb3c7a64aae5c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 16:09:25 -0400
-Subject: [PATCH 153/198] Make any of the loaders that link in efi mode honor
+Subject: [PATCH 153/206] Make any of the loaders that link in efi mode honor
  secure boot.
 
 And in this case "honor" means "even if somebody does link this in, they
@@ -9,7 +9,6 @@ won't register commands if SB is enabled."
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
- grub-core/Makefile.am              |  1 +
  grub-core/Makefile.core.def        |  1 +
  grub-core/commands/iorw.c          |  7 +++++
  grub-core/commands/memrw.c         |  7 +++++
@@ -28,6 +27,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  include/grub/mips/linux.h          |  0
  include/grub/powerpc/linux.h       |  0
  include/grub/sparc64/linux.h       |  0
+ grub-core/Makefile.am              |  1 +
  19 files changed, 146 insertions(+), 29 deletions(-)
  create mode 100644 grub-core/kern/efi/sb.c
  create mode 100644 include/grub/efi/sb.h
@@ -36,20 +36,8 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  create mode 100644 include/grub/powerpc/linux.h
  create mode 100644 include/grub/sparc64/linux.h
 
-diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
-index 104513847..f7b4d29b0 100644
---- a/grub-core/Makefile.am
-+++ b/grub-core/Makefile.am
-@@ -71,6 +71,7 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/command.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/device.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/disk.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/dl.h
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/efi/sb.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/env.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/env_private.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/err.h
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 4857a1e5f..75a7ab344 100644
+index 4857a1e5f61..75a7ab3441d 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -196,6 +196,7 @@ kernel = {
@@ -61,7 +49,7 @@ index 4857a1e5f..75a7ab344 100644
    x86 = kern/i386/tsc.c;
    x86 = kern/i386/tsc_pit.c;
 diff --git a/grub-core/commands/iorw.c b/grub-core/commands/iorw.c
-index a0c164e54..41a7f3f04 100644
+index a0c164e54f0..41a7f3f0466 100644
 --- a/grub-core/commands/iorw.c
 +++ b/grub-core/commands/iorw.c
 @@ -23,6 +23,7 @@
@@ -93,7 +81,7 @@ index a0c164e54..41a7f3f04 100644
    grub_unregister_extcmd (cmd_read_word);
    grub_unregister_extcmd (cmd_read_dword);
 diff --git a/grub-core/commands/memrw.c b/grub-core/commands/memrw.c
-index 98769eadb..088cbe9e2 100644
+index 98769eadb34..088cbe9e2bc 100644
 --- a/grub-core/commands/memrw.c
 +++ b/grub-core/commands/memrw.c
 @@ -22,6 +22,7 @@
@@ -125,7 +113,7 @@ index 98769eadb..088cbe9e2 100644
    grub_unregister_extcmd (cmd_read_word);
    grub_unregister_extcmd (cmd_read_dword);
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index 2588b481e..684ca93f8 100644
+index 2588b481e76..684ca93f8f4 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -269,34 +269,6 @@ grub_efi_get_variable (const char *var, const grub_efi_guid_t *guid,
@@ -165,7 +153,7 @@ index 2588b481e..684ca93f8 100644
  /* Search the mods section from the PE32/PE32+ image. This code uses
 diff --git a/grub-core/kern/efi/sb.c b/grub-core/kern/efi/sb.c
 new file mode 100644
-index 000000000..a41b6c5b8
+index 00000000000..a41b6c5b851
 --- /dev/null
 +++ b/grub-core/kern/efi/sb.c
 @@ -0,0 +1,58 @@
@@ -228,7 +216,7 @@ index 000000000..a41b6c5b8
 +#endif
 +}
 diff --git a/grub-core/loader/efi/appleloader.c b/grub-core/loader/efi/appleloader.c
-index 74888c463..69c2a10d3 100644
+index 74888c463ba..69c2a10d351 100644
 --- a/grub-core/loader/efi/appleloader.c
 +++ b/grub-core/loader/efi/appleloader.c
 @@ -24,6 +24,7 @@
@@ -259,7 +247,7 @@ index 74888c463..69c2a10d3 100644
    grub_unregister_command (cmd);
  }
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index 87a91e16f..aee8e6bec 100644
+index 87a91e16f17..aee8e6becf6 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -34,6 +34,7 @@
@@ -271,7 +259,7 @@ index 87a91e16f..aee8e6bec 100644
  #include <grub/i18n.h>
  #include <grub/net.h>
 diff --git a/grub-core/loader/i386/bsd.c b/grub-core/loader/i386/bsd.c
-index 7f96515da..87709aa23 100644
+index 7f96515da65..87709aa23e8 100644
 --- a/grub-core/loader/i386/bsd.c
 +++ b/grub-core/loader/i386/bsd.c
 @@ -38,6 +38,7 @@
@@ -303,7 +291,7 @@ index 7f96515da..87709aa23 100644
    grub_unregister_extcmd (cmd_openbsd);
    grub_unregister_extcmd (cmd_netbsd);
 diff --git a/grub-core/loader/i386/linux.c b/grub-core/loader/i386/linux.c
-index 083f9417c..b2438547d 100644
+index 083f9417cb6..b2438547dd0 100644
 --- a/grub-core/loader/i386/linux.c
 +++ b/grub-core/loader/i386/linux.c
 @@ -35,6 +35,7 @@
@@ -335,7 +323,7 @@ index 083f9417c..b2438547d 100644
    grub_unregister_command (cmd_initrd);
  }
 diff --git a/grub-core/loader/i386/pc/linux.c b/grub-core/loader/i386/pc/linux.c
-index a293b17aa..91283157e 100644
+index a293b17aa10..91283157e30 100644
 --- a/grub-core/loader/i386/pc/linux.c
 +++ b/grub-core/loader/i386/pc/linux.c
 @@ -35,6 +35,7 @@
@@ -367,7 +355,7 @@ index a293b17aa..91283157e 100644
    grub_unregister_command (cmd_initrd);
  }
 diff --git a/grub-core/loader/multiboot.c b/grub-core/loader/multiboot.c
-index bd9d5b3e6..fb044a60c 100644
+index bd9d5b3e698..fb044a60c79 100644
 --- a/grub-core/loader/multiboot.c
 +++ b/grub-core/loader/multiboot.c
 @@ -42,6 +42,7 @@
@@ -399,7 +387,7 @@ index bd9d5b3e6..fb044a60c 100644
    grub_unregister_command (cmd_module);
  }
 diff --git a/grub-core/loader/xnu.c b/grub-core/loader/xnu.c
-index c9885b1bc..df8dfdb4b 100644
+index c9885b1bcd7..df8dfdb4ba0 100644
 --- a/grub-core/loader/xnu.c
 +++ b/grub-core/loader/xnu.c
 @@ -33,6 +33,7 @@
@@ -431,7 +419,7 @@ index c9885b1bc..df8dfdb4b 100644
    grub_unregister_command (cmd_resume);
  #endif
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index bb3ab7dfd..91e29ce66 100644
+index bb3ab7dfdeb..91e29ce66f1 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
 @@ -83,7 +83,6 @@ EXPORT_FUNC (grub_efi_set_variable) (const char *var,
@@ -444,7 +432,7 @@ index bb3ab7dfd..91e29ce66 100644
  					     const grub_efi_device_path_t *dp2);
 diff --git a/include/grub/efi/sb.h b/include/grub/efi/sb.h
 new file mode 100644
-index 000000000..9629fbb0f
+index 00000000000..9629fbb0f9e
 --- /dev/null
 +++ b/include/grub/efi/sb.h
 @@ -0,0 +1,29 @@
@@ -479,16 +467,28 @@ index 000000000..9629fbb0f
 +#endif /* ! GRUB_EFI_SB_HEADER */
 diff --git a/include/grub/ia64/linux.h b/include/grub/ia64/linux.h
 new file mode 100644
-index 000000000..e69de29bb
+index 00000000000..e69de29bb2d
 diff --git a/include/grub/mips/linux.h b/include/grub/mips/linux.h
 new file mode 100644
-index 000000000..e69de29bb
+index 00000000000..e69de29bb2d
 diff --git a/include/grub/powerpc/linux.h b/include/grub/powerpc/linux.h
 new file mode 100644
-index 000000000..e69de29bb
+index 00000000000..e69de29bb2d
 diff --git a/include/grub/sparc64/linux.h b/include/grub/sparc64/linux.h
 new file mode 100644
-index 000000000..e69de29bb
+index 00000000000..e69de29bb2d
+diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
+index 10451384720..f7b4d29b0b3 100644
+--- a/grub-core/Makefile.am
++++ b/grub-core/Makefile.am
+@@ -71,6 +71,7 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/command.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/device.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/disk.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/dl.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/efi/sb.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/env.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/env_private.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/err.h
 -- 
-2.14.3
+2.15.0
 

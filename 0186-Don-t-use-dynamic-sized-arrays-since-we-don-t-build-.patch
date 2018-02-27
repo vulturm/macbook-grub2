@@ -1,7 +1,7 @@
-From 8bda2ce6ce3a91a0d84b0489679522add72780ef Mon Sep 17 00:00:00 2001
+From 9430a7f210803daaef67f9dd113a4217292e42da Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:42:57 -0400
-Subject: [PATCH 186/198] Don't use dynamic sized arrays since we don't build
+Subject: [PATCH 186/206] Don't use dynamic sized arrays since we don't build
  with -std=c99
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 186/198] Don't use dynamic sized arrays since we don't build
  1 file changed, 14 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/net/net.c b/grub-core/net/net.c
-index 4be228d95..fa3e29126 100644
+index 4be228d9576..fa3e2912643 100644
 --- a/grub-core/net/net.c
 +++ b/grub-core/net/net.c
 @@ -1853,14 +1853,25 @@ grub_net_search_configfile (char *config)
@@ -42,5 +42,5 @@ index 4be228d95..fa3e29126 100644
          {
            grub_strcpy (suffix, client_uuid);
 -- 
-2.14.3
+2.15.0
 

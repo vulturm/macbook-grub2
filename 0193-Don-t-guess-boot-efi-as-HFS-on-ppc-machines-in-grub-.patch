@@ -1,7 +1,7 @@
-From d47f8b7d1d9bf708cfd989d20cc0fd87ba72c058 Mon Sep 17 00:00:00 2001
+From 89ed2838bec91a26f6797702e637e48737c4fb0f Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 20 Apr 2017 13:29:06 -0400
-Subject: [PATCH 193/198] Don't guess /boot/efi/ as HFS+ on ppc machines in
+Subject: [PATCH 193/206] Don't guess /boot/efi/ as HFS+ on ppc machines in
  grub-install
 
 This should never be trying this, and since we've consolidated the
@@ -16,7 +16,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 1 insertion(+), 11 deletions(-)
 
 diff --git a/util/grub-install.c b/util/grub-install.c
-index cd84a72b9..48f2abc3e 100644
+index cd84a72b97b..48f2abc3ea5 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
 @@ -1159,18 +1159,8 @@ main (int argc, char *argv[])
@@ -40,5 +40,5 @@ index cd84a72b9..48f2abc3e 100644
  	    {
  	      free (d);
 -- 
-2.14.3
+2.15.0
 

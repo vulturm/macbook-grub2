@@ -1,7 +1,7 @@
 From b0bad6fd9449d3333fe1ab58953c0e6c1ce12c0d Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 3 May 2017 11:55:52 +0200
-Subject: [PATCH 001/198] Bump version to 2.03
+Subject: [PATCH 001/206] Bump version to 2.03
 
 ---
  configure.ac                |   2 +-
@@ -9,7 +9,7 @@ Subject: [PATCH 001/198] Bump version to 2.03
  2 files changed, 99 insertions(+), 99 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index edd184154..d10d8adac 100644
+index edd184154f7..d10d8adac58 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -31,7 +31,7 @@ dnl (such as BUILD_CC, BUILD_CFLAGS, etc.) for the build type and variables
@@ -22,7 +22,7 @@ index edd184154..d10d8adac 100644
  AC_CONFIG_AUX_DIR([build-aux])
  
 diff --git a/grub-core/tests/checksums.h b/grub-core/tests/checksums.h
-index 68d8ce7c7..921e57ff4 100644
+index 68d8ce7c775..921e57ff48d 100644
 --- a/grub-core/tests/checksums.h
 +++ b/grub-core/tests/checksums.h
 @@ -1,101 +1,101 @@
@@ -226,5 +226,5 @@ index 68d8ce7c7..921e57ff4 100644
    { "videotest", 800, 600, 0x2, 16, 8, 1, 0, 0, 0, 0, 0, 0, 0, 0 /* 800x600xi16 */, (grub_uint32_t []) { 0x7033079c, 0x7033079c, 0x7033079c, 0x7033079c, 0x7033079c, }, 5 },
    { "videotest", 1024, 768, 0x2, 16, 8, 1, 0, 0, 0, 0, 0, 0, 0, 0 /* 1024x768xi16 */, (grub_uint32_t []) { 0xff583fbf, 0xff583fbf, 0xff583fbf, 0xff583fbf, 0xff583fbf, }, 5 },
 -- 
-2.14.3
+2.15.0
 

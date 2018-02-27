@@ -1,7 +1,7 @@
 From 1deebd85ef87cc581e995ce0a51dc0802ac9c367 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Mon, 7 Aug 2017 16:23:12 +0100
-Subject: [PATCH 063/198] io: add a GRUB_GZ prefix to gzio specific defines
+Subject: [PATCH 063/206] io: add a GRUB_GZ prefix to gzio specific defines
 
 * This is done to avoid a conflict with a PACKED define in the EDK2
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 063/198] io: add a GRUB_GZ prefix to gzio specific defines
  1 file changed, 20 insertions(+), 20 deletions(-)
 
 diff --git a/grub-core/io/gzio.c b/grub-core/io/gzio.c
-index 0f2ea6bd8..a8e33033b 100644
+index 0f2ea6bd845..a8e33033bf8 100644
 --- a/grub-core/io/gzio.c
 +++ b/grub-core/io/gzio.c
 @@ -140,24 +140,24 @@ eat_field (grub_file_t file, int len)
@@ -81,5 +81,5 @@ index 0f2ea6bd8..a8e33033b 100644
        /* TRANSLATORS: It's about given file having some strange format, not
  	 complete lack of gzip support.  */
 -- 
-2.14.3
+2.15.0
 

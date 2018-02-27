@@ -1,7 +1,7 @@
 From f168a0803d8d35e431ef6888755f9b2622304846 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Mon, 10 Feb 2014 16:13:10 -0500
-Subject: [PATCH 115/198] Switch to use APM Mustang device tree, for hardware
+Subject: [PATCH 115/206] Switch to use APM Mustang device tree, for hardware
  testing.
 
 Signed-off-by: David A. Marlin <d.marlin@redhat.com>
@@ -10,7 +10,7 @@ Signed-off-by: David A. Marlin <d.marlin@redhat.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 79a747ebd..462b461ff 100644
+index 79a747ebd4d..462b461ff49 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -232,8 +232,8 @@ while [ "x$list" != "x" ] ; do
@@ -25,5 +25,5 @@ index 79a747ebd..462b461ff 100644
      fi
    done
 -- 
-2.14.3
+2.15.0
 

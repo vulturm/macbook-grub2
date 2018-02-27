@@ -1,7 +1,7 @@
-From 10d3df4413dde0edf41ba1adeba50ef62577d967 Mon Sep 17 00:00:00 2001
+From ecb06a3cb18f13882faeef81011396fac5594d71 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 1 May 2017 11:19:40 -0400
-Subject: [PATCH 172/198] print more debug info in our module loader.
+Subject: [PATCH 172/206] print more debug info in our module loader.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index 684ca93f8..1f3ac5e1d 100644
+index 684ca93f8f4..1f3ac5e1d08 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -304,13 +304,23 @@ grub_efi_modules_addr (void)
@@ -40,5 +40,5 @@ index 684ca93f8..1f3ac5e1d 100644
  }
  
 -- 
-2.14.3
+2.15.0
 

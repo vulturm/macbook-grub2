@@ -1,7 +1,7 @@
 From 34423216f8f3d7ce6086e2f1ee9869407e6a2221 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Thu, 20 Sep 2012 18:07:39 -0300
-Subject: [PATCH 066/198] IBM client architecture (CAS) reboot support
+Subject: [PATCH 066/206] IBM client architecture (CAS) reboot support
 
 This is an implementation of IBM client architecture (CAS) reboot for GRUB.
 
@@ -25,7 +25,7 @@ parameters
  4 files changed, 90 insertions(+)
 
 diff --git a/grub-core/kern/ieee1275/openfw.c b/grub-core/kern/ieee1275/openfw.c
-index ddb778340..6db8b9865 100644
+index ddb778340e4..6db8b986551 100644
 --- a/grub-core/kern/ieee1275/openfw.c
 +++ b/grub-core/kern/ieee1275/openfw.c
 @@ -561,3 +561,65 @@ grub_ieee1275_canonicalise_devname (const char *path)
@@ -95,7 +95,7 @@ index ddb778340..6db8b9865 100644
 +  return 0;
 +}
 diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
-index 78a70a8bf..249e19bc7 100644
+index 78a70a8bf47..249e19bc788 100644
 --- a/grub-core/normal/main.c
 +++ b/grub-core/normal/main.c
 @@ -33,6 +33,9 @@
@@ -132,7 +132,7 @@ index 78a70a8bf..249e19bc7 100644
        grub_errno = GRUB_ERR_NONE;
      }
 diff --git a/grub-core/script/execute.c b/grub-core/script/execute.c
-index a8502d907..ab78ca87f 100644
+index a8502d90711..ab78ca87f90 100644
 --- a/grub-core/script/execute.c
 +++ b/grub-core/script/execute.c
 @@ -27,6 +27,9 @@
@@ -157,7 +157,7 @@ index a8502d907..ab78ca87f 100644
      {
        char *line;
 diff --git a/include/grub/ieee1275/ieee1275.h b/include/grub/ieee1275/ieee1275.h
-index 8e4251303..9f26c69a2 100644
+index 8e425130327..9f26c69a2df 100644
 --- a/include/grub/ieee1275/ieee1275.h
 +++ b/include/grub/ieee1275/ieee1275.h
 @@ -234,6 +234,8 @@ int EXPORT_FUNC(grub_ieee1275_devalias_next) (struct grub_ieee1275_devalias *ali
@@ -170,5 +170,5 @@ index 8e4251303..9f26c69a2 100644
  #define FOR_IEEE1275_DEVALIASES(alias) for (grub_ieee1275_devalias_init_iterator (&(alias)); grub_ieee1275_devalias_next (&(alias));)
  
 -- 
-2.14.3
+2.15.0
 

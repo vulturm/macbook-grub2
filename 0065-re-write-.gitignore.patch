@@ -1,7 +1,7 @@
 From ff9da35fd789354cc1490b75893e765771808352 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 8 Aug 2017 12:48:04 -0400
-Subject: [PATCH 065/198] re-write .gitignore
+Subject: [PATCH 065/206] re-write .gitignore
 
 ---
  .gitignore                        | 352 ++++++++++++--------------------------
@@ -24,7 +24,7 @@ Subject: [PATCH 065/198] re-write .gitignore
  create mode 100644 util/bash-completion.d/.gitignore
 
 diff --git a/.gitignore b/.gitignore
-index eca17bec9..d95fac578 100644
+index eca17bec9b8..d95fac5789c 100644
 --- a/.gitignore
 +++ b/.gitignore
 @@ -1,249 +1,121 @@
@@ -391,7 +391,7 @@ index eca17bec9..d95fac578 100644
 +/stamp-h.in
 diff --git a/build-aux/.gitignore b/build-aux/.gitignore
 new file mode 100644
-index 000000000..f2f17aab9
+index 00000000000..f2f17aab9ff
 --- /dev/null
 +++ b/build-aux/.gitignore
 @@ -0,0 +1,9 @@
@@ -406,7 +406,7 @@ index 000000000..f2f17aab9
 +/texinfo.tex
 diff --git a/docs/.gitignore b/docs/.gitignore
 new file mode 100644
-index 000000000..91aee84d3
+index 00000000000..91aee84d3e9
 --- /dev/null
 +++ b/docs/.gitignore
 @@ -0,0 +1,4 @@
@@ -416,7 +416,7 @@ index 000000000..91aee84d3
 +/version*.texi
 diff --git a/grub-core/.gitignore b/grub-core/.gitignore
 new file mode 100644
-index 000000000..c738ac6c6
+index 00000000000..c738ac6c649
 --- /dev/null
 +++ b/grub-core/.gitignore
 @@ -0,0 +1,15 @@
@@ -437,7 +437,7 @@ index 000000000..c738ac6c6
 +/trigtables.c
 diff --git a/grub-core/gnulib/.gitignore b/grub-core/gnulib/.gitignore
 new file mode 100644
-index 000000000..29e199c2d
+index 00000000000..29e199c2db4
 --- /dev/null
 +++ b/grub-core/gnulib/.gitignore
 @@ -0,0 +1,22 @@
@@ -465,14 +465,14 @@ index 000000000..29e199c2d
 +/wctype.h
 diff --git a/grub-core/lib/.gitignore b/grub-core/lib/.gitignore
 new file mode 100644
-index 000000000..681545914
+index 00000000000..68154591404
 --- /dev/null
 +++ b/grub-core/lib/.gitignore
 @@ -0,0 +1 @@
 +/libgcrypt-grub/
 diff --git a/include/grub/gcrypt/.gitignore b/include/grub/gcrypt/.gitignore
 new file mode 100644
-index 000000000..8fbf56462
+index 00000000000..8fbf5646246
 --- /dev/null
 +++ b/include/grub/gcrypt/.gitignore
 @@ -0,0 +1,2 @@
@@ -480,7 +480,7 @@ index 000000000..8fbf56462
 +gcrypt.h
 diff --git a/po/.gitignore b/po/.gitignore
 new file mode 100644
-index 000000000..97b679c31
+index 00000000000..97b679c3138
 --- /dev/null
 +++ b/po/.gitignore
 @@ -0,0 +1,4 @@
@@ -490,11 +490,11 @@ index 000000000..97b679c31
 +/stamp-po
 diff --git a/util/bash-completion.d/.gitignore b/util/bash-completion.d/.gitignore
 new file mode 100644
-index 000000000..b7e1eb124
+index 00000000000..b7e1eb12428
 --- /dev/null
 +++ b/util/bash-completion.d/.gitignore
 @@ -0,0 +1 @@
 +grub
 -- 
-2.14.3
+2.15.0
 

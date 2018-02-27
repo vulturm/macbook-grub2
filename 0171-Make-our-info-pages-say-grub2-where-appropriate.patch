@@ -1,7 +1,7 @@
-From 12e056f068df6a17ddee61959a3d5da409366a91 Mon Sep 17 00:00:00 2001
+From 53bdb9166fd78f0c703292529a1b674b2c5a58c7 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 6 May 2016 18:43:08 -0400
-Subject: [PATCH 171/198] Make our info pages say "grub2" where appropriate.
+Subject: [PATCH 171/206] Make our info pages say "grub2" where appropriate.
 
 This needs to be hooked up to --program-transform=, but I haven't had
 time.
@@ -13,7 +13,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 161 insertions(+), 161 deletions(-)
 
 diff --git a/docs/grub-dev.texi b/docs/grub-dev.texi
-index a9f4de631..3ce827ab7 100644
+index a9f4de6318c..3ce827ab726 100644
 --- a/docs/grub-dev.texi
 +++ b/docs/grub-dev.texi
 @@ -1,7 +1,7 @@
@@ -35,7 +35,7 @@ index a9f4de631..3ce827ab7 100644
  
  @setchapternewpage odd
 diff --git a/docs/grub.texi b/docs/grub.texi
-index 15a90b26e..f28c4cd52 100644
+index 15a90b26e4d..f28c4cd5247 100644
 --- a/docs/grub.texi
 +++ b/docs/grub.texi
 @@ -1,7 +1,7 @@
@@ -1012,5 +1012,5 @@ index 15a90b26e..f28c4cd52 100644
  @table @option
  @item --help
 -- 
-2.14.3
+2.15.0
 

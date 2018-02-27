@@ -1,7 +1,7 @@
-From 1daf969815f1487e02a78725e592b4d973641a4f Mon Sep 17 00:00:00 2001
+From 3602fba26df0d9fc04bae72d26d866ec9d1e24a6 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 27 Oct 2014 09:22:55 -0400
-Subject: [PATCH 128/198] Try to emit linux16/initrd16 and linuxefi/initrdefi
+Subject: [PATCH 128/206] Try to emit linux16/initrd16 and linuxefi/initrdefi
  in 30-os_prober.
 
 Resolves: rhbz#1108296
@@ -12,7 +12,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 26 insertions(+), 4 deletions(-)
 
 diff --git a/util/grub.d/30_os-prober.in b/util/grub.d/30_os-prober.in
-index 9b8f5968e..dc98eace9 100644
+index 9b8f5968e2d..dc98eace934 100644
 --- a/util/grub.d/30_os-prober.in
 +++ b/util/grub.d/30_os-prober.in
 @@ -141,6 +141,28 @@ for OS in ${OSPROBED} ; do
@@ -73,5 +73,5 @@ index 9b8f5968e..dc98eace9 100644
          fi
          cat << EOF
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
 From b7aa57a2f879d185888e4d47f77a1a30370973f9 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 6 Mar 2014 11:51:33 -0500
-Subject: [PATCH 113/198] Try mac/guid/etc before grub.cfg on tftp config
+Subject: [PATCH 113/206] Try mac/guid/etc before grub.cfg on tftp config
  files.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
@@ -10,7 +10,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 43 insertions(+), 37 deletions(-)
 
 diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
-index a3713efcd..7d9c4f09b 100644
+index a3713efcd90..7d9c4f09b9b 100644
 --- a/grub-core/normal/main.c
 +++ b/grub-core/normal/main.c
 @@ -341,53 +341,59 @@ grub_cmd_normal (struct grub_command *cmd __attribute__ ((unused)),
@@ -60,26 +60,26 @@ index a3713efcd..7d9c4f09b 100644
 +	      config_len = grub_strlen (prefix) +
 +		sizeof ("/grub.cfg-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
 +	      config = grub_malloc (config_len);
-+
-+	      if (! config)
-+		goto quit;
  
 -          if (! config)
 -            goto quit;
-+	      grub_snprintf (config, config_len, "%s/grub.cfg", prefix);
++	      if (! config)
++		goto quit;
  
 -          grub_snprintf (config, config_len, "%s/grub.cfg", prefix);
-+	      grub_net_search_configfile (config);
++	      grub_snprintf (config, config_len, "%s/grub.cfg", prefix);
  
 -          if (grub_strncmp (prefix + 1, "tftp", sizeof ("tftp") - 1) == 0)
 -            grub_net_search_configfile (config);
++	      grub_net_search_configfile (config);
+ 
+-	  grub_enter_normal_mode (config);
+-	  grub_free (config);
 +	      grub_enter_normal_mode (config);
 +	      grub_free (config);
 +	      config = NULL;
 +	    }
- 
--	  grub_enter_normal_mode (config);
--	  grub_free (config);
++
 +	  if (!config)
 +	    {
 +	      config = grub_xasprintf ("%s/grub.cfg", prefix);
@@ -111,5 +111,5 @@ index a3713efcd..7d9c4f09b 100644
    else
      grub_enter_normal_mode (argv[0]);
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
 From ac6b41b89fbb82a3ba843a7ed19115d81432b604 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:29:48 +0200
-Subject: [PATCH 022/198] arm-coreboot: Export FDT routines.
+Subject: [PATCH 022/206] arm-coreboot: Export FDT routines.
 
 We need to use them from modules as well.
 ---
@@ -9,7 +9,7 @@ We need to use them from modules as well.
  1 file changed, 2 insertions(+)
 
 diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
-index fc6ca3051..147e6959c 100644
+index fc6ca305147..147e6959c97 100644
 --- a/grub-core/Makefile.am
 +++ b/grub-core/Makefile.am
 @@ -246,7 +246,9 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video_fb.h
@@ -23,5 +23,5 @@ index fc6ca3051..147e6959c 100644
  
  if COND_arm_efi
 -- 
-2.14.3
+2.15.0
 

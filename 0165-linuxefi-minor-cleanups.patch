@@ -1,7 +1,7 @@
-From 2d1e45c97ab97cc924769095521664192e8196ed Mon Sep 17 00:00:00 2001
+From 242d81d7af4fa50070cc7bd44b9f38a25248080b Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:31:52 -0500
-Subject: [PATCH 165/198] linuxefi: minor cleanups
+Subject: [PATCH 165/206] linuxefi: minor cleanups
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 20 insertions(+), 10 deletions(-)
 
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
-index 010bf982d..8b5a817b9 100644
+index 010bf982d80..8b5a817b9d1 100644
 --- a/grub-core/loader/i386/efi/linux.c
 +++ b/grub-core/loader/i386/efi/linux.c
 @@ -61,13 +61,18 @@ grub_linuxefi_unload (void)
@@ -85,5 +85,5 @@ index 010bf982d..8b5a817b9 100644
    return grub_errno;
  }
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
-From 6246598c06a27ca40a6101e39fb788d1a02976d7 Mon Sep 17 00:00:00 2001
+From a90a7d236fcfa01bd09e34fdec5782c6509c6578 Mon Sep 17 00:00:00 2001
 From: Mark Salter <msalter@redhat.com>
 Date: Mon, 17 Apr 2017 08:44:29 -0400
-Subject: [PATCH 169/198] arm64: make sure fdt has #address-cells and
+Subject: [PATCH 169/206] arm64: make sure fdt has #address-cells and
  #size-cells properties
 
 Recent upstream changes to kexec-tools relies on #address-cells
@@ -14,7 +14,7 @@ make sure they exist.
  1 file changed, 15 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 34f34e65a..530c4ba2d 100644
+index ad39a301527..59ff9cc05b4 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -79,7 +79,21 @@ finalize_params_linux (void)
@@ -41,5 +41,5 @@ index 34f34e65a..530c4ba2d 100644
    if (node < 1)
      goto failure;
 -- 
-2.14.3
+2.15.0
 

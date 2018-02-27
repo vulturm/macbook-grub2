@@ -1,30 +1,18 @@
 From 848bed9d92cf20e9f25db4c69a20efad23996ca0 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:42:37 +0200
-Subject: [PATCH 024/198] arm_coreboot: Support keyboard for vexpress.
+Subject: [PATCH 024/206] arm_coreboot: Support keyboard for vexpress.
 
 ---
- grub-core/Makefile.am              |   1 +
  grub-core/Makefile.core.def        |   3 +
  grub-core/kern/arm/coreboot/init.c |   1 +
  grub-core/term/arm/pl050.c         | 189 +++++++++++++++++++++++++++++++++++++
+ grub-core/Makefile.am              |   1 +
  4 files changed, 194 insertions(+)
  create mode 100644 grub-core/term/arm/pl050.c
 
-diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
-index 147e6959c..a2aaf9f54 100644
---- a/grub-core/Makefile.am
-+++ b/grub-core/Makefile.am
-@@ -240,6 +240,7 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/system.h
- endif
- 
- if COND_arm_coreboot
-+KERNEL_HEADER_FILES += $(top_builddir)/include/grub/keyboard_layouts.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/system.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video_fb.h
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 6ade6e950..6be6e7f61 100644
+index 6ade6e95057..6be6e7f61ee 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -160,6 +160,9 @@ kernel = {
@@ -38,7 +26,7 @@ index 6ade6e950..6be6e7f61 100644
    terminfoinkernel = term/terminfo.c;
    terminfoinkernel = term/tparm.c;
 diff --git a/grub-core/kern/arm/coreboot/init.c b/grub-core/kern/arm/coreboot/init.c
-index aec75c672..a06ccb72f 100644
+index aec75c672a2..a06ccb72f42 100644
 --- a/grub-core/kern/arm/coreboot/init.c
 +++ b/grub-core/kern/arm/coreboot/init.c
 @@ -133,6 +133,7 @@ grub_machine_init (void)
@@ -51,7 +39,7 @@ index aec75c672..a06ccb72f 100644
  void
 diff --git a/grub-core/term/arm/pl050.c b/grub-core/term/arm/pl050.c
 new file mode 100644
-index 000000000..e4cda3056
+index 00000000000..e4cda305666
 --- /dev/null
 +++ b/grub-core/term/arm/pl050.c
 @@ -0,0 +1,189 @@
@@ -244,6 +232,18 @@ index 000000000..e4cda3056
 +{
 +  grub_fdtbus_register (&pl050);
 +}
+diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
+index 147e6959c97..a2aaf9f54b0 100644
+--- a/grub-core/Makefile.am
++++ b/grub-core/Makefile.am
+@@ -240,6 +240,7 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/system.h
+ endif
+ 
+ if COND_arm_coreboot
++KERNEL_HEADER_FILES += $(top_builddir)/include/grub/keyboard_layouts.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/system.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video_fb.h
 -- 
-2.14.3
+2.15.0
 

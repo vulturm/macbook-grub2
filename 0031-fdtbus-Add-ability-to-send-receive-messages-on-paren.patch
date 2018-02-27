@@ -1,7 +1,7 @@
 From c4313c812dc14e82a774b580b5e34d40e7f3fae6 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 08:40:29 +0200
-Subject: [PATCH 031/198] fdtbus: Add ability to send/receive messages on
+Subject: [PATCH 031/206] fdtbus: Add ability to send/receive messages on
  parent busses.
 
 ---
@@ -10,7 +10,7 @@ Subject: [PATCH 031/198] fdtbus: Add ability to send/receive messages on
  2 files changed, 34 insertions(+), 19 deletions(-)
 
 diff --git a/grub-core/bus/fdt.c b/grub-core/bus/fdt.c
-index 34d535457..135da497b 100644
+index 34d53545732..135da497ba6 100644
 --- a/grub-core/bus/fdt.c
 +++ b/grub-core/bus/fdt.c
 @@ -25,30 +25,22 @@ static grub_size_t root_address_cells, root_size_cells;
@@ -87,7 +87,7 @@ index 34d535457..135da497b 100644
        }
  }
 diff --git a/include/grub/fdtbus.h b/include/grub/fdtbus.h
-index 985837e55..f519c40ec 100644
+index 985837e55f6..f519c40ec35 100644
 --- a/include/grub/fdtbus.h
 +++ b/include/grub/fdtbus.h
 @@ -22,7 +22,13 @@
@@ -130,5 +130,5 @@ index 985837e55..f519c40ec 100644
  /* dtb is assumed to be unfreeable and must remain
     valid for lifetime of GRUB.
 -- 
-2.14.3
+2.15.0
 

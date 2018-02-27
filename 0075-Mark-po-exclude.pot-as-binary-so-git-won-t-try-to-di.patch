@@ -1,7 +1,7 @@
 From 126f6952b853ea67e784650ed12f365ab7988f51 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 22 Jul 2015 11:21:01 -0400
-Subject: [PATCH 075/198] Mark po/exclude.pot as binary so git won't try to
+Subject: [PATCH 075/206] Mark po/exclude.pot as binary so git won't try to
  diff nonprintables.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
@@ -12,11 +12,11 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
 
 diff --git a/.gitattributes b/.gitattributes
 new file mode 100644
-index 000000000..33ffaa404
+index 00000000000..33ffaa40460
 --- /dev/null
 +++ b/.gitattributes
 @@ -0,0 +1 @@
 +po/exclude.pot binary
 -- 
-2.14.3
+2.15.0
 

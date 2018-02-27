@@ -1,7 +1,7 @@
-From 54f7769a22e9f82a9c894746e61d86f33d226218 Mon Sep 17 00:00:00 2001
+From 2d588223e2beb9af35ed05e57d19563f9aaf19ac Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 21 Aug 2014 03:39:11 +0000
-Subject: [PATCH 178/198] grub2-btrfs-05-grub2-mkconfig
+Subject: [PATCH 178/206] grub2-btrfs-05-grub2-mkconfig
 
 ---
  util/grub-mkconfig.in       |  3 ++-
@@ -12,7 +12,7 @@ Subject: [PATCH 178/198] grub2-btrfs-05-grub2-mkconfig
  5 files changed, 37 insertions(+), 2 deletions(-)
 
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index e32de5ef3..3b0bfe403 100644
+index e32de5ef361..3b0bfe40308 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -239,7 +239,8 @@ export GRUB_DEFAULT \
@@ -26,7 +26,7 @@ index e32de5ef3..3b0bfe403 100644
  if test "x${grub_cfg}" != "x"; then
    rm -f "${grub_cfg}.new"
 diff --git a/util/grub-mkconfig_lib.in b/util/grub-mkconfig_lib.in
-index 9c410eae4..2fb4f4f81 100644
+index 9c410eae493..2fb4f4f8143 100644
 --- a/util/grub-mkconfig_lib.in
 +++ b/util/grub-mkconfig_lib.in
 @@ -52,7 +52,11 @@ grub_warn ()
@@ -42,7 +42,7 @@ index 9c410eae4..2fb4f4f81 100644
  
  is_path_readable_by_grub ()
 diff --git a/util/grub.d/00_header.in b/util/grub.d/00_header.in
-index 858b526c9..e2a533001 100644
+index 858b526c925..e2a53300126 100644
 --- a/util/grub.d/00_header.in
 +++ b/util/grub.d/00_header.in
 @@ -27,6 +27,14 @@ export TEXTDOMAINDIR="@localedir@"
@@ -88,7 +88,7 @@ index 858b526c9..e2a533001 100644
 +EOF
 +fi
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index c9bf223f2..7e78ad336 100644
+index c9bf223f273..7e78ad33636 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -56,10 +56,14 @@ fi
@@ -107,7 +107,7 @@ index c9bf223f2..7e78ad336 100644
      xzfs)
  	rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
 diff --git a/util/grub.d/20_linux_xen.in b/util/grub.d/20_linux_xen.in
-index 54f1ec8a2..462f8e1f8 100644
+index 54f1ec8a2fd..462f8e1f819 100644
 --- a/util/grub.d/20_linux_xen.in
 +++ b/util/grub.d/20_linux_xen.in
 @@ -63,10 +63,14 @@ fi
@@ -126,5 +126,5 @@ index 54f1ec8a2..462f8e1f8 100644
      xzfs)
  	rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
 -- 
-2.14.3
+2.15.0
 

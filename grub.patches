@@ -196,3 +196,11 @@ Patch0195: 0195-Use-grub-file-to-figure-out-whether-multiboot2-shoul.patch
 Patch0196: 0196-20_linux_xen-load-xen-or-multiboot-2-modules-as-need.patch
 Patch0197: 0197-tsc-Change-default-tsc-calibration-method-to-pmtimer.patch
 Patch0198: 0198-Make-pmtimer-tsc-calibration-not-take-51-seconds-to-.patch
+Patch0199: 0199-align-struct-efi_variable-better.patch
+Patch0200: 0200-Add-quicksort-implementation.patch
+Patch0201: 0201-Add-blscfg-command-support-to-parse-BootLoaderSpec-c.patch
+Patch0202: 0202-Add-BLS-support-to-grub-mkconfig.patch
+Patch0203: 0203-Remove-duplicated-grub_exit-definition-for-grub-emu-.patch
+Patch0204: 0204-Don-t-attempt-to-backtrace-on-grub_abort-for-grub-em.patch
+Patch0205: 0205-Enable-blscfg-command-for-the-emu-platform.patch
+Patch0206: 0206-Add-linux-and-initrd-commands-for-grub-emu.patch

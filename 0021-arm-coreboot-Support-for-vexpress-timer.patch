@@ -1,14 +1,14 @@
 From 5a865b37866ee8cd64c080bc6fb1e537f8e2b3c6 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:26:36 +0200
-Subject: [PATCH 021/198] arm-coreboot: Support for vexpress timer.
+Subject: [PATCH 021/206] arm-coreboot: Support for vexpress timer.
 
 ---
  grub-core/kern/arm/coreboot/timer.c | 36 ++++++++++++++++++++++++++++++++++++
  1 file changed, 36 insertions(+)
 
 diff --git a/grub-core/kern/arm/coreboot/timer.c b/grub-core/kern/arm/coreboot/timer.c
-index ebefb99d5..d97b844f8 100644
+index ebefb99d58f..d97b844f848 100644
 --- a/grub-core/kern/arm/coreboot/timer.c
 +++ b/grub-core/kern/arm/coreboot/timer.c
 @@ -21,6 +21,7 @@
@@ -69,5 +69,5 @@ index ebefb99d5..d97b844f8 100644
      try_generic_timer ();
    if (!have_timer)
 -- 
-2.14.3
+2.15.0
 

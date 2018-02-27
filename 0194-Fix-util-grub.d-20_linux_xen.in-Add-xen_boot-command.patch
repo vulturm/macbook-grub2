@@ -1,7 +1,7 @@
-From 40e6d913ad65d357a13205d3392f613ac52508c2 Mon Sep 17 00:00:00 2001
+From a39fb79b9424d5390b3940676ed441199c419048 Mon Sep 17 00:00:00 2001
 From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 Date: Mon, 28 Aug 2017 13:51:14 -0400
-Subject: [PATCH 194/198] Fix util/grub.d/20_linux_xen.in: Add xen_boot command
+Subject: [PATCH 194/206] Fix util/grub.d/20_linux_xen.in: Add xen_boot command
  support for aarch64
 
 Commit d33045ce7ffcb7c1e4a60c14d5ca64b36e3c5abe introduced
@@ -36,7 +36,7 @@ Signed-off-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
  1 file changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/util/grub.d/20_linux_xen.in b/util/grub.d/20_linux_xen.in
-index 462f8e1f8..9b1bd7169 100644
+index 462f8e1f819..9b1bd716965 100644
 --- a/util/grub.d/20_linux_xen.in
 +++ b/util/grub.d/20_linux_xen.in
 @@ -210,13 +210,12 @@ while [ "x${xen_list}" != "x" ] ; do
@@ -58,5 +58,5 @@ index 462f8e1f8..9b1bd7169 100644
      while [ "x$list" != "x" ] ; do
  	linux=`version_find_latest $list`
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
 From 26c2f306fd425d2c0348023b8dcb7eb40a01851a Mon Sep 17 00:00:00 2001
 From: Fu Wei <fu.wei@linaro.org>
 Date: Sun, 14 May 2017 15:43:47 +0800
-Subject: [PATCH 041/198] arm64: Update the introduction of Xen boot commands
+Subject: [PATCH 041/206] arm64: Update the introduction of Xen boot commands
  in docs/grub.texi
 
 delete: xen_linux, xen_initrd, xen_xsm
@@ -27,7 +27,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 13 insertions(+), 25 deletions(-)
 
 diff --git a/docs/grub.texi b/docs/grub.texi
-index e935af33e..a0c4b9e4e 100644
+index e935af33ea5..a0c4b9e4e8e 100644
 --- a/docs/grub.texi
 +++ b/docs/grub.texi
 @@ -3873,11 +3873,9 @@ you forget a command, you can run the command @command{help}
@@ -89,5 +89,5 @@ index e935af33e..a0c4b9e4e 100644
  @section The list of networking commands
  
 -- 
-2.14.3
+2.15.0
 

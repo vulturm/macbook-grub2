@@ -1,7 +1,7 @@
 From eef343ff642b42f0e46eb5e8ff5d89fef375f4a2 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Fri, 7 Jun 2013 11:09:04 -0400
-Subject: [PATCH 093/198] Message string cleanups
+Subject: [PATCH 093/206] Message string cleanups
 
 Make use of terminology consistent. Remove jargon.
 ---
@@ -9,7 +9,7 @@ Make use of terminology consistent. Remove jargon.
  1 file changed, 9 insertions(+), 12 deletions(-)
 
 diff --git a/grub-core/normal/menu_text.c b/grub-core/normal/menu_text.c
-index a3d1f23f6..64a83862f 100644
+index a3d1f23f68f..64a83862f66 100644
 --- a/grub-core/normal/menu_text.c
 +++ b/grub-core/normal/menu_text.c
 @@ -157,9 +157,8 @@ print_message (int nested, int edit, struct grub_term_output *term, int dry_run)
@@ -67,5 +67,5 @@ index a3d1f23f6..64a83862f 100644
      {
        grub_print_error ();
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
 From a0fe0c26aa8a1c0ad66d9527611bd726b849c623 Mon Sep 17 00:00:00 2001
 From: AppChecker <appchecker>
 Date: Sun, 9 Jul 2017 21:57:35 +0200
-Subject: [PATCH 047/198] crypto: Fix use after free.
+Subject: [PATCH 047/206] crypto: Fix use after free.
 
 Reported by: AppChecker
 Transformed to patch by: Satish Govindarajan
@@ -10,7 +10,7 @@ Transformed to patch by: Satish Govindarajan
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/normal/crypto.c b/grub-core/normal/crypto.c
-index 2bfd67c8e..e6d345f33 100644
+index 2bfd67c8ef3..e6d345f3345 100644
 --- a/grub-core/normal/crypto.c
 +++ b/grub-core/normal/crypto.c
 @@ -147,8 +147,8 @@ read_crypto_list (const char *prefix)
@@ -24,5 +24,5 @@ index 2bfd67c8e..e6d345f33 100644
  	}
        cur->next = crypto_specs;
 -- 
-2.14.3
+2.15.0
 

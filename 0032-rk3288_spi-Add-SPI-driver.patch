@@ -1,7 +1,7 @@
 From b0b1b81a11f8bae8ab9e8edd87ac3f4f7949d03b Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 08:42:14 +0200
-Subject: [PATCH 032/198] rk3288_spi: Add SPI driver
+Subject: [PATCH 032/206] rk3288_spi: Add SPI driver
 
 ---
  grub-core/Makefile.core.def        |   1 +
@@ -12,7 +12,7 @@ Subject: [PATCH 032/198] rk3288_spi: Add SPI driver
  create mode 100644 grub-core/bus/spi/rk3288_spi.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 5ce506597..d2239f171 100644
+index 5ce506597a6..d2239f1718d 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -162,6 +162,7 @@ kernel = {
@@ -25,7 +25,7 @@ index 5ce506597..d2239f171 100644
  
 diff --git a/grub-core/bus/spi/rk3288_spi.c b/grub-core/bus/spi/rk3288_spi.c
 new file mode 100644
-index 000000000..aacb79ffe
+index 00000000000..aacb79ffef1
 --- /dev/null
 +++ b/grub-core/bus/spi/rk3288_spi.c
 @@ -0,0 +1,103 @@
@@ -133,7 +133,7 @@ index 000000000..aacb79ffe
 +  grub_fdtbus_register (&spi);
 +}
 diff --git a/grub-core/kern/arm/coreboot/init.c b/grub-core/kern/arm/coreboot/init.c
-index a06ccb72f..0126ff638 100644
+index a06ccb72f42..0126ff6381a 100644
 --- a/grub-core/kern/arm/coreboot/init.c
 +++ b/grub-core/kern/arm/coreboot/init.c
 @@ -132,6 +132,8 @@ grub_machine_init (void)
@@ -146,7 +146,7 @@ index a06ccb72f..0126ff638 100644
    grub_pl050_init ();
  }
 diff --git a/include/grub/arm/coreboot/kernel.h b/include/grub/arm/coreboot/kernel.h
-index 09cd7fe32..269505342 100644
+index 09cd7fe328c..26950534270 100644
 --- a/include/grub/arm/coreboot/kernel.h
 +++ b/include/grub/arm/coreboot/kernel.h
 @@ -34,8 +34,8 @@ struct grub_fdt_board
@@ -161,5 +161,5 @@ index 09cd7fe32..269505342 100644
  #endif /* ! ASM_FILE */
  
 -- 
-2.14.3
+2.15.0
 

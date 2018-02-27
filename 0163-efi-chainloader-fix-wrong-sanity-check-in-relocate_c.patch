@@ -1,7 +1,7 @@
-From a8b65c0ac1e2ddd001e8b837c798f1b135f2a522 Mon Sep 17 00:00:00 2001
+From 1543d9204f0bd32c3c06da2b55c7d531a88a0c95 Mon Sep 17 00:00:00 2001
 From: Laszlo Ersek <lersek@redhat.com>
 Date: Mon, 21 Nov 2016 15:34:00 +0100
-Subject: [PATCH 163/198] efi/chainloader: fix wrong sanity check in
+Subject: [PATCH 163/206] efi/chainloader: fix wrong sanity check in
  relocate_coff()
 
 In relocate_coff(), the relocation entries are parsed from the original
@@ -22,7 +22,7 @@ Tested-by: Juan Orti <j.orti.alcaine@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index b977c7b55..d5ab21d09 100644
+index b977c7b5573..d5ab21d09c3 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -401,7 +401,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,
@@ -35,5 +35,5 @@ index b977c7b55..d5ab21d09 100644
            grub_error (GRUB_ERR_BAD_ARGUMENT, "Reloc entry %d overflows binary",
  		      n);
 -- 
-2.14.3
+2.15.0
 

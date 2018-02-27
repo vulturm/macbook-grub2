@@ -1,7 +1,7 @@
-From ac0fa764dfdd5e45ccda6f91c6e136e84e284c4a Mon Sep 17 00:00:00 2001
+From 940c62edc168e3b7715b04a30c0bd8a1a423c5e1 Mon Sep 17 00:00:00 2001
 From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 Date: Mon, 28 Aug 2017 13:59:12 -0400
-Subject: [PATCH 195/198] Use grub-file to figure out whether multiboot2 should
+Subject: [PATCH 195/206] Use grub-file to figure out whether multiboot2 should
  be used for Xen.gz
 
 The multiboot2 is much more preferable than multiboot. Especiall
@@ -14,7 +14,7 @@ Signed-off-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
  1 file changed, 4 insertions(+)
 
 diff --git a/util/grub.d/20_linux_xen.in b/util/grub.d/20_linux_xen.in
-index 9b1bd7169..fae1ffe94 100644
+index 9b1bd716965..fae1ffe9494 100644
 --- a/util/grub.d/20_linux_xen.in
 +++ b/util/grub.d/20_linux_xen.in
 @@ -216,6 +216,10 @@ while [ "x${xen_list}" != "x" ] ; do
@@ -29,5 +29,5 @@ index 9b1bd7169..fae1ffe94 100644
      while [ "x$list" != "x" ] ; do
  	linux=`version_find_latest $list`
 -- 
-2.14.3
+2.15.0
 

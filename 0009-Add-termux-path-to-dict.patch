@@ -1,14 +1,14 @@
 From 1073ddb12078f3c8edbdb74bb8f5afc674983f40 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 14:52:48 +0300
-Subject: [PATCH 009/198] Add termux path to dict.
+Subject: [PATCH 009/206] Add termux path to dict.
 
 ---
  tests/util/grub-fs-tester.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tests/util/grub-fs-tester.in b/tests/util/grub-fs-tester.in
-index bf47305f3..468d9e785 100644
+index bf47305f3e8..468d9e7856d 100644
 --- a/tests/util/grub-fs-tester.in
 +++ b/tests/util/grub-fs-tester.in
 @@ -259,7 +259,7 @@ for LOGSECSIZE in $(range "$MINLOGSECSIZE" "$MAXLOGSECSIZE" 1); do
@@ -21,5 +21,5 @@ index bf47305f3..468d9e785 100644
  		    CFILESRC="$cand"
  		    break
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
 From 656c3b0d7fbe23f0e1ab561c8faa4ac4a37364d1 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:00:06 +0200
-Subject: [PATCH 026/198] arm_coreboot: Support loading linux images.
+Subject: [PATCH 026/206] arm_coreboot: Support loading linux images.
 
 ---
  grub-core/loader/arm/linux.c | 132 ++++++++++++++++++++++---------------------
@@ -9,7 +9,7 @@ Subject: [PATCH 026/198] arm_coreboot: Support loading linux images.
  2 files changed, 83 insertions(+), 65 deletions(-)
 
 diff --git a/grub-core/loader/arm/linux.c b/grub-core/loader/arm/linux.c
-index 01374ee78..260cbf068 100644
+index 01374ee78fa..260cbf06861 100644
 --- a/grub-core/loader/arm/linux.c
 +++ b/grub-core/loader/arm/linux.c
 @@ -31,8 +31,6 @@
@@ -271,7 +271,7 @@ index 01374ee78..260cbf068 100644
  }
 -#endif
 diff --git a/include/grub/arm/linux.h b/include/grub/arm/linux.h
-index a66caad13..f217f8281 100644
+index a66caad13db..f217f8281ad 100644
 --- a/include/grub/arm/linux.h
 +++ b/include/grub/arm/linux.h
 @@ -46,6 +46,22 @@ grub_arm_firmware_get_machine_type (void)
@@ -298,5 +298,5 @@ index a66caad13..f217f8281 100644
  
  #define FDT_ADDITIONAL_ENTRIES_SIZE	0x300
 -- 
-2.14.3
+2.15.0
 

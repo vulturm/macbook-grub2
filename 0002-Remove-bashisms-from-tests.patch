@@ -1,7 +1,7 @@
 From 5a0c548ba388b343b0bb6d2a38888e7eac5bbb96 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 03:47:13 +0300
-Subject: [PATCH 002/198] Remove bashisms from tests.
+Subject: [PATCH 002/206] Remove bashisms from tests.
 
 Those tests don't actually need bash. Just use common shebang.
 ---
@@ -19,7 +19,7 @@ Those tests don't actually need bash. Just use common shebang.
  11 files changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/tests/grub_cmd_date.in b/tests/grub_cmd_date.in
-index a459353e8..0d8162e98 100644
+index a459353e8a5..0d8162e98b0 100644
 --- a/tests/grub_cmd_date.in
 +++ b/tests/grub_cmd_date.in
 @@ -1,4 +1,4 @@
@@ -29,7 +29,7 @@ index a459353e8..0d8162e98 100644
  
  . "@builddir@/grub-core/modinfo.sh"
 diff --git a/tests/grub_cmd_regexp.in b/tests/grub_cmd_regexp.in
-index e7e625701..7e9ab86aa 100644
+index e7e62570115..7e9ab86aabb 100644
 --- a/tests/grub_cmd_regexp.in
 +++ b/tests/grub_cmd_regexp.in
 @@ -1,4 +1,4 @@
@@ -39,7 +39,7 @@ index e7e625701..7e9ab86aa 100644
  
  # Run GRUB script in a Qemu instance
 diff --git a/tests/grub_cmd_set_date.in b/tests/grub_cmd_set_date.in
-index c594ae3fc..2f518dd9e 100644
+index c594ae3fc14..2f518dd9e34 100644
 --- a/tests/grub_cmd_set_date.in
 +++ b/tests/grub_cmd_set_date.in
 @@ -1,4 +1,4 @@
@@ -49,7 +49,7 @@ index c594ae3fc..2f518dd9e 100644
  
  . "@builddir@/grub-core/modinfo.sh"
 diff --git a/tests/grub_cmd_sleep.in b/tests/grub_cmd_sleep.in
-index eb362aa24..05b8f6b73 100644
+index eb362aa2439..05b8f6b73fa 100644
 --- a/tests/grub_cmd_sleep.in
 +++ b/tests/grub_cmd_sleep.in
 @@ -1,4 +1,4 @@
@@ -59,7 +59,7 @@ index eb362aa24..05b8f6b73 100644
  
  . "@builddir@/grub-core/modinfo.sh"
 diff --git a/tests/grub_cmd_test.in b/tests/grub_cmd_test.in
-index 6269891c9..49ae8a9c8 100644
+index 6269891c9ee..49ae8a9c830 100644
 --- a/tests/grub_cmd_test.in
 +++ b/tests/grub_cmd_test.in
 @@ -1,4 +1,4 @@
@@ -69,7 +69,7 @@ index 6269891c9..49ae8a9c8 100644
  # create a randome file
  empty="`mktemp "${TMPDIR:-/tmp}/tmp.XXXXXXXXXX"`" || exit 1
 diff --git a/tests/grub_cmd_tr.in b/tests/grub_cmd_tr.in
-index 3fb15e35c..0e8d645eb 100644
+index 3fb15e35c8a..0e8d645eb6b 100644
 --- a/tests/grub_cmd_tr.in
 +++ b/tests/grub_cmd_tr.in
 @@ -1,4 +1,4 @@
@@ -79,7 +79,7 @@ index 3fb15e35c..0e8d645eb 100644
  # Run GRUB script in a Qemu instance
  # Copyright (C) 2010  Free Software Foundation, Inc.
 diff --git a/tests/grub_func_test.in b/tests/grub_func_test.in
-index c8cc26376..b32f24466 100644
+index c8cc2637633..b32f2446659 100644
 --- a/tests/grub_func_test.in
 +++ b/tests/grub_func_test.in
 @@ -1,4 +1,4 @@
@@ -89,7 +89,7 @@ index c8cc26376..b32f24466 100644
  
  . "@builddir@/grub-core/modinfo.sh"
 diff --git a/tests/grub_script_blockarg.in b/tests/grub_script_blockarg.in
-index 2765b61ac..63b60a2ea 100644
+index 2765b61acbb..63b60a2ea06 100644
 --- a/tests/grub_script_blockarg.in
 +++ b/tests/grub_script_blockarg.in
 @@ -1,4 +1,4 @@
@@ -99,7 +99,7 @@ index 2765b61ac..63b60a2ea 100644
  # Run GRUB script in a Qemu instance
  # Copyright (C) 2010  Free Software Foundation, Inc.
 diff --git a/tests/grub_script_expansion.in b/tests/grub_script_expansion.in
-index e46401c4c..2b7829568 100644
+index e46401c4c9f..2b782956838 100644
 --- a/tests/grub_script_expansion.in
 +++ b/tests/grub_script_expansion.in
 @@ -1,4 +1,4 @@
@@ -109,7 +109,7 @@ index e46401c4c..2b7829568 100644
  
  # Run GRUB script in a Qemu instance
 diff --git a/tests/help_test.in b/tests/help_test.in
-index e780924ef..aa9645835 100644
+index e780924ef7b..aa96458355b 100644
 --- a/tests/help_test.in
 +++ b/tests/help_test.in
 @@ -1,4 +1,4 @@
@@ -119,7 +119,7 @@ index e780924ef..aa9645835 100644
  
  . "@builddir@/grub-core/modinfo.sh"
 diff --git a/tests/test_sha512sum.in b/tests/test_sha512sum.in
-index d5ef7f9ea..80ebdc59f 100644
+index d5ef7f9ea62..80ebdc59fd5 100644
 --- a/tests/test_sha512sum.in
 +++ b/tests/test_sha512sum.in
 @@ -1,4 +1,4 @@
@@ -129,5 +129,5 @@ index d5ef7f9ea..80ebdc59f 100644
  # create a randome file
  file="`mktemp "${TMPDIR:-/tmp}/tmp.XXXXXXXXXX"`" || exit 1
 -- 
-2.14.3
+2.15.0
 

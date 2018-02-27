@@ -1,7 +1,7 @@
-From c293c4a99ef27e210014b4c87f0330df40571a4c Mon Sep 17 00:00:00 2001
+From 5c94dbb64c3ffa6394be00cd185e111151fbe6f1 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 9 May 2016 14:15:17 -0400
-Subject: [PATCH 170/198] Add some grub_dprintf() in the secure boot verify
+Subject: [PATCH 170/206] Add some grub_dprintf() in the secure boot verify
  code.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
@@ -10,7 +10,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index 2a7024134..7fe7201a3 100644
+index 2a7024134da..7fe7201a388 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
 @@ -43,12 +43,22 @@ grub_linuxefi_secure_validate (void *data, grub_uint32_t size)
@@ -40,5 +40,5 @@ index 2a7024134..7fe7201a3 100644
    return -1;
  }
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
-From 45a648d1dc7a63cbff180848ca6ab6e26365de11 Mon Sep 17 00:00:00 2001
+From b90a1afe2d3af828cccd291cb09b8cda2fc581dc Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 30 May 2017 14:16:07 -0400
-Subject: [PATCH 167/198] Fix up linux params usage...
+Subject: [PATCH 167/206] Fix up linux params usage...
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/loader/i386/linux.c b/grub-core/loader/i386/linux.c
-index e4b8342f5..c9e89310b 100644
+index e4b8342f5d0..c9e89310bdd 100644
 --- a/grub-core/loader/i386/linux.c
 +++ b/grub-core/loader/i386/linux.c
 @@ -680,6 +680,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
@@ -39,5 +39,5 @@ index e4b8342f5..c9e89310b 100644
  
    linux_params.type_of_loader = GRUB_LINUX_BOOT_LOADER_TYPE;
 -- 
-2.14.3
+2.15.0
 

@@ -1,36 +1,24 @@
 From 265292f2b0da0eb414c409871ba0f94a99ec33c1 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:06:04 +0200
-Subject: [PATCH 027/198] arm_coreboot: Support DMA.
+Subject: [PATCH 027/206] arm_coreboot: Support DMA.
 
 This is needed to support USB and some other busses.
 ---
- grub-core/Makefile.am             |  1 +
  grub-core/Makefile.core.def       |  1 +
  grub-core/kern/arm/cache.c        | 34 ++++++++++++++++++++++
- grub-core/kern/arm/cache_armv7.S  | 12 ++++++++
  grub-core/kern/arm/coreboot/dma.c | 59 +++++++++++++++++++++++++++++++++++++++
  include/grub/cache.h              |  7 ++---
  include/grub/dma.h                | 44 +++++++++++++++++++++++++++++
  include/grub/pci.h                | 22 +--------------
+ grub-core/kern/arm/cache_armv7.S  | 12 ++++++++
+ grub-core/Makefile.am             |  1 +
  8 files changed, 155 insertions(+), 25 deletions(-)
  create mode 100644 grub-core/kern/arm/coreboot/dma.c
  create mode 100644 include/grub/dma.h
 
-diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
-index a2aaf9f54..104513847 100644
---- a/grub-core/Makefile.am
-+++ b/grub-core/Makefile.am
-@@ -248,6 +248,7 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/gfxterm.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/font.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/bufio.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/fdt.h
-+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/dma.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/coreboot/kernel.h
- KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/fdtbus.h
- endif
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 6be6e7f61..e4f253a20 100644
+index 6be6e7f61ee..e4f253a205e 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -163,6 +163,7 @@ kernel = {
@@ -42,7 +30,7 @@ index 6be6e7f61..e4f253a20 100644
    terminfoinkernel = term/terminfo.c;
    terminfoinkernel = term/tparm.c;
 diff --git a/grub-core/kern/arm/cache.c b/grub-core/kern/arm/cache.c
-index 34154ccdb..af1c4bbf5 100644
+index 34154ccdb0e..af1c4bbf544 100644
 --- a/grub-core/kern/arm/cache.c
 +++ b/grub-core/kern/arm/cache.c
 @@ -29,6 +29,8 @@ void grub_arm_clean_dcache_range_armv6 (grub_addr_t start, grub_addr_t end,
@@ -93,32 +81,9 @@ index 34154ccdb..af1c4bbf5 100644
  void
  grub_arm_disable_caches_mmu (void)
  {
-diff --git a/grub-core/kern/arm/cache_armv7.S b/grub-core/kern/arm/cache_armv7.S
-index 1ef2754af..5ae76a3d8 100644
---- a/grub-core/kern/arm/cache_armv7.S
-+++ b/grub-core/kern/arm/cache_armv7.S
-@@ -33,6 +33,18 @@
- # define ISB	isb
- #define ARMV7 1
- 
-+FUNCTION(grub_arm_clean_dcache_range_poc_armv7)
-+	DSB
-+	@ Clean data cache for range to point-of-coherence
-+1:	cmp	r0, r1
-+	bge	2f
-+	mcr	p15, 0, r0, c7, c14, 1	@ DCCMVAC
-+	add	r0, r0, r2		@ Next line
-+	b	1b
-+2:	DSB
-+	bx	lr
-+
-+
- 	@ r0  - CLIDR
- 	@ r1  - LoC
- 	@ r2  - current level
 diff --git a/grub-core/kern/arm/coreboot/dma.c b/grub-core/kern/arm/coreboot/dma.c
 new file mode 100644
-index 000000000..2c2a62789
+index 00000000000..2c2a6278904
 --- /dev/null
 +++ b/grub-core/kern/arm/coreboot/dma.c
 @@ -0,0 +1,59 @@
@@ -182,7 +147,7 @@ index 000000000..2c2a62789
 +}
 +
 diff --git a/include/grub/cache.h b/include/grub/cache.h
-index fc669dfd1..1c98ce270 100644
+index fc669dfd189..1c98ce270b6 100644
 --- a/include/grub/cache.h
 +++ b/include/grub/cache.h
 @@ -34,15 +34,14 @@ void EXPORT_FUNC(grub_arch_sync_caches) (void *address, grub_size_t len);
@@ -206,7 +171,7 @@ index fc669dfd1..1c98ce270 100644
  
 diff --git a/include/grub/dma.h b/include/grub/dma.h
 new file mode 100644
-index 000000000..19992ebc1
+index 00000000000..19992ebc131
 --- /dev/null
 +++ b/include/grub/dma.h
 @@ -0,0 +1,44 @@
@@ -255,7 +220,7 @@ index 000000000..19992ebc1
 +
 +#endif
 diff --git a/include/grub/pci.h b/include/grub/pci.h
-index 70d9a0513..262c89b74 100644
+index 70d9a05131b..262c89b748b 100644
 --- a/include/grub/pci.h
 +++ b/include/grub/pci.h
 @@ -142,27 +142,7 @@ grub_pci_address_t EXPORT_FUNC(grub_pci_make_address) (grub_pci_device_t dev,
@@ -287,6 +252,41 @@ index 70d9a0513..262c89b74 100644
  
  grub_uint8_t
  EXPORT_FUNC (grub_pci_find_capability) (grub_pci_device_t dev, grub_uint8_t cap);
+diff --git a/grub-core/kern/arm/cache_armv7.S b/grub-core/kern/arm/cache_armv7.S
+index 1ef2754af8a..5ae76a3d819 100644
+--- a/grub-core/kern/arm/cache_armv7.S
++++ b/grub-core/kern/arm/cache_armv7.S
+@@ -33,6 +33,18 @@
+ # define ISB	isb
+ #define ARMV7 1
+ 
++FUNCTION(grub_arm_clean_dcache_range_poc_armv7)
++	DSB
++	@ Clean data cache for range to point-of-coherence
++1:	cmp	r0, r1
++	bge	2f
++	mcr	p15, 0, r0, c7, c14, 1	@ DCCMVAC
++	add	r0, r0, r2		@ Next line
++	b	1b
++2:	DSB
++	bx	lr
++
++
+ 	@ r0  - CLIDR
+ 	@ r1  - LoC
+ 	@ r2  - current level
+diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
+index a2aaf9f54b0..10451384720 100644
+--- a/grub-core/Makefile.am
++++ b/grub-core/Makefile.am
+@@ -248,6 +248,7 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/gfxterm.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/font.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/bufio.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/fdt.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/dma.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arm/coreboot/kernel.h
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/fdtbus.h
+ endif
 -- 
-2.14.3
+2.15.0
 

@@ -1,41 +1,19 @@
 From a35ac854308b0af7c86c2c7b199f6abdfa2110b0 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 17:32:15 +0200
-Subject: [PATCH 014/198] mkimage: Pass layout to mkimage_generate_elfXX rather
+Subject: [PATCH 014/206] mkimage: Pass layout to mkimage_generate_elfXX rather
  than some fields.
 
 This allows easier extension of this function without having too long of
 arguments list.
 ---
- include/grub/util/mkimage.h |  8 ++++----
  util/grub-mkimagexx.c       | 35 ++++++++++++++++++-----------------
  util/mkimage.c              |  4 ++--
+ include/grub/util/mkimage.h |  8 ++++----
  3 files changed, 24 insertions(+), 23 deletions(-)
 
-diff --git a/include/grub/util/mkimage.h b/include/grub/util/mkimage.h
-index 1a18708a8..b3a5ca132 100644
---- a/include/grub/util/mkimage.h
-+++ b/include/grub/util/mkimage.h
-@@ -51,13 +51,13 @@ grub_mkimage_load_image64 (const char *kernel_path,
- void
- grub_mkimage_generate_elf32 (const struct grub_install_image_target_desc *image_target,
- 			     int note, char **core_img, size_t *core_size,
--			     Elf32_Addr target_addr, grub_size_t align,
--			     size_t kernel_size, size_t bss_size);
-+			     Elf32_Addr target_addr,
-+			     struct grub_mkimage_layout *layout);
- void
- grub_mkimage_generate_elf64 (const struct grub_install_image_target_desc *image_target,
- 			     int note, char **core_img, size_t *core_size,
--			     Elf64_Addr target_addr, grub_size_t align,
--			     size_t kernel_size, size_t bss_size);
-+			     Elf64_Addr target_addr,
-+			     struct grub_mkimage_layout *layout);
- 
- struct grub_install_image_target_desc
- {
 diff --git a/util/grub-mkimagexx.c b/util/grub-mkimagexx.c
-index e63f148e4..3fab93e20 100644
+index e63f148e48c..3fab93e2088 100644
 --- a/util/grub-mkimagexx.c
 +++ b/util/grub-mkimagexx.c
 @@ -185,8 +185,8 @@ grub_arm_reloc_jump24 (grub_uint32_t *target, Elf32_Addr sym_addr)
@@ -147,7 +125,7 @@ index e63f148e4..3fab93e20 100644
  	shdr->sh_size = grub_host_to_target32 (XEN_NOTE_SIZE);
  	shdr->sh_link = grub_host_to_target32 (0);
 diff --git a/util/mkimage.c b/util/mkimage.c
-index 9ad4cfe42..528166c87 100644
+index 9ad4cfe4223..528166c87ac 100644
 --- a/util/mkimage.c
 +++ b/util/mkimage.c
 @@ -1638,10 +1638,10 @@ grub_install_generate_image (const char *dir, const char *prefix,
@@ -163,6 +141,28 @@ index 9ad4cfe42..528166c87 100644
        }
        break;
      }
+diff --git a/include/grub/util/mkimage.h b/include/grub/util/mkimage.h
+index 1a18708a89c..b3a5ca132bc 100644
+--- a/include/grub/util/mkimage.h
++++ b/include/grub/util/mkimage.h
+@@ -51,13 +51,13 @@ grub_mkimage_load_image64 (const char *kernel_path,
+ void
+ grub_mkimage_generate_elf32 (const struct grub_install_image_target_desc *image_target,
+ 			     int note, char **core_img, size_t *core_size,
+-			     Elf32_Addr target_addr, grub_size_t align,
+-			     size_t kernel_size, size_t bss_size);
++			     Elf32_Addr target_addr,
++			     struct grub_mkimage_layout *layout);
+ void
+ grub_mkimage_generate_elf64 (const struct grub_install_image_target_desc *image_target,
+ 			     int note, char **core_img, size_t *core_size,
+-			     Elf64_Addr target_addr, grub_size_t align,
+-			     size_t kernel_size, size_t bss_size);
++			     Elf64_Addr target_addr,
++			     struct grub_mkimage_layout *layout);
+ 
+ struct grub_install_image_target_desc
+ {
 -- 
-2.14.3
+2.15.0
 

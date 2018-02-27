@@ -1,7 +1,7 @@
 From b43b8cacc813c2c15347de1e35cc88d9aa912d22 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 14:31:36 +0300
-Subject: [PATCH 004/198] support busybox date.
+Subject: [PATCH 004/206] support busybox date.
 
 Busybox date doesn't understand weekdays in -d input,
 so strip them beforehand.
@@ -11,7 +11,7 @@ so strip them beforehand.
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/tests/grub_cmd_date.in b/tests/grub_cmd_date.in
-index 0d8162e98..60f039ebc 100644
+index 0d8162e98b0..60f039ebc8b 100644
 --- a/tests/grub_cmd_date.in
 +++ b/tests/grub_cmd_date.in
 @@ -9,7 +9,7 @@ if [ "${grub_modinfo_target_cpu}-${grub_modinfo_platform}" = sparc64-ieee1275 ];
@@ -24,7 +24,7 @@ index 0d8162e98..60f039ebc 100644
  ndt="$(date -u +%s)"
  
 diff --git a/tests/grub_cmd_sleep.in b/tests/grub_cmd_sleep.in
-index 05b8f6b73..ac51d4209 100644
+index 05b8f6b73fa..ac51d42098e 100644
 --- a/tests/grub_cmd_sleep.in
 +++ b/tests/grub_cmd_sleep.in
 @@ -11,8 +11,8 @@ fi
@@ -39,5 +39,5 @@ index 05b8f6b73..ac51d4209 100644
  # Ignore QEMU bug
  if [ "${grub_modinfo_target_cpu}" = arm ] && [ $((dt2 - dt1)) -ge 15 ] && [ $((dt2 - dt1)) -le 17 ]; then
 -- 
-2.14.3
+2.15.0
 

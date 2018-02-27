@@ -1,22 +1,22 @@
 From 216950a4eea1a1ead1c28eaca94e34ea2ef2ad19 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:41:22 +0200
-Subject: [PATCH 023/198] at_keyboard: Split protocol from controller code.
+Subject: [PATCH 023/206] at_keyboard: Split protocol from controller code.
 
 On vexpress controller is different but protocol is the same, so reuse the
 code.
 ---
  grub-core/Makefile.core.def  |   3 +
- grub-core/term/at_keyboard.c | 426 +++----------------------------------------
- grub-core/term/ps2.c         | 387 +++++++++++++++++++++++++++++++++++++++
+ grub-core/term/at_keyboard.c | 428 +++----------------------------------------
+ grub-core/term/ps2.c         | 387 ++++++++++++++++++++++++++++++++++++++
  include/grub/at_keyboard.h   |   4 -
  include/grub/ps2.h           |  43 +++++
- 5 files changed, 462 insertions(+), 401 deletions(-)
+ 5 files changed, 463 insertions(+), 402 deletions(-)
  create mode 100644 grub-core/term/ps2.c
  create mode 100644 include/grub/ps2.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 77d0b019e..6ade6e950 100644
+index 77d0b019eb2..6ade6e95057 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -251,6 +251,7 @@ kernel = {
@@ -44,7 +44,7 @@ index 77d0b019e..6ade6e950 100644
  };
  
 diff --git a/grub-core/term/at_keyboard.c b/grub-core/term/at_keyboard.c
-index b4ea9ff7e..3ab4e205f 100644
+index b4ea9ff7e63..3ab4e205f40 100644
 --- a/grub-core/term/at_keyboard.c
 +++ b/grub-core/term/at_keyboard.c
 @@ -22,212 +22,21 @@
@@ -71,13 +71,10 @@ index b4ea9ff7e..3ab4e205f 100644
  static grub_uint8_t grub_keyboard_controller_orig;
  static grub_uint8_t grub_keyboard_orig_set;
 -static grub_uint8_t current_set; 
-+struct grub_ps2_state ps2_state;
-+
-+static int ping_sent;
- 
- static void
- grub_keyboard_controller_init (void);
- 
+-
+-static void
+-grub_keyboard_controller_init (void);
+-
 -static const grub_uint8_t set1_mapping[128] =
 -  {
 -    /* 0x00 */ 0 /* Unused  */,               GRUB_KEYBOARD_KEY_ESCAPE, 
@@ -258,9 +255,13 @@ index b4ea9ff7e..3ab4e205f 100644
 -    {0x7a, GRUB_KEYBOARD_KEY_NPAGE},
 -    {0x7d, GRUB_KEYBOARD_KEY_PPAGE},
 -  };
--
--static int ping_sent;
--
++struct grub_ps2_state ps2_state;
+ 
+ static int ping_sent;
+ 
++static void
++grub_keyboard_controller_init (void);
++
  static void
  keyboard_controller_wait_until_ready (void)
  {
@@ -567,7 +568,7 @@ index b4ea9ff7e..3ab4e205f 100644
  }
 diff --git a/grub-core/term/ps2.c b/grub-core/term/ps2.c
 new file mode 100644
-index 000000000..7ae4e9f2f
+index 00000000000..7ae4e9f2f8c
 --- /dev/null
 +++ b/grub-core/term/ps2.c
 @@ -0,0 +1,387 @@
@@ -959,7 +960,7 @@ index 000000000..7ae4e9f2f
 +    }
 +}
 diff --git a/include/grub/at_keyboard.h b/include/grub/at_keyboard.h
-index b4f8ff0a0..b031523eb 100644
+index b4f8ff0a061..b031523eb7d 100644
 --- a/include/grub/at_keyboard.h
 +++ b/include/grub/at_keyboard.h
 @@ -27,10 +27,6 @@
@@ -975,7 +976,7 @@ index b4f8ff0a0..b031523eb 100644
  #define KEYBOARD_SCANCODE(x)	((x) & 0x7f)
 diff --git a/include/grub/ps2.h b/include/grub/ps2.h
 new file mode 100644
-index 000000000..4f2e527e4
+index 00000000000..4f2e527e497
 --- /dev/null
 +++ b/include/grub/ps2.h
 @@ -0,0 +1,43 @@
@@ -1023,5 +1024,5 @@ index 000000000..4f2e527e4
 +
 +#endif
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
-From f92f6c050e5c1bfc3146dd674dc37ac12cbb1c76 Mon Sep 17 00:00:00 2001
+From d58a3e5545c0a3245fdd9a05b6696c619d98fe84 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 24 May 2017 12:42:32 -0400
-Subject: [PATCH 173/198] macos: just build chainloader entries, don't try any
+Subject: [PATCH 173/206] macos: just build chainloader entries, don't try any
  xnu xnu.
 
 Since our bugs tell us that the xnu boot entries really just don't work
@@ -21,7 +21,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 18 insertions(+), 60 deletions(-)
 
 diff --git a/util/grub.d/30_os-prober.in b/util/grub.d/30_os-prober.in
-index e40274fc0..d979de198 100644
+index e40274fc0f4..d979de1982a 100644
 --- a/util/grub.d/30_os-prober.in
 +++ b/util/grub.d/30_os-prober.in
 @@ -42,68 +42,25 @@ if [ -z "${OSPROBED}" ] ; then
@@ -124,5 +124,5 @@ index e40274fc0..d979de198 100644
      hurd)
        onstr="$(gettext_printf "(on %s)" "${DEVICE}")"
 -- 
-2.14.3
+2.15.0
 

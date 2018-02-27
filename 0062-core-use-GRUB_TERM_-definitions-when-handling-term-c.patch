@@ -1,7 +1,7 @@
 From bdd89d239cd9b4089630bfb5ec862aab8086dca2 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Mon, 7 Aug 2017 16:20:30 +0100
-Subject: [PATCH 062/198] core: use GRUB_TERM_ definitions when handling term
+Subject: [PATCH 062/206] core: use GRUB_TERM_ definitions when handling term
  characters
 
 * Also use hex value for GRUB_TERM_ESC as '\e' is not in the C standard and is not understood by some compilers
@@ -22,7 +22,7 @@ Subject: [PATCH 062/198] core: use GRUB_TERM_ definitions when handling term
  13 files changed, 25 insertions(+), 24 deletions(-)
 
 diff --git a/grub-core/commands/keylayouts.c b/grub-core/commands/keylayouts.c
-index f4b773020..f35d3a369 100644
+index f4b7730208a..f35d3a369ba 100644
 --- a/grub-core/commands/keylayouts.c
 +++ b/grub-core/commands/keylayouts.c
 @@ -40,7 +40,7 @@ static struct grub_keyboard_layout layout_us = {
@@ -46,7 +46,7 @@ index f4b773020..f35d3a369 100644
      /* According to usage table 0x31 should be mapped to '/'
         but testing with real keyboard shows that 0x32 is remapped to '/'.
 diff --git a/grub-core/commands/menuentry.c b/grub-core/commands/menuentry.c
-index 58d4dadf6..2c5363da7 100644
+index 58d4dadf6ee..2c5363da7f5 100644
 --- a/grub-core/commands/menuentry.c
 +++ b/grub-core/commands/menuentry.c
 @@ -52,8 +52,8 @@ static struct
@@ -61,7 +61,7 @@ index 58d4dadf6..2c5363da7 100644
      {"insert", GRUB_TERM_KEY_INSERT},
      {"f1", GRUB_TERM_KEY_F1},
 diff --git a/grub-core/lib/crypto.c b/grub-core/lib/crypto.c
-index 683a8aaa7..ca334d5a4 100644
+index 683a8aaa711..ca334d5a40e 100644
 --- a/grub-core/lib/crypto.c
 +++ b/grub-core/lib/crypto.c
 @@ -462,7 +462,7 @@ grub_password_get (char buf[], unsigned buf_size)
@@ -83,7 +83,7 @@ index 683a8aaa7..ca334d5a4 100644
  #endif
  
 diff --git a/grub-core/normal/auth.c b/grub-core/normal/auth.c
-index 7338f8245..6be678c0d 100644
+index 7338f8245e3..6be678c0de1 100644
 --- a/grub-core/normal/auth.c
 +++ b/grub-core/normal/auth.c
 @@ -166,13 +166,13 @@ grub_username_get (char buf[], unsigned buf_size)
@@ -112,7 +112,7 @@ index 7338f8245..6be678c0d 100644
  
  grub_err_t
 diff --git a/grub-core/normal/cmdline.c b/grub-core/normal/cmdline.c
-index a36180d75..c037d5050 100644
+index a36180d7530..c037d5050ed 100644
 --- a/grub-core/normal/cmdline.c
 +++ b/grub-core/normal/cmdline.c
 @@ -626,12 +626,12 @@ grub_cmdline_get (const char *prompt_translated)
@@ -131,7 +131,7 @@ index a36180d75..c037d5050 100644
  	    {
  	      lpos--;
 diff --git a/grub-core/normal/menu.c b/grub-core/normal/menu.c
-index 719e2fb1c..e7a83c2d6 100644
+index 719e2fb1c26..e7a83c2d6e2 100644
 --- a/grub-core/normal/menu.c
 +++ b/grub-core/normal/menu.c
 @@ -763,7 +763,7 @@ run_menu (grub_menu_t menu, int nested, int *auto_boot)
@@ -144,7 +144,7 @@ index 719e2fb1c..e7a83c2d6 100644
  		{
  		  menu_fini ();
 diff --git a/grub-core/normal/menu_entry.c b/grub-core/normal/menu_entry.c
-index eeeee5580..cdf3590a3 100644
+index eeeee5580ab..cdf3590a364 100644
 --- a/grub-core/normal/menu_entry.c
 +++ b/grub-core/normal/menu_entry.c
 @@ -1403,7 +1403,7 @@ grub_menu_entry_run (grub_menu_entry_t entry)
@@ -157,7 +157,7 @@ index eeeee5580..cdf3590a3 100644
  	  return;
  
 diff --git a/grub-core/term/efi/console.c b/grub-core/term/efi/console.c
-index 7d31095b1..02f64ea74 100644
+index 7d31095b1ef..02f64ea7441 100644
 --- a/grub-core/term/efi/console.c
 +++ b/grub-core/term/efi/console.c
 @@ -104,7 +104,7 @@ const unsigned efi_codes[] =
@@ -170,7 +170,7 @@ index 7d31095b1..02f64ea74 100644
  
  static int
 diff --git a/grub-core/term/i386/pc/console.c b/grub-core/term/i386/pc/console.c
-index 28de46b57..f6142a2de 100644
+index 28de46b576a..f6142a2dea8 100644
 --- a/grub-core/term/i386/pc/console.c
 +++ b/grub-core/term/i386/pc/console.c
 @@ -204,7 +204,7 @@ static int
@@ -183,7 +183,7 @@ index 28de46b57..f6142a2de 100644
    struct grub_bios_int_registers regs;
    unsigned i;
 diff --git a/grub-core/term/terminfo.c b/grub-core/term/terminfo.c
-index f0d3e3deb..d317efa36 100644
+index f0d3e3debc6..d317efa368d 100644
 --- a/grub-core/term/terminfo.c
 +++ b/grub-core/term/terminfo.c
 @@ -426,12 +426,12 @@ grub_terminfo_readkey (struct grub_term_input *term, int *keys, int *len,
@@ -221,7 +221,7 @@ index f0d3e3deb..d317efa36 100644
        && grub_get_time_ms () - data->last_key_time < 1000
        && (data->last_key & GRUB_TERM_EXTENDED))
 diff --git a/grub-core/tests/cmdline_cat_test.c b/grub-core/tests/cmdline_cat_test.c
-index f1e21439e..baea7688a 100644
+index f1e21439e2b..baea7688a1d 100644
 --- a/grub-core/tests/cmdline_cat_test.c
 +++ b/grub-core/tests/cmdline_cat_test.c
 @@ -103,7 +103,7 @@ cmdline_cat_test (void)
@@ -234,7 +234,7 @@ index f1e21439e..baea7688a 100644
  
        grub_video_checksum ("cmdline_cat");
 diff --git a/grub-core/tests/gfxterm_menu.c b/grub-core/tests/gfxterm_menu.c
-index 8f63dc27a..12836fb96 100644
+index 8f63dc27a35..12836fb9659 100644
 --- a/grub-core/tests/gfxterm_menu.c
 +++ b/grub-core/tests/gfxterm_menu.c
 @@ -146,7 +146,7 @@ gfxterm_menu (void)
@@ -247,7 +247,7 @@ index 8f63dc27a..12836fb96 100644
  	grub_video_checksum (tests[j].name);
  
 diff --git a/include/grub/term.h b/include/grub/term.h
-index 5ffb38f69..8117e2a24 100644
+index 5ffb38f69aa..8117e2a24da 100644
 --- a/include/grub/term.h
 +++ b/include/grub/term.h
 @@ -55,7 +55,8 @@
@@ -261,5 +261,5 @@ index 5ffb38f69..8117e2a24 100644
  #define GRUB_TERM_BACKSPACE	'\b'
  
 -- 
-2.14.3
+2.15.0
 

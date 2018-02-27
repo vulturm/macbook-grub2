@@ -1,19 +1,19 @@
-From fab60e6bf20b1759145eab3056846dfba3610a62 Mon Sep 17 00:00:00 2001
+From 3c9245b695f3abcab701dfb4dee9a04a49a5ec8d Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 21 Aug 2014 03:39:11 +0000
-Subject: [PATCH 177/198] grub2-btrfs-04-grub2-install
+Subject: [PATCH 177/206] grub2-btrfs-04-grub2-install
 
 ---
  grub-core/osdep/linux/getroot.c |  7 +++++++
  grub-core/osdep/unix/config.c   | 17 +++++++++++++++--
- include/grub/emu/config.h       |  1 +
  util/config.c                   | 10 ++++++++++
  util/grub-install.c             | 15 +++++++++++++++
  util/grub-mkrelpath.c           |  6 ++++++
+ include/grub/emu/config.h       |  1 +
  6 files changed, 54 insertions(+), 2 deletions(-)
 
 diff --git a/grub-core/osdep/linux/getroot.c b/grub-core/osdep/linux/getroot.c
-index 6d9f4e5fa..5d50dd6f8 100644
+index 6d9f4e5faa2..5d50dd6f8dc 100644
 --- a/grub-core/osdep/linux/getroot.c
 +++ b/grub-core/osdep/linux/getroot.c
 @@ -376,6 +376,7 @@ get_btrfs_fs_prefix (const char *mount_path)
@@ -38,7 +38,7 @@ index 6d9f4e5fa..5d50dd6f8 100644
        else if (!retry && grub_strcmp (entries[i].fstype, "autofs") == 0)
  	{
 diff --git a/grub-core/osdep/unix/config.c b/grub-core/osdep/unix/config.c
-index 65effa9f3..b637c58ef 100644
+index 65effa9f3a7..b637c58efb7 100644
 --- a/grub-core/osdep/unix/config.c
 +++ b/grub-core/osdep/unix/config.c
 @@ -82,6 +82,19 @@ grub_util_load_config (struct grub_util_config *cfg)
@@ -72,20 +72,8 @@ index 65effa9f3..b637c58ef 100644
  
    argv[2] = script;
    argv[3] = '\0';
-diff --git a/include/grub/emu/config.h b/include/grub/emu/config.h
-index 875d5896c..c9a7e5f4a 100644
---- a/include/grub/emu/config.h
-+++ b/include/grub/emu/config.h
-@@ -37,6 +37,7 @@ struct grub_util_config
- {
-   int is_cryptodisk_enabled;
-   char *grub_distributor;
-+  int is_suse_btrfs_snapshot_enabled;
- };
- 
- void
 diff --git a/util/config.c b/util/config.c
-index ebcdd8f5e..f044a880a 100644
+index ebcdd8f5e22..f044a880a76 100644
 --- a/util/config.c
 +++ b/util/config.c
 @@ -42,6 +42,16 @@ grub_util_parse_config (FILE *f, struct grub_util_config *cfg, int simple)
@@ -106,7 +94,7 @@ index ebcdd8f5e..f044a880a 100644
  			sizeof ("GRUB_DISTRIBUTOR=") - 1) == 0)
  	{
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 75e3e5ba6..036fe1822 100644
+index 75e3e5ba6f0..036fe1822e0 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
 @@ -816,6 +816,8 @@ fill_core_services (const char *core_services)
@@ -146,7 +134,7 @@ index 75e3e5ba6..036fe1822 100644
    char *install_drive = NULL;
  
 diff --git a/util/grub-mkrelpath.c b/util/grub-mkrelpath.c
-index 47a241a39..5db7a9a7d 100644
+index 47a241a391b..5db7a9a7d97 100644
 --- a/util/grub-mkrelpath.c
 +++ b/util/grub-mkrelpath.c
 @@ -40,9 +40,12 @@ struct arguments
@@ -172,6 +160,18 @@ index 47a241a39..5db7a9a7d 100644
      case ARGP_KEY_ARG:
        if (state->arg_num == 0)
  	arguments->pathname = xstrdup (arg);
+diff --git a/include/grub/emu/config.h b/include/grub/emu/config.h
+index 875d5896ce1..c9a7e5f4ade 100644
+--- a/include/grub/emu/config.h
++++ b/include/grub/emu/config.h
+@@ -37,6 +37,7 @@ struct grub_util_config
+ {
+   int is_cryptodisk_enabled;
+   char *grub_distributor;
++  int is_suse_btrfs_snapshot_enabled;
+ };
+ 
+ void
 -- 
-2.14.3
+2.15.0
 

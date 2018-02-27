@@ -1,19 +1,19 @@
-From 7f34f8d670e4dccf341de5acf388cfa79c7361fd Mon Sep 17 00:00:00 2001
+From 6fe073f4eed1a287314e7581b955a39d069b5d35 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:18:54 -0500
-Subject: [PATCH 166/198] Handle multi-arch (64-on-32) boot in linuxefi loader.
+Subject: [PATCH 166/206] Handle multi-arch (64-on-32) boot in linuxefi loader.
 
 Allow booting 64-bit kernels on 32-bit EFI on x86.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
- grub-core/loader/efi/linux.c      |   9 ++-
- grub-core/loader/i386/efi/linux.c | 114 +++++++++++++++++++++++++++-----------
+ grub-core/loader/efi/linux.c      |   9 +++-
+ grub-core/loader/i386/efi/linux.c | 110 +++++++++++++++++++++++++++-----------
  include/grub/i386/linux.h         |   7 ++-
- 3 files changed, 95 insertions(+), 35 deletions(-)
+ 3 files changed, 93 insertions(+), 33 deletions(-)
 
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index 8890bdf05..2a7024134 100644
+index 8890bdf059a..2a7024134da 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
 @@ -56,12 +56,17 @@ grub_linuxefi_secure_validate (void *data, grub_uint32_t size)
@@ -37,7 +37,7 @@ index 8890bdf05..2a7024134 100644
  
    return GRUB_ERR_BUG;
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
-index 8b5a817b9..bed5919ca 100644
+index 8b5a817b9d1..bed5919cab3 100644
 --- a/grub-core/loader/i386/efi/linux.c
 +++ b/grub-core/loader/i386/efi/linux.c
 @@ -44,14 +44,10 @@ static char *linux_cmdline;
@@ -103,14 +103,12 @@ index 8b5a817b9..bed5919ca 100644
      }
  
 -  grub_memset (params, 0, 16384);
--
--  grub_memcpy (&lh, kernel, sizeof (lh));
--
--  if (lh.boot_flag != grub_cpu_to_le16 (0xaa55))
 +  grub_dprintf ("linuxefi", "params = %p\n", (unsigned long) params);
-+
+ 
+-  grub_memcpy (&lh, kernel, sizeof (lh));
 +  grub_memset (params, 0, sizeof(*params));
-+
+ 
+-  if (lh.boot_flag != grub_cpu_to_le16 (0xaa55))
 +  setup_header_end_offset = *((grub_uint8_t *)kernel + 0x201);
 +  grub_dprintf ("linuxefi", "copying %d bytes from %p to %p\n",
 +		MIN(0x202+setup_header_end_offset,sizeof (*params)) - 0x1f1,
@@ -152,8 +150,6 @@ index 8b5a817b9..bed5919ca 100644
        goto fail;
      }
  
--  linux_cmdline = grub_efi_allocate_pages_max(0x3fffffff,
--					 BYTES_TO_PAGES(lh.cmdline_size + 1));
 +#if defined(__x86_64__) || defined(__aarch64__)
 +  grub_dprintf ("linuxefi", "checking lh->xloadflags\n");
 +  if (!(lh->xloadflags & LINUX_XLF_KERNEL_64))
@@ -172,9 +168,11 @@ index 8b5a817b9..bed5919ca 100644
 +      goto fail;
 +    }
 +#endif
- 
++
 +  grub_dprintf ("linuxefi", "setting up cmdline\n");
-+  linux_cmdline = grub_efi_allocate_pages_max(0x3fffffff,
+   linux_cmdline = grub_efi_allocate_pages_max(0x3fffffff,
+-					 BYTES_TO_PAGES(lh.cmdline_size + 1));
+-
 +					 BYTES_TO_PAGES(lh->cmdline_size + 1));
    if (!linux_cmdline)
      {
@@ -234,15 +232,15 @@ index 8b5a817b9..bed5919ca 100644
 -  params->type_of_loader = 0x21;
 +  grub_dprintf ("linuxefi", "setting lh->type_of_loader\n");
 +  lh->type_of_loader = 0x6;
- 
-- fail:
++
 +  grub_dprintf ("linuxefi", "setting lh->ext_loader_{type,ver}\n");
 +  params->ext_loader_type = 0;
 +  params->ext_loader_ver = 2;
 +  grub_dprintf("linuxefi", "kernel_mem: %p handover_offset: %08x\n",
 +	       kernel_mem, handover_offset);
  
-+ fail:
+  fail:
+-
    if (file)
      grub_file_close (file);
  
@@ -256,7 +254,7 @@ index 8b5a817b9..bed5919ca 100644
    if (kernel_mem && !loaded)
      grub_efi_free_pages ((grub_efi_physical_address_t)(grub_addr_t)kernel_mem,
 diff --git a/include/grub/i386/linux.h b/include/grub/i386/linux.h
-index fc36bdaf3..110ecf806 100644
+index fc36bdaf367..110ecf806fb 100644
 --- a/include/grub/i386/linux.h
 +++ b/include/grub/i386/linux.h
 @@ -130,7 +130,12 @@ struct linux_kernel_header
@@ -274,5 +272,5 @@ index fc36bdaf3..110ecf806 100644
    grub_uint32_t hardware_subarch;
    grub_uint64_t hardware_subarch_data;
 -- 
-2.14.3
+2.15.0
 

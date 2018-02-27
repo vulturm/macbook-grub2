@@ -1,14 +1,14 @@
-From 6c59dbc93e8757b6b79d93e3e3cd97a506778682 Mon Sep 17 00:00:00 2001
+From 9dbffec98eb6aaf3c020d32f4e50c0a478f76c4c Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 21 Aug 2014 03:39:11 +0000
-Subject: [PATCH 176/198] grub2-btrfs-03-follow_default
+Subject: [PATCH 176/206] grub2-btrfs-03-follow_default
 
 ---
  grub-core/fs/btrfs.c | 107 ++++++++++++++++++++++++++++++++++++---------------
  1 file changed, 76 insertions(+), 31 deletions(-)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index 396296166..2c462584e 100644
+index 3962961666e..2c462584e91 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
 @@ -920,6 +920,7 @@ grub_btrfs_mount (grub_device_t dev)
@@ -195,5 +195,5 @@ index 396296166..2c462584e 100644
  
  GRUB_MOD_FINI (btrfs)
 -- 
-2.14.3
+2.15.0
 

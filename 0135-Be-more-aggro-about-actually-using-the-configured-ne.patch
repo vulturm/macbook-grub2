@@ -1,7 +1,7 @@
-From 457789395b36baa8348b4594f9dc9fc2e8c5ef6c Mon Sep 17 00:00:00 2001
+From 8448d685b7748afe147be063cbd5fe0beb8bfec5 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 11 Sep 2015 17:30:49 -0400
-Subject: [PATCH 135/198] Be more aggro about actually using the *configured*
+Subject: [PATCH 135/206] Be more aggro about actually using the *configured*
  network device.
 
 Right now we use any SNP device with the same mac+IP block, but when
@@ -18,7 +18,7 @@ Signed-off-by: Peter Jones <example@example.com>
  2 files changed, 102 insertions(+), 26 deletions(-)
 
 diff --git a/grub-core/net/drivers/efi/efinet.c b/grub-core/net/drivers/efi/efinet.c
-index 3f112438a..a3ce4c67c 100644
+index 3f112438a93..a3ce4c67cce 100644
 --- a/grub-core/net/drivers/efi/efinet.c
 +++ b/grub-core/net/drivers/efi/efinet.c
 @@ -239,46 +239,85 @@ grub_efinet_get_device_handle (struct grub_net_card *card)
@@ -39,7 +39,8 @@ index 3f112438a..a3ce4c67c 100644
 -  int i = 0;
 +  grub_efi_device_path_t *pdp = NULL, *pp = NULL, *pc = NULL;
 +  int ret = 0;
-+
+ 
+-  /* Find handles which support the disk io interface.  */
 +  if (preferred)
 +    {
 +      grub_efi_device_path_t *pdpc;
@@ -49,8 +50,7 @@ index 3f112438a..a3ce4c67c 100644
 +	  grub_print_error ();
 +	  return -1;
 +	}
- 
--  /* Find handles which support the disk io interface.  */
++
 +      for (; ! GRUB_EFI_END_ENTIRE_DEVICE_PATH (pdpc);
 +	   pdpc = GRUB_EFI_NEXT_DEVICE_PATH (pdpc))
 +	{
@@ -205,7 +205,7 @@ index 3f112438a..a3ce4c67c 100644
      if (! cdp)
        continue;
 diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
-index c7c9f0e1d..97b9aa7a4 100644
+index c7c9f0e1db1..97b9aa7a4d7 100644
 --- a/include/grub/efi/api.h
 +++ b/include/grub/efi/api.h
 @@ -622,6 +622,10 @@ typedef struct grub_efi_device_path grub_efi_device_path_t;
@@ -220,5 +220,5 @@ index c7c9f0e1d..97b9aa7a4 100644
  #define GRUB_EFI_DEVICE_PATH_SUBTYPE(dp)	((dp)->subtype)
  #define GRUB_EFI_DEVICE_PATH_LENGTH(dp)		((dp)->length)
 -- 
-2.14.3
+2.15.0
 

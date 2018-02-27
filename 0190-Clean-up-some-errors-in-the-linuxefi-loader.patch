@@ -1,7 +1,7 @@
-From 1351ba7ec388e9449b209c76fad61e6b9792044e Mon Sep 17 00:00:00 2001
+From 819eceb4c94e8463f4d2edb381a04bf0020d68a9 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 24 May 2017 15:58:18 -0400
-Subject: [PATCH 190/198] Clean up some errors in the linuxefi loader
+Subject: [PATCH 190/206] Clean up some errors in the linuxefi loader
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
-index bed5919ca..6db5d0bf3 100644
+index bed5919cab3..6db5d0bf3a0 100644
 --- a/grub-core/loader/i386/efi/linux.c
 +++ b/grub-core/loader/i386/efi/linux.c
 @@ -161,8 +161,8 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
@@ -65,5 +65,5 @@ index bed5919ca..6db5d0bf3 100644
  			 linux_cmdline,
  			 BYTES_TO_PAGES(lh->cmdline_size + 1));
 -- 
-2.14.3
+2.15.0
 

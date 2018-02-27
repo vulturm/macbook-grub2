@@ -1,7 +1,7 @@
-From 5b1b2603175923e8d1eac701308d220ac39ad8c7 Mon Sep 17 00:00:00 2001
+From 5ccff1d133f501355b03fb756f859ccde07b5e5c Mon Sep 17 00:00:00 2001
 From: "David E. Box" <david.e.box@linux.intel.com>
 Date: Fri, 15 Sep 2017 15:37:05 -0700
-Subject: [PATCH 197/198] tsc: Change default tsc calibration method to pmtimer
+Subject: [PATCH 197/206] tsc: Change default tsc calibration method to pmtimer
  on EFI systems
 
 On efi systems, make pmtimer based tsc calibration the default over the
@@ -15,7 +15,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/kern/i386/tsc.c b/grub-core/kern/i386/tsc.c
-index 2e85289d8..f266eb131 100644
+index 2e85289d848..f266eb13185 100644
 --- a/grub-core/kern/i386/tsc.c
 +++ b/grub-core/kern/i386/tsc.c
 @@ -68,7 +68,7 @@ grub_tsc_init (void)
@@ -28,5 +28,5 @@ index 2e85289d8..f266eb131 100644
    (void) (grub_tsc_calibrate_from_pmtimer () || grub_tsc_calibrate_from_pit () || calibrate_tsc_hardcode());
  #else
 -- 
-2.14.3
+2.15.0
 

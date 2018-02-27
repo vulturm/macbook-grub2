@@ -1,7 +1,7 @@
 From 4bc909bf89f5b4ff86c9e4e609d4fe0c11a66b0c Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 7 Aug 2017 18:33:29 +0200
-Subject: [PATCH 057/198] Remove grub_efi_allocate_pages.
+Subject: [PATCH 057/206] Remove grub_efi_allocate_pages.
 
 grub_efi_allocate_pages Essentially does 2 unrelated things:
 * Allocate at fixed address.
@@ -21,7 +21,7 @@ value which is wrong as 0 is a perfectly valid fixed adress to allocate at.
  8 files changed, 32 insertions(+), 34 deletions(-)
 
 diff --git a/grub-core/kern/arm/efi/misc.c b/grub-core/kern/arm/efi/misc.c
-index 7cd41842a..c95e8299d 100644
+index 7cd41842ae7..c95e8299d42 100644
 --- a/grub-core/kern/arm/efi/misc.c
 +++ b/grub-core/kern/arm/efi/misc.c
 @@ -146,7 +146,7 @@ grub_efi_allocate_loader_memory (grub_uint32_t min_offset, grub_uint32_t size)
@@ -43,7 +43,7 @@ index 7cd41842a..c95e8299d 100644
      return GRUB_ERR_OUT_OF_MEMORY;
  
 diff --git a/grub-core/kern/efi/mm.c b/grub-core/kern/efi/mm.c
-index d88bc5e43..b97b05fe8 100644
+index d88bc5e4326..b97b05fe825 100644
 --- a/grub-core/kern/efi/mm.c
 +++ b/grub-core/kern/efi/mm.c
 @@ -83,20 +83,19 @@ grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
@@ -51,8 +51,16 @@ index d88bc5e43..b97b05fe8 100644
  
  void *
 -grub_efi_allocate_pages (grub_efi_physical_address_t address,
--			 grub_efi_uintn_t pages)
 +grub_efi_allocate_any_pages (grub_efi_uintn_t pages)
++{
++  return grub_efi_allocate_pages_real (GRUB_EFI_MAX_USABLE_ADDRESS,
++				       pages, GRUB_EFI_ALLOCATE_MAX_ADDRESS,
++				       GRUB_EFI_LOADER_DATA);
++}
++
++void *
++grub_efi_allocate_fixed (grub_efi_physical_address_t address,
+ 			 grub_efi_uintn_t pages)
  {
 -  grub_efi_allocate_type_t alloctype;
 -
@@ -63,16 +71,8 @@ index d88bc5e43..b97b05fe8 100644
 -    }
 -  else
 -    alloctype = GRUB_EFI_ALLOCATE_ADDRESS;
-+  return grub_efi_allocate_pages_real (GRUB_EFI_MAX_USABLE_ADDRESS,
-+				       pages, GRUB_EFI_ALLOCATE_MAX_ADDRESS,
-+				       GRUB_EFI_LOADER_DATA);
-+}
- 
+-
 -  return grub_efi_allocate_pages_real (address, pages, alloctype,
-+void *
-+grub_efi_allocate_fixed (grub_efi_physical_address_t address,
-+			 grub_efi_uintn_t pages)
-+{
 +  return grub_efi_allocate_pages_real (address, pages,
 +				       GRUB_EFI_ALLOCATE_ADDRESS,
  				       GRUB_EFI_LOADER_DATA);
@@ -107,7 +107,7 @@ index d88bc5e43..b97b05fe8 100644
  	grub_fatal ("cannot allocate memory");
  
 diff --git a/grub-core/loader/arm64/fdt.c b/grub-core/loader/arm64/fdt.c
-index db49cf649..368001696 100644
+index db49cf64991..368001696ee 100644
 --- a/grub-core/loader/arm64/fdt.c
 +++ b/grub-core/loader/arm64/fdt.c
 @@ -50,7 +50,7 @@ grub_fdt_load (grub_size_t additional_size)
@@ -120,7 +120,7 @@ index db49cf649..368001696 100644
      return NULL;
  
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 9519d2e4d..ee3fcaa86 100644
+index 9519d2e4d3e..ee3fcaa86ae 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -148,8 +148,7 @@ grub_arm64_uefi_boot_image (grub_addr_t addr, grub_size_t size, char *args)
@@ -152,7 +152,7 @@ index 9519d2e4d..ee3fcaa86 100644
  		(long long) GRUB_EFI_BYTES_TO_PAGES (kernel_size));
    if (!kernel_addr)
 diff --git a/grub-core/loader/arm64/xen_boot.c b/grub-core/loader/arm64/xen_boot.c
-index 27ede46ca..6c145a771 100644
+index 27ede46cac5..6c145a771ee 100644
 --- a/grub-core/loader/arm64/xen_boot.c
 +++ b/grub-core/loader/arm64/xen_boot.c
 @@ -324,10 +324,9 @@ xen_boot_binary_load (struct xen_boot_binary *binary, grub_file_t file,
@@ -170,7 +170,7 @@ index 27ede46ca..6c145a771 100644
      {
        grub_error (GRUB_ERR_OUT_OF_MEMORY, N_("out of memory"));
 diff --git a/grub-core/loader/ia64/efi/linux.c b/grub-core/loader/ia64/efi/linux.c
-index efaa42ccd..750330d45 100644
+index efaa42ccdd2..750330d4572 100644
 --- a/grub-core/loader/ia64/efi/linux.c
 +++ b/grub-core/loader/ia64/efi/linux.c
 @@ -252,7 +252,7 @@ allocate_pages (grub_uint64_t align, grub_uint64_t size_pages,
@@ -219,7 +219,7 @@ index efaa42ccd..750330d45 100644
      {
        grub_error (GRUB_ERR_OUT_OF_MEMORY, "cannot allocate pages");
 diff --git a/include/grub/autoefi.h b/include/grub/autoefi.h
-index b75591176..b7a252e07 100644
+index b75591176eb..b7a252e079e 100644
 --- a/include/grub/autoefi.h
 +++ b/include/grub/autoefi.h
 @@ -55,7 +55,7 @@ static inline grub_err_t grub_autoefi_prepare (void)
@@ -232,7 +232,7 @@ index b75591176..b7a252e07 100644
  # define grub_autoefi_finish_boot_services grub_efiemu_finish_boot_services
  # define EFI_PRESENT 1
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index b4cbebf38..3fa082816 100644
+index b4cbebf3828..3fa082816ca 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
 @@ -43,8 +43,10 @@ EXPORT_FUNC(grub_efi_allocate_pages_real) (grub_efi_physical_address_t address,
@@ -248,5 +248,5 @@ index b4cbebf38..3fa082816 100644
  				       grub_efi_uintn_t pages);
  int
 -- 
-2.14.3
+2.15.0
 

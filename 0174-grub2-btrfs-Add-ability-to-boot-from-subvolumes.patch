@@ -1,7 +1,7 @@
-From 1a7e8fd6eaff05a32889e48e9fae6f9c80219a04 Mon Sep 17 00:00:00 2001
+From 1b996230e31c4f854c42d71a1697a063a6a06808 Mon Sep 17 00:00:00 2001
 From: Jeff Mahoney <jeffm@suse.com>
 Date: Wed, 18 Dec 2013 09:57:04 +0000
-Subject: [PATCH 174/198] grub2/btrfs: Add ability to boot from subvolumes
+Subject: [PATCH 174/206] grub2/btrfs: Add ability to boot from subvolumes
 
 This patch adds the ability to specify a different root on a btrfs
 filesystem too boot from other than the default one.
@@ -19,12 +19,12 @@ variable and loading the config file from the subvolume.
 
 Signed-off-by: Jeff Mahoney <jeffm@suse.com>
 ---
- grub-core/fs/btrfs.c | 548 +++++++++++++++++++++++++++++++++++++++++++++++++--
+ grub-core/fs/btrfs.c | 552 +++++++++++++++++++++++++++++++++++++++++++++++++--
  include/grub/btrfs.h |   1 +
- 2 files changed, 531 insertions(+), 18 deletions(-)
+ 2 files changed, 533 insertions(+), 20 deletions(-)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index 4849c1ceb..38facf3cb 100644
+index 4849c1ceb65..38facf3cb8b 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
 @@ -29,6 +29,9 @@
@@ -314,40 +314,45 @@ index 4849c1ceb..38facf3cb 100644
  	    }
  	  continue;
  	}
-@@ -1673,6 +1867,20 @@ grub_btrfs_read (grub_file_t file, char *buf, grub_size_t len)
+@@ -1673,18 +1867,10 @@ grub_btrfs_read (grub_file_t file, char *buf, grub_size_t len)
  				 data->tree, file->offset, buf, len);
  }
  
+-static grub_err_t
+-grub_btrfs_uuid (grub_device_t device, char **uuid)
 +static char *
 +btrfs_unparse_uuid(struct grub_btrfs_data *data)
-+{
+ {
+-  struct grub_btrfs_data *data;
+-
+-  *uuid = NULL;
+-
+-  data = grub_btrfs_mount (device);
+-  if (!data)
+-    return grub_errno;
+-
+-  *uuid = grub_xasprintf ("%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
 +  return  grub_xasprintf ("%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
-+			  grub_be_to_cpu16 (data->sblock.uuid[0]),
-+			  grub_be_to_cpu16 (data->sblock.uuid[1]),
-+			  grub_be_to_cpu16 (data->sblock.uuid[2]),
-+			  grub_be_to_cpu16 (data->sblock.uuid[3]),
-+			  grub_be_to_cpu16 (data->sblock.uuid[4]),
-+			  grub_be_to_cpu16 (data->sblock.uuid[5]),
-+			  grub_be_to_cpu16 (data->sblock.uuid[6]),
-+			  grub_be_to_cpu16 (data->sblock.uuid[7]));
+ 			  grub_be_to_cpu16 (data->sblock.uuid[0]),
+ 			  grub_be_to_cpu16 (data->sblock.uuid[1]),
+ 			  grub_be_to_cpu16 (data->sblock.uuid[2]),
+@@ -1693,6 +1879,20 @@ grub_btrfs_uuid (grub_device_t device, char **uuid)
+ 			  grub_be_to_cpu16 (data->sblock.uuid[5]),
+ 			  grub_be_to_cpu16 (data->sblock.uuid[6]),
+ 			  grub_be_to_cpu16 (data->sblock.uuid[7]));
 +}
 +
- static grub_err_t
- grub_btrfs_uuid (grub_device_t device, char **uuid)
- {
-@@ -1684,15 +1892,7 @@ grub_btrfs_uuid (grub_device_t device, char **uuid)
-   if (!data)
-     return grub_errno;
- 
--  *uuid = grub_xasprintf ("%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
--			  grub_be_to_cpu16 (data->sblock.uuid[0]),
--			  grub_be_to_cpu16 (data->sblock.uuid[1]),
--			  grub_be_to_cpu16 (data->sblock.uuid[2]),
--			  grub_be_to_cpu16 (data->sblock.uuid[3]),
--			  grub_be_to_cpu16 (data->sblock.uuid[4]),
--			  grub_be_to_cpu16 (data->sblock.uuid[5]),
--			  grub_be_to_cpu16 (data->sblock.uuid[6]),
--			  grub_be_to_cpu16 (data->sblock.uuid[7]));
++static grub_err_t
++grub_btrfs_uuid (grub_device_t device, char **uuid)
++{
++  struct grub_btrfs_data *data;
++
++  *uuid = NULL;
++
++  data = grub_btrfs_mount (device);
++  if (!data)
++    return grub_errno;
++
 +  *uuid = btrfs_unparse_uuid(data);
  
    grub_btrfs_unmount (data);
@@ -685,7 +690,7 @@ index 4849c1ceb..38facf3cb 100644
 +
 +// vim: si et sw=2:
 diff --git a/include/grub/btrfs.h b/include/grub/btrfs.h
-index 9d93fb6c1..234ad9767 100644
+index 9d93fb6c182..234ad976771 100644
 --- a/include/grub/btrfs.h
 +++ b/include/grub/btrfs.h
 @@ -29,6 +29,7 @@ enum
@@ -697,5 +702,5 @@ index 9d93fb6c1..234ad9767 100644
    };
  
 -- 
-2.14.3
+2.15.0
 

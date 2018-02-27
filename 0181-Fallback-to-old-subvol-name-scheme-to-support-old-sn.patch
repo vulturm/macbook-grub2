@@ -1,7 +1,7 @@
-From 7cfb7a4b2d8c90ef6aa17c32b059eb2c5ed45b3d Mon Sep 17 00:00:00 2001
+From 47d4b57eb561b27af62427721a7e1fdef55129f0 Mon Sep 17 00:00:00 2001
 From: Andrei Borzenkov <arvidjaar@gmail.com>
 Date: Tue, 21 Jun 2016 16:44:17 +0000
-Subject: [PATCH 181/198] Fallback to old subvol name scheme to support old
+Subject: [PATCH 181/206] Fallback to old subvol name scheme to support old
  snapshot config
 
 Ref: bsc#953538
@@ -10,7 +10,7 @@ Ref: bsc#953538
  1 file changed, 31 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index d111147e8..a5c000805 100644
+index d111147e836..a5c000805a7 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
 @@ -924,11 +924,41 @@ lookup_root_by_name(struct grub_btrfs_data *data, const char *path)
@@ -57,5 +57,5 @@ index d111147e8..a5c000805 100644
    if (btrfs_default_subvolid)
      return lookup_root_by_id(data, btrfs_default_subvolid);
 -- 
-2.14.3
+2.15.0
 

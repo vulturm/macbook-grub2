@@ -1,7 +1,7 @@
 From f826330683675f0deb55b58fd229afd7d65fb053 Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Thu, 3 Aug 2017 11:04:32 +0100
-Subject: [PATCH 061/198] efi: change heap allocation type to
+Subject: [PATCH 061/206] efi: change heap allocation type to
  GRUB_EFI_LOADER_CODE
 
 With upcoming changes to EDK2, allocations of type EFI_LOADER_DATA may
@@ -17,7 +17,7 @@ Signed-off-by: Leif Lindholm <leif.lindholm@linaro.org>
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/kern/efi/mm.c b/grub-core/kern/efi/mm.c
-index b97b05fe8..ac2a4c556 100644
+index b97b05fe825..ac2a4c556b8 100644
 --- a/grub-core/kern/efi/mm.c
 +++ b/grub-core/kern/efi/mm.c
 @@ -403,7 +403,9 @@ add_memory_regions (grub_efi_memory_descriptor_t *memory_map,
@@ -32,5 +32,5 @@ index b97b05fe8..ac2a4c556 100644
  	grub_fatal ("cannot allocate conventional memory %p with %u pages",
  		    (void *) ((grub_addr_t) start),
 -- 
-2.14.3
+2.15.0
 

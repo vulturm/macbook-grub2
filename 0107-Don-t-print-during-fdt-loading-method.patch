@@ -1,7 +1,7 @@
 From 40e56a4c2e879f5efcbcc36cf6a88ee1cb39d607 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Jan 2014 16:15:46 -0500
-Subject: [PATCH 107/198] Don't print during fdt loading method.
+Subject: [PATCH 107/206] Don't print during fdt loading method.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 2 deletions(-)
 
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 191aebe80..452a9f69d 100644
+index 191aebe80bb..452a9f69d28 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -164,9 +164,7 @@ EOF
@@ -23,5 +23,5 @@ index 191aebe80..452a9f69d 100644
  EOF
    fi
 -- 
-2.14.3
+2.15.0
 

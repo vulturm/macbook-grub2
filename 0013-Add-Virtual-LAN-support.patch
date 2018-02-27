@@ -1,7 +1,7 @@
 From d9f7de0ae3c0c09cff7257c55418450261f3e082 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Mon, 23 Dec 2013 12:32:02 -0200
-Subject: [PATCH 013/198] Add Virtual LAN support.
+Subject: [PATCH 013/206] Add Virtual LAN support.
 
 This patch adds support for virtual LAN (VLAN) tagging. VLAN tagging allows
 multiple VLANs in a bridged network to share the same physical network link
@@ -26,7 +26,7 @@ http://en.wikipedia.org/wiki/IEEE_802.1Q
  7 files changed, 92 insertions(+), 20 deletions(-)
 
 diff --git a/grub-core/net/arp.c b/grub-core/net/arp.c
-index 4b68c4151..54306e3b1 100644
+index 4b68c4151a1..54306e3b16d 100644
 --- a/grub-core/net/arp.c
 +++ b/grub-core/net/arp.c
 @@ -111,8 +111,8 @@ grub_net_arp_send_request (struct grub_net_network_level_interface *inf,
@@ -56,7 +56,7 @@ index 4b68c4151..54306e3b1 100644
      if (grub_net_addr_cmp (&inf->address, &target_addr) == 0
  	&& arp_packet->op == grub_cpu_to_be16_compile_time (ARP_REQUEST))
 diff --git a/grub-core/net/drivers/ieee1275/ofnet.c b/grub-core/net/drivers/ieee1275/ofnet.c
-index a78d164db..002446be1 100644
+index a78d164db1a..002446be1c3 100644
 --- a/grub-core/net/drivers/ieee1275/ofnet.c
 +++ b/grub-core/net/drivers/ieee1275/ofnet.c
 @@ -153,11 +153,11 @@ grub_ieee1275_parse_bootpath (const char *devpath, char *bootpath,
@@ -96,7 +96,7 @@ index a78d164db..002446be1 100644
  
    if (gateway_addr.ipv4 != 0)
 diff --git a/grub-core/net/ethernet.c b/grub-core/net/ethernet.c
-index c397b1b34..4d7ceed6f 100644
+index c397b1b348c..4d7ceed6f93 100644
 --- a/grub-core/net/ethernet.c
 +++ b/grub-core/net/ethernet.c
 @@ -18,6 +18,7 @@
@@ -192,7 +192,7 @@ index c397b1b34..4d7ceed6f 100644
    grub_netbuff_free (nb);
    return GRUB_ERR_NONE;
 diff --git a/grub-core/net/ip.c b/grub-core/net/ip.c
-index aba4f8908..7c95cc746 100644
+index aba4f89087b..7c95cc7464a 100644
 --- a/grub-core/net/ip.c
 +++ b/grub-core/net/ip.c
 @@ -228,12 +228,13 @@ handle_dgram (struct grub_net_buff *nb,
@@ -294,7 +294,7 @@ index aba4f8908..7c95cc746 100644
    grub_netbuff_free (nb);
    return GRUB_ERR_NONE;
 diff --git a/include/grub/net.h b/include/grub/net.h
-index 2192fa186..1096b2432 100644
+index 2192fa18628..1096b24322e 100644
 --- a/include/grub/net.h
 +++ b/include/grub/net.h
 @@ -291,6 +291,7 @@ struct grub_net_network_level_interface
@@ -313,7 +313,7 @@ index 2192fa186..1096b2432 100644
 +
  #endif /* ! GRUB_NET_HEADER */
 diff --git a/include/grub/net/arp.h b/include/grub/net/arp.h
-index bb1703622..8d9d08113 100644
+index bb1703622e1..8d9d081134f 100644
 --- a/include/grub/net/arp.h
 +++ b/include/grub/net/arp.h
 @@ -22,10 +22,11 @@
@@ -331,7 +331,7 @@ index bb1703622..8d9d08113 100644
  
  #endif 
 diff --git a/include/grub/net/ip.h b/include/grub/net/ip.h
-index dcceaa568..ab9d68f98 100644
+index dcceaa56894..ab9d68f9825 100644
 --- a/include/grub/net/ip.h
 +++ b/include/grub/net/ip.h
 @@ -48,7 +48,8 @@ grub_err_t
@@ -345,5 +345,5 @@ index dcceaa568..ab9d68f98 100644
  grub_err_t
  grub_net_send_ip_packet (struct grub_net_network_level_interface *inf,
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
-From 87206b6fc4fcb9ac5fb5778ec7c9fbb4ef1841b7 Mon Sep 17 00:00:00 2001
+From b68b3292d6a5aa057a39b8098bcd1299a210921c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 18 Sep 2014 11:26:14 -0400
-Subject: [PATCH 123/198] Load arm with SB enabled.
+Subject: [PATCH 123/206] Load arm with SB enabled.
 
 Make sure we actually try to validate secure boot on this platform (even
 though we're not shipping it enabled by default.)
@@ -11,17 +11,17 @@ kernel command line, because we can't call systab->bs->LoadImage() if SB
 is enabled.
 ---
  grub-core/Makefile.core.def       |   3 +
- grub-core/loader/arm64/linux.c    | 116 ++++++++++++++++++++------------------
- grub-core/loader/efi/linux.c      |  65 +++++++++++++++++++++
- grub-core/loader/i386/efi/linux.c |  39 +------------
+ grub-core/loader/arm64/linux.c    | 121 ++++++++++++++++++++------------------
+ grub-core/loader/efi/linux.c      |  65 ++++++++++++++++++++
+ grub-core/loader/i386/efi/linux.c |  39 +-----------
  include/grub/arm64/linux.h        |   7 +++
  include/grub/efi/linux.h          |  31 ++++++++++
- 6 files changed, 171 insertions(+), 90 deletions(-)
+ 6 files changed, 173 insertions(+), 93 deletions(-)
  create mode 100644 grub-core/loader/efi/linux.c
  create mode 100644 include/grub/efi/linux.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 7f3d5a2bf..5ae70204c 100644
+index 7f3d5a2bfe6..5ae70204cd2 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -1709,6 +1709,8 @@ module = {
@@ -42,7 +42,7 @@ index 7f3d5a2bf..5ae70204c 100644
    enable = x86_64_efi;
  };
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 746edd104..03ff83563 100644
+index 746edd10415..33345d37534 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -28,6 +28,7 @@
@@ -71,41 +71,20 @@ index 746edd104..03ff83563 100644
  
    void *fdt;
  
-@@ -100,6 +103,25 @@ finalize_params_linux (void)
+@@ -100,79 +103,73 @@ finalize_params_linux (void)
    if (grub_fdt_install() != GRUB_ERR_NONE)
      goto failure;
  
-+  grub_dprintf ("linux", "Installed/updated FDT configuration table @ %p\n",
-+		fdt);
-+
-+  /* Convert command line to UCS-2 */
-+  loaded_image = grub_efi_get_loaded_image (grub_efi_image_handle);
-+  if (!loaded_image)
-+    goto failure;
-+
-+  loaded_image->load_options_size = len =
-+    (grub_strlen (linux_args) + 1) * sizeof (grub_efi_char16_t);
-+  loaded_image->load_options =
-+    grub_efi_allocate_any_pages (GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
-+  if (!loaded_image->load_options)
-+    return grub_error(GRUB_ERR_BAD_OS, "failed to create kernel parameters");
-+
-+  loaded_image->load_options_size =
-+    2 * grub_utf8_to_utf16 (loaded_image->load_options, len,
-+			    (grub_uint8_t *) linux_args, len, NULL);
-+
-   return GRUB_ERR_NONE;
- 
- failure:
-@@ -107,72 +129,47 @@ failure:
-   return grub_error(GRUB_ERR_BAD_OS, "failed to install/update FDT");
- }
- 
+-  return GRUB_ERR_NONE;
+-
+-failure:
+-  grub_fdt_unload();
+-  return grub_error(GRUB_ERR_BAD_OS, "failed to install/update FDT");
+-}
+-
 -grub_err_t
 -grub_arm64_uefi_boot_image (grub_addr_t addr, grub_size_t size, char *args)
-+static void
-+free_params (void)
- {
+-{
 -  grub_efi_memory_mapped_device_path_t *mempath;
 -  grub_efi_handle_t image_handle;
 -  grub_efi_boot_services_t *b;
@@ -123,8 +102,7 @@ index 746edd104..03ff83563 100644
 -  mempath[0].memory_type = GRUB_EFI_LOADER_DATA;
 -  mempath[0].start_address = addr;
 -  mempath[0].end_address = addr + size;
-+  grub_efi_loaded_image_t *loaded_image = NULL;
- 
+-
 -  mempath[1].header.type = GRUB_EFI_END_DEVICE_PATH_TYPE;
 -  mempath[1].header.subtype = GRUB_EFI_END_ENTIRE_DEVICE_PATH_SUBTYPE;
 -  mempath[1].header.length = sizeof (grub_efi_device_path_t);
@@ -135,6 +113,50 @@ index 746edd104..03ff83563 100644
 -			  (void *) addr, size, &image_handle);
 -  if (status != GRUB_EFI_SUCCESS)
 -    return grub_error (GRUB_ERR_BAD_OS, "cannot load image");
+-
+-  grub_dprintf ("linux", "linux command line: '%s'\n", args);
++  grub_dprintf ("linux", "Installed/updated FDT configuration table @ %p\n",
++		fdt);
+ 
+   /* Convert command line to UCS-2 */
+-  loaded_image = grub_efi_get_loaded_image (image_handle);
++  loaded_image = grub_efi_get_loaded_image (grub_efi_image_handle);
++  if (!loaded_image)
++    goto failure;
++
+   loaded_image->load_options_size = len =
+-    (grub_strlen (args) + 1) * sizeof (grub_efi_char16_t);
++    (grub_strlen (linux_args) + 1) * sizeof (grub_efi_char16_t);
+   loaded_image->load_options =
+     grub_efi_allocate_any_pages (GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
+   if (!loaded_image->load_options)
+-    return grub_errno;
++    return grub_error(GRUB_ERR_BAD_OS, "failed to create kernel parameters");
+ 
+   loaded_image->load_options_size =
+     2 * grub_utf8_to_utf16 (loaded_image->load_options, len,
+-			    (grub_uint8_t *) args, len, NULL);
++			    (grub_uint8_t *) linux_args, len, NULL);
+ 
+-  grub_dprintf ("linux", "starting image %p\n", image_handle);
+-  status = b->start_image (image_handle, 0, NULL);
++  return GRUB_ERR_NONE;
+ 
+-  /* When successful, not reached */
+-  b->unload_image (image_handle);
+-  grub_efi_free_pages ((grub_addr_t) loaded_image->load_options,
+-		       GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
++failure:
++  grub_fdt_unload();
++  return grub_error(GRUB_ERR_BAD_OS, "failed to install/update FDT");
++}
+ 
+-  return grub_errno;
++static void
++free_params (void)
++{
++  grub_efi_loaded_image_t *loaded_image = NULL;
++
 +  loaded_image = grub_efi_get_loaded_image (grub_efi_image_handle);
 +  if (loaded_image)
 +    {
@@ -146,40 +168,21 @@ index 746edd104..03ff83563 100644
 +      loaded_image->load_options_size = 0;
 +    }
 +}
- 
--  grub_dprintf ("linux", "linux command line: '%s'\n", args);
++
 +grub_err_t
 +grub_arm64_uefi_boot_image (grub_addr_t addr, grub_size_t size, char *args)
 +{
 +  grub_err_t retval;
- 
--  /* Convert command line to UCS-2 */
--  loaded_image = grub_efi_get_loaded_image (image_handle);
--  loaded_image->load_options_size = len =
--    (grub_strlen (args) + 1) * sizeof (grub_efi_char16_t);
--  loaded_image->load_options =
--    grub_efi_allocate_any_pages (GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
--  if (!loaded_image->load_options)
++
 +  retval = finalize_params_linux ();
 +  if (retval != GRUB_ERR_NONE)
-     return grub_errno;
- 
--  loaded_image->load_options_size =
--    2 * grub_utf8_to_utf16 (loaded_image->load_options, len,
--			    (grub_uint8_t *) args, len, NULL);
--
--  grub_dprintf ("linux", "starting image %p\n", image_handle);
--  status = b->start_image (image_handle, 0, NULL);
++    return grub_errno;
++
 +  grub_dprintf ("linux", "linux command line: '%s'\n", args);
- 
--  /* When successful, not reached */
--  b->unload_image (image_handle);
--  grub_efi_free_pages ((grub_addr_t) loaded_image->load_options,
--		       GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
++
 +  retval = grub_efi_linux_boot ((char *)kernel_addr, handover_offset,
 +				kernel_addr);
- 
--  return grub_errno;
++
 +  /* Never reached... */
 +  free_params();
 +  return retval;
@@ -224,7 +227,7 @@ index 746edd104..03ff83563 100644
    if (!linux_args)
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
 new file mode 100644
-index 000000000..aea378adf
+index 00000000000..aea378adf5c
 --- /dev/null
 +++ b/grub-core/loader/efi/linux.c
 @@ -0,0 +1,65 @@
@@ -294,7 +297,7 @@ index 000000000..aea378adf
 +  return GRUB_ERR_BUG;
 +}
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
-index b79e6320b..e5b778577 100644
+index b79e6320ba9..e5b778577f9 100644
 --- a/grub-core/loader/i386/efi/linux.c
 +++ b/grub-core/loader/i386/efi/linux.c
 @@ -26,6 +26,7 @@
@@ -361,7 +364,7 @@ index b79e6320b..e5b778577 100644
  
  static grub_err_t
 diff --git a/include/grub/arm64/linux.h b/include/grub/arm64/linux.h
-index a981df5d1..0df384133 100644
+index a981df5d15f..0df38413338 100644
 --- a/include/grub/arm64/linux.h
 +++ b/include/grub/arm64/linux.h
 @@ -20,6 +20,7 @@
@@ -386,7 +389,7 @@ index a981df5d1..0df384133 100644
  #endif /* ! GRUB_LINUX_CPU_HEADER */
 diff --git a/include/grub/efi/linux.h b/include/grub/efi/linux.h
 new file mode 100644
-index 000000000..d9ede3677
+index 00000000000..d9ede36773b
 --- /dev/null
 +++ b/include/grub/efi/linux.h
 @@ -0,0 +1,31 @@
@@ -422,5 +425,5 @@ index 000000000..d9ede3677
 +
 +#endif /* ! GRUB_EFI_LINUX_HEADER */
 -- 
-2.14.3
+2.15.0
 

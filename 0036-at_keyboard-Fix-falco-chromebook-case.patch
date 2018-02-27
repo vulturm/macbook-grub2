@@ -1,7 +1,7 @@
 From c4b8bec5fee4e30a165fd14a188cf3ab8eccd095 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 14:27:52 +0200
-Subject: [PATCH 036/198] at_keyboard: Fix falco chromebook case.
+Subject: [PATCH 036/206] at_keyboard: Fix falco chromebook case.
 
 EC is slow, so we need few delays for it to toggle the bits correctly.
 
@@ -12,7 +12,7 @@ Command to enable clock and keyboard were not sent.
  2 files changed, 16 insertions(+), 9 deletions(-)
 
 diff --git a/grub-core/term/at_keyboard.c b/grub-core/term/at_keyboard.c
-index 3ab4e205f..f0a986eb1 100644
+index 3ab4e205f40..f0a986eb176 100644
 --- a/grub-core/term/at_keyboard.c
 +++ b/grub-core/term/at_keyboard.c
 @@ -40,6 +40,8 @@ grub_keyboard_controller_init (void);
@@ -69,7 +69,7 @@ index 3ab4e205f..f0a986eb1 100644
    write_mode (2);
    ps2_state.current_set = query_mode ();
 diff --git a/include/grub/at_keyboard.h b/include/grub/at_keyboard.h
-index b031523eb..bcb4d9ba7 100644
+index b031523eb7d..bcb4d9ba78f 100644
 --- a/include/grub/at_keyboard.h
 +++ b/include/grub/at_keyboard.h
 @@ -23,9 +23,11 @@
@@ -85,5 +85,5 @@ index b031523eb..bcb4d9ba7 100644
  #define KEYBOARD_ISMAKE(x)	!((x) & 0x80)
  #define KEYBOARD_ISREADY(x)	((x) & 0x01)
 -- 
-2.14.3
+2.15.0
 

@@ -1,14 +1,14 @@
 From 6dec3a26b37e128ded5d912e08abc5cee1592499 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 21:24:05 +0300
-Subject: [PATCH 005/198] Don't retrieve fstime when it's not useful.
+Subject: [PATCH 005/206] Don't retrieve fstime when it's not useful.
 
 ---
  tests/util/grub-fs-tester.in | 48 ++++++++++++++++++++++----------------------
  1 file changed, 24 insertions(+), 24 deletions(-)
 
 diff --git a/tests/util/grub-fs-tester.in b/tests/util/grub-fs-tester.in
-index 4515d165e..bf47305f3 100644
+index 4515d165e6e..bf47305f3e8 100644
 --- a/tests/util/grub-fs-tester.in
 +++ b/tests/util/grub-fs-tester.in
 @@ -1328,31 +1328,31 @@ for LOGSECSIZE in $(range "$MINLOGSECSIZE" "$MAXLOGSECSIZE" 1); do
@@ -68,5 +68,5 @@ index 4515d165e..bf47305f3 100644
  
  	    if [ x$NOHARDLINK != xy ]; then
 -- 
-2.14.3
+2.15.0
 

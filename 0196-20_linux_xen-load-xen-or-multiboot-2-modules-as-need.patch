@@ -1,7 +1,7 @@
-From b0260d2f586390b19294f5b98194c9e78a33ccad Mon Sep 17 00:00:00 2001
+From 58884ecfeb0304a0495e0f312b5f5b878ec9c94c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 19 Oct 2017 11:29:11 -0400
-Subject: [PATCH 196/198] 20_linux_xen: load xen or multiboot{,2} modules as
+Subject: [PATCH 196/206] 20_linux_xen: load xen or multiboot{,2} modules as
  needed.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
@@ -10,7 +10,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/util/grub.d/20_linux_xen.in b/util/grub.d/20_linux_xen.in
-index fae1ffe94..fc53bd542 100644
+index fae1ffe9494..fc53bd54231 100644
 --- a/util/grub.d/20_linux_xen.in
 +++ b/util/grub.d/20_linux_xen.in
 @@ -126,6 +126,8 @@ linux_entry ()
@@ -31,5 +31,5 @@ index fae1ffe94..fc53bd542 100644
  EOF
    fi
 -- 
-2.14.3
+2.15.0
 

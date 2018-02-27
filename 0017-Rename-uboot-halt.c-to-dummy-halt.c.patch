@@ -1,7 +1,7 @@
 From 1daa716c7017f1858de117a20a31da66815435c5 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 19:31:55 +0200
-Subject: [PATCH 017/198] Rename uboot/halt.c to dummy/halt.c.
+Subject: [PATCH 017/206] Rename uboot/halt.c to dummy/halt.c.
 
 It's not U-Boot specific and it's a stub.
 ---
@@ -11,7 +11,7 @@ It's not U-Boot specific and it's a stub.
  rename grub-core/lib/{uboot => dummy}/halt.c (100%)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 45ed0fa6b..2a38bd4bc 100644
+index 45ed0fa6b1c..2a38bd4bc8a 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -841,7 +841,7 @@ module = {
@@ -28,5 +28,5 @@ similarity index 100%
 rename from grub-core/lib/uboot/halt.c
 rename to grub-core/lib/dummy/halt.c
 -- 
-2.14.3
+2.15.0
 

@@ -1,7 +1,7 @@
-From 89b9b60f3bf638786a686eb86344a73523168034 Mon Sep 17 00:00:00 2001
+From 7456c9e2715a2e272a9e3d5fb2ae7e14c2edf3f6 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 8 Jun 2016 21:03:37 -0400
-Subject: [PATCH 145/198] efinet and bootp: add support for dhcpv6
+Subject: [PATCH 145/206] efinet and bootp: add support for dhcpv6
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -14,7 +14,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  6 files changed, 480 insertions(+), 14 deletions(-)
 
 diff --git a/grub-core/net/bootp.c b/grub-core/net/bootp.c
-index f03eeab2f..da3e45446 100644
+index f03eeab2fb4..da3e454466b 100644
 --- a/grub-core/net/bootp.c
 +++ b/grub-core/net/bootp.c
 @@ -23,6 +23,7 @@
@@ -206,7 +206,7 @@ index f03eeab2f..da3e45446 100644
  grub_net_process_dhcp (struct grub_net_buff *nb,
  		       struct grub_net_card *card)
 diff --git a/grub-core/net/drivers/efi/efinet.c b/grub-core/net/drivers/efi/efinet.c
-index a3ce4c67c..329024b6f 100644
+index a3ce4c67cce..329024b6f2c 100644
 --- a/grub-core/net/drivers/efi/efinet.c
 +++ b/grub-core/net/drivers/efi/efinet.c
 @@ -18,11 +18,15 @@
@@ -319,7 +319,7 @@ index a3ce4c67c..329024b6f 100644
    }
  }
 diff --git a/grub-core/net/net.c b/grub-core/net/net.c
-index 16d2ce06d..4be228d95 100644
+index 16d2ce06d5a..4be228d9576 100644
 --- a/grub-core/net/net.c
 +++ b/grub-core/net/net.c
 @@ -955,6 +955,78 @@ grub_net_network_level_interface_register (struct grub_net_network_level_interfa
@@ -402,7 +402,7 @@ index 16d2ce06d..4be228d95 100644
  grub_err_t
  grub_net_add_ipv4_local (struct grub_net_network_level_interface *inter,
 diff --git a/grub-core/net/tftp.c b/grub-core/net/tftp.c
-index 7d90bf66e..1157524fc 100644
+index 7d90bf66e76..1157524fc50 100644
 --- a/grub-core/net/tftp.c
 +++ b/grub-core/net/tftp.c
 @@ -379,19 +379,23 @@ tftp_open (struct grub_file *file, const char *filename)
@@ -430,7 +430,7 @@ index 7d90bf66e..1157524fc 100644
        grub_free (data);
        return grub_errno;
 diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
-index 97b9aa7a4..02488ec35 100644
+index 97b9aa7a4d7..02488ec35ae 100644
 --- a/include/grub/efi/api.h
 +++ b/include/grub/efi/api.h
 @@ -572,10 +572,16 @@ typedef void *grub_efi_handle_t;
@@ -585,7 +585,7 @@ index 97b9aa7a4..02488ec35 100644
  
  typedef struct grub_efi_pxe
 diff --git a/include/grub/net.h b/include/grub/net.h
-index 50d62ab0c..f8f3ec13a 100644
+index 50d62ab0c8c..f8f3ec13acc 100644
 --- a/include/grub/net.h
 +++ b/include/grub/net.h
 @@ -442,6 +442,51 @@ struct grub_net_bootp_packet
@@ -663,5 +663,5 @@ index 50d62ab0c..f8f3ec13a 100644
  grub_net_add_ipv4_local (struct grub_net_network_level_interface *inf,
  			 int mask);
 -- 
-2.14.3
+2.15.0
 

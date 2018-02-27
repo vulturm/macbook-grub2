@@ -1,7 +1,7 @@
 From 70b555a52a065b2beb91e6fc97a6b358c931b303 Mon Sep 17 00:00:00 2001
 From: Julius Werner <jwerner@chromium.org>
 Date: Tue, 9 May 2017 09:03:02 +0200
-Subject: [PATCH 035/198] coreboot: Changed cbmemc to support updated console
+Subject: [PATCH 035/206] coreboot: Changed cbmemc to support updated console
  format from coreboot.
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 035/198] coreboot: Changed cbmemc to support updated console
  1 file changed, 35 insertions(+), 15 deletions(-)
 
 diff --git a/grub-core/term/i386/coreboot/cbmemc.c b/grub-core/term/i386/coreboot/cbmemc.c
-index 129248c7f..cea9b8431 100644
+index 129248c7f47..cea9b84315b 100644
 --- a/grub-core/term/i386/coreboot/cbmemc.c
 +++ b/grub-core/term/i386/coreboot/cbmemc.c
 @@ -29,11 +29,14 @@
@@ -94,5 +94,5 @@ index 129248c7f..cea9b8431 100644
  }
  
 -- 
-2.14.3
+2.15.0
 

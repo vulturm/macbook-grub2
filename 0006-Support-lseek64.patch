@@ -1,7 +1,7 @@
 From 608bec51128008afb81c9e3f297283e9f830a146 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 20:21:05 +0300
-Subject: [PATCH 006/198] Support lseek64.
+Subject: [PATCH 006/206] Support lseek64.
 
 Android doesn't have 64-bit off_t, so use off64_t instead.
 ---
@@ -10,7 +10,7 @@ Android doesn't have 64-bit off_t, so use off64_t instead.
  2 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index d10d8adac..e0262e159 100644
+index d10d8adac58..e0262e159f0 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -373,7 +373,10 @@ case "$host_os" in
@@ -26,7 +26,7 @@ index d10d8adac..e0262e159 100644
  
  if test x$USE_NLS = xno; then
 diff --git a/grub-core/osdep/unix/hostdisk.c b/grub-core/osdep/unix/hostdisk.c
-index 2a8c5882e..5450cf416 100644
+index 2a8c5882e3d..5450cf4166e 100644
 --- a/grub-core/osdep/unix/hostdisk.c
 +++ b/grub-core/osdep/unix/hostdisk.c
 @@ -77,11 +77,19 @@ grub_util_get_fd_size (grub_util_fd_t fd, const char *name, unsigned *log_secsiz
@@ -50,5 +50,5 @@ index 2a8c5882e..5450cf416 100644
  }
  
 -- 
-2.14.3
+2.15.0
 

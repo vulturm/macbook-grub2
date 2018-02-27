@@ -1,7 +1,7 @@
-From 71af399a49085b805028f1faadda16b503ce46a0 Mon Sep 17 00:00:00 2001
+From 65473fe6fe5bc08a874eb433c3da3e7181250822 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 26 Feb 2014 21:49:12 -0500
-Subject: [PATCH 168/198] Make "exit" take a return code.
+Subject: [PATCH 168/206] Make "exit" take a return code.
 
 This adds "exit" with a return code.  With this patch, any "exit"
 command /may/ include a return code, and on platforms that support
@@ -15,7 +15,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 15 insertions(+)
 
 diff --git a/grub-core/kern/emu/main.c b/grub-core/kern/emu/main.c
-index 55ea5a11c..7e47ec812 100644
+index 55ea5a11ccd..7e47ec81263 100644
 --- a/grub-core/kern/emu/main.c
 +++ b/grub-core/kern/emu/main.c
 @@ -72,6 +72,12 @@ grub_exit (int retval __attribute__((unused)))
@@ -32,7 +32,7 @@ index 55ea5a11c..7e47ec812 100644
  grub_machine_init (void)
  {
 diff --git a/grub-core/kern/misc.c b/grub-core/kern/misc.c
-index 5ce89a40c..04371ac49 100644
+index 5ce89a40c68..04371ac49f2 100644
 --- a/grub-core/kern/misc.c
 +++ b/grub-core/kern/misc.c
 @@ -1120,6 +1120,15 @@ grub_abort (void)
@@ -52,5 +52,5 @@ index 5ce89a40c..04371ac49 100644
  grub_fatal (const char *fmt, ...)
  {
 -- 
-2.14.3
+2.15.0
 

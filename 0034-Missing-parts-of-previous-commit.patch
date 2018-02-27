@@ -1,7 +1,7 @@
 From c6eaa982d12e3cfc5465dda5ea372774188b6b81 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 09:02:15 +0200
-Subject: [PATCH 034/198] Missing parts of previous commit
+Subject: [PATCH 034/206] Missing parts of previous commit
 
 ---
  grub-core/Makefile.core.def        | 2 ++
@@ -9,7 +9,7 @@ Subject: [PATCH 034/198] Missing parts of previous commit
  2 files changed, 3 insertions(+)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index d2239f171..1d86bd22e 100644
+index d2239f1718d..1d86bd22e04 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -162,6 +162,8 @@ kernel = {
@@ -22,7 +22,7 @@ index d2239f171..1d86bd22e 100644
    arm_coreboot = commands/keylayouts.c;
    arm_coreboot = kern/arm/coreboot/dma.c;
 diff --git a/grub-core/kern/arm/coreboot/init.c b/grub-core/kern/arm/coreboot/init.c
-index 0126ff638..8d8c5b829 100644
+index 0126ff6381a..8d8c5b8291e 100644
 --- a/grub-core/kern/arm/coreboot/init.c
 +++ b/grub-core/kern/arm/coreboot/init.c
 @@ -135,6 +135,7 @@ grub_machine_init (void)
@@ -34,5 +34,5 @@ index 0126ff638..8d8c5b829 100644
  }
  
 -- 
-2.14.3
+2.15.0
 
