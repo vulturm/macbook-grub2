@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	26%{?dist}
+Release:	27%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -451,6 +451,9 @@ fi
 %endif
 
 %changelog
+* Tue Mar 06 2018 Peter Jones <pjones@redhat.com> - 2.02-27
+- Build the blscfg module in on EFI builds.
+
 * Wed Feb 28 2018 Peter Jones <pjones@redhat.com> - 2.02-26
 - Try to fix things for new compiler madness.
   I really don't know why gcc decided __attribute__((packed)) on a "typedef
