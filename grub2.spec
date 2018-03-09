@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	27%{?dist}
+Release:	28%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -21,6 +21,7 @@ Source4:	http://unifoundry.com/unifont-5.1.20080820.pcf.gz
 Source5:	theme.tar.bz2
 Source6:	gitignore
 Source8:	strtoull_test.c
+Source9:	20-grub.install
 
 %include %{SOURCE1}
 
@@ -211,6 +212,11 @@ cat << EOF > ${RPM_BUILD_ROOT}%{_sysconfdir}/prelink.conf.d/grub2.conf
 -b /usr/sbin/grub2-sparc64-setup
 EOF
 
+# Install kernel-install scripts
+install -Dm0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE9}
+ln -sf /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/20-grubby.install
+ln -sf /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/90-loaderentry.install
+
 # Don't run debuginfo on all the grub modules and whatnot; it just
 # rejects them, complains, and slows down extraction.
 %global finddebugroot "%{_builddir}/%{?buildsubdir}/debug"
@@ -303,6 +309,9 @@ fi
 %dir %{_datarootdir}/grub/themes/
 %exclude %{_datarootdir}/grub/themes/*
 %attr(0700,root,root) %dir %{_sysconfdir}/grub.d
+%{_prefix}/lib/kernel/install.d/20-grub.install
+%{_sysconfdir}/kernel/install.d/20-grubby.install
+%{_sysconfdir}/kernel/install.d/90-loaderentry.install
 %dir %{_datarootdir}/grub
 %exclude %{_datarootdir}/grub/*
 %dir /boot/%{name}
@@ -451,6 +460,9 @@ fi
 %endif
 
 %changelog
+* Fri Mar 09 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-28
+- Install kernel-install scripts.
+
 * Tue Mar 06 2018 Peter Jones <pjones@redhat.com> - 2.02-27
 - Build the blscfg module in on EFI builds.
 
