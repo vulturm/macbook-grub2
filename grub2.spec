@@ -214,6 +214,7 @@ EOF
 
 # Install kernel-install scripts
 install -Dm0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE9}
+install -d %{buildroot}%{_sysconfdir}/kernel/install.d
 ln -sf /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/20-grubby.install
 ln -sf /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/90-loaderentry.install
 
