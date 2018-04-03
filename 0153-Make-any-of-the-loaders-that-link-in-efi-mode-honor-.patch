@@ -1,7 +1,7 @@
-From de9e4f818527846f4a9cbfeb3d0bb3c7a64aae5c Mon Sep 17 00:00:00 2001
+From fe18b297027c4976d11b87f1b5adc07a7565cdee Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 16:09:25 -0400
-Subject: [PATCH 153/206] Make any of the loaders that link in efi mode honor
+Subject: [PATCH 153/216] Make any of the loaders that link in efi mode honor
  secure boot.
 
 And in this case "honor" means "even if somebody does link this in, they

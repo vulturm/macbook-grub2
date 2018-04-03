@@ -1,7 +1,7 @@
-From ecb06a3cb18f13882faeef81011396fac5594d71 Mon Sep 17 00:00:00 2001
+From 6025b0afe64157eb922d562e85f1734b7ce800c9 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 1 May 2017 11:19:40 -0400
-Subject: [PATCH 172/206] print more debug info in our module loader.
+Subject: [PATCH 172/216] print more debug info in our module loader.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index 684ca93f8f4..1f3ac5e1d08 100644
+index 684ca93f8f4..866fc20e162 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -304,13 +304,23 @@ grub_efi_modules_addr (void)
@@ -29,7 +29,7 @@ index 684ca93f8f4..1f3ac5e1d08 100644
 +  if (section->name[0] != '.' && info->magic != GRUB_MODULE_MAGIC)
 +    {
 +      grub_dprintf("sections",
-+		   "section %d has bad magic %08lx, should be %08lx\n",
++		   "section %d has bad magic %08x, should be %08x\n",
 +		   i, info->magic, GRUB_MODULE_MAGIC);
 +      return 0;
 +    }

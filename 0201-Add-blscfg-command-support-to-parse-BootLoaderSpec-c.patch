@@ -1,7 +1,7 @@
-From ae50bd922b174a6cbb513a4cd703a4f8a94aeddb Mon Sep 17 00:00:00 2001
+From de3430a0a616a9600ccac0f0a9df661446661999 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:40:58 -0500
-Subject: [PATCH 201/206] Add blscfg command support to parse BootLoaderSpec
+Subject: [PATCH 201/216] Add blscfg command support to parse BootLoaderSpec
  config fragments
 
 The BootLoaderSpec (BLS) defines a scheme where different bootloaders can
@@ -12,11 +12,11 @@ GRUB2 already has a blscfg modle that can parse the config snippets using
 the bls_import command, change it to blscfg and improve the BLS support.
 ---
  grub-core/Makefile.core.def  |   4 +-
- grub-core/commands/blscfg.c  | 786 ++++++++++++++++++++++++++++++++++++++++---
+ grub-core/commands/blscfg.c  | 788 ++++++++++++++++++++++++++++++++++++++++---
  grub-core/commands/loadenv.c |  77 +----
  grub-core/commands/loadenv.h |  93 +++++
  include/grub/compiler.h      |   2 +
- 5 files changed, 830 insertions(+), 132 deletions(-)
+ 5 files changed, 832 insertions(+), 132 deletions(-)
  create mode 100644 grub-core/commands/loadenv.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
@@ -42,7 +42,7 @@ index 3a5d450f3d0..0ca0bdad412 100644
  };
  
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 4274aca5a9d..87e7d9a4c64 100644
+index 4274aca5a9d..9ab45631465 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -30,32 +30,405 @@
@@ -669,7 +669,7 @@ index 4274aca5a9d..87e7d9a4c64 100644
    src = grub_xasprintf ("load_video\n"
  			"set gfx_payload=keep\n"
  			"insmod gzio\n"
-@@ -133,40 +621,217 @@ static int parse_entry (
+@@ -133,40 +621,219 @@ static int parse_entry (
  			GRUB_BOOT_DEVICE, clinux, options ? " " : "", options ? options : "",
  			initrd ? GRUB_INITRD_CMD " " : "", initrd ? GRUB_BOOT_DEVICE : "", initrd ? initrd : "", initrd ? "\n" : "");
  
@@ -829,7 +829,9 @@ index 4274aca5a9d..87e7d9a4c64 100644
 +      bls_free_entry (entries[r]);
 +finish:
 +  nentries = 0;
++
 +  grub_free (entries);
++  entries = NULL;
 +
 +  grub_free ((char *)blsdir);
 +
@@ -899,7 +901,7 @@ index 4274aca5a9d..87e7d9a4c64 100644
    fs = grub_fs_probe (dev);
    if (!fs)
      {
-@@ -174,7 +839,17 @@ grub_cmd_bls_import (grub_extcmd_context_t ctxt __attribute__ ((unused)),
+@@ -174,7 +841,17 @@ grub_cmd_bls_import (grub_extcmd_context_t ctxt __attribute__ ((unused)),
        goto finish;
      }
  
@@ -918,7 +920,7 @@ index 4274aca5a9d..87e7d9a4c64 100644
  
  finish:
    if (dev)
-@@ -187,8 +862,9 @@ static grub_extcmd_t cmd;
+@@ -187,8 +864,9 @@ static grub_extcmd_t cmd;
  
  GRUB_MOD_INIT(bls)
  {

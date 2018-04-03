@@ -15,10 +15,38 @@ MACHINE_ID=$KERNEL_INSTALL_MACHINE_ID
 # Remove it, since for grub2 the images are always installed in /boot
 rm -rf "${BOOT_DIR_ABS%/*}"
 
+EFIDIR="$(echo "${ID}" | sed -e 's/rhel/redhat/')"
+
 BLS_DIR="/boot/loader/entries"
 if [ -d /sys/firmware/efi ]; then
-    BLS_DIR="/boot/efi/EFI/${ID}/loader/entries"
+    BLS_DIR="/boot/efi/EFI/${EFIDIR}/loader/entries"
 fi
+
+mkbls() {
+    local kernelver=$1 && shift
+    local datetime=$1 && shift
+
+    local debugname=""
+    local flavor=""
+
+    if [[ "$KERNEL_VERSION" == *\+* ]] ; then
+        local flavor=-"${KERNEL_VERSION##*+}"
+        if [[ "${flavor}" == "-debug" ]]; then
+            local debugname=" with debugging"
+        fi
+    fi
+
+    cat <<EOF
+title ${NAME} (${kernelver}) ${VERSION}${debugname}
+linux /vmlinuz-${kernelver}
+initrd /initramfs-${kernelver}.img
+options \$kernelopts
+id ${ID}-${datetime}-${kernelver}
+grub_users \$grub_users
+grub_arg --unrestricted
+grub_class kernel${flavor}
+EOF
+}
 
 [[ "$KERNEL_VERSION" == *\+* ]] && flavor=-"${KERNEL_VERSION##*+}"
 case "$COMMAND" in
@@ -29,8 +57,8 @@ case "$COMMAND" in
                     "$KERNEL_DIR"/System.map \
                     "$KERNEL_DIR"/config \
                     "$KERNEL_DIR"/zImage.stub \
-                    "$KERNEL_DIR"/dtb \
-                ; do
+                    "$KERNEL_DIR"/dtb
+            do
                 [[ -e "$i" ]] || continue
                 cp -aT "$i" "/boot/${i##*/}-${KERNEL_VERSION}"
                 command -v restorecon &>/dev/null && \
@@ -45,40 +73,28 @@ case "$COMMAND" in
             fi
         fi
 
-	if [[ "x${GRUB_ENABLE_BLSCFG}" = "xtrue" ]] || [[ ! -f /sbin/new-kernel-pkg ]]; then
-            [[ -d "$BLS_DIR" ]] || mkdir -p "$BLS_DIR"
-	    if [[ ! -f "${KERNEL_DIR}/bls.conf" ]]; then
-
-		if [ "${flavor}" = "-debug" ]; then
-		    debugname=" with debugging"
-		else
-		    debugname=""
-		fi
-
-		cat >"${KERNEL_DIR}/bls.conf" <<EOF
-title ${NAME} (${KERNEL_VERSION}) ${VERSION}${debugname}
-linux /vmlinuz-${KERNEL_VERSION}
-initrd /initramfs-${KERNEL_VERSION}.img
-options \$kernelopts
-id ${ID}-0-${KERNEL_VERSION}
-grub_users \$grub_users
-grub_arg --unrestricted
-grub_class kernel${flavor}
-EOF
-	    fi
-	    cp -aT "${KERNEL_DIR}/bls.conf" "${BLS_DIR}/${MACHINE_ID}-${KERNEL_VERSION}.conf" || exit $?
-	    exit 0
+        if [[ "x${GRUB_ENABLE_BLSCFG}" = "xtrue" ]] || [[ ! -f /sbin/new-kernel-pkg ]]; then
+            [[ -d "$BLS_DIR" ]] || mkdir -m 0700 -p "$BLS_DIR"
+            BLS_TARGET="${BLS_DIR}/${MACHINE_ID}-${KERNEL_VERSION}.conf"
+            if [[ -f "${KERNEL_DIR}/bls.conf" ]]; then
+                cp -aT "${KERNEL_DIR}/bls.conf" "${BLS_TARGET}" || exit $?
+            else
+                mkbls "${KERNEL_VERSION}" \
+                    "$(date -u +%Y%m%d%H%M%S -d "$(stat -c '%y' "${KERNEL_DIR}")")" \
+                    >"${BLS_TARGET}"
+            fi
+            exit 0
         fi
 
         /sbin/new-kernel-pkg --package "kernel${flavor}" --install "$KERNEL_VERSION" || exit $?
         /sbin/new-kernel-pkg --package "kernel${flavor}" --mkinitrd --dracut --depmod --update "$KERNEL_VERSION" || exit $?
         /sbin/new-kernel-pkg --package "kernel${flavor}" --rpmposttrans "$KERNEL_VERSION" || exit $?
-	# If grubby is used there's no need to run other installation plugins
-	exit 77
+        # If grubby is used there's no need to run other installation plugins
+        exit 77
         ;;
     remove)
 
-	if [[ "x${GRUB_ENABLE_BLSCFG}" = "xtrue" ]] || [[ ! -f /sbin/new-kernel-pkg ]]; then
+        if [[ "x${GRUB_ENABLE_BLSCFG}" = "xtrue" ]] || [[ ! -f /sbin/new-kernel-pkg ]]; then
             rm -f "${BLS_DIR}/${MACHINE_ID}-${KERNEL_VERSION}.conf"
 
             for i in vmlinuz System.map config zImage.stub dtb; do

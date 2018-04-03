@@ -387,7 +387,7 @@ cd ..								\
 
 %define do_alt_efi_install()					\
 cd grub-%{1}-%{tarversion}					\
-install -d -m 755 $RPM_BUILD_ROOT/usr/lib/grub/%{grubaltefiarch}/ \
+install -d -m 700 $RPM_BUILD_ROOT/usr/lib/grub/%{grubaltefiarch}/ \
 find . '(' -iname gdb_grub					\\\
 	-o -iname kernel.exec					\\\
 	-o -iname kernel.img					\\\
@@ -399,15 +399,16 @@ find . '(' -iname gdb_grub					\\\
 	')'							\\\
 	-exec cp {} $RPM_BUILD_ROOT/usr/lib/grub/%{grubaltefiarch}/ \\\; \
 find $RPM_BUILD_ROOT -type f -iname "*.mod*" -exec chmod a-x {} '\;'	\
-install -m 755 %{2} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{2}	\
-install -m 755 %{3} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{3} \
+install -m 700 %{2} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{2}	\
+install -m 700 %{3} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{3} \
 cd ..								\
 %{nil}
 
 %define do_efi_install()					\
 cd grub-%{1}-%{tarversion}					\
-install -m 755 -d $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/	\
-install -m 755 -d $RPM_BUILD_ROOT/boot/grub2/			\
+install -m 700 -d $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/	\
+install -m 700 -d $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/loader/entries \
+install -m 700 -d $RPM_BUILD_ROOT/boot/grub2/			\
 make DESTDIR=$RPM_BUILD_ROOT install				\
 if [ -f $RPM_BUILD_ROOT%{_infodir}/grub.info ]; then		\
 	rm -f $RPM_BUILD_ROOT%{_infodir}/grub.info		\
@@ -419,8 +420,8 @@ find $RPM_BUILD_ROOT -iname "*.module" -exec chmod a-x {} '\;'	\
 touch $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/grub.cfg		\
 ln -sf ../boot/efi/EFI/%{efidir}/grub.cfg			\\\
 	$RPM_BUILD_ROOT%{_sysconfdir}/%{name}-efi.cfg		\
-install -m 755 %{2} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{2}	\
-install -m 755 %{3} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{3} \
+install -m 700 %{2} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{2}	\
+install -m 700 %{3} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{3} \
 install -D -m 644 unicode.pf2					\\\
 	$RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/fonts/unicode.pf2\
 cd ..								\
@@ -442,6 +443,7 @@ if [ -f $RPM_BUILD_ROOT/%{_libdir}/grub/%{1}/grub2.chrp ]; then \
 	   $RPM_BUILD_ROOT/%{_libdir}/grub/%{1}/grub.chrp	\
 fi								\
 cd ..								\
+install -d -m 0755 ${RPM_BUILD_ROOT}/boot/loader/entries	\
 %{nil}
 
 %define do_common_install()					\
@@ -455,7 +457,7 @@ cp docs/grub.info $RPM_BUILD_ROOT%{_infodir}/%{name}.info	\
 cp docs/grub-dev.info						\\\
 	$RPM_BUILD_ROOT%{_infodir}/%{name}-dev.info		\
 # Ghost config file						\
-install -d -m 0755 ${RPM_BUILD_ROOT}/boot/efi/EFI/%{efidir}/	\
+install -d -m 0700 ${RPM_BUILD_ROOT}/boot/efi/EFI/%{efidir}/	\
 install -d -m 0755 ${RPM_BUILD_ROOT}/boot/grub2/		\
 install -d -m 0755 ${RPM_BUILD_ROOT}/boot/%{name}/themes/system	\
 install -d -m 0755 ${RPM_BUILD_ROOT}%{_sysconfdir}/default	\
@@ -473,6 +475,7 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 %defattr(-,root,root,-)						\
 %config(noreplace) %{_sysconfdir}/%{name}.cfg			\
 %ghost %config(noreplace) /boot/%{name}/grub.cfg		\
+%dir %attr(0700,root,root)/boot/loader/entries			\
 								\
 %{expand:%if 0%{?with_legacy_modules}				\
 %{expand:%%files %{1}-modules}					\
@@ -493,7 +496,8 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 %config(noreplace) %{_sysconfdir}/%{name}-efi.cfg		\
 %dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}		\
 %attr(0700,root,root)/boot/efi/EFI/%{efidir}/%{2}		\
-%attr(0700,root,root)/boot/efi/EFI/%{efidir}/fonts		\
+%dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}/fonts		\
+%dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}/loader/entries \
 %ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grub.cfg	\
 /boot/grub2/grubenv						\
 %ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grubenv \

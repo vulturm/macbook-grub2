@@ -1,7 +1,7 @@
-From f936ec025e26ed98ae25786a2d931035cf482949 Mon Sep 17 00:00:00 2001
+From bc8e33848ee9888fd8b3aa61b4d3ecf9094356aa Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 25 Jun 2015 15:11:36 -0400
-Subject: [PATCH] Make a "gdb" dprintf that tells us load addresses.
+Subject: [PATCH 215/216] Make a "gdb" dprintf that tells us load addresses.
 
 This makes a grub_dprintf() call during platform init and during module
 loading that tells us the virtual addresses of the .text and .data
@@ -20,10 +20,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  4 files changed, 78 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/kern/dl.c b/grub-core/kern/dl.c
-index 6210709..a314ac7 100644
+index 5028d157c46..eb8b969cded 100644
 --- a/grub-core/kern/dl.c
 +++ b/grub-core/kern/dl.c
-@@ -456,6 +456,23 @@ grub_dl_find_section (Elf_Ehdr *e, const char *name)
+@@ -501,6 +501,23 @@ grub_dl_find_section (Elf_Ehdr *e, const char *name)
        return s;
    return NULL;
  }
@@ -47,7 +47,7 @@ index 6210709..a314ac7 100644
  
  /* Me, Vladimir Serbinenko, hereby I add this module check as per new
     GNU module policy. Note that this license check is informative only.
-@@ -599,6 +616,37 @@ grub_dl_relocate_symbols (grub_dl_t mod, void *ehdr)
+@@ -644,6 +661,37 @@ grub_dl_relocate_symbols (grub_dl_t mod, void *ehdr)
  
    return GRUB_ERR_NONE;
  }
@@ -85,7 +85,7 @@ index 6210709..a314ac7 100644
  
  /* Load a module from core memory.  */
  grub_dl_t
-@@ -658,6 +706,8 @@ grub_dl_load_core_noinit (void *addr, grub_size_t size)
+@@ -703,6 +751,8 @@ grub_dl_load_core_noinit (void *addr, grub_size_t size)
    grub_dprintf ("modules", "module name: %s\n", mod->name);
    grub_dprintf ("modules", "init function: %p\n", mod->init);
  
@@ -95,7 +95,7 @@ index 6210709..a314ac7 100644
      {
        grub_dl_unload (mod);
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index 1f3ac5e..d70d091 100644
+index 91f75fdb89a..621251242e1 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -274,7 +274,7 @@ grub_efi_get_variable (const char *var, const grub_efi_guid_t *guid,
@@ -117,7 +117,7 @@ index 1f3ac5e..d70d091 100644
      }
  
 diff --git a/grub-core/kern/efi/init.c b/grub-core/kern/efi/init.c
-index f7782b6..79243b3 100644
+index f7782b6e114..79243b364a1 100644
 --- a/grub-core/kern/efi/init.c
 +++ b/grub-core/kern/efi/init.c
 @@ -59,10 +59,33 @@ grub_efi_env_init (void)
@@ -164,10 +164,10 @@ index f7782b6..79243b3 100644
  }
  
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 4f3c1a4..77ef79b 100644
+index 68326d96f5a..6702b312040 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
-@@ -115,7 +115,7 @@ extern void (*EXPORT_VAR(grub_efi_net_config)) (grub_efi_handle_t hnd,
+@@ -126,7 +126,7 @@ extern void (*EXPORT_VAR(grub_efi_net_config)) (grub_efi_handle_t hnd,
  void *EXPORT_FUNC(grub_efi_get_firmware_fdt)(void);
  #endif
  
@@ -177,5 +177,5 @@ index 4f3c1a4..77ef79b 100644
  void grub_efi_mm_init (void);
  void grub_efi_mm_fini (void);
 -- 
-2.13.0
+2.15.0
 

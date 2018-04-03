@@ -204,3 +204,13 @@ Patch0203: 0203-Remove-duplicated-grub_exit-definition-for-grub-emu-.patch
 Patch0204: 0204-Don-t-attempt-to-backtrace-on-grub_abort-for-grub-em.patch
 Patch0205: 0205-Enable-blscfg-command-for-the-emu-platform.patch
 Patch0206: 0206-Add-linux-and-initrd-commands-for-grub-emu.patch
+Patch0207: 0207-Fix-the-efidir-in-grub-setpassword.patch
+Patch0208: 0208-Add-grub2-switch-to-blscfg.patch
+Patch0209: 0209-Add-grub_debug_enabled.patch
+Patch0210: 0210-make-better-backtraces.patch
+Patch0211: 0211-normal-don-t-draw-our-startup-message-if-debug-is-se.patch
+Patch0212: 0212-Work-around-some-minor-include-path-weirdnesses.patch
+Patch0213: 0213-Make-it-possible-to-enabled-build-id-sha1.patch
+Patch0214: 0214-Add-grub_qdprintf-grub_dprintf-without-the-file-line.patch
+Patch0215: 0215-Make-a-gdb-dprintf-that-tells-us-load-addresses.patch
+Patch0216: 0216-Only-attempt-to-scan-different-BLS-directories-on-EF.patch

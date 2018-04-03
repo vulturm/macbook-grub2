@@ -1,7 +1,7 @@
-From 5e50fc35ba1c2f03cc9ccbd6ae2f49dcb0ffd560 Mon Sep 17 00:00:00 2001
+From 29216d4ad0f75587c42274ebd63b8526fa9e815c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Sun, 28 Jun 2015 13:09:58 -0400
-Subject: [PATCH 10004/10006] Add grub_qdprintf() - grub_dprintf() without the
+Subject: [PATCH 214/216] Add grub_qdprintf() - grub_dprintf() without the
  file+line number.
 
 This just makes copy+paste of our debug loading info easier.
@@ -13,10 +13,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 20 insertions(+)
 
 diff --git a/grub-core/kern/misc.c b/grub-core/kern/misc.c
-index d7dcd97..8e12a62 100644
+index 5c2d2039d0b..0e89c483d5e 100644
 --- a/grub-core/kern/misc.c
 +++ b/grub-core/kern/misc.c
-@@ -179,6 +179,24 @@ grub_real_dprintf (const char *file, const int line, const char *condition,
+@@ -190,6 +190,24 @@ grub_real_dprintf (const char *file, const int line, const char *condition,
      }
  }
  
@@ -42,10 +42,10 @@ index d7dcd97..8e12a62 100644
  
  int
 diff --git a/include/grub/misc.h b/include/grub/misc.h
-index 0620814..4cb1ba5 100644
+index 493e328d968..4607e8defa9 100644
 --- a/include/grub/misc.h
 +++ b/include/grub/misc.h
-@@ -326,6 +326,8 @@ void EXPORT_FUNC(grub_real_dprintf) (const char *file,
+@@ -372,6 +372,8 @@ void EXPORT_FUNC(grub_real_dprintf) (const char *file,
                                       const int line,
                                       const char *condition,
                                       const char *fmt, ...) __attribute__ ((format (GNU_PRINTF, 4, 5)));
@@ -55,5 +55,5 @@ index 0620814..4cb1ba5 100644
  int EXPORT_FUNC(grub_snprintf) (char *str, grub_size_t n, const char *fmt, ...)
       __attribute__ ((format (GNU_PRINTF, 3, 4)));
 -- 
-2.5.0
+2.15.0
 

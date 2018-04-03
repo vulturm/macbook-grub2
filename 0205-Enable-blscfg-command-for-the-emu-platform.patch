@@ -1,7 +1,7 @@
-From 32679a10c1297104cf89ba53f238b4233ba922ce Mon Sep 17 00:00:00 2001
+From 01839f5d2491ba1b5694d1c4b2f3c2818a2408ae Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 2 Feb 2018 11:36:29 +0100
-Subject: [PATCH 205/206] Enable blscfg command for the emu platform
+Subject: [PATCH 205/216] Enable blscfg command for the emu platform
 
 Allow grub-emu to call a blscfg command. This may be useful for platforms
 that don't support GRUB, so grub-emu can be used to parse the BLS configs
@@ -26,7 +26,7 @@ index 0ca0bdad412..420cbf0a024 100644
  
  module = {
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 87e7d9a4c64..12104d490ec 100644
+index 9ab45631465..e5617c3bc6c 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -37,7 +37,12 @@ GRUB_MOD_LICENSE ("GPLv3+");
@@ -102,7 +102,7 @@ index 87e7d9a4c64..12104d490ec 100644
      blsdir = grub_xasprintf ("/EFI/%s/%s/", filename, blsdir);
    else
      blsdir = grub_strdup (blsdir);
-@@ -816,15 +831,21 @@ grub_cmd_blscfg (grub_extcmd_context_t ctxt UNUSED,
+@@ -818,15 +833,21 @@ grub_cmd_blscfg (grub_extcmd_context_t ctxt UNUSED,
      {
        .dev = NULL,
        .fs = NULL,
@@ -125,7 +125,7 @@ index 87e7d9a4c64..12104d490ec 100644
  
    grub_dprintf ("blscfg", "opening %s\n", devid);
    dev = grub_device_open (devid);
-@@ -842,11 +863,16 @@ grub_cmd_blscfg (grub_extcmd_context_t ctxt UNUSED,
+@@ -844,11 +865,16 @@ grub_cmd_blscfg (grub_extcmd_context_t ctxt UNUSED,
    info.dev = dev;
    info.fs = fs;
  #ifdef GRUB_MACHINE_EFI
@@ -144,7 +144,7 @@ index 87e7d9a4c64..12104d490ec 100644
    grub_dprintf ("blscfg", "scanning %s\n", GRUB_BLS_CONFIG_PATH);
    r = fs->dir (dev, "/", find_entry, &info);
  #endif
-@@ -860,7 +886,7 @@ finish:
+@@ -862,7 +888,7 @@ finish:
  
  static grub_extcmd_t cmd;
  
@@ -153,7 +153,7 @@ index 87e7d9a4c64..12104d490ec 100644
  {
    grub_dprintf("blscfg", "%s got here\n", __func__);
    cmd = grub_register_extcmd ("blscfg",
-@@ -871,7 +897,7 @@ GRUB_MOD_INIT(bls)
+@@ -873,7 +899,7 @@ GRUB_MOD_INIT(bls)
  			      NULL);
  }
  

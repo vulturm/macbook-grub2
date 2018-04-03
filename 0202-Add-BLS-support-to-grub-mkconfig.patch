@@ -1,7 +1,7 @@
-From 3f54a7a23b2d239ccee7e13ee3b699e085f54301 Mon Sep 17 00:00:00 2001
+From 9baa7c16e5138497862eba684d2c41e5ed16e787 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:40:29 -0500
-Subject: [PATCH 202/206] Add BLS support to grub-mkconfig
+Subject: [PATCH 202/216] Add BLS support to grub-mkconfig
 
 GRUB now has BootLoaderSpec support, the user can choose to use this by
 setting GRUB_ENABLE_BLSCFG to true in /etc/default/grub. On this setup,
@@ -10,8 +10,8 @@ files are parsed by blscfg command and the entries created dynamically.
 ---
  util/grub-mkconfig.in     |  3 ++-
  util/grub-mkconfig_lib.in | 29 +++++++++++++++++++----------
- util/grub.d/10_linux.in   | 36 ++++++++++++++++++++++++++++++++++--
- 3 files changed, 55 insertions(+), 13 deletions(-)
+ util/grub.d/10_linux.in   | 37 +++++++++++++++++++++++++++++++++++--
+ 3 files changed, 56 insertions(+), 13 deletions(-)
 
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
 index 3b0bfe40308..760fe08727f 100644
@@ -104,10 +104,10 @@ index 2fb4f4f8143..70dc8d57e92 100644
    fi
    IFS="$old_ifs"
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 7e78ad33636..68f631772c3 100644
+index 7e78ad33636..f5daefb9d24 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
-@@ -126,6 +126,33 @@ linux_entry ()
+@@ -126,6 +126,34 @@ linux_entry ()
    if [ -z "$boot_device_id" ]; then
        boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
    fi
@@ -127,6 +127,7 @@ index 7e78ad33636..68f631772c3 100644
 +    prepare_grub_to_access_device ${bootefi_device} boot
 +
 +    cat << EOF
++insmod blscfg
 +blscfg
 +if [ -s \$prefix/grubenv ]; then
 +  load_env
@@ -141,7 +142,7 @@ index 7e78ad33636..68f631772c3 100644
    if [ x$type != xsimple ] ; then
        title=$(mktitle "$type" "$version")
        if [ x"$title" = x"$GRUB_ACTUAL_DEFAULT" ] || [ x"Previous Linux versions>$title" = x"$GRUB_ACTUAL_DEFAULT" ]; then
-@@ -236,7 +263,10 @@ submenu_indentation=""
+@@ -236,7 +264,10 @@ submenu_indentation=""
  is_top_level=true
  while [ "x$list" != "x" ] ; do
    linux=`version_find_latest $list`
@@ -153,7 +154,7 @@ index 7e78ad33636..68f631772c3 100644
    basename=`basename $linux`
    dirname=`dirname $linux`
    rel_dirname=`make_system_path_relative_to_its_root $dirname`
-@@ -281,7 +311,9 @@ while [ "x$list" != "x" ] ; do
+@@ -281,7 +312,9 @@ while [ "x$list" != "x" ] ; do
    fi
  
    if test -n "${initrd}" ; then

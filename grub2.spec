@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	28%{?dist}
+Release:	29%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -27,16 +27,6 @@ Source9:	20-grub.install
 
 # generate with do-rebase
 %include %{SOURCE2}
-
-# And these are:
-# git checkout debuginfo
-# git format-patch fedora-23..
-Patch10001:	10001-Put-the-correct-.file-directives-in-our-.S-files.patch
-Patch10002:	10002-Make-it-possible-to-enabled-build-id-sha1.patch
-#Patch10003:	10003-Don-t-tell-the-compiler-to-do-annoying-things-with-.patch
-Patch10004:	10004-Add-grub_qdprintf-grub_dprintf-without-the-file-lin.patch
-Patch10005:	10005-Make-a-gdb-dprintf-that-tells-us-load-addresses.patch
-#Patch10006:	10006-Try-it-in-gentpl-again.patch
 
 BuildRequires:	flex bison binutils python
 BuildRequires:	ncurses-devel xz-devel bzip2-devel
@@ -88,7 +78,7 @@ Summary:	Support tools for GRUB.
 Group:		System Environment/Base
 Obsoletes:	%{name}-tools < %{evr}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
-Requires:	gettext os-prober which file
+Requires:	gettext which file
 Requires(pre):	dracut
 Requires(post):	dracut
 
@@ -100,7 +90,7 @@ This subpackage provides tools for support of all platforms.
 %package tools-efi
 Summary:	Support tools for GRUB.
 Group:		System Environment/Base
-Requires:	gettext os-prober which file
+Requires:	gettext which file
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-tools < %{evr}
 
@@ -123,7 +113,7 @@ This subpackage provides tools for support of all platforms.
 %package tools-extra
 Summary:	Support tools for GRUB.
 Group:		System Environment/Base
-Requires:	gettext os-prober which file
+Requires:	gettext which file
 Requires:	%{name}-tools-minimal = %{epoch}:%{version}-%{release}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-tools < %{evr}
@@ -213,10 +203,10 @@ cat << EOF > ${RPM_BUILD_ROOT}%{_sysconfdir}/prelink.conf.d/grub2.conf
 EOF
 
 # Install kernel-install scripts
-install -Dm0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE9}
-install -d %{buildroot}%{_sysconfdir}/kernel/install.d
-ln -sf /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/20-grubby.install
-ln -sf /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/90-loaderentry.install
+install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE9}
+install -d -m 0755 %{buildroot}%{_sysconfdir}/kernel/install.d/
+install -m 0644 /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/20-grubby.install
+install -m 0644 /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/90-loaderentry.install
 
 # Don't run debuginfo on all the grub modules and whatnot; it just
 # rejects them, complains, and slows down extraction.
@@ -367,6 +357,7 @@ fi
 %exclude %{_datarootdir}/grub/*.h
 %{_datarootdir}/bash-completion/completions/grub
 %{_sbindir}/%{name}-mkconfig
+%{_sbindir}/%{name}-switch-to-blscfg
 %{_sbindir}/%{name}-probe
 %{_sbindir}/%{name}-rpm-sort
 %{_sbindir}/%{name}-reboot
@@ -461,6 +452,10 @@ fi
 %endif
 
 %changelog
+* Tue Apr 03 2018 Peter Jones <pjones@redhat.com> - 2.02-29
+- Add grub2-switch-to-blscfg
+- Fix for BLS paths on BIOS / non-UEFI (javierm)
+
 * Fri Mar 09 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-28
 - Install kernel-install scripts.
 

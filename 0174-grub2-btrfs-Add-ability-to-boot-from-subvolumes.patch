@@ -1,7 +1,7 @@
-From 1b996230e31c4f854c42d71a1697a063a6a06808 Mon Sep 17 00:00:00 2001
+From ba06fbb797dff2261df7d211484c98905447ddb6 Mon Sep 17 00:00:00 2001
 From: Jeff Mahoney <jeffm@suse.com>
 Date: Wed, 18 Dec 2013 09:57:04 +0000
-Subject: [PATCH 174/206] grub2/btrfs: Add ability to boot from subvolumes
+Subject: [PATCH 174/216] grub2/btrfs: Add ability to boot from subvolumes
 
 This patch adds the ability to specify a different root on a btrfs
 filesystem too boot from other than the default one.
