@@ -1,4 +1,4 @@
-From eb631580edb7cd1ed00de0a521373d363651be41 Mon Sep 17 00:00:00 2001
+From 654614fc2a0b075bc94907a58469c4df05f81994 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Wed, 23 Mar 2016 17:03:43 -0700
 Subject: [PATCH 225/227] Rework TPM measurements
@@ -160,15 +160,15 @@ index 0ca525380c9..cc53d429bca 100644
  }
  
 diff --git a/grub-core/loader/multiboot_mbi2.c b/grub-core/loader/multiboot_mbi2.c
-index a7b4a57ec4f..f43482935cb 100644
+index 99ef9036423..f7e333f56c1 100644
 --- a/grub-core/loader/multiboot_mbi2.c
 +++ b/grub-core/loader/multiboot_mbi2.c
 @@ -132,7 +132,7 @@ grub_multiboot_load (grub_file_t file, const char *filename)
  
    COMPILE_TIME_ASSERT (MULTIBOOT_HEADER_ALIGN % 4 == 0);
  
--  grub_tpm_measure ((unsigned char *)buffer, len, GRUB_KERNEL_PCR, filename);
-+  grub_tpm_measure ((unsigned char *)buffer, len, GRUB_BINARY_PCR, "grub_multiboot", filename);
+-  grub_tpm_measure ((unsigned char *)mld.buffer, len, GRUB_KERNEL_PCR, filename);
++  grub_tpm_measure ((unsigned char *)mld.buffer, len, GRUB_BINARY_PCR, "grub_multiboot", filename);
  
    header = find_header (mld.buffer, len);
    if (header == 0)

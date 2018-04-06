@@ -1,4 +1,4 @@
-From 98dd154527b9cddaff15ab22b35c41815d9f1b13 Mon Sep 17 00:00:00 2001
+From 484c55d3bce0697de94d6dfd52aa8b8a92334aab Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 1 Sep 2015 16:02:55 -0700
 Subject: [PATCH 223/227] Measure multiboot images and modules
@@ -51,7 +51,7 @@ index fb044a60c79..0ca525380c9 100644
  }
  
 diff --git a/grub-core/loader/multiboot_mbi2.c b/grub-core/loader/multiboot_mbi2.c
-index b0679a9f6c9..a7b4a57ec4f 100644
+index b0679a9f6c9..99ef9036423 100644
 --- a/grub-core/loader/multiboot_mbi2.c
 +++ b/grub-core/loader/multiboot_mbi2.c
 @@ -36,6 +36,7 @@
@@ -66,7 +66,7 @@ index b0679a9f6c9..a7b4a57ec4f 100644
  
    COMPILE_TIME_ASSERT (MULTIBOOT_HEADER_ALIGN % 4 == 0);
  
-+  grub_tpm_measure ((unsigned char *)buffer, len, GRUB_KERNEL_PCR, filename);
++  grub_tpm_measure ((unsigned char *)mld.buffer, len, GRUB_KERNEL_PCR, filename);
 +
    header = find_header (mld.buffer, len);
 -

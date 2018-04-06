@@ -1,4 +1,4 @@
-From 5d9681adc296936bea6d070c4b93db42741f05ff Mon Sep 17 00:00:00 2001
+From a155931ed02d4517d9dba298f5c8da45fa9e7577 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 6 Apr 2018 14:08:36 +0200
 Subject: [PATCH 227/227] Set the first boot menu entry as default when using
