@@ -1,7 +1,7 @@
 From d446fed131fadd00d0daab0654c7d9e14442d451 Mon Sep 17 00:00:00 2001
 From: Robert Marshall <rmarshall@redhat.com>
 Date: Mon, 16 Mar 2015 16:34:51 -0400
-Subject: [PATCH 125/227] Update info with grub.cfg netboot selection order
+Subject: [PATCH 125/229] Update info with grub.cfg netboot selection order
  (#1148650)
 
 Added documentation to the grub info page that specifies the order

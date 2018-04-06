@@ -1,7 +1,7 @@
 From cffad45026af9a05a0509daf593fa87148a3de66 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Wed, 5 Feb 2014 09:42:42 -0200
-Subject: [PATCH 078/227] trim arp packets with abnormal size
+Subject: [PATCH 078/229] trim arp packets with abnormal size
 
 GRUB uses arp request to create the arp response. If the incoming packet
 is foobared, GRUB needs to trim the arp response packet before sending it.

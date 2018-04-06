@@ -1,7 +1,7 @@
 From a0fe0c26aa8a1c0ad66d9527611bd726b849c623 Mon Sep 17 00:00:00 2001
 From: AppChecker <appchecker>
 Date: Sun, 9 Jul 2017 21:57:35 +0200
-Subject: [PATCH 047/227] crypto: Fix use after free.
+Subject: [PATCH 047/229] crypto: Fix use after free.
 
 Reported by: AppChecker
 Transformed to patch by: Satish Govindarajan

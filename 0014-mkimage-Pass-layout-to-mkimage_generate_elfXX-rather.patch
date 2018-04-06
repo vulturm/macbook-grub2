@@ -1,7 +1,7 @@
 From a35ac854308b0af7c86c2c7b199f6abdfa2110b0 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 17:32:15 +0200
-Subject: [PATCH 014/227] mkimage: Pass layout to mkimage_generate_elfXX rather
+Subject: [PATCH 014/229] mkimage: Pass layout to mkimage_generate_elfXX rather
  than some fields.
 
 This allows easier extension of this function without having too long of

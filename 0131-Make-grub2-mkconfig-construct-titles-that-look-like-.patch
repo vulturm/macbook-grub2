@@ -1,7 +1,7 @@
 From 7d9c29023e6c242306ae008a984245037655a23c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 28 Apr 2015 11:15:03 -0400
-Subject: [PATCH 131/227] Make grub2-mkconfig construct titles that look like
+Subject: [PATCH 131/229] Make grub2-mkconfig construct titles that look like
  the ones we want elsewhere.
 
 Resolves: rhbz#1215839

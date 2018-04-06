@@ -1,7 +1,7 @@
 From ea34d6d6755dcd818fe6e74526a58a4f818f711a Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:31:52 -0500
-Subject: [PATCH 165/227] linuxefi: minor cleanups
+Subject: [PATCH 165/229] linuxefi: minor cleanups
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---

@@ -1,7 +1,7 @@
 From 72eb71bcadf8f35851b15632e8ef4ad1d0a64513 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:46:23 -0400
-Subject: [PATCH 189/227] make GRUB_MOD_INIT() declare its function prototypes.
+Subject: [PATCH 189/229] make GRUB_MOD_INIT() declare its function prototypes.
 
 ---
  include/grub/dl.h | 2 ++

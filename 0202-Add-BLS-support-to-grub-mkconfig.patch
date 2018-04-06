@@ -1,7 +1,7 @@
 From 9baa7c16e5138497862eba684d2c41e5ed16e787 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:40:29 -0500
-Subject: [PATCH 202/227] Add BLS support to grub-mkconfig
+Subject: [PATCH 202/229] Add BLS support to grub-mkconfig
 
 GRUB now has BootLoaderSpec support, the user can choose to use this by
 setting GRUB_ENABLE_BLSCFG to true in /etc/default/grub. On this setup,

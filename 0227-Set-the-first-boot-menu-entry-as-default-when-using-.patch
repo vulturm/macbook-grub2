@@ -1,7 +1,7 @@
-From a155931ed02d4517d9dba298f5c8da45fa9e7577 Mon Sep 17 00:00:00 2001
+From e540034970a1dbeaeafc5d9f08c2e83d9197b0db Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 6 Apr 2018 14:08:36 +0200
-Subject: [PATCH 227/227] Set the first boot menu entry as default when using
+Subject: [PATCH 227/229] Set the first boot menu entry as default when using
  BLS fragments
 
 When BootLoaderSpec configuration files are used, the default boot menu

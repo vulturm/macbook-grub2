@@ -1,7 +1,7 @@
 From 656c3b0d7fbe23f0e1ab561c8faa4ac4a37364d1 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:00:06 +0200
-Subject: [PATCH 026/227] arm_coreboot: Support loading linux images.
+Subject: [PATCH 026/229] arm_coreboot: Support loading linux images.
 
 ---
  grub-core/loader/arm/linux.c | 132 ++++++++++++++++++++++---------------------

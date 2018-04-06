@@ -1,7 +1,7 @@
 From 1da43f34f211772fbda36ef6fd81e1cbde37eae7 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Fri, 22 Jan 2016 14:10:30 +0100
-Subject: [PATCH 142/227] efiemu: Fix compilation failure
+Subject: [PATCH 142/229] efiemu: Fix compilation failure
 
 (cherry picked from commit b6a03dfd327489d53ee07c6d7d593b99c7b7cb62)
 

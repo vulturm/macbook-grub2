@@ -1,7 +1,7 @@
 From 35cdd6b929d5f63750bb214a53e1c75b31dcae99 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Mon, 13 Jan 2014 21:50:59 -0500
-Subject: [PATCH 105/227] Add .eh_frame to list of relocations stripped
+Subject: [PATCH 105/229] Add .eh_frame to list of relocations stripped
 
 ---
  conf/Makefile.common | 2 +-

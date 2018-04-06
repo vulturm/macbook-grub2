@@ -225,3 +225,5 @@ Patch0224: 0224-Fix-boot-when-there-s-no-TPM.patch
 Patch0225: 0225-Rework-TPM-measurements.patch
 Patch0226: 0226-Fix-event-log-prefix.patch
 Patch0227: 0227-Set-the-first-boot-menu-entry-as-default-when-using-.patch
+Patch0228: 0228-tpm-fix-warnings-when-compiling-for-platforms-other-.patch
+Patch0229: 0229-Make-TPM-errors-less-fatal.patch

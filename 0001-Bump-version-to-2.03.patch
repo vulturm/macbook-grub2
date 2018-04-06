@@ -1,7 +1,7 @@
 From b0bad6fd9449d3333fe1ab58953c0e6c1ce12c0d Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 3 May 2017 11:55:52 +0200
-Subject: [PATCH 001/227] Bump version to 2.03
+Subject: [PATCH 001/229] Bump version to 2.03
 
 ---
  configure.ac                |   2 +-

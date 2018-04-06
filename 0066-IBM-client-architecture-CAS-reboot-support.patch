@@ -1,7 +1,7 @@
 From 34423216f8f3d7ce6086e2f1ee9869407e6a2221 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Thu, 20 Sep 2012 18:07:39 -0300
-Subject: [PATCH 066/227] IBM client architecture (CAS) reboot support
+Subject: [PATCH 066/229] IBM client architecture (CAS) reboot support
 
 This is an implementation of IBM client architecture (CAS) reboot for GRUB.
 

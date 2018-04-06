@@ -1,7 +1,7 @@
 From 29216d4ad0f75587c42274ebd63b8526fa9e815c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Sun, 28 Jun 2015 13:09:58 -0400
-Subject: [PATCH 214/227] Add grub_qdprintf() - grub_dprintf() without the
+Subject: [PATCH 214/229] Add grub_qdprintf() - grub_dprintf() without the
  file+line number.
 
 This just makes copy+paste of our debug loading info easier.

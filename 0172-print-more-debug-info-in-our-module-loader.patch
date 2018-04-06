@@ -1,7 +1,7 @@
 From 6025b0afe64157eb922d562e85f1734b7ce800c9 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 1 May 2017 11:19:40 -0400
-Subject: [PATCH 172/227] print more debug info in our module loader.
+Subject: [PATCH 172/229] print more debug info in our module loader.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---

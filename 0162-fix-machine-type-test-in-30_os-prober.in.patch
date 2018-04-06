@@ -1,7 +1,7 @@
 From 33faccd6c6f23774bbbbc83731a712a7bed76c3f Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 11 Jul 2016 13:36:45 -0400
-Subject: [PATCH 162/227] fix machine type test in 30_os-prober.in
+Subject: [PATCH 162/229] fix machine type test in 30_os-prober.in
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---

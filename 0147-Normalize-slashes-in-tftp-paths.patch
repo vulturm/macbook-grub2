@@ -1,7 +1,7 @@
 From 130783c1e461b64befbf0fa8c9002ef763606105 Mon Sep 17 00:00:00 2001
 From: Lenny Szubowicz <lszubowi@redhat.com>
 Date: Mon, 29 Aug 2016 11:04:48 -0400
-Subject: [PATCH 147/227] Normalize slashes in tftp paths.
+Subject: [PATCH 147/229] Normalize slashes in tftp paths.
 
 Some tftp servers do not handle multiple consecutive slashes correctly;
 this patch avoids sending tftp requests with non-normalized paths.

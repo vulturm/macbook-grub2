@@ -1,7 +1,7 @@
 From 3312b0eab4773f09b00d294e3438d6cf881d62ef Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 21 Aug 2014 03:39:11 +0000
-Subject: [PATCH 178/227] grub2-btrfs-05-grub2-mkconfig
+Subject: [PATCH 178/229] grub2-btrfs-05-grub2-mkconfig
 
 ---
  util/grub-mkconfig.in       |  3 ++-

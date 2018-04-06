@@ -1,7 +1,7 @@
 From 004821d9e309f65e4ff533f66787663fe2a54eac Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 6 May 2016 18:43:08 -0400
-Subject: [PATCH 171/227] Make our info pages say "grub2" where appropriate.
+Subject: [PATCH 171/229] Make our info pages say "grub2" where appropriate.
 
 This needs to be hooked up to --program-transform=, but I haven't had
 time.

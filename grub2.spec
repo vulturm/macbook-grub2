@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	30%{?dist}
+Release:	31%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -452,6 +452,9 @@ fi
 %endif
 
 %changelog
+* Fri Apr 06 2018 Peter Jones <pjones@redhat.com> - 2.02-31
+- Pull in some TPM fixes I missed.
+
 * Fri Apr 06 2018 Peter Jones <pjones@redhat.com> - 2.02-30
 - Enable TPM measurements
 - Set the default boot entry to the first entry when we're using BLS.

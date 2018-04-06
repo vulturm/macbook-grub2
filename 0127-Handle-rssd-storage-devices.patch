@@ -1,7 +1,7 @@
 From 8d3f2f0f389efbb9ed5da0c4f90fc82d104163c1 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 30 Jun 2015 15:50:41 -0400
-Subject: [PATCH 127/227] Handle rssd storage devices.
+Subject: [PATCH 127/229] Handle rssd storage devices.
 
 Resolves: rhbz#1087962
 

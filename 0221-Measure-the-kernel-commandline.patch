@@ -1,7 +1,7 @@
 From eeca74b2e520dd3c0ca74deb8c6351e9ec14096c Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Sun, 9 Aug 2015 16:32:29 -0700
-Subject: [PATCH 221/227] Measure the kernel commandline
+Subject: [PATCH 221/229] Measure the kernel commandline
 
 Measure the kernel commandline to ensure that it hasn't been modified
 ---

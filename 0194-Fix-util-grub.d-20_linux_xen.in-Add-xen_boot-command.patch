@@ -1,7 +1,7 @@
 From 733966aa9d241a0987a7097eca74b0f58b426833 Mon Sep 17 00:00:00 2001
 From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 Date: Mon, 28 Aug 2017 13:51:14 -0400
-Subject: [PATCH 194/227] Fix util/grub.d/20_linux_xen.in: Add xen_boot command
+Subject: [PATCH 194/229] Fix util/grub.d/20_linux_xen.in: Add xen_boot command
  support for aarch64
 
 Commit d33045ce7ffcb7c1e4a60c14d5ca64b36e3c5abe introduced

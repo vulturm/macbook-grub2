@@ -1,7 +1,7 @@
 From d11ced1e1fb93676942e51618eb53c140f541890 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:14:28 +0200
-Subject: [PATCH 029/227] arm_coreboot: Support EHCI.
+Subject: [PATCH 029/229] arm_coreboot: Support EHCI.
 
 ---
  grub-core/Makefile.core.def  |  2 ++

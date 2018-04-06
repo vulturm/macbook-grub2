@@ -1,7 +1,7 @@
 From 79e679458cc2e70d0097cfc702668976fe1fdc5d Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Wed, 15 May 2013 16:47:33 -0400
-Subject: [PATCH 103/227] Don't draw a border around the menu
+Subject: [PATCH 103/229] Don't draw a border around the menu
 
 It looks cleaner without it.
 ---

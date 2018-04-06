@@ -1,7 +1,7 @@
 From d4f94fc4cd48954f757d6efb82311eb3256389e4 Mon Sep 17 00:00:00 2001
 From: Josef Bacik <jbacik@fb.com>
 Date: Mon, 31 Aug 2015 13:34:35 -0400
-Subject: [PATCH 134/227] efinet: retransmit if our device is busy
+Subject: [PATCH 134/229] efinet: retransmit if our device is busy
 
 When I fixed the txbuf handling I ripped out the retransmission code since it
 was flooding our network when we had the buggy behavior.  Turns out this was too

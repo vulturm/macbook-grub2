@@ -1,7 +1,7 @@
 From c2ea443446b7feea868e54f94a87781f69820375 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 00:55:30 +0300
-Subject: [PATCH 007/227] Use $(SHELL) rather than /bin/sh.
+Subject: [PATCH 007/229] Use $(SHELL) rather than /bin/sh.
 
 /bin/sh doesn't exist under termux.
 ---

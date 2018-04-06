@@ -1,7 +1,7 @@
 From 62af3df5904d4fff7e8c4bab0a90aae6752be432 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Fri, 7 Jun 2013 14:30:55 -0400
-Subject: [PATCH 096/227] Indent menu entries
+Subject: [PATCH 096/229] Indent menu entries
 
 ---
  grub-core/normal/menu_text.c | 3 ++-

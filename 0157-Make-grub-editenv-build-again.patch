@@ -1,7 +1,7 @@
 From 4e0105392434bac9f10ac79a820a69098abec2f5 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 4 Mar 2016 16:29:13 -0500
-Subject: [PATCH 157/227] Make grub-editenv build again.
+Subject: [PATCH 157/229] Make grub-editenv build again.
 
 36212460d3565b18439a3a8130b28e6c97702c6a split how some of the mkimage
 utility functions are defined, and they wind up being linked into

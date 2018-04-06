@@ -1,7 +1,7 @@
 From 556a7abe5d08b3b7b2d8446759587b17337fe9c9 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Thu, 16 Jul 2015 15:22:34 -0700
-Subject: [PATCH 218/227] Measure kernel + initrd
+Subject: [PATCH 218/229] Measure kernel + initrd
 
 Measure the kernel and initrd when loaded on UEFI systems
 ---

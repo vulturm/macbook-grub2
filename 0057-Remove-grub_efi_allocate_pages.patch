@@ -1,7 +1,7 @@
 From 4bc909bf89f5b4ff86c9e4e609d4fe0c11a66b0c Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 7 Aug 2017 18:33:29 +0200
-Subject: [PATCH 057/227] Remove grub_efi_allocate_pages.
+Subject: [PATCH 057/229] Remove grub_efi_allocate_pages.
 
 grub_efi_allocate_pages Essentially does 2 unrelated things:
 * Allocate at fixed address.

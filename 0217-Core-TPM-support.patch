@@ -1,7 +1,7 @@
 From 7f4bde559545d19352072829fb9267b916c60fa3 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 14 Jul 2015 17:06:35 -0700
-Subject: [PATCH 217/227] Core TPM support
+Subject: [PATCH 217/229] Core TPM support
 
 Add support for performing basic TPM measurements. Right now this only
 supports extending PCRs statically and only on UEFI and BIOS systems, but

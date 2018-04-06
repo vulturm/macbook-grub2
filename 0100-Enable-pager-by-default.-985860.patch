@@ -1,7 +1,7 @@
 From 24b186833aad3f456111b7f9d3806065dbb95a2e Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 28 Oct 2013 10:09:27 -0400
-Subject: [PATCH 100/227] Enable pager by default. (#985860)
+Subject: [PATCH 100/229] Enable pager by default. (#985860)
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---

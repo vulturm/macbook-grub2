@@ -1,7 +1,7 @@
 From cc1566933cbc2d8d56aa77ab1ca8a15392ee0d42 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 9 Nov 2017 15:58:52 -0500
-Subject: [PATCH 211/227] normal: don't draw our startup message if debug is
+Subject: [PATCH 211/229] normal: don't draw our startup message if debug is
  set
 
 ---

@@ -1,7 +1,7 @@
 From 0c98cb57eb1a34ec29f719e3a798f5b20c6a4082 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 3 Oct 2014 11:08:03 -0400
-Subject: [PATCH 124/227] Try $prefix if $fw_path doesn't work.
+Subject: [PATCH 124/229] Try $prefix if $fw_path doesn't work.
 
 Related: rhbz#1148652
 

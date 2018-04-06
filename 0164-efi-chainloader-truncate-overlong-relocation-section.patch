@@ -1,7 +1,7 @@
 From 243bfac3395d76a7fc7344c5471e49ea41689233 Mon Sep 17 00:00:00 2001
 From: Laszlo Ersek <lersek@redhat.com>
 Date: Wed, 23 Nov 2016 06:27:09 +0100
-Subject: [PATCH 164/227] efi/chainloader: truncate overlong relocation section
+Subject: [PATCH 164/229] efi/chainloader: truncate overlong relocation section
 
 The UEFI Windows 7 boot loader ("EFI/Microsoft/Boot/bootmgfw.efi", SHA1
 31b410e029bba87d2068c65a80b88882f9f8ea25) has inconsistent headers.

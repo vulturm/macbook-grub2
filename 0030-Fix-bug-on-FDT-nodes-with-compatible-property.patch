@@ -1,7 +1,7 @@
 From 4f8471532d454b2db96434c28bf7105ed69e0f4d Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 08:39:40 +0200
-Subject: [PATCH 030/227] Fix bug on FDT nodes with compatible property
+Subject: [PATCH 030/229] Fix bug on FDT nodes with compatible property
 
 ---
  grub-core/bus/fdt.c | 2 ++

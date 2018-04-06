@@ -1,7 +1,7 @@
 From f46dc44957a3a31a86a215d43f3971fa4ca97318 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:39:47 -0500
-Subject: [PATCH 200/227] Add quicksort implementation
+Subject: [PATCH 200/229] Add quicksort implementation
 
 This will be used to sort the boot menu entries that are read from
 the BootLoaderSpec config files.

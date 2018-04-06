@@ -1,7 +1,7 @@
 From 8390e231d322fd94f7a8223f140c4bc5de2ba56f Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Sun, 9 Aug 2015 15:48:51 -0700
-Subject: [PATCH 219/227] Add BIOS boot measurement
+Subject: [PATCH 219/229] Add BIOS boot measurement
 
 Measure the on-disk grub core on BIOS systems - unlike UEFI, the firmware
 can't do this stage for us.
