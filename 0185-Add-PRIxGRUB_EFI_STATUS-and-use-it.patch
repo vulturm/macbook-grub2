@@ -1,7 +1,7 @@
 From 4759e79a841a9d7eab743e67715459d3a864a29f Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 1 Jun 2017 10:07:50 -0400
-Subject: [PATCH 185/216] Add PRIxGRUB_EFI_STATUS and use it.
+Subject: [PATCH 185/227] Add PRIxGRUB_EFI_STATUS and use it.
 
 This avoids syntax checkers getting confused about if it's llx or lx.
 

@@ -1,7 +1,7 @@
 From 62b3c9bf77feda2ae595c5e811b3918d3bf990a4 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 3 Apr 2018 15:42:47 +0200
-Subject: [PATCH 216/216] Only attempt to scan different BLS directories on EFI
+Subject: [PATCH 216/227] Only attempt to scan different BLS directories on EFI
  machines
 
 Current BLS support attempted to scan for BLS directories, but this only

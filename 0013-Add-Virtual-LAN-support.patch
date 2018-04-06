@@ -1,7 +1,7 @@
 From d9f7de0ae3c0c09cff7257c55418450261f3e082 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Mon, 23 Dec 2013 12:32:02 -0200
-Subject: [PATCH 013/216] Add Virtual LAN support.
+Subject: [PATCH 013/227] Add Virtual LAN support.
 
 This patch adds support for virtual LAN (VLAN) tagging. VLAN tagging allows
 multiple VLANs in a bridged network to share the same physical network link

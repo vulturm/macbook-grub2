@@ -1,7 +1,7 @@
 From cfcacf01ed042f6354c5d4249bdc6d883d04b330 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 27 Feb 2018 13:55:35 -0500
-Subject: [PATCH 199/216] align struct efi_variable better...
+Subject: [PATCH 199/227] align struct efi_variable better...
 
 ---
  include/grub/efiemu/runtime.h | 2 +-

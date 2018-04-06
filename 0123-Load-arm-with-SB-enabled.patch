@@ -1,7 +1,7 @@
 From c03bf04fd9e3192bec942a7adee23b5377ea81dc Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 18 Sep 2014 11:26:14 -0400
-Subject: [PATCH 123/216] Load arm with SB enabled.
+Subject: [PATCH 123/227] Load arm with SB enabled.
 
 Make sure we actually try to validate secure boot on this platform (even
 though we're not shipping it enabled by default.)

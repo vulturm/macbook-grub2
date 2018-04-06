@@ -1,7 +1,7 @@
 From 8c9465fac901caac6802d6872a1374518b001517 Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Thu, 3 Aug 2017 11:04:24 +0100
-Subject: [PATCH 058/216] efi: move fdt helper library
+Subject: [PATCH 058/227] efi: move fdt helper library
 
 There is nothing ARM64 (or even ARM) specific about the efi fdt helper
 library, which is used for locating or overriding a firmware-provided

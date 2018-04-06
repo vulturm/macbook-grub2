@@ -1,7 +1,7 @@
 From 3eb59abe528f660e24e004a99b86686ea2f022c5 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:43:22 -0400
-Subject: [PATCH 187/216] don't ignore const
+Subject: [PATCH 187/227] don't ignore const
 
 ---
  grub-core/net/tftp.c | 2 +-

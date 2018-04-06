@@ -1,7 +1,7 @@
 From d5339007d0ffdaf6e8a4e9702e7cec447b118804 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 14 Jul 2015 16:58:51 -0700
-Subject: [PATCH 149/216] Fix race in EFI validation
+Subject: [PATCH 149/227] Fix race in EFI validation
 
 ---
  grub-core/loader/i386/efi/linux.c | 44 ++++++++++-----------------------------

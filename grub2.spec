@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	29%{?dist}
+Release:	30%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -452,6 +452,10 @@ fi
 %endif
 
 %changelog
+* Fri Apr 06 2018 Peter Jones <pjones@redhat.com> - 2.02-30
+- Enable TPM measurements
+- Set the default boot entry to the first entry when we're using BLS.
+
 * Tue Apr 03 2018 Peter Jones <pjones@redhat.com> - 2.02-29
 - Add grub2-switch-to-blscfg
 - Fix for BLS paths on BIOS / non-UEFI (javierm)

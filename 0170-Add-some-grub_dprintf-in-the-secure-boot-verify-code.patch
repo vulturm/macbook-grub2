@@ -1,7 +1,7 @@
 From 848a699f96e8529a30a47670051c5cb1f1a91d66 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 9 May 2016 14:15:17 -0400
-Subject: [PATCH 170/216] Add some grub_dprintf() in the secure boot verify
+Subject: [PATCH 170/227] Add some grub_dprintf() in the secure boot verify
  code.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>

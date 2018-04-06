@@ -1,7 +1,7 @@
 From 421b1facc21a25ca28a48c9dd323c48c5ce8a46b Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Fri, 22 May 2015 11:45:25 +0000
-Subject: [PATCH 179/216] grub2-btrfs-06-subvol-mount
+Subject: [PATCH 179/227] grub2-btrfs-06-subvol-mount
 
 ---
  grub-core/fs/btrfs.c            | 195 +++++++++++++++++++++++++++++++++++++++-

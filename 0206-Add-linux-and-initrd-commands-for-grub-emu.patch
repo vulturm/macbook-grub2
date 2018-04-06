@@ -1,7 +1,7 @@
 From f1a8f489ec2cafdcfbdd3b60ffc7752bed8c8528 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Tue, 6 Feb 2018 09:09:00 +0100
-Subject: [PATCH 206/216] Add linux and initrd commands for grub-emu
+Subject: [PATCH 206/227] Add linux and initrd commands for grub-emu
 
 When using grub-emu, the linux and initrd commands are used as arguments
 to the kexec command line tool, to allow booting the selected menu entry.

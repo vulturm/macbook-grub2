@@ -1,7 +1,7 @@
 From fa42786264cef98c56e972b3bb6b8448000e1c70 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Thu, 3 Aug 2017 15:46:15 +0100
-Subject: [PATCH 051/216] zfs: remove size_t typedef and use grub_size_t
+Subject: [PATCH 051/227] zfs: remove size_t typedef and use grub_size_t
  instead
 
 * Prevents some toolchains from issuing a warning on size_t redef.

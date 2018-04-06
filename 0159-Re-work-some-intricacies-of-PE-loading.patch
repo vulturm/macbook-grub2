@@ -1,7 +1,7 @@
 From 9ca2908ab56bc32052b2f01bda6a35a190e39bae Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 9 Jun 2016 12:22:29 -0400
-Subject: [PATCH 159/216] Re-work some intricacies of PE loading.
+Subject: [PATCH 159/227] Re-work some intricacies of PE loading.
 
 The PE spec is not a well written document, and awesomely every place
 where there's an ambiguous way to read something, Windows' bootmgfw.efi

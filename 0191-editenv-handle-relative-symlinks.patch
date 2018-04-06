@@ -1,7 +1,7 @@
 From 9778fafba22ec67f97bb35a34980230966ebe0de Mon Sep 17 00:00:00 2001
 From: Jonathan Lebon <jlebon@redhat.com>
 Date: Mon, 14 Aug 2017 14:37:20 -0400
-Subject: [PATCH 191/216] editenv: handle relative symlinks
+Subject: [PATCH 191/227] editenv: handle relative symlinks
 
 Handle symlinks with targets relative to the containing dir. This
 ensures that the rename operation does not depend on the cwd.

@@ -1,7 +1,7 @@
 From b2fd6377486d66ced5fd82325c3ee8e11f4f1176 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 27 Jan 2016 09:22:42 -0500
-Subject: [PATCH 154/216] Make grub_fatal() also backtrace.
+Subject: [PATCH 154/227] Make grub_fatal() also backtrace.
 
 ---
  grub-core/Makefile.core.def     |  3 ++

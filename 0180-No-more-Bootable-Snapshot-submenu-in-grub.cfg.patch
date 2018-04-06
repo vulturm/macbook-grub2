@@ -1,7 +1,7 @@
 From 1eeea190cf2e134fddb448c7b55e6c82697f3f72 Mon Sep 17 00:00:00 2001
 From: Dusty Mabe <dusty@dustymabe.com>
 Date: Sat, 18 Jul 2015 15:38:08 +0000
-Subject: [PATCH 180/216] No more "Bootable Snapshot" submenu in grub.cfg.
+Subject: [PATCH 180/227] No more "Bootable Snapshot" submenu in grub.cfg.
 
 This breaks grubby (run on kernel upgrades) because grubby just
 does a search for "menuentry".

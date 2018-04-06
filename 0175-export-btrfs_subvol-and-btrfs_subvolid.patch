@@ -1,7 +1,7 @@
 From c2d51bfc2fedf707ec4bc8cca9a10cb1100c6888 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Wed, 18 Dec 2013 09:57:04 +0000
-Subject: [PATCH 175/216] export btrfs_subvol and btrfs_subvolid
+Subject: [PATCH 175/227] export btrfs_subvol and btrfs_subvolid
 
 We should export btrfs_subvol and btrfs_subvolid to have both visible
 to subsidiary configuration files loaded using configfile.

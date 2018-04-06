@@ -1,7 +1,7 @@
 From 9b93a986a68502c1ab2303efd7469fda0c5709cf Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 7 Apr 2016 10:58:06 -0400
-Subject: [PATCH 143/216] Revert "reopen SNP protocol for exclusive use by
+Subject: [PATCH 143/227] Revert "reopen SNP protocol for exclusive use by
  grub"
 
 I *think* this should have been replaced by upstream's

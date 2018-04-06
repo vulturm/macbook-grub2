@@ -1,7 +1,7 @@
 From 37865c2c4ad26cd5e947b08abf1fde8145699919 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 14:35:59 +0300
-Subject: [PATCH 003/216] fs-tester: make sh-compatible
+Subject: [PATCH 003/227] fs-tester: make sh-compatible
 
 ---
  tests/util/grub-fs-tester.in | 306 ++++++++++++++++++++++++-------------------

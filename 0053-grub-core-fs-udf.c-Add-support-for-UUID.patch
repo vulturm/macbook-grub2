@@ -1,7 +1,7 @@
 From 435fa75e01ef40917239c7f775e505e86f70d202 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali.rohar@gmail.com>
 Date: Thu, 22 Jun 2017 14:42:16 +0200
-Subject: [PATCH 053/216] * grub-core/fs/udf.c: Add support for UUID
+Subject: [PATCH 053/227] * grub-core/fs/udf.c: Add support for UUID
 
 Use same algorithm as in libblkid from util-linux v2.30.
 

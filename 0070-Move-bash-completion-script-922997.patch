@@ -1,7 +1,7 @@
 From 999bbc2002275efce284aed6e1e31b3ca351fa19 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 3 Apr 2013 14:35:34 -0400
-Subject: [PATCH 070/216] Move bash completion script (#922997)
+Subject: [PATCH 070/227] Move bash completion script (#922997)
 
 Apparently these go in a new place now.
 ---

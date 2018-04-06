@@ -1,7 +1,7 @@
 From d4eb7984ad8938e50764c541f0e8f4c8d6d012f8 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 11 Sep 2015 17:30:49 -0400
-Subject: [PATCH 135/216] Be more aggro about actually using the *configured*
+Subject: [PATCH 135/227] Be more aggro about actually using the *configured*
  network device.
 
 Right now we use any SNP device with the same mac+IP block, but when

@@ -1,7 +1,7 @@
 From c7bb1be13a759a55216c99662d660614a161c37f Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:42:57 -0400
-Subject: [PATCH 186/216] Don't use dynamic sized arrays since we don't build
+Subject: [PATCH 186/227] Don't use dynamic sized arrays since we don't build
  with -std=c99
 
 ---

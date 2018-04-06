@@ -1,7 +1,7 @@
 From eea2b6113c2f17ed5755b23242457948025bfd33 Mon Sep 17 00:00:00 2001
 From: Masahiro Matsuya <mmatsuya@redhat.com>
 Date: Sat, 29 Oct 2016 08:35:26 +0900
-Subject: [PATCH 150/216] bz1374141 fix incorrect mask for ppc64
+Subject: [PATCH 150/227] bz1374141 fix incorrect mask for ppc64
 
 The netmask configured in firmware is not respected on ppc64 (big endian).
 When 255.255.252.0 is set as netmask in firmware, the following is the value of bootpath string in grub_ieee1275_parse_bootpath().

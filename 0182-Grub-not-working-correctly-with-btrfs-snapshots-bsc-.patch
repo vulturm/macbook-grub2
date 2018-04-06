@@ -1,7 +1,7 @@
 From 158b6b3987ed402ddcb6d0568acbb60cc7a01aac Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 11 May 2017 08:56:57 +0000
-Subject: [PATCH 182/216] Grub not working correctly with btrfs snapshots
+Subject: [PATCH 182/227] Grub not working correctly with btrfs snapshots
  (bsc#1026511)
 
 ---

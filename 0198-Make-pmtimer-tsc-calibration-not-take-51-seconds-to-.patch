@@ -1,7 +1,7 @@
 From ee10486cadcae785711ccc7c46dac24a500be8fc Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 7 Nov 2017 17:12:17 -0500
-Subject: [PATCH 198/216] Make pmtimer tsc calibration not take 51 seconds to
+Subject: [PATCH 198/227] Make pmtimer tsc calibration not take 51 seconds to
  fail.
 
 On my laptop running at 2.4GHz, if I run a VM where tsc calibration

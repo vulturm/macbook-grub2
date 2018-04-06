@@ -1,7 +1,7 @@
 From 21539770394174892fe90ab9ce09a4d9a7e2a676 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 24 May 2017 12:42:32 -0400
-Subject: [PATCH 173/216] macos: just build chainloader entries, don't try any
+Subject: [PATCH 173/227] macos: just build chainloader entries, don't try any
  xnu xnu.
 
 Since our bugs tell us that the xnu boot entries really just don't work

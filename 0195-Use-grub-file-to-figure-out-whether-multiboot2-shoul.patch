@@ -1,7 +1,7 @@
 From d592ef69ef92e3f7a414577af70678be706ff8c8 Mon Sep 17 00:00:00 2001
 From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 Date: Mon, 28 Aug 2017 13:59:12 -0400
-Subject: [PATCH 195/216] Use grub-file to figure out whether multiboot2 should
+Subject: [PATCH 195/227] Use grub-file to figure out whether multiboot2 should
  be used for Xen.gz
 
 The multiboot2 is much more preferable than multiboot. Especiall

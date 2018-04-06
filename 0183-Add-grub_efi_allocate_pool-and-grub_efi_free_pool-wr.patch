@@ -1,7 +1,7 @@
 From bdc07d05d0eeb39f0c90e7f8f6850016ebc4bf6b Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 1 Jun 2017 09:59:56 -0400
-Subject: [PATCH 183/216] Add grub_efi_allocate_pool() and grub_efi_free_pool()
+Subject: [PATCH 183/227] Add grub_efi_allocate_pool() and grub_efi_free_pool()
  wrappers.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>

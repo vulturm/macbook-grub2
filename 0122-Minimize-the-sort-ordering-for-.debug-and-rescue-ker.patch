@@ -1,7 +1,7 @@
 From 547d0c60f28c026801af2ada3e0995d0ecc22c35 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 4 Sep 2014 15:52:08 -0400
-Subject: [PATCH 122/216] Minimize the sort ordering for .debug and -rescue-
+Subject: [PATCH 122/227] Minimize the sort ordering for .debug and -rescue-
  kernels.
 
 Resolves: rhbz#1065360

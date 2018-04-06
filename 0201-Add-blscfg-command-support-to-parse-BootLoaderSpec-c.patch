@@ -1,7 +1,7 @@
 From de3430a0a616a9600ccac0f0a9df661446661999 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:40:58 -0500
-Subject: [PATCH 201/216] Add blscfg command support to parse BootLoaderSpec
+Subject: [PATCH 201/227] Add blscfg command support to parse BootLoaderSpec
  config fragments
 
 The BootLoaderSpec (BLS) defines a scheme where different bootloaders can

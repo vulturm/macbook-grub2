@@ -1,7 +1,7 @@
 From d8901e3ba115d705c9c08ecedd201aca8b4867b8 Mon Sep 17 00:00:00 2001
 From: phcoder <phcoder@sid.debian.laptop.phnet>
 Date: Sun, 9 Jul 2017 20:59:15 +0200
-Subject: [PATCH 045/216] cache: Fix compilation for ppc, sparc and arm64
+Subject: [PATCH 045/227] cache: Fix compilation for ppc, sparc and arm64
 
 ---
  include/grub/cache.h | 4 +++-

@@ -1,7 +1,7 @@
 From afc0024ac644e80552c808e8b8def04fd7f89918 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 21 Aug 2014 03:39:11 +0000
-Subject: [PATCH 176/216] grub2-btrfs-03-follow_default
+Subject: [PATCH 176/227] grub2-btrfs-03-follow_default
 
 ---
  grub-core/fs/btrfs.c | 107 ++++++++++++++++++++++++++++++++++++---------------

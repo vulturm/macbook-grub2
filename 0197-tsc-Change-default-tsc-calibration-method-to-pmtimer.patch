@@ -1,7 +1,7 @@
 From d88a8ff86cb9c360bc92b75db69e5024b1e814cc Mon Sep 17 00:00:00 2001
 From: "David E. Box" <david.e.box@linux.intel.com>
 Date: Fri, 15 Sep 2017 15:37:05 -0700
-Subject: [PATCH 197/216] tsc: Change default tsc calibration method to pmtimer
+Subject: [PATCH 197/227] tsc: Change default tsc calibration method to pmtimer
  on EFI systems
 
 On efi systems, make pmtimer based tsc calibration the default over the

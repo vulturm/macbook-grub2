@@ -1,7 +1,7 @@
 From 206697fab4e803807a83f1f7f330d3d009aba2fd Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 6 Feb 2018 11:02:09 +0100
-Subject: [PATCH 203/216] Remove duplicated grub_exit() definition for grub-emu
+Subject: [PATCH 203/227] Remove duplicated grub_exit() definition for grub-emu
  platform
 
 The grub_exit() function signature was changed on all platforms to take a
