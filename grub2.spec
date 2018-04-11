@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	31%{?dist}
+Release:	32%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -452,6 +452,9 @@ fi
 %endif
 
 %changelog
+* Wed Apr 11 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-32
+- Make 20-grub.install to generate debug BLS when MAKEDEBUG is set.
+
 * Fri Apr 06 2018 Peter Jones <pjones@redhat.com> - 2.02-31
 - Pull in some TPM fixes I missed.
 

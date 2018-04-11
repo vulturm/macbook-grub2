@@ -83,6 +83,19 @@ case "$COMMAND" in
                     "$(date -u +%Y%m%d%H%M%S -d "$(stat -c '%y' "${KERNEL_DIR}")")" \
                     >"${BLS_TARGET}"
             fi
+
+            eval "$(grub2-get-kernel-settings)" || true
+            if [ "x$GRUB_LINUX_MAKE_DEBUG" = "xtrue" ]; then
+                ARCH="$(uname -m)"
+                BLS_DEBUG="$(echo ${BLS_TARGET} | sed -e "s/\.${ARCH}/-debug.${ARCH}/")"
+                cp -aT  "${BLS_TARGET}" "${BLS_DEBUG}"
+                TITLE="$(grep '^title[ \t]' "${BLS_DEBUG}" | sed -e 's/^title[ \t]*//')"
+                BLSID="$(grep '^id[ \t]' "${BLS_DEBUG}" | sed -e "s/\.${ARCH}/-debug.${ARCH}/")"
+                sed -i -e "s/^title.*/title ${TITLE}${GRUB_LINUX_DEBUG_TITLE_POSTFIX}/" "${BLS_DEBUG}"
+                sed -i -e "s/^id.*/${BLSID}/" "${BLS_DEBUG}"
+                sed -i -e "s/^options.*/options \$kernelopts ${GRUB_CMDLINE_LINUX_DEBUG}/" "${BLS_DEBUG}"
+	    fi
+
             exit 0
         fi
 
@@ -95,7 +108,10 @@ case "$COMMAND" in
     remove)
 
         if [[ "x${GRUB_ENABLE_BLSCFG}" = "xtrue" ]] || [[ ! -f /sbin/new-kernel-pkg ]]; then
-            rm -f "${BLS_DIR}/${MACHINE_ID}-${KERNEL_VERSION}.conf"
+            ARCH="$(uname -m)"
+            BLS_TARGET="${BLS_DIR}/${MACHINE_ID}-${KERNEL_VERSION}.conf"
+            BLS_DEBUG="$(echo ${BLS_TARGET} | sed -e "s/\.${ARCH}/-debug.${ARCH}/")"
+            rm -f "${BLS_TARGET}" "${BLS_DEBUG}"
 
             for i in vmlinuz System.map config zImage.stub dtb; do
                 rm -rf "/boot/${i}-${KERNEL_VERSION}"
