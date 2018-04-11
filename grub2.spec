@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	32%{?dist}
+Release:	33%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -203,6 +203,7 @@ cat << EOF > ${RPM_BUILD_ROOT}%{_sysconfdir}/prelink.conf.d/grub2.conf
 EOF
 
 # Install kernel-install scripts
+install -d -m 0755 %{buildroot}%{_prefix}/lib/kernel/install.d/
 install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE9}
 install -d -m 0755 %{buildroot}%{_sysconfdir}/kernel/install.d/
 install -m 0644 /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/20-grubby.install
@@ -452,6 +453,9 @@ fi
 %endif
 
 %changelog
+* Wed Apr 11 2018 Peter Jones <pjones@redhat.com> - 2.02-33
+- Work around some issues with older automake found in CentOS.
+
 * Wed Apr 11 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-32
 - Make 20-grub.install to generate debug BLS when MAKEDEBUG is set.
 
