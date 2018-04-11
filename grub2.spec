@@ -455,6 +455,7 @@ fi
 %changelog
 * Wed Apr 11 2018 Peter Jones <pjones@redhat.com> - 2.02-33
 - Work around some issues with older automake found in CentOS.
+- Make multiple initramfs images work in BLS.
 
 * Wed Apr 11 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-32
 - Make 20-grub.install to generate debug BLS when MAKEDEBUG is set.
