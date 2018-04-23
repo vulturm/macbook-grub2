@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	33%{?dist}
+Release:	34%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -78,7 +78,7 @@ Summary:	Support tools for GRUB.
 Group:		System Environment/Base
 Obsoletes:	%{name}-tools < %{evr}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
-Requires:	gettext which file
+Requires:	gettext os-prober which file
 Requires(pre):	dracut
 Requires(post):	dracut
 
@@ -90,7 +90,7 @@ This subpackage provides tools for support of all platforms.
 %package tools-efi
 Summary:	Support tools for GRUB.
 Group:		System Environment/Base
-Requires:	gettext which file
+Requires:	gettext os-prober which file
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-tools < %{evr}
 
@@ -113,7 +113,7 @@ This subpackage provides tools for support of all platforms.
 %package tools-extra
 Summary:	Support tools for GRUB.
 Group:		System Environment/Base
-Requires:	gettext which file
+Requires:	gettext os-prober which file
 Requires:	%{name}-tools-minimal = %{epoch}:%{version}-%{release}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-tools < %{evr}
@@ -453,6 +453,11 @@ fi
 %endif
 
 %changelog
+* Mon Apr 23 2018 Peter Jones <pjones@redhat.com> - 2.02-34
+- Put the os-prober dep back in - we need to change test plans and criteria
+  before it can go.
+  Resolves: rhbz#1569411
+
 * Wed Apr 11 2018 Peter Jones <pjones@redhat.com> - 2.02-33
 - Work around some issues with older automake found in CentOS.
 - Make multiple initramfs images work in BLS.
