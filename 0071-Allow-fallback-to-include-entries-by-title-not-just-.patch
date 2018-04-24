@@ -1,7 +1,7 @@
 From 27845fb323de35e9dcaad8c738eb1a2a2bc316f8 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 5 Sep 2014 10:07:04 -0400
-Subject: [PATCH 071/229] Allow "fallback" to include entries by title, not
+Subject: [PATCH 071/236] Allow "fallback" to include entries by title, not
  just number.
 
 Resolves: rhbz#1026084

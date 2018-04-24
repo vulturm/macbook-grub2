@@ -1,7 +1,7 @@
 From edb37fb30bbc8a3b6bec67911c7200e4eb071127 Mon Sep 17 00:00:00 2001
 From: phcoder <phcoder@sid.debian.laptop.phnet>
 Date: Sun, 9 Jul 2017 20:58:31 +0200
-Subject: [PATCH 044/229] ehci: Fix compilation for amd64
+Subject: [PATCH 044/236] ehci: Fix compilation for amd64
 
 ---
  grub-core/bus/usb/ehci.c | 8 ++++----

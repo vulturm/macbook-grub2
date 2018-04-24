@@ -1,7 +1,7 @@
 From b164ec560cd6373c0c5d8a189d70baeca2c3ef13 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 1 Sep 2015 16:02:55 -0700
-Subject: [PATCH 222/229] Measure multiboot images and modules
+Subject: [PATCH 222/236] Measure multiboot images and modules
 
 ---
  grub-core/loader/i386/multiboot_mbi.c | 3 +++

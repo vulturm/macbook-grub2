@@ -1,7 +1,7 @@
 From 939f3dfcfacde13bd7ebfe411c0dceee9e5ed0ae Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 22 Jul 2015 11:21:01 -0400
-Subject: [PATCH 074/229] Mark po/exclude.pot as binary so git won't try to
+Subject: [PATCH 074/236] Mark po/exclude.pot as binary so git won't try to
  diff nonprintables.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>

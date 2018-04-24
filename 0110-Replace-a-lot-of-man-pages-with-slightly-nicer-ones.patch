@@ -1,7 +1,7 @@
 From dcf3b9c590f00e33f773de68ac4ebd55ca4f6e90 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 4 Mar 2014 11:00:23 -0500
-Subject: [PATCH 110/229] Replace a lot of man pages with slightly nicer ones.
+Subject: [PATCH 110/236] Replace a lot of man pages with slightly nicer ones.
 
 Replace a bunch of machine generated ones with ones that look nicer.
 ---

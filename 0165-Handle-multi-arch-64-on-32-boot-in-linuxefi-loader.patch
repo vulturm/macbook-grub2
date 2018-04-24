@@ -1,7 +1,7 @@
 From 10d6d333de0aa7e390a22ebc4b308f7ad937d5bc Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:18:54 -0500
-Subject: [PATCH 165/229] Handle multi-arch (64-on-32) boot in linuxefi loader.
+Subject: [PATCH 165/236] Handle multi-arch (64-on-32) boot in linuxefi loader.
 
 Allow booting 64-bit kernels on 32-bit EFI on x86.
 

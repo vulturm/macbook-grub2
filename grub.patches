@@ -227,3 +227,10 @@ Patch0226: 0226-Set-the-first-boot-menu-entry-as-default-when-using-.patch
 Patch0227: 0227-tpm-fix-warnings-when-compiling-for-platforms-other-.patch
 Patch0228: 0228-Make-TPM-errors-less-fatal.patch
 Patch0229: 0229-blscfg-handle-multiple-initramfs-images.patch
+Patch0230: 0230-BLS-Fix-grub2-switch-to-blscfg-on-non-EFI-machines.patch
+Patch0231: 0231-BLS-Use-etcdefaultgrub-instead-of-etc.patch
+Patch0232: 0232-Add-missing-options-to-grub2-switch-to-blscfg-man-pa.patch
+Patch0233: 0233-Make-grub2-switch-to-blscfg-to-generate-debug-BLS-wh.patch
+Patch0234: 0234-Make-grub2-switch-to-blscfg-to-generate-BLS-fragment.patch
+Patch0235: 0235-Only-attempt-to-query-dev-mounted-in-boot-efi-as-boo.patch
+Patch0236: 0236-Include-OSTree-path-when-searching-kernels-images-if.patch

@@ -1,7 +1,7 @@
 From c8d93b9e27e9cbf51e91f6cc99abbcb7b68189ce Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 4 Sep 2014 14:23:23 -0400
-Subject: [PATCH 120/229] Generate OS and CLASS in 10_linux from
+Subject: [PATCH 120/236] Generate OS and CLASS in 10_linux from
  /etc/os-release
 
 This makes us use pretty names in the titles we generate in

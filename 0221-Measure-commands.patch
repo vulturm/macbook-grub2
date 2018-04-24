@@ -1,7 +1,7 @@
 From c93a27f2e6a323a4985e6fe902eb5c6447fca572 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@srcf.ucam.org>
 Date: Mon, 10 Aug 2015 15:27:12 -0700
-Subject: [PATCH 221/229] Measure commands
+Subject: [PATCH 221/236] Measure commands
 
 Measure each command executed by grub, which includes script execution.
 ---

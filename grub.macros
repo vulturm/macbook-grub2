@@ -497,6 +497,7 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 %dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}		\
 %attr(0700,root,root)/boot/efi/EFI/%{efidir}/%{2}		\
 %dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}/fonts		\
+%dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}/loader	\
 %dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}/loader/entries \
 %ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grub.cfg	\
 /boot/grub2/grubenv						\

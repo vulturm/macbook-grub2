@@ -1,7 +1,7 @@
 From bdd89d239cd9b4089630bfb5ec862aab8086dca2 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Mon, 7 Aug 2017 16:20:30 +0100
-Subject: [PATCH 062/229] core: use GRUB_TERM_ definitions when handling term
+Subject: [PATCH 062/236] core: use GRUB_TERM_ definitions when handling term
  characters
 
 * Also use hex value for GRUB_TERM_ESC as '\e' is not in the C standard and is not understood by some compilers

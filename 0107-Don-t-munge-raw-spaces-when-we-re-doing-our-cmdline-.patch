@@ -1,7 +1,7 @@
 From f2790b1f7c8efcd5589c8fcdaca51b548ab9825c Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Mon, 30 Jun 2014 14:16:46 -0400
-Subject: [PATCH 107/229] Don't munge raw spaces when we're doing our cmdline
+Subject: [PATCH 107/236] Don't munge raw spaces when we're doing our cmdline
  escaping (#923374)
 
 Signed-off-by: Peter Jones <pjones@redhat.com>

@@ -1,7 +1,7 @@
 From a230ec5c31d818c2f046acf3592a5492d3e2ea69 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 11 Apr 2018 13:44:29 -0400
-Subject: [PATCH 229/229] blscfg: handle multiple initramfs images.
+Subject: [PATCH 229/236] blscfg: handle multiple initramfs images.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---

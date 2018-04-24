@@ -1,7 +1,7 @@
 From 6776773c89828c9b69c1552760ba6a4d9cd5589f Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 30 Nov 2017 15:11:39 -0500
-Subject: [PATCH 208/229] Add grub_debug_enabled()
+Subject: [PATCH 208/236] Add grub_debug_enabled()
 
 ---
  grub-core/kern/misc.c | 21 ++++++++++++++++-----

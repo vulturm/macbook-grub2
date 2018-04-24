@@ -1,7 +1,7 @@
 From ef24bc601e11b96eefe06f477b5da1199d761b3d Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 10 Jun 2016 14:06:15 -0400
-Subject: [PATCH 159/229] Rework even more of efi chainload so non-sb cases
+Subject: [PATCH 159/236] Rework even more of efi chainload so non-sb cases
  work right.
 
 This ensures that if shim protocol is not loaded, or is loaded but shim

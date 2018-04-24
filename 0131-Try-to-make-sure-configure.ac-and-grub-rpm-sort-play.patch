@@ -1,7 +1,7 @@
 From 6f892038567f1706fdde819f5f226ec4cacbea47 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 3 Aug 2015 11:46:42 -0400
-Subject: [PATCH 131/229] Try to make sure configure.ac and grub-rpm-sort play
+Subject: [PATCH 131/236] Try to make sure configure.ac and grub-rpm-sort play
  nice.
 
 Apparently the test for whether to use grub-rpm-sort and also the

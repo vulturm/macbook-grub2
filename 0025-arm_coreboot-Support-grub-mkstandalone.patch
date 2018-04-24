@@ -1,7 +1,7 @@
 From 3edabad8fefb112cc4b2d43be6e97d43c909ceee Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:59:48 +0200
-Subject: [PATCH 025/229] arm_coreboot: Support grub-mkstandalone.
+Subject: [PATCH 025/236] arm_coreboot: Support grub-mkstandalone.
 
 ---
  util/grub-install-common.c  | 12 ++++++++++--

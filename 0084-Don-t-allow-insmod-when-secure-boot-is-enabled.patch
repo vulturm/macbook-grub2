@@ -1,7 +1,7 @@
 From eb8fd62e887e624f5c6e7c2ee8512981e8b5be97 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Tue, 23 Oct 2012 10:40:49 -0400
-Subject: [PATCH 084/229] Don't allow insmod when secure boot is enabled.
+Subject: [PATCH 084/236] Don't allow insmod when secure boot is enabled.
 
 Hi,
 

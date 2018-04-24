@@ -1,7 +1,7 @@
 From 8bdc0c77919ddb9bd588ac45e96c96497683f76c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 24 May 2017 15:58:18 -0400
-Subject: [PATCH 189/229] Clean up some errors in the linuxefi loader
+Subject: [PATCH 189/236] Clean up some errors in the linuxefi loader
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---

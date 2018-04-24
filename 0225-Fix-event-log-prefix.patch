@@ -1,7 +1,7 @@
 From 0816621235226952a5bd0cfd027eb97ff84df547 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 29 Mar 2016 15:36:49 -0700
-Subject: [PATCH 225/229] Fix event log prefix
+Subject: [PATCH 225/236] Fix event log prefix
 
 We're not passing the prefixed version of the description to the event log.
 Fix that.

@@ -1,7 +1,7 @@
 From 48768b0295ad4d908cefd8e8fbee96a4dc2765f5 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 8 Jun 2016 21:03:37 -0400
-Subject: [PATCH 144/229] efinet and bootp: add support for dhcpv6
+Subject: [PATCH 144/236] efinet and bootp: add support for dhcpv6
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
