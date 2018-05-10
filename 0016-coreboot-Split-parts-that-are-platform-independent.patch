@@ -1,7 +1,7 @@
 From 461bfab7b7e47fd0a76bf6076a438af1b7e2184a Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 19:06:22 +0200
-Subject: [PATCH 016/236] coreboot: Split parts that are platform-independent.
+Subject: [PATCH 016/238] coreboot: Split parts that are platform-independent.
 
 We currently assume that coreboot is always i386, it's no longer the case,
 so split i386-coreboot parts from generic coreboot code.
@@ -340,5 +340,5 @@ index 809a8aa26bf..781d0ffbf75 100644
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/video_fb.h
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/gfxterm.h
 -- 
-2.15.0
+2.17.0
 

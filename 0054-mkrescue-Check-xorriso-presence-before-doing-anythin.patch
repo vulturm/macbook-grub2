@@ -1,7 +1,7 @@
 From 9e962fd3c42081e2eef1f99a0eaab38fd04d2620 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 7 Aug 2017 18:05:17 +0200
-Subject: [PATCH 054/236] mkrescue: Check xorriso presence before doing
+Subject: [PATCH 054/238] mkrescue: Check xorriso presence before doing
  anything else.
 
 mkrescue can't do anything useful without xorriso, so abort early if it's
@@ -46,5 +46,5 @@ index 238d4840e2f..38f1543974e 100644
    grub_hostfs_init ();
    grub_host_init ();
 -- 
-2.15.0
+2.17.0
 

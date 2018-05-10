@@ -1,7 +1,7 @@
 From e66dc5d71ebfc9763420a76c274e6980d54641c3 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 7 Aug 2017 18:08:39 +0200
-Subject: [PATCH 055/236] Fail if xorriso failed.
+Subject: [PATCH 055/238] Fail if xorriso failed.
 
 If xorriso failed most likely we didn't generate a meaningful image.
 ---
@@ -40,5 +40,5 @@ index 38f1543974e..9545945d8f3 100644
    grub_util_unlink_recursive (iso9660_dir);
  
 -- 
-2.15.0
+2.17.0
 

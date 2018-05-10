@@ -1,7 +1,7 @@
 From 1daa716c7017f1858de117a20a31da66815435c5 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 19:31:55 +0200
-Subject: [PATCH 017/236] Rename uboot/halt.c to dummy/halt.c.
+Subject: [PATCH 017/238] Rename uboot/halt.c to dummy/halt.c.
 
 It's not U-Boot specific and it's a stub.
 ---
@@ -28,5 +28,5 @@ similarity index 100%
 rename from grub-core/lib/uboot/halt.c
 rename to grub-core/lib/dummy/halt.c
 -- 
-2.15.0
+2.17.0
 

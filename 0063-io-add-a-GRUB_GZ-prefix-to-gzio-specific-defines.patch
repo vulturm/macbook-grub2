@@ -1,7 +1,7 @@
 From 1deebd85ef87cc581e995ce0a51dc0802ac9c367 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Mon, 7 Aug 2017 16:23:12 +0100
-Subject: [PATCH 063/236] io: add a GRUB_GZ prefix to gzio specific defines
+Subject: [PATCH 063/238] io: add a GRUB_GZ prefix to gzio specific defines
 
 * This is done to avoid a conflict with a PACKED define in the EDK2
 ---
@@ -81,5 +81,5 @@ index 0f2ea6bd845..a8e33033bf8 100644
        /* TRANSLATORS: It's about given file having some strange format, not
  	 complete lack of gzip support.  */
 -- 
-2.15.0
+2.17.0
 

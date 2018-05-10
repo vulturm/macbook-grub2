@@ -1,7 +1,7 @@
 From 397f179c26aeddf3fe452c62aa404459889835fc Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 18 Feb 2014 11:34:00 -0500
-Subject: [PATCH 113/236] Fix convert function to support NVMe devices
+Subject: [PATCH 113/238] Fix convert function to support NVMe devices
 
 This is adapted from the patch at
 https://bugzilla.redhat.com/show_bug.cgi?id=1019660 , which is against
@@ -55,5 +55,5 @@ index 847406fbab0..fa3460d6cd8 100644
      return grub_util_devmapper_part_to_disk (&st, is_part, os_dev);
  
 -- 
-2.15.0
+2.17.0
 

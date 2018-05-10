@@ -1,7 +1,7 @@
 From f006df881d1b2b3ca7320ecfcd33181295ec1018 Mon Sep 17 00:00:00 2001
 From: Jan Hlavac <jhlavac@redhat.com>
 Date: Tue, 10 Apr 2018 16:07:36 +0200
-Subject: [PATCH 230/236] BLS: Fix grub2-switch-to-blscfg on non-EFI machines
+Subject: [PATCH 230/238] BLS: Fix grub2-switch-to-blscfg on non-EFI machines
 
 On the non-EFI machines the grub2-switch-to-blscfg script places the BLS
 snippets into the /boot directory. But the right location is
@@ -24,5 +24,5 @@ index 3ae5e4ea8d0..f740b8f4d03 100644
  
  backupsuffix=.bak
 -- 
-2.15.0
+2.17.0
 

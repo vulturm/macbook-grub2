@@ -1,7 +1,7 @@
 From 76188809d5ca40c5285b0ab202b5edea7be3f04d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali.rohar@gmail.com>
 Date: Thu, 22 Jun 2017 14:33:17 +0200
-Subject: [PATCH 052/236] udf: Fix reading label, lvd.ident is dstring
+Subject: [PATCH 052/238] udf: Fix reading label, lvd.ident is dstring
 
 UDF dstring has stored length in the last byte of buffer. Therefore last
 byte is not part of recorded characters. And empty string in dstring is
@@ -50,5 +50,5 @@ index 839bff88963..2587456336e 100644
      }
    else
 -- 
-2.15.0
+2.17.0
 

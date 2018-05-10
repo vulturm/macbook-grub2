@@ -1,7 +1,7 @@
 From 68d54b55f49249c5e0517bf189f0f3df7ee6a36f Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 10 Jul 2017 01:34:22 +0000
-Subject: [PATCH 049/236] fdt: silence clang warning.
+Subject: [PATCH 049/238] fdt: silence clang warning.
 
 ---
  grub-core/lib/fdt.c | 3 ++-
@@ -22,5 +22,5 @@ index bdc6302448d..2705f2629b9 100644
            return 0;
  	return token;
 -- 
-2.15.0
+2.17.0
 

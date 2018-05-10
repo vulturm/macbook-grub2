@@ -1,7 +1,7 @@
 From 45322cbc9402639a431fc0f33bd76e387e6f02bf Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Tue, 11 Jun 2013 15:14:05 -0300
-Subject: [PATCH 067/236] Disable GRUB video support for IBM power machines
+Subject: [PATCH 067/238] Disable GRUB video support for IBM power machines
 
 Should fix the problem in bugzilla:
 https://bugzilla.redhat.com/show_bug.cgi?id=973205
@@ -61,5 +61,5 @@ index 9f26c69a2df..ab4f284c341 100644
  
  extern int EXPORT_FUNC(grub_ieee1275_test_flag) (enum grub_ieee1275_flag flag);
 -- 
-2.15.0
+2.17.0
 

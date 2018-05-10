@@ -1,7 +1,7 @@
 From 4139fdfdb64fd248a0d5f200b27c583159dbb190 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 11 Jul 2016 13:36:45 -0400
-Subject: [PATCH 161/236] fix machine type test in 30_os-prober.in
+Subject: [PATCH 161/238] fix machine type test in 30_os-prober.in
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -21,5 +21,5 @@ index dc98eace934..e40274fc0f4 100644
      i?86|x86_64)
        sixteenbit="16"
 -- 
-2.15.0
+2.17.0
 

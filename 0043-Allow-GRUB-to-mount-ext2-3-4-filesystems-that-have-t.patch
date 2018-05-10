@@ -1,7 +1,7 @@
 From 734668238fcc0ef691a080839e04f33854fa133a Mon Sep 17 00:00:00 2001
 From: Eric Biggers <ebiggers@google.com>
 Date: Thu, 29 Jun 2017 13:27:49 +0000
-Subject: [PATCH 043/236] Allow GRUB to mount ext2/3/4 filesystems that have
+Subject: [PATCH 043/238] Allow GRUB to mount ext2/3/4 filesystems that have
  the encryption feature.
 
 On such a filesystem, inodes may have EXT4_ENCRYPT_FLAG set.
@@ -136,5 +136,5 @@ index 88cbe7365e9..fd7e0f14b68 100644
  		    MKE2FS_DEVICE_SECTSIZE=$SECSIZE "mkfs.$fs" -b $BLKSIZE -L "$FSLABEL" -q "${MOUNTDEVICE}" ;;
  		xxfs)
 -- 
-2.15.0
+2.17.0
 

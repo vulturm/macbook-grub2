@@ -1,7 +1,7 @@
 From 8ece44c2c8f88f531ac9a679f65a263e7b6d2dba Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 11 Sep 2015 17:30:49 -0400
-Subject: [PATCH 134/236] Be more aggro about actually using the *configured*
+Subject: [PATCH 134/238] Be more aggro about actually using the *configured*
  network device.
 
 Right now we use any SNP device with the same mac+IP block, but when
@@ -220,5 +220,5 @@ index c7c9f0e1db1..97b9aa7a4d7 100644
  #define GRUB_EFI_DEVICE_PATH_SUBTYPE(dp)	((dp)->subtype)
  #define GRUB_EFI_DEVICE_PATH_LENGTH(dp)		((dp)->length)
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From a35ac854308b0af7c86c2c7b199f6abdfa2110b0 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 17:32:15 +0200
-Subject: [PATCH 014/236] mkimage: Pass layout to mkimage_generate_elfXX rather
+Subject: [PATCH 014/238] mkimage: Pass layout to mkimage_generate_elfXX rather
  than some fields.
 
 This allows easier extension of this function without having too long of
@@ -164,5 +164,5 @@ index 1a18708a89c..b3a5ca132bc 100644
  struct grub_install_image_target_desc
  {
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 38bfcd3054c28aa40234840c12d900f1d18a217d Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 8 Aug 2017 12:48:04 -0400
-Subject: [PATCH 064/236] re-write .gitignore
+Subject: [PATCH 064/238] re-write .gitignore
 
 ---
  .gitignore                        | 352 ++++++++++++--------------------------
@@ -496,5 +496,5 @@ index 00000000000..b7e1eb12428
 @@ -0,0 +1 @@
 +grub
 -- 
-2.15.0
+2.17.0
 

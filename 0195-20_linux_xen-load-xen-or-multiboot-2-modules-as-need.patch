@@ -1,7 +1,7 @@
 From 92d3db585076d022521ab94a2ceed03eb05013fc Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 19 Oct 2017 11:29:11 -0400
-Subject: [PATCH 195/236] 20_linux_xen: load xen or multiboot{,2} modules as
+Subject: [PATCH 195/238] 20_linux_xen: load xen or multiboot{,2} modules as
  needed.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
@@ -31,5 +31,5 @@ index fae1ffe9494..fc53bd54231 100644
  EOF
    fi
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 68bdf29eb6e376a3b4a817bbe7481efd12b8f9de Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Fri, 22 Jan 2016 14:10:30 +0100
-Subject: [PATCH 141/236] efiemu: Fix compilation failure
+Subject: [PATCH 141/238] efiemu: Fix compilation failure
 
 (cherry picked from commit b6a03dfd327489d53ee07c6d7d593b99c7b7cb62)
 
@@ -26,5 +26,5 @@ index 92e7df7e501..52a032f7b2e 100644
  					GRUB_EFI_PERSISTENT_MEMORY);
        default:
 -- 
-2.15.0
+2.17.0
 

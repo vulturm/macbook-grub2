@@ -1,7 +1,7 @@
 From 87c089b6f1945ebcc690697d279c74284f1b4072 Mon Sep 17 00:00:00 2001
 From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 Date: Mon, 28 Aug 2017 13:59:12 -0400
-Subject: [PATCH 194/236] Use grub-file to figure out whether multiboot2 should
+Subject: [PATCH 194/238] Use grub-file to figure out whether multiboot2 should
  be used for Xen.gz
 
 The multiboot2 is much more preferable than multiboot. Especiall
@@ -29,5 +29,5 @@ index 9b1bd716965..fae1ffe9494 100644
      while [ "x$list" != "x" ] ; do
  	linux=`version_find_latest $list`
 -- 
-2.15.0
+2.17.0
 

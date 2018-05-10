@@ -1,7 +1,7 @@
 From 8dc21ff37f62f3d10fb3d708ffd33b7d723a23cf Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:31:52 -0500
-Subject: [PATCH 164/236] linuxefi: minor cleanups
+Subject: [PATCH 164/238] linuxefi: minor cleanups
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -85,5 +85,5 @@ index 010bf982d80..8b5a817b9d1 100644
    return grub_errno;
  }
 -- 
-2.15.0
+2.17.0
 

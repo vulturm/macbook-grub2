@@ -1,7 +1,7 @@
 From 8eed7be8a61c295df700e918744a984162378ca9 Mon Sep 17 00:00:00 2001
 From: Fu Wei <fu.wei@linaro.org>
 Date: Sun, 14 May 2017 15:43:45 +0800
-Subject: [PATCH 039/236] arm64: Add "--nounzip" option support in xen_module
+Subject: [PATCH 039/238] arm64: Add "--nounzip" option support in xen_module
  command
 
 This patch adds "--nounzip" option support in order to
@@ -52,5 +52,5 @@ index 8ae43d7e894..27ede46cac5 100644
    if (!file)
      goto fail;
 -- 
-2.15.0
+2.17.0
 

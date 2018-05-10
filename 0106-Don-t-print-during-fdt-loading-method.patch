@@ -1,7 +1,7 @@
 From aedf2aceb354ab7bf28bbf70d0a4b505c0adcfdf Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Jan 2014 16:15:46 -0500
-Subject: [PATCH 106/236] Don't print during fdt loading method.
+Subject: [PATCH 106/238] Don't print during fdt loading method.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -23,5 +23,5 @@ index 191aebe80bb..452a9f69d28 100644
  EOF
    fi
 -- 
-2.15.0
+2.17.0
 

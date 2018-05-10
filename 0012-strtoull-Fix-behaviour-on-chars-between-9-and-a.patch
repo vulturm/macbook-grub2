@@ -1,7 +1,7 @@
 From dc6e1b5af83eb1c4290baf97c2d221c0865127be Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 10 Aug 2016 17:49:42 +0200
-Subject: [PATCH 012/236] strtoull: Fix behaviour on chars between '9' and 'a'.
+Subject: [PATCH 012/238] strtoull: Fix behaviour on chars between '9' and 'a'.
 
 Reported by: Aaron Miller <aaronmiller@fb.com>
 ---
@@ -64,5 +64,5 @@ index d4822a12456..96781fb39b5 100644
        ok = ok && !grub_test_run (test);
        grub_errno = 0;
 -- 
-2.15.0
+2.17.0
 

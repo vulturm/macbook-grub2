@@ -1,7 +1,7 @@
 From d08c9685149e7788001ac9a209baa1d84c3628e0 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 17:47:57 +0200
-Subject: [PATCH 015/236] Refactor arm-uboot code to make it genereic.
+Subject: [PATCH 015/238] Refactor arm-uboot code to make it genereic.
 
 arm-coreboot startup code can be very similar to arm-uboot but current code has
 U-Boot specific references. So split U-Boot part from generic part.
@@ -401,5 +401,5 @@ index 00000000000..d128775f19e
 +
 +	END
 -- 
-2.15.0
+2.17.0
 

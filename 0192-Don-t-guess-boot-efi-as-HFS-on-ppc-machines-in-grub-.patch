@@ -1,7 +1,7 @@
 From 351799d9310a4bec23ed4074444780c2a35435fd Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 20 Apr 2017 13:29:06 -0400
-Subject: [PATCH 192/236] Don't guess /boot/efi/ as HFS+ on ppc machines in
+Subject: [PATCH 192/238] Don't guess /boot/efi/ as HFS+ on ppc machines in
  grub-install
 
 This should never be trying this, and since we've consolidated the
@@ -40,5 +40,5 @@ index cd84a72b97b..48f2abc3ea5 100644
  	    {
  	      free (d);
 -- 
-2.15.0
+2.17.0
 

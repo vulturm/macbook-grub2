@@ -1,7 +1,7 @@
 From 5a0c548ba388b343b0bb6d2a38888e7eac5bbb96 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 03:47:13 +0300
-Subject: [PATCH 002/236] Remove bashisms from tests.
+Subject: [PATCH 002/238] Remove bashisms from tests.
 
 Those tests don't actually need bash. Just use common shebang.
 ---
@@ -129,5 +129,5 @@ index d5ef7f9ea62..80ebdc59fd5 100644
  # create a randome file
  file="`mktemp "${TMPDIR:-/tmp}/tmp.XXXXXXXXXX"`" || exit 1
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 8c9465fac901caac6802d6872a1374518b001517 Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Thu, 3 Aug 2017 11:04:24 +0100
-Subject: [PATCH 058/236] efi: move fdt helper library
+Subject: [PATCH 058/238] efi: move fdt helper library
 
 There is nothing ARM64 (or even ARM) specific about the efi fdt helper
 library, which is used for locating or overriding a firmware-provided
@@ -89,5 +89,5 @@ similarity index 100%
 rename from include/grub/arm64/fdtload.h
 rename to include/grub/efi/fdtload.h
 -- 
-2.15.0
+2.17.0
 

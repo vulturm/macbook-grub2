@@ -1,7 +1,7 @@
 From 656c3b0d7fbe23f0e1ab561c8faa4ac4a37364d1 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:00:06 +0200
-Subject: [PATCH 026/236] arm_coreboot: Support loading linux images.
+Subject: [PATCH 026/238] arm_coreboot: Support loading linux images.
 
 ---
  grub-core/loader/arm/linux.c | 132 ++++++++++++++++++++++---------------------
@@ -298,5 +298,5 @@ index a66caad13db..f217f8281ad 100644
  
  #define FDT_ADDITIONAL_ENTRIES_SIZE	0x300
 -- 
-2.15.0
+2.17.0
 

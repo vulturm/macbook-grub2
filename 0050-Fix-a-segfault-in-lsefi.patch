@@ -1,7 +1,7 @@
 From e8ab5a1a9e2889eb59d1fa494ba441a53698dcd2 Mon Sep 17 00:00:00 2001
 From: Rob Clark <rclark@redhat.com>
 Date: Wed, 19 Jul 2017 15:47:41 -0400
-Subject: [PATCH 050/236] Fix a segfault in lsefi
+Subject: [PATCH 050/238] Fix a segfault in lsefi
 
 when protocols_per_handle returns error, we can't use the pointers we
 passed to it, and that includes trusting num_protocols.
@@ -29,5 +29,5 @@ index d901c389263..d1ce99af438 100644
  	{
  	  for (k = 0; k < ARRAY_SIZE (known_protocols); k++)
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From d4b4184078610a3639fa1e0e463679c424496c3b Mon Sep 17 00:00:00 2001
 From: Robert Marshall <rmarshall@redhat.com>
 Date: Mon, 16 Mar 2015 16:34:51 -0400
-Subject: [PATCH 124/236] Update info with grub.cfg netboot selection order
+Subject: [PATCH 124/238] Update info with grub.cfg netboot selection order
  (#1148650)
 
 Added documentation to the grub info page that specifies the order
@@ -66,5 +66,5 @@ index 6fdd2a041f7..15a90b26e4d 100644
  @samp{(tftp)} device.
  
 -- 
-2.15.0
+2.17.0
 

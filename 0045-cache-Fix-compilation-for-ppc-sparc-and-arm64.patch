@@ -1,7 +1,7 @@
 From d8901e3ba115d705c9c08ecedd201aca8b4867b8 Mon Sep 17 00:00:00 2001
 From: phcoder <phcoder@sid.debian.laptop.phnet>
 Date: Sun, 9 Jul 2017 20:59:15 +0200
-Subject: [PATCH 045/236] cache: Fix compilation for ppc, sparc and arm64
+Subject: [PATCH 045/238] cache: Fix compilation for ppc, sparc and arm64
 
 ---
  include/grub/cache.h | 4 +++-
@@ -23,5 +23,5 @@ index 1c98ce270b6..ccfa717e669 100644
  grub_arch_sync_dma_caches (volatile void *address __attribute__ ((unused)),
  			   grub_size_t len __attribute__ ((unused)))
 -- 
-2.15.0
+2.17.0
 

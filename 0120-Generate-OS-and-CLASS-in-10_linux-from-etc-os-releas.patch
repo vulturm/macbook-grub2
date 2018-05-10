@@ -1,7 +1,7 @@
 From c8d93b9e27e9cbf51e91f6cc99abbcb7b68189ce Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 4 Sep 2014 14:23:23 -0400
-Subject: [PATCH 120/236] Generate OS and CLASS in 10_linux from
+Subject: [PATCH 120/238] Generate OS and CLASS in 10_linux from
  /etc/os-release
 
 This makes us use pretty names in the titles we generate in
@@ -29,5 +29,5 @@ index a9692a0c2a2..c6627268cca 100644
    OS="${GRUB_DISTRIBUTOR}"
    CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1|LC_ALL=C sed 's,[^[:alnum:]_],_,g') ${CLASS}"
 -- 
-2.15.0
+2.17.0
 

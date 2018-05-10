@@ -1,7 +1,7 @@
 From 216950a4eea1a1ead1c28eaca94e34ea2ef2ad19 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:41:22 +0200
-Subject: [PATCH 023/236] at_keyboard: Split protocol from controller code.
+Subject: [PATCH 023/238] at_keyboard: Split protocol from controller code.
 
 On vexpress controller is different but protocol is the same, so reuse the
 code.
@@ -1024,5 +1024,5 @@ index 00000000000..4f2e527e497
 +
 +#endif
 -- 
-2.15.0
+2.17.0
 

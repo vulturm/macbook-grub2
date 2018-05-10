@@ -1,7 +1,7 @@
 From 608bec51128008afb81c9e3f297283e9f830a146 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 20:21:05 +0300
-Subject: [PATCH 006/236] Support lseek64.
+Subject: [PATCH 006/238] Support lseek64.
 
 Android doesn't have 64-bit off_t, so use off64_t instead.
 ---
@@ -50,5 +50,5 @@ index 2a8c5882e3d..5450cf4166e 100644
  }
  
 -- 
-2.15.0
+2.17.0
 

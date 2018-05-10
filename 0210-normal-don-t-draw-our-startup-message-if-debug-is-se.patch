@@ -1,7 +1,7 @@
 From 81d0e079ea5aa6f43daf12f7a8698d0bcd1a36f8 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 9 Nov 2017 15:58:52 -0500
-Subject: [PATCH 210/236] normal: don't draw our startup message if debug is
+Subject: [PATCH 210/238] normal: don't draw our startup message if debug is
  set
 
 ---
@@ -23,5 +23,5 @@ index b69f9e738fa..04ae9ed02f6 100644
  				    "the first word, TAB lists possible command completions. Anywhere "
  				    "else TAB lists possible device or file completions. %s"),
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From c1694574d6eb287e6e181dd018fe54b718a613b3 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Sun, 9 Aug 2015 16:32:29 -0700
-Subject: [PATCH 220/236] Measure the kernel commandline
+Subject: [PATCH 220/238] Measure the kernel commandline
 
 Measure the kernel commandline to ensure that it hasn't been modified
 ---
@@ -39,5 +39,5 @@ index 970ea868c14..6b56304d4a7 100644
    return i;
  }
 -- 
-2.15.0
+2.17.0
 

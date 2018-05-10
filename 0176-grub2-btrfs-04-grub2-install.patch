@@ -1,7 +1,7 @@
 From e03dd83cc804d70af0716d0a429715afbcdc7eae Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 21 Aug 2014 03:39:11 +0000
-Subject: [PATCH 176/236] grub2-btrfs-04-grub2-install
+Subject: [PATCH 176/238] grub2-btrfs-04-grub2-install
 
 ---
  grub-core/osdep/linux/getroot.c |  7 +++++++
@@ -173,5 +173,5 @@ index 875d5896ce1..c9a7e5f4ade 100644
  
  void
 -- 
-2.15.0
+2.17.0
 

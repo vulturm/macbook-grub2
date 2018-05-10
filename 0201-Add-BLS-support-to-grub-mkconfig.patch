@@ -1,7 +1,7 @@
 From d847a4806bb7a4f3b457d0074d712e500fbd5e97 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:40:29 -0500
-Subject: [PATCH 201/236] Add BLS support to grub-mkconfig
+Subject: [PATCH 201/238] Add BLS support to grub-mkconfig
 
 GRUB now has BootLoaderSpec support, the user can choose to use this by
 setting GRUB_ENABLE_BLSCFG to true in /etc/default/grub. On this setup,
@@ -166,5 +166,5 @@ index 7e78ad33636..f5daefb9d24 100644
      # "UUID=" and "ZFS=" magic is parsed by initrd or initramfs.  Since there's
      # no initrd or builtin initramfs, it can't work here.
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 5c3fd1b135bd73c8e3467b9b635b25ca4d360a19 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 08:47:34 +0200
-Subject: [PATCH 033/236] arm_coreboot: Add Chromebook keyboard driver.
+Subject: [PATCH 033/238] arm_coreboot: Add Chromebook keyboard driver.
 
 ---
  grub-core/term/arm/cros.c    | 125 +++++++++++++++++++++++
@@ -415,5 +415,5 @@ index 00000000000..45a372572a5
 +
 +#endif
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 58fba65b7e339d4c7279e4ca88937d9501275169 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 4 Mar 2016 15:13:59 -0500
-Subject: [PATCH 117/236] Revert "reopen SNP protocol for exclusive use by
+Subject: [PATCH 117/238] Revert "reopen SNP protocol for exclusive use by
  grub"
 
 This reverts commit a3f2c756ce34c9666bddef35e3b3b85ccecdcffc , which is
@@ -51,5 +51,5 @@ index ea0e0ca360e..5388f952ba9 100644
    }
  }
 -- 
-2.15.0
+2.17.0
 

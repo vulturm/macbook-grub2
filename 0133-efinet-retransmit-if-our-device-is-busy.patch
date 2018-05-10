@@ -1,7 +1,7 @@
 From d09f32622f6fc247dd88f731c34be10395785d8d Mon Sep 17 00:00:00 2001
 From: Josef Bacik <jbacik@fb.com>
 Date: Mon, 31 Aug 2015 13:34:35 -0400
-Subject: [PATCH 133/236] efinet: retransmit if our device is busy
+Subject: [PATCH 133/238] efinet: retransmit if our device is busy
 
 When I fixed the txbuf handling I ripped out the retransmission code since it
 was flooding our network when we had the buggy behavior.  Turns out this was too
@@ -44,5 +44,5 @@ index 5388f952ba9..3f112438a93 100644
  	  return grub_error (GRUB_ERR_TIMEOUT,
  			     N_("couldn't send network packet"));
 -- 
-2.15.0
+2.17.0
 

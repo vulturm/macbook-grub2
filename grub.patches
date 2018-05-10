@@ -234,3 +234,5 @@ Patch0233: 0233-Make-grub2-switch-to-blscfg-to-generate-debug-BLS-wh.patch
 Patch0234: 0234-Make-grub2-switch-to-blscfg-to-generate-BLS-fragment.patch
 Patch0235: 0235-Only-attempt-to-query-dev-mounted-in-boot-efi-as-boo.patch
 Patch0236: 0236-Include-OSTree-path-when-searching-kernels-images-if.patch
+Patch0237: 0237-Use-BLS-version-field-to-compare-entries-if-id-field.patch
+Patch0238: 0238-Add-version-field-to-BLS-generated-by-grub2-switch-t.patch

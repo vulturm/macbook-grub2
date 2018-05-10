@@ -1,7 +1,7 @@
 From 030095a01a205aba04a0849ac0c0329ac429a9ed Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 25 Jun 2015 15:11:36 -0400
-Subject: [PATCH 214/236] Make a "gdb" dprintf that tells us load addresses.
+Subject: [PATCH 214/238] Make a "gdb" dprintf that tells us load addresses.
 
 This makes a grub_dprintf() call during platform init and during module
 loading that tells us the virtual addresses of the .text and .data
@@ -177,5 +177,5 @@ index 68326d96f5a..6702b312040 100644
  void grub_efi_mm_init (void);
  void grub_efi_mm_fini (void);
 -- 
-2.15.0
+2.17.0
 

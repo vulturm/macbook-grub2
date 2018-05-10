@@ -1,7 +1,7 @@
 From 33fb6113d65a819496d0b67b8db071fedad845a7 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Wed, 23 Mar 2016 16:49:42 -0700
-Subject: [PATCH 223/236] Fix boot when there's no TPM
+Subject: [PATCH 223/238] Fix boot when there's no TPM
 
 If the firmware has TPM support but has no TPM, we're jumping to core.img
 without popping the registers back onto the stack. Fix that.
@@ -28,5 +28,5 @@ index c1df86dec0b..acab37369ae 100644
  	jmp	*(LOCAL(kernel_address))
  
 -- 
-2.15.0
+2.17.0
 

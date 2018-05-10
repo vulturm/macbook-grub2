@@ -1,7 +1,7 @@
 From 058df7b5a9cc7aaa9872eaa916b715544a8f9840 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:10:26 +0200
-Subject: [PATCH 028/236] ehci: Split core  code from PCI part.
+Subject: [PATCH 028/238] ehci: Split core  code from PCI part.
 
 On ARM often EHCI is present without PCI and just declared in device
 tree. So splitcore from PCI part.
@@ -567,5 +567,5 @@ index 5f4297bb21e..c772e76546e 100644
    grub_usb_controller_dev_register (&usb_controller);
    grub_boot_time ("EHCI driver registered");
 -- 
-2.15.0
+2.17.0
 

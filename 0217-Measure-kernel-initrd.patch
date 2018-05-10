@@ -1,7 +1,7 @@
 From ffd305d09def6610ef96f928c0df8303c5529d63 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Thu, 16 Jul 2015 15:22:34 -0700
-Subject: [PATCH 217/236] Measure kernel + initrd
+Subject: [PATCH 217/238] Measure kernel + initrd
 
 Measure the kernel and initrd when loaded on UEFI systems
 ---
@@ -38,5 +38,5 @@ index 6db5d0bf3a0..48febdc8100 100644
    if (rc < 0)
      {
 -- 
-2.15.0
+2.17.0
 

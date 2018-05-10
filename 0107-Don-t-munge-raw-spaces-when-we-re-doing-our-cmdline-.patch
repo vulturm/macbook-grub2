@@ -1,7 +1,7 @@
 From f2790b1f7c8efcd5589c8fcdaca51b548ab9825c Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Mon, 30 Jun 2014 14:16:46 -0400
-Subject: [PATCH 107/236] Don't munge raw spaces when we're doing our cmdline
+Subject: [PATCH 107/238] Don't munge raw spaces when we're doing our cmdline
  escaping (#923374)
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
@@ -32,5 +32,5 @@ index 0a5b2afb94b..970ea868c14 100644
  	    {
  	      *buf++ = *c++;
 -- 
-2.15.0
+2.17.0
 

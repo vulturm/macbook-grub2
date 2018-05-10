@@ -1,7 +1,7 @@
 From 1073ddb12078f3c8edbdb74bb8f5afc674983f40 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 14:52:48 +0300
-Subject: [PATCH 009/236] Add termux path to dict.
+Subject: [PATCH 009/238] Add termux path to dict.
 
 ---
  tests/util/grub-fs-tester.in | 2 +-
@@ -21,5 +21,5 @@ index bf47305f3e8..468d9e7856d 100644
  		    CFILESRC="$cand"
  		    break
 -- 
-2.15.0
+2.17.0
 

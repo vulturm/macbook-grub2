@@ -1,7 +1,7 @@
 From 65be94a64a5608209561ba0914d29445d81bf4b2 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 14 Jul 2015 17:06:35 -0700
-Subject: [PATCH 216/236] Core TPM support
+Subject: [PATCH 216/238] Core TPM support
 
 Add support for performing basic TPM measurements. Right now this only
 supports extending PCRs statically and only on UEFI and BIOS systems, but
@@ -785,5 +785,5 @@ index 5c7a2c8f808..84b076962d8 100644
  
  if COND_i386_pc
 -- 
-2.15.0
+2.17.0
 

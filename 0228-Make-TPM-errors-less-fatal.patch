@@ -1,7 +1,7 @@
 From 406f7dda0cc2689170f102341a546c87072d1ce5 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Thu, 13 Oct 2016 13:55:26 -0700
-Subject: [PATCH 228/236] Make TPM errors less fatal
+Subject: [PATCH 228/238] Make TPM errors less fatal
 
 Handle TPM errors, and stop trying to use the TPM once we hit one.
 ---
@@ -207,5 +207,5 @@ index 976643c47b0..93965777138 100644
    invert = 0;
    argc = argv.argc - 1;
 -- 
-2.15.0
+2.17.0
 

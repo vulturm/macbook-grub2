@@ -1,7 +1,7 @@
 From 2485633ada06c11c07a34a696a92b14e58f1e846 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 27 Feb 2018 13:55:35 -0500
-Subject: [PATCH 198/236] align struct efi_variable better...
+Subject: [PATCH 198/238] align struct efi_variable better...
 
 ---
  include/grub/efiemu/runtime.h | 2 +-
@@ -32,5 +32,5 @@ index b93e4820194..f6a9723971d 100644
  #ifdef GRUB_BUILD
  # define GRUB_CPU_SIZEOF_VOID_P	BUILD_SIZEOF_VOID_P
 -- 
-2.15.0
+2.17.0
 

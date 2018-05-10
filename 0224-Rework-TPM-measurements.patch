@@ -1,7 +1,7 @@
 From 415072bbda8b4de133c6dc6add230e41ee6d9579 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Wed, 23 Mar 2016 17:03:43 -0700
-Subject: [PATCH 224/236] Rework TPM measurements
+Subject: [PATCH 224/238] Rework TPM measurements
 
 Rework TPM measurements to use fewer PCRs. After discussion with upstream,
 it's preferable to avoid using so many PCRs. Instead, measure into PCRs 8
@@ -215,5 +215,5 @@ index 7fc9d77d277..ecb2d09ff5d 100644
  #if defined (GRUB_MACHINE_EFI) || defined (GRUB_MACHINE_PCBIOS)
  grub_err_t grub_tpm_execute(PassThroughToTPM_InputParamBlock *inbuf,
 -- 
-2.15.0
+2.17.0
 

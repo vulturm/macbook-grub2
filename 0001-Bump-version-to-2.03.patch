@@ -1,7 +1,7 @@
 From b0bad6fd9449d3333fe1ab58953c0e6c1ce12c0d Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 3 May 2017 11:55:52 +0200
-Subject: [PATCH 001/236] Bump version to 2.03
+Subject: [PATCH 001/238] Bump version to 2.03
 
 ---
  configure.ac                |   2 +-
@@ -226,5 +226,5 @@ index 68d8ce7c775..921e57ff48d 100644
    { "videotest", 800, 600, 0x2, 16, 8, 1, 0, 0, 0, 0, 0, 0, 0, 0 /* 800x600xi16 */, (grub_uint32_t []) { 0x7033079c, 0x7033079c, 0x7033079c, 0x7033079c, 0x7033079c, }, 5 },
    { "videotest", 1024, 768, 0x2, 16, 8, 1, 0, 0, 0, 0, 0, 0, 0, 0 /* 1024x768xi16 */, (grub_uint32_t []) { 0xff583fbf, 0xff583fbf, 0xff583fbf, 0xff583fbf, 0xff583fbf, }, 5 },
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 8521929bcf671b465d6450b969d11617b6aec608 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 25 Jun 2015 15:41:06 -0400
-Subject: [PATCH 212/236] Make it possible to enabled --build-id=sha1
+Subject: [PATCH 212/238] Make it possible to enabled --build-id=sha1
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -60,5 +60,5 @@ index 78cdf6e1d01..242e829ff23 100644
  AC_DEFUN([grub_PROG_NM_WORKS],
  [AC_MSG_CHECKING([whether nm works])
 -- 
-2.15.0
+2.17.0
 

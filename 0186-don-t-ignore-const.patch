@@ -1,7 +1,7 @@
 From d06e2578107f217d2bc8beee7fd0dc7f2645873d Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:43:22 -0400
-Subject: [PATCH 186/236] don't ignore const
+Subject: [PATCH 186/238] don't ignore const
 
 ---
  grub-core/net/tftp.c | 2 +-
@@ -21,5 +21,5 @@ index dcd82494309..f90071353ad 100644
    while (*src != '\0')
      {
 -- 
-2.15.0
+2.17.0
 

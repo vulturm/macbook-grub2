@@ -1,7 +1,7 @@
 From fa42786264cef98c56e972b3bb6b8448000e1c70 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Thu, 3 Aug 2017 15:46:15 +0100
-Subject: [PATCH 051/236] zfs: remove size_t typedef and use grub_size_t
+Subject: [PATCH 051/238] zfs: remove size_t typedef and use grub_size_t
  instead
 
 * Prevents some toolchains from issuing a warning on size_t redef.
@@ -55,5 +55,5 @@ index 2f73449f0d4..5453822d025 100644
  			const int dec2 = 0;
  #endif
 -- 
-2.15.0
+2.17.0
 

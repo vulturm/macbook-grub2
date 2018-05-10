@@ -1,7 +1,7 @@
 From 265292f2b0da0eb414c409871ba0f94a99ec33c1 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:06:04 +0200
-Subject: [PATCH 027/236] arm_coreboot: Support DMA.
+Subject: [PATCH 027/238] arm_coreboot: Support DMA.
 
 This is needed to support USB and some other busses.
 ---
@@ -288,5 +288,5 @@ index a2aaf9f54b0..10451384720 100644
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/fdtbus.h
  endif
 -- 
-2.15.0
+2.17.0
 

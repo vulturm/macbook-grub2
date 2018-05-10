@@ -1,7 +1,7 @@
 From 6d86c59c24e12c8e8471cdd2affca574fdee160d Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:44:59 -0400
-Subject: [PATCH 187/236] don't use int for efi status
+Subject: [PATCH 187/238] don't use int for efi status
 
 ---
  grub-core/kern/efi/efi.c | 2 +-
@@ -21,5 +21,5 @@ index 866fc20e162..91f75fdb89a 100644
    if (retval == 0)
      rc = GRUB_EFI_SUCCESS;
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From c29e260c9f41f4f802fa852b6c46fb2e5d912cb6 Mon Sep 17 00:00:00 2001
 From: Marcel Kolaja <mkolaja@redhat.com>
 Date: Tue, 21 Jan 2014 10:57:08 -0500
-Subject: [PATCH 068/236] Honor a symlink when generating configuration by
+Subject: [PATCH 068/238] Honor a symlink when generating configuration by
  grub2-mkconfig
 
 Honor a symlink when generating configuration by grub2-mkconfig, so that
@@ -25,5 +25,5 @@ index f8496d28bdf..3b070fd7632 100644
  fi
  
 -- 
-2.15.0
+2.17.0
 

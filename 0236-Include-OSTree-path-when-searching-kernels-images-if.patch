@@ -1,7 +1,7 @@
 From 459eaeacbb40116dcb501cf165c7816e70c66fb3 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 24 Apr 2018 02:28:04 +0200
-Subject: [PATCH 236/236] Include OSTree path when searching kernels images if
+Subject: [PATCH 236/238] Include OSTree path when searching kernels images if
  BLS config is enabled
 
 The OSTree based distros (i.e: Fedora Atomic) don't install kernel images
@@ -37,5 +37,5 @@ index c2ffc77398f..15ba8eff8a6 100644
      i?86) GENKERNEL_ARCH="x86" ;;
      mips|mips64) GENKERNEL_ARCH="mips" ;;
 -- 
-2.15.0
+2.17.0
 

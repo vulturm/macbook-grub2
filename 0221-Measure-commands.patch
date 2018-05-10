@@ -1,7 +1,7 @@
 From c93a27f2e6a323a4985e6fe902eb5c6447fca572 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@srcf.ucam.org>
 Date: Mon, 10 Aug 2015 15:27:12 -0700
-Subject: [PATCH 221/236] Measure commands
+Subject: [PATCH 221/238] Measure commands
 
 Measure each command executed by grub, which includes script execution.
 ---
@@ -72,5 +72,5 @@ index 40d3cf65ba6..7fc9d77d277 100644
  #define TPM_TAG_RQU_COMMAND 0x00C1
  #define TPM_ORD_Extend 0x14
 -- 
-2.15.0
+2.17.0
 

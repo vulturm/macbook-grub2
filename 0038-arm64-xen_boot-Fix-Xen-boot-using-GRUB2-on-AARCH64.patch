@@ -1,7 +1,7 @@
 From ae5817f1dcbf0b99f7a849f56afe442165317840 Mon Sep 17 00:00:00 2001
 From: Julien Grall <julien.grall@linaro.org>
 Date: Fri, 19 Feb 2016 16:28:52 +0000
-Subject: [PATCH 038/236] arm64/xen_boot: Fix Xen boot using GRUB2 on AARCH64
+Subject: [PATCH 038/238] arm64/xen_boot: Fix Xen boot using GRUB2 on AARCH64
 
 Xen is currently crashing because of malformed compatible property for
 the boot module. This is because the property string is not
@@ -28,5 +28,5 @@ index a914eb8e2df..8ae43d7e894 100644
      return grub_error (GRUB_ERR_IO, "failed to update FDT");
  
 -- 
-2.15.0
+2.17.0
 

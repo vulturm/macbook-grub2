@@ -1,7 +1,7 @@
 From 84d6a482c2c8d0677141bb888512a6a89daf9d8b Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Fri, 22 May 2015 11:45:25 +0000
-Subject: [PATCH 178/236] grub2-btrfs-06-subvol-mount
+Subject: [PATCH 178/238] grub2-btrfs-06-subvol-mount
 
 ---
  grub-core/fs/btrfs.c            | 195 +++++++++++++++++++++++++++++++++++++++-
@@ -536,5 +536,5 @@ index 73fa2d34abb..9c642ae3fe3 100644
  void
  grub_util_pull_devmapper (const char *os_dev);
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 41a50aa2c275076caa2f9fe7a747eeb054abed16 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:42:57 -0400
-Subject: [PATCH 185/236] Don't use dynamic sized arrays since we don't build
+Subject: [PATCH 185/238] Don't use dynamic sized arrays since we don't build
  with -std=c99
 
 ---
@@ -42,5 +42,5 @@ index 4be228d9576..fa3e2912643 100644
          {
            grub_strcpy (suffix, client_uuid);
 -- 
-2.15.0
+2.17.0
 

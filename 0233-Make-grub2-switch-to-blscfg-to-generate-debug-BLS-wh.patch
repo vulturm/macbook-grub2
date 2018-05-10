@@ -1,7 +1,7 @@
 From 55b00d518e029a563653401c6908489924c07238 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Wed, 11 Apr 2018 11:49:24 +0200
-Subject: [PATCH 233/236] Make grub2-switch-to-blscfg to generate debug BLS
+Subject: [PATCH 233/238] Make grub2-switch-to-blscfg to generate debug BLS
  when MAKEDEBUG is set
 
 If MAKEDEBUG=yes in /etc/sysconfig/kernel, then a debug menu entry should
@@ -57,5 +57,5 @@ index eae3c379e4a..c59299ffa6a 100644
  
  GENERATE=0
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From d9f7de0ae3c0c09cff7257c55418450261f3e082 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Mon, 23 Dec 2013 12:32:02 -0200
-Subject: [PATCH 013/236] Add Virtual LAN support.
+Subject: [PATCH 013/238] Add Virtual LAN support.
 
 This patch adds support for virtual LAN (VLAN) tagging. VLAN tagging allows
 multiple VLANs in a bridged network to share the same physical network link
@@ -345,5 +345,5 @@ index dcceaa56894..ab9d68f9825 100644
  grub_err_t
  grub_net_send_ip_packet (struct grub_net_network_level_interface *inf,
 -- 
-2.15.0
+2.17.0
 

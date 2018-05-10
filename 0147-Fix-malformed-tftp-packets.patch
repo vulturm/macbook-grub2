@@ -1,7 +1,7 @@
 From 7d05a8298e6a54bfae0038841462443f21da3535 Mon Sep 17 00:00:00 2001
 From: Mark Salter <msalter@redhat.com>
 Date: Tue, 7 Mar 2017 18:26:17 -0500
-Subject: [PATCH 147/236] Fix malformed tftp packets
+Subject: [PATCH 147/238] Fix malformed tftp packets
 
 0088-Normalize-slashes-in-tftp-paths.patch collapses multiple contiguous
 slashes in a filename into one slash in the tftp packet filename field.
@@ -31,5 +31,5 @@ index 5ca0a96a6f6..dcd82494309 100644
    grub_strcpy (rrq, "octet");
    rrqlen += grub_strlen ("octet") + 1;
 -- 
-2.15.0
+2.17.0
 

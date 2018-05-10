@@ -1,7 +1,7 @@
 From c71e6152ea8e4e525a853441bb5f08808bae3afd Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 23 Sep 2014 09:58:49 -0400
-Subject: [PATCH 157/236] Fix up some man pages rpmdiff noticed.
+Subject: [PATCH 157/238] Fix up some man pages rpmdiff noticed.
 
 ---
  configure.ac             |  2 ++
@@ -149,5 +149,5 @@ index 00000000000..85309482718
 +.SH SEE ALSO
 +.BR "info grub"
 -- 
-2.15.0
+2.17.0
 

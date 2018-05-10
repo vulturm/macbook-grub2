@@ -1,7 +1,7 @@
 From 9808c3ef956c6472a96790b60cf74f4eaa742010 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 19:37:29 +0200
-Subject: [PATCH 018/236] Rename uboot/datetime to dummy/datetime.
+Subject: [PATCH 018/238] Rename uboot/datetime to dummy/datetime.
 
 It's just a stub and is not UBoot-specific.
 ---
@@ -54,5 +54,5 @@ index 4be716928a5..cf693fc6b62 100644
 +		     "can\'t set datetime on this machine");
  }
 -- 
-2.15.0
+2.17.0
 

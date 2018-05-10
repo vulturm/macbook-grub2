@@ -1,7 +1,7 @@
 From c4b8bec5fee4e30a165fd14a188cf3ab8eccd095 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 14:27:52 +0200
-Subject: [PATCH 036/236] at_keyboard: Fix falco chromebook case.
+Subject: [PATCH 036/238] at_keyboard: Fix falco chromebook case.
 
 EC is slow, so we need few delays for it to toggle the bits correctly.
 
@@ -85,5 +85,5 @@ index b031523eb7d..bcb4d9ba78f 100644
  #define KEYBOARD_ISMAKE(x)	!((x) & 0x80)
  #define KEYBOARD_ISREADY(x)	((x) & 0x01)
 -- 
-2.15.0
+2.17.0
 

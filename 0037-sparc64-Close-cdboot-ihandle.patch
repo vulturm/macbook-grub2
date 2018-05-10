@@ -1,7 +1,7 @@
 From bd4e40aadded7093908d786d03b4acf60b7b1707 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Thu, 11 May 2017 18:42:23 -0700
-Subject: [PATCH 037/236] sparc64: Close cdboot ihandle
+Subject: [PATCH 037/238] sparc64: Close cdboot ihandle
 
 The ihandle is left open with a cd-core image.  This will cause a delay
 booting grub from a virtual cdrom in a LDOM.  It will also cause problems
@@ -44,5 +44,5 @@ index 586efb4014e..9ea9b4e0662 100644
  	 mov	512, %o3
  #endif
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 8c4b2eaa204f0ea0377ca4592d2be6029fdb9be7 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Sun, 28 Jun 2015 13:09:58 -0400
-Subject: [PATCH 213/236] Add grub_qdprintf() - grub_dprintf() without the
+Subject: [PATCH 213/238] Add grub_qdprintf() - grub_dprintf() without the
  file+line number.
 
 This just makes copy+paste of our debug loading info easier.
@@ -55,5 +55,5 @@ index 493e328d968..4607e8defa9 100644
  int EXPORT_FUNC(grub_snprintf) (char *str, grub_size_t n, const char *fmt, ...)
       __attribute__ ((format (GNU_PRINTF, 3, 4)));
 -- 
-2.15.0
+2.17.0
 

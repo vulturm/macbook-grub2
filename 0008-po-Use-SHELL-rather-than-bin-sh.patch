@@ -1,7 +1,7 @@
 From 4341f82af0b61d3dfbe675670d4105dc759c0df3 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 23 Jan 2017 14:54:03 +0300
-Subject: [PATCH 008/236] po: Use @SHELL@ rather than /bin/sh.
+Subject: [PATCH 008/238] po: Use @SHELL@ rather than /bin/sh.
 
 /bin/sh might not exist.
 ---
@@ -22,5 +22,5 @@ index 3619458e85f..e68e9da843d 100644
  
  srcdir = @srcdir@
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From 8afe59812e83e78564697ef8241ed4f1b3527423 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 24 Apr 2018 02:16:38 +0200
-Subject: [PATCH 235/236] Only attempt to query dev mounted in /boot/efi as
+Subject: [PATCH 235/238] Only attempt to query dev mounted in /boot/efi as
  boot dev on EFI machines
 
 The 10_linux script calls grub2-probe to probe the information for the dev
@@ -39,5 +39,5 @@ index b24bb410dc0..c2ffc77398f 100644
      cat << EOF
  insmod blscfg
 -- 
-2.15.0
+2.17.0
 

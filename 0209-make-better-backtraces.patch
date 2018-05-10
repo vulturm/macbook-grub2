@@ -1,7 +1,7 @@
 From 318ee04aadcda40b779b2a5314dd23ead165f896 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 6 Nov 2017 18:31:56 -0500
-Subject: [PATCH 209/236] make better backtraces
+Subject: [PATCH 209/238] make better backtraces
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -883,5 +883,5 @@ index 75e8715e631..5c7a2c8f808 100644
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/command.h
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/device.h
 -- 
-2.15.0
+2.17.0
 

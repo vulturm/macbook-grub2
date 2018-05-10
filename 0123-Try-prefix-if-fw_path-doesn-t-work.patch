@@ -1,7 +1,7 @@
 From 3846b040f1050f246e1e975ee88f22c687ae04bf Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 3 Oct 2014 11:08:03 -0400
-Subject: [PATCH 123/236] Try $prefix if $fw_path doesn't work.
+Subject: [PATCH 123/238] Try $prefix if $fw_path doesn't work.
 
 Related: rhbz#1148652
 
@@ -207,5 +207,5 @@ index 7d9c4f09b9b..b69f9e738fa 100644
  }
  
 -- 
-2.15.0
+2.17.0
 

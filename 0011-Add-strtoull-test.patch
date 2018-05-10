@@ -1,7 +1,7 @@
 From ede6c9689395499f98a4c14d76b97151b4de5f54 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 3 May 2017 12:58:15 +0200
-Subject: [PATCH 011/236] Add strtoull test.
+Subject: [PATCH 011/238] Add strtoull test.
 
 ---
  grub-core/Makefile.core.def | 5 +++++
@@ -24,5 +24,5 @@ index 2dfa22a9271..8dcd0e5a998 100644
    name = setjmp_test;
    common = tests/setjmp_test.c;
 -- 
-2.15.0
+2.17.0
 

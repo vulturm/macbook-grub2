@@ -1,7 +1,7 @@
 From edb37fb30bbc8a3b6bec67911c7200e4eb071127 Mon Sep 17 00:00:00 2001
 From: phcoder <phcoder@sid.debian.laptop.phnet>
 Date: Sun, 9 Jul 2017 20:58:31 +0200
-Subject: [PATCH 044/236] ehci: Fix compilation for amd64
+Subject: [PATCH 044/238] ehci: Fix compilation for amd64
 
 ---
  grub-core/bus/usb/ehci.c | 8 ++++----
@@ -34,5 +34,5 @@ index c772e76546e..7b7061f5335 100644
  		grub_ehci_oper_read32 (e, GRUB_EHCI_COMMAND));
    grub_dprintf ("ehci", "EHCI grub_ehci_pci_iter: STATUS: %08x\n",
 -- 
-2.15.0
+2.17.0
 

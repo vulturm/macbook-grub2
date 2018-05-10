@@ -1,7 +1,7 @@
 From c86299049c2cc0503728deee280d9f6bf50886f4 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 23 Aug 2017 10:37:27 -0400
-Subject: [PATCH 191/236] Make libgrub.pp depend on config-util.h
+Subject: [PATCH 191/238] Make libgrub.pp depend on config-util.h
 
 If you build with "make -j48" a lot, sometimes you see:
 
@@ -44,5 +44,5 @@ index 7795baeb654..c7b0e6a9c46 100644
  	  -D'GRUB_MOD_INIT(x)=@MARKER@x@' $^ > $@ || (rm -f $@; exit 1)
  CLEANFILES += libgrub.pp
 -- 
-2.15.0
+2.17.0
 

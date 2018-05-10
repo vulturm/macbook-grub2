@@ -1,7 +1,7 @@
 From 5f89c77c7cff17c931f1ea52af0c39df8ab28ac9 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 27 Oct 2014 09:22:55 -0400
-Subject: [PATCH 127/236] Try to emit linux16/initrd16 and linuxefi/initrdefi
+Subject: [PATCH 127/238] Try to emit linux16/initrd16 and linuxefi/initrdefi
  in 30-os_prober.
 
 Resolves: rhbz#1108296
@@ -73,5 +73,5 @@ index 9b8f5968e2d..dc98eace934 100644
          fi
          cat << EOF
 -- 
-2.15.0
+2.17.0
 

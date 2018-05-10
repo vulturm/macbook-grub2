@@ -1,7 +1,7 @@
 From ab8e0d4bf544b708f5afa4cc56e6bd16789f2f1e Mon Sep 17 00:00:00 2001
 From: Andrei Borzenkov <arvidjaar@gmail.com>
 Date: Tue, 21 Jun 2016 16:44:17 +0000
-Subject: [PATCH 180/236] Fallback to old subvol name scheme to support old
+Subject: [PATCH 180/238] Fallback to old subvol name scheme to support old
  snapshot config
 
 Ref: bsc#953538
@@ -57,5 +57,5 @@ index d111147e836..a5c000805a7 100644
    if (btrfs_default_subvolid)
      return lookup_root_by_id(data, btrfs_default_subvolid);
 -- 
-2.15.0
+2.17.0
 

@@ -1,7 +1,7 @@
 From bdd89d239cd9b4089630bfb5ec862aab8086dca2 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Mon, 7 Aug 2017 16:20:30 +0100
-Subject: [PATCH 062/236] core: use GRUB_TERM_ definitions when handling term
+Subject: [PATCH 062/238] core: use GRUB_TERM_ definitions when handling term
  characters
 
 * Also use hex value for GRUB_TERM_ESC as '\e' is not in the C standard and is not understood by some compilers
@@ -261,5 +261,5 @@ index 5ffb38f69aa..8117e2a24da 100644
  #define GRUB_TERM_BACKSPACE	'\b'
  
 -- 
-2.15.0
+2.17.0
 

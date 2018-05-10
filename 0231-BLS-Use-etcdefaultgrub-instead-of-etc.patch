@@ -1,7 +1,7 @@
 From 29b79fde633a43223ead7874ffd373603f129832 Mon Sep 17 00:00:00 2001
 From: Jan Hlavac <jhlavac@redhat.com>
 Date: Tue, 10 Apr 2018 16:56:28 +0200
-Subject: [PATCH 231/236] BLS: Use ${etcdefaultgrub} instead of /etc/...
+Subject: [PATCH 231/238] BLS: Use ${etcdefaultgrub} instead of /etc/...
 
 Inside the grub-switch-to-blscfg script the ${etcdefaultgrub} variable
 is used. So replace the hardcoded /etc/default/grub with it.
@@ -23,5 +23,5 @@ index f740b8f4d03..eae3c379e4a 100644
          exit 1
      fi
 -- 
-2.15.0
+2.17.0
 

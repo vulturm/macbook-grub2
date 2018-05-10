@@ -1,7 +1,7 @@
 From 93be95c27b0ddb63c2e3a287a3ed92c0a5de93e5 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 30 May 2017 14:16:07 -0400
-Subject: [PATCH 166/236] Fix up linux params usage...
+Subject: [PATCH 166/238] Fix up linux params usage...
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -39,5 +39,5 @@ index e4b8342f5d0..c9e89310bdd 100644
  
    linux_params.type_of_loader = GRUB_LINUX_BOOT_LOADER_TYPE;
 -- 
-2.15.0
+2.17.0
 

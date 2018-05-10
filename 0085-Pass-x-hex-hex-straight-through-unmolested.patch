@@ -1,7 +1,7 @@
 From 0d54ed89090fc1bdcb75de474024b2b81dbf644f Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 1 Oct 2012 13:24:37 -0400
-Subject: [PATCH 085/236] Pass "\x[[:hex:]][[:hex:]]" straight through
+Subject: [PATCH 085/238] Pass "\x[[:hex:]][[:hex:]]" straight through
  unmolested.
 
 ---
@@ -179,5 +179,5 @@ index ab78ca87f90..cf6cd6601d6 100644
        case '$':
  	if (escaped)
 -- 
-2.15.0
+2.17.0
 

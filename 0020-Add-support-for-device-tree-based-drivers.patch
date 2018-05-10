@@ -1,7 +1,7 @@
 From fcbb723d4b1f7ad4687191562621dd0eb25f4d9e Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:19:59 +0200
-Subject: [PATCH 020/236] Add support for device-tree-based drivers.
+Subject: [PATCH 020/238] Add support for device-tree-based drivers.
 
 ---
  grub-core/Makefile.core.def        |   2 +
@@ -852,5 +852,5 @@ index bec0585549a..fc6ca305147 100644
  	(for pp in $^; do \
  	  b=`basename $$pp .marker`; \
 -- 
-2.15.0
+2.17.0
 

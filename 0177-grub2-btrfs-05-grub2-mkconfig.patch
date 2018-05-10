@@ -1,7 +1,7 @@
 From cb43e7a6c96127e72d6787c6063de8911284fe18 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 21 Aug 2014 03:39:11 +0000
-Subject: [PATCH 177/236] grub2-btrfs-05-grub2-mkconfig
+Subject: [PATCH 177/238] grub2-btrfs-05-grub2-mkconfig
 
 ---
  util/grub-mkconfig.in       |  3 ++-
@@ -126,5 +126,5 @@ index 54f1ec8a2fd..462f8e1f819 100644
      xzfs)
  	rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
 -- 
-2.15.0
+2.17.0
 

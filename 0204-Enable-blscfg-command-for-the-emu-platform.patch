@@ -1,7 +1,7 @@
 From 39bb86c661911f06ff40caa842a9babf18f27c8b Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 2 Feb 2018 11:36:29 +0100
-Subject: [PATCH 204/236] Enable blscfg command for the emu platform
+Subject: [PATCH 204/238] Enable blscfg command for the emu platform
 
 Allow grub-emu to call a blscfg command. This may be useful for platforms
 that don't support GRUB, so grub-emu can be used to parse the BLS configs
@@ -163,5 +163,5 @@ index 9ab45631465..e5617c3bc6c 100644
    grub_unregister_extcmd (cmd);
  }
 -- 
-2.15.0
+2.17.0
 

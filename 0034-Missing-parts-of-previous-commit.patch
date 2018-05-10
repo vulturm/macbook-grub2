@@ -1,7 +1,7 @@
 From c6eaa982d12e3cfc5465dda5ea372774188b6b81 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 09:02:15 +0200
-Subject: [PATCH 034/236] Missing parts of previous commit
+Subject: [PATCH 034/238] Missing parts of previous commit
 
 ---
  grub-core/Makefile.core.def        | 2 ++
@@ -34,5 +34,5 @@ index 0126ff6381a..8d8c5b8291e 100644
  }
  
 -- 
-2.15.0
+2.17.0
 

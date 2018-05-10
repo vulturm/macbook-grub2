@@ -1,7 +1,7 @@
 From 25ea5be888dcc92cd0b3cb7d34b381f5005f1e30 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 16:09:25 -0400
-Subject: [PATCH 152/236] Make any of the loaders that link in efi mode honor
+Subject: [PATCH 152/238] Make any of the loaders that link in efi mode honor
  secure boot.
 
 And in this case "honor" means "even if somebody does link this in, they
@@ -490,5 +490,5 @@ index 10451384720..f7b4d29b0b3 100644
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/env_private.h
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/err.h
 -- 
-2.15.0
+2.17.0
 

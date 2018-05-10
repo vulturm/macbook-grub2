@@ -1,7 +1,7 @@
 From 6ea13cdb3f33da45d7a8042d85ad87e2a18fc946 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 1 Jun 2017 10:06:38 -0400
-Subject: [PATCH 183/236] Use grub_efi_...() memory helpers where reasonable.
+Subject: [PATCH 183/238] Use grub_efi_...() memory helpers where reasonable.
 
 This uses grub_efi_allocate_pool(), grub_efi_free_pool(), and
 grub_efi_free_pages() instead of open-coded efi_call_N() calls, so we
@@ -105,5 +105,5 @@ index 7826e794ad9..d2557b38dce 100644
    if (cmdline)
      grub_free (cmdline);
 -- 
-2.15.0
+2.17.0
 

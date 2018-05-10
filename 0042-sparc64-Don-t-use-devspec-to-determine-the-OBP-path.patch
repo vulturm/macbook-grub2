@@ -1,7 +1,7 @@
 From f8679cedff703b437171f4708d46adbfcff80a65 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Thu, 18 May 2017 17:10:22 -0600
-Subject: [PATCH 042/236] sparc64: Don't use devspec to determine the OBP path
+Subject: [PATCH 042/238] sparc64: Don't use devspec to determine the OBP path
 
 Don't use devspec to determine the OBP path on SPARC hardware.  Within all
 versions of Linux on SPARC, the devspec returns one of three values:
@@ -49,5 +49,5 @@ index a79682a5e31..dce4e59d081 100644
        if (fd < 0 || fstat (fd, &st) < 0)
  	{
 -- 
-2.15.0
+2.17.0
 

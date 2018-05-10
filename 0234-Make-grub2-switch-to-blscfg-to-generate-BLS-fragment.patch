@@ -1,7 +1,7 @@
 From 60bddbc714c96ca05821d52bdd7dbad7eabd6dd5 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Wed, 11 Apr 2018 12:39:59 +0200
-Subject: [PATCH 234/236] Make grub2-switch-to-blscfg to generate BLS fragment
+Subject: [PATCH 234/238] Make grub2-switch-to-blscfg to generate BLS fragment
  for rescue kernel
 
 If a rescue image is available, it should have a BootLoaderSpec fragment.
@@ -27,5 +27,5 @@ index c59299ffa6a..bc28053cd30 100644
  if grep '^GRUB_ENABLE_BLSCFG=.*' "${etcdefaultgrub}" \
          | grep -vq '^GRUB_ENABLE_BLSCFG="*true"*\s*$' ; then
 -- 
-2.15.0
+2.17.0
 
