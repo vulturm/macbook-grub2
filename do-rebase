@@ -6,7 +6,9 @@ shopt -qs expand_aliases
 export LC_COLLATE=C
 export LC_ALL=C
 
+format_patch_ops="--stat=80 --summary -O.git.diff.order --patience -l0"
 alias othergit="GIT_DIR=$PWD/.rhboot.git GIT_WORK_TREE=$PWD git"
+alias formatpatch="othergit format-patch $format_patch_ops"
 
 usage()
 {
@@ -119,7 +121,7 @@ unset LC_ALL
 git rm -q 0*.patch
 
 > grub.patches
-patches=$(othergit format-patch grub-2.02..refs/remotes/rhboot/${releasever})
+patches=$(formatpatch grub-2.02..refs/remotes/rhboot/${releasever})
 for x in $patches ; do
 	echo Patch$(echo ${x} | cut -d- -f1): ${x} >> grub.patches
 done
