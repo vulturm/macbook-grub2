@@ -1,0 +1,15 @@
+*.dec
+*.dsc.inc
+*.dsc
+*.fdf
+*.inf
+*.vfr
+*.ac
+*.def
+*.c
+*.h
+*.S
+*.mk
+Makefile.*
+Make.*
+Makefile
