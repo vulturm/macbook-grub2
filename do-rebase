@@ -13,7 +13,7 @@ alias formatpatch="othergit format-patch $format_patch_ops"
 usage()
 {
 	retcode=0
-	if [ -n "$1" ]; then
+	if [ -n "${1:-}" ]; then
 		exec 1>&2
 		retcode=$1
 	fi
