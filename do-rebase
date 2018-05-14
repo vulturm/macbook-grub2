@@ -17,7 +17,7 @@ usage()
 		exec 1>&2
 		retcode=$1
 	fi
-	echo usage: do-rebase \$releasever
+	echo usage: do-rebase \$releasever \$gitrepo
 	exit $retcode
 }
 
@@ -26,6 +26,7 @@ if ! git status | grep -q 'nothing to commit, working .* clean' ; then
 	exit 1
 fi
 
+gitrepo="git@github.com:rhboot/grub2.git"
 releasever=""
 amend=""
 
@@ -42,6 +43,13 @@ while [ $# -gt 0 ]; do
 	--dist)
 		shift
 		releasever=$1
+		;;
+	--repo=*)
+		gitrepo=${1##--repo=}
+		;;
+	--repo)
+		shift
+		gitrepo=$1
 		;;
 	--amend)
 		amend="--amend"
@@ -88,6 +96,11 @@ if [ -z "$releasever" ]; then
 	usage 1
 fi
 
+if [ -n "${1:-}" ]; then
+	gitrepo=$1
+	shift
+fi
+
 if [ $# -ge 1 ]; then
 	echo "Unknown argument \"$1\"" 1>&2
 	usage 1
@@ -96,14 +109,14 @@ fi
 if [ ! -d $PWD/.rhboot.git ]; then
 	othergit init
 	if ! othergit remote add \
-		 rhboot git@github.com:rhboot/grub2.git \
+		 rhboot $gitrepo \
 		  >/dev/null 2>&1 ; then
 		echo "Could not add remote: rhboot" 1>&2
 		exit 1
 	fi
 elif othergit remote show -n rhboot | grep -q "URL: github$" ; then
 	if ! othergit remote add \
-		 rhboot git@github.com:rhboot/grub2.git \
+		 rhboot $gitrepo \
 		  >/dev/null 2>&1 ; then
 		echo "Could not add remote: rhboot" 1>&2
 		exit 1
