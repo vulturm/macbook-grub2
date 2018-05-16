@@ -1,0 +1,98 @@
+From d621b18f82c4fe2a903432c3fb811fb9281b0273 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Fri, 11 May 2018 10:58:34 -0400
+Subject: [PATCH 249/250] linuxefi: honor the "linux" and "initrd" names of
+ commands.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ grub-core/commands/blscfg.c       | 14 +++-----------
+ grub-core/loader/i386/efi/linux.c | 14 +++++++++++---
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+
+diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
+index 72ee497ea2d..f1f18fefbf2 100644
+--- a/grub-core/commands/blscfg.c
++++ b/grub-core/commands/blscfg.c
+@@ -43,14 +43,6 @@ GRUB_MOD_LICENSE ("GPLv3+");
+ #define GRUB_BOOT_DEVICE "($root)"
+ #endif
+ 
+-#ifdef GRUB_MACHINE_EFI
+-#define GRUB_LINUX_CMD "linuxefi"
+-#define GRUB_INITRD_CMD "initrdefi"
+-#else
+-#define GRUB_LINUX_CMD "linux"
+-#define GRUB_INITRD_CMD "initrd"
+-#endif
+-
+ enum
+   {
+     PLATFORM_EFI,
+@@ -631,7 +623,7 @@ static void create_entry (struct bls_entry *entry, const char *cfgfile)
+   grub_dprintf ("blscfg", "adding menu entry for \"%s\"\n", title);
+   if (initrds)
+     {
+-      int initrd_size = sizeof (GRUB_INITRD_CMD);
++      int initrd_size = sizeof ("linux");
+       char *tmp;
+ 
+       for (i = 0; initrds != NULL && initrds[i] != NULL; i++)
+@@ -647,7 +639,7 @@ static void create_entry (struct bls_entry *entry, const char *cfgfile)
+ 	}
+ 
+ 
+-      tmp = grub_stpcpy(initrd, GRUB_INITRD_CMD);
++      tmp = grub_stpcpy(initrd, "linux");
+       for (i = 0; initrds != NULL && initrds[i] != NULL; i++)
+ 	{
+ 	  grub_dprintf ("blscfg", "adding initrd %s\n", initrds[i]);
+@@ -660,7 +652,7 @@ static void create_entry (struct bls_entry *entry, const char *cfgfile)
+   src = grub_xasprintf ("load_video\n"
+ 			"set gfx_payload=keep\n"
+ 			"insmod gzio\n"
+-			GRUB_LINUX_CMD " %s%s%s%s\n"
++			"linux %s%s%s%s\n"
+ 			"%s",
+ 			GRUB_BOOT_DEVICE, clinux, options ? " " : "", options ? options : "",
+ 			initrd ? initrd : "");
+diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
+index 6c9268f2ff5..2cdfa8f671c 100644
+--- a/grub-core/loader/i386/efi/linux.c
++++ b/grub-core/loader/i386/efi/linux.c
+@@ -365,16 +365,22 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+   return grub_errno;
+ }
+ 
+-static grub_command_t cmd_linux, cmd_initrd;
++static grub_command_t cmd_linux, cmd_initrd, cmd_linuxefi, cmd_initrdefi;
+ 
+ GRUB_MOD_INIT(linuxefi)
+ {
+-  cmd_linux =
++  cmd_linuxefi =
+     grub_register_command ("linuxefi", grub_cmd_linux,
+                            0, N_("Load Linux."));
+-  cmd_initrd =
++  cmd_initrdefi =
+     grub_register_command ("initrdefi", grub_cmd_initrd,
+                            0, N_("Load initrd."));
++  cmd_linux =
++    grub_register_command ("linux", grub_cmd_linux,
++                           0, N_("Load Linux."));
++  cmd_initrd =
++    grub_register_command ("initrd", grub_cmd_initrd,
++                           0, N_("Load initrd."));
+   my_mod = mod;
+ }
+ 
+@@ -382,4 +388,6 @@ GRUB_MOD_FINI(linuxefi)
+ {
+   grub_unregister_command (cmd_linux);
+   grub_unregister_command (cmd_initrd);
++  grub_unregister_command (cmd_linuxefi);
++  grub_unregister_command (cmd_initrdefi);
+ }
+-- 
+2.14.3
+

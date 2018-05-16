@@ -236,3 +236,15 @@ Patch0235: 0235-Only-attempt-to-query-dev-mounted-in-boot-efi-as-boo.patch
 Patch0236: 0236-Include-OSTree-path-when-searching-kernels-images-if.patch
 Patch0237: 0237-Use-BLS-version-field-to-compare-entries-if-id-field.patch
 Patch0238: 0238-Add-version-field-to-BLS-generated-by-grub2-switch-t.patch
+Patch0239: 0239-Fixup-for-newer-compiler.patch
+Patch0240: 0240-net-read-bracketed-ipv6-addrs-and-port-numbers.patch
+Patch0241: 0241-New-net_bootp6-command-and-UEFI-IPv6-PXE-support.patch
+Patch0242: 0242-grub.texi-Add-net_bootp6-doument.patch
+Patch0243: 0243-bootp-Add-processing-DHCPACK-packet-from-HTTP-Boot.patch
+Patch0244: 0244-efinet-Setting-network-from-UEFI-device-path.patch
+Patch0245: 0245-efinet-Setting-DNS-server-from-UEFI-protocol.patch
+Patch0246: 0246-grub-core-video-efi_gop.c-Add-support-for-BLT_ONLY-a.patch
+Patch0247: 0247-Support-UEFI-networking-protocols.patch
+Patch0248: 0248-AUDIT-0-http-boot-tracker-bug.patch
+Patch0249: 0249-linuxefi-honor-the-linux-and-initrd-names-of-command.patch
+Patch0250: 0250-xfs-accept-filesystem-with-sparse-inodes.patch
