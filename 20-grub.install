@@ -87,6 +87,16 @@ case "$COMMAND" in
                     >"${BLS_TARGET}"
             fi
 
+            LINUX="$(grep '^linux[ \t]' "${BLS_TARGET}" | sed -e 's,^linux[ \t]*,,')"
+            INITRD="$(grep '^initrd[ \t]' "${BLS_TARGET}" | sed -e 's,^initrd[ \t]*,,')"
+            LINUX_RELPATH="$(grub2-mkrelpath /boot${LINUX})"
+            BOOTPREFIX="$(dirname ${LINUX_RELPATH})"
+
+            if [[ $LINUX != $LINUX_RELPATH ]]; then
+                sed -i -e "s,^linux.*,linux ${BOOTPREFIX}${LINUX},g" "${BLS_TARGET}"
+                sed -i -e "s,^initrd.*,initrd ${BOOTPREFIX}${INITRD},g" "${BLS_TARGET}"
+            fi
+
             eval "$(grub2-get-kernel-settings)" || true
             if [ "x$GRUB_LINUX_MAKE_DEBUG" = "xtrue" ]; then
                 ARCH="$(uname -m)"
