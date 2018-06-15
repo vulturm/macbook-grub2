@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if ! [[ $KERNEL_INSTALL_MACHINE_ID ]]; then
+    exit 0
+fi
+
 [[ -f /etc/default/grub ]] && . /etc/default/grub
 [[ -f /etc/os-release ]] && . /etc/os-release
 
