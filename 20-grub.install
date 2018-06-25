@@ -19,12 +19,7 @@ MACHINE_ID=$KERNEL_INSTALL_MACHINE_ID
 # Remove it, since for grub2 the images are always installed in /boot
 rm -rf "${BOOT_DIR_ABS%/*}"
 
-EFIDIR="$(echo "${ID}" | sed -e 's/rhel/redhat/')"
-
 BLS_DIR="/boot/loader/entries"
-if [ -d /sys/firmware/efi ]; then
-    BLS_DIR="/boot/efi/EFI/${EFIDIR}/loader/entries"
-fi
 
 mkbls() {
     local kernelver=$1 && shift
