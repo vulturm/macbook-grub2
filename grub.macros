@@ -26,6 +26,7 @@
 		-e 's/-mregparm=3/-mregparm=4/g'		\\\
 		-e 's/-fexceptions//g'				\\\
 		-e 's/-fasynchronous-unwind-tables//g'		\\\
+		-e 's/-mfloat-abi=hard/-mfloat-abi=float/g'	\\\
 		-e 's/^/ -fno-strict-aliasing /'		\\\
 		%{nil}
 
@@ -88,7 +89,7 @@
 %global efi_modules " backtrace http linuxefi usb usbserial_common usbserial_pl2303 usbserial_ftdi usbserial_usbdebug "
 %endif
 
-%ifarch aarch64
+%ifarch aarch64 %{arm}
 %global legacy_provides -l
 %endif
 
@@ -301,7 +302,7 @@ git config --unset user.name					\
 	--with-grubdir=%{name}					\\\
         --program-transform-name=s,grub,%{name},		\\\
 	--disable-grub-mount					\\\
-	--disable-werror					\
+	--disable-werror || ( cat config.log ; exit 1 )		\
 %{nil}
 
 %define do_efi_build_modules()					\
@@ -319,7 +320,7 @@ for x in grub-mkimage ; do					\\\
 done								\
 %{nil}
 
-%ifarch x86_64 aarch64
+%ifarch x86_64 aarch64 %{arm}
 %define mkimage()						\
 %{4}./grub-mkimage -O %{1} -o %{2}.orig				\\\
 	-p /EFI/%{efidir} -d grub-core ${GRUB_MODULES}		\
@@ -380,7 +381,7 @@ cd grub-%{1}-%{tarversion}					\
 	--with-grubdir=%{name}					\\\
         --program-transform-name=s,grub,%{name},		\\\
 	--disable-grub-mount					\\\
-	--disable-werror					\
+	--disable-werror || ( cat config.log ; exit 1 )		\
 make %{?_smp_mflags}						\
 cd ..								\
 %{nil}
