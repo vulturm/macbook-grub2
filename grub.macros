@@ -387,7 +387,7 @@ cd ..								\
 
 %define do_alt_efi_install()					\
 cd grub-%{1}-%{tarversion}					\
-install -d -m 700 $RPM_BUILD_ROOT/usr/lib/grub/%{grubaltefiarch}/ \
+install -d -m 755 $RPM_BUILD_ROOT/usr/lib/grub/%{grubaltefiarch}/ \
 find . '(' -iname gdb_grub					\\\
 	-o -iname kernel.exec					\\\
 	-o -iname kernel.img					\\\
@@ -422,7 +422,7 @@ ln -sf ../boot/efi/EFI/%{efidir}/grub.cfg			\\\
 	$RPM_BUILD_ROOT%{_sysconfdir}/%{name}-efi.cfg		\
 install -m 700 %{2} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{2}	\
 install -m 700 %{3} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{3} \
-install -D -m 644 unicode.pf2					\\\
+install -D -m 700 unicode.pf2					\\\
 	$RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/fonts/unicode.pf2\
 cd ..								\
 %{nil}
@@ -458,7 +458,7 @@ cp docs/grub-dev.info						\\\
 	$RPM_BUILD_ROOT%{_infodir}/%{name}-dev.info		\
 # Ghost config file						\
 install -d -m 0700 ${RPM_BUILD_ROOT}/boot/efi/EFI/%{efidir}/	\
-install -d -m 0755 ${RPM_BUILD_ROOT}/boot/grub2/		\
+install -d -m 0700 ${RPM_BUILD_ROOT}/boot/grub2/		\
 install -d -m 0755 ${RPM_BUILD_ROOT}/boot/%{name}/themes/system	\
 install -d -m 0755 ${RPM_BUILD_ROOT}%{_sysconfdir}/default	\
 install -d -m 0755 ${RPM_BUILD_ROOT}%{_sysconfdir}/sysconfig	\
