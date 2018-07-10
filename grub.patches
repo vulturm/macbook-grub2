@@ -372,3 +372,4 @@ Patch0371: 0371-00_menu_auto_hide-Use-a-timeout-of-60s-for-menu_show.patch
 Patch0372: 0372-00_menu_auto_hide-Reduce-number-of-save_env-calls.patch
 Patch0373: 0373-Minor-fixes-to-make-armv7hl-build-as-arm-efi.patch
 Patch0374: 0374-30_uefi-firmware-fix-use-with-sys-firmware-efi-efiva.patch
+Patch0375: 0375-Force-gentply.py-to-use-python3.patch

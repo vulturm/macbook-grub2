@@ -1,0 +1,20 @@
+From 1263543c5038d016553b783146043398cc4f78c0 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Tue, 10 Jul 2018 16:54:02 -0400
+Subject: [PATCH] Force gentply.py to use python3
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ gentpl.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gentpl.py b/gentpl.py
+index bf8439fa743..6ab9eb3af71 100644
+--- a/gentpl.py
++++ b/gentpl.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python
++#! /usr/bin/env python3
+ #  GRUB  --  GRand Unified Bootloader
+ #  Copyright (C) 2010,2011,2012,2013  Free Software Foundation, Inc.
+ #
