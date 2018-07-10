@@ -1,7 +1,7 @@
 From d0a896275ec2969f507e6b60c75a4b24c7fd5bd5 Mon Sep 17 00:00:00 2001
 From: Eric Sandeen <sandeen@sandeen.net>
 Date: Tue, 15 May 2018 14:55:55 -0500
-Subject: [PATCH 250/250] xfs: accept filesystem with sparse inodes
+Subject: [PATCH] xfs: accept filesystem with sparse inodes
 
 The sparse inode metadata format became a mkfs.xfs default in
 xfsprogs-4.16.0, and such filesystems are now rejected by grub as
@@ -53,6 +53,3 @@ index 9f66dd6e4c6..d7222b529f5 100644
  	 XFS_SB_FEAT_INCOMPAT_META_UUID)
  
  struct grub_xfs_sblock
--- 
-2.14.3
-

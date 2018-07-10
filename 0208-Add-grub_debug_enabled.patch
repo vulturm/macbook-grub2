@@ -1,7 +1,7 @@
 From 6776773c89828c9b69c1552760ba6a4d9cd5589f Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 30 Nov 2017 15:11:39 -0500
-Subject: [PATCH 208/250] Add grub_debug_enabled()
+Subject: [PATCH] Add grub_debug_enabled()
 
 ---
  grub-core/kern/misc.c | 21 ++++++++++++++++-----
@@ -58,6 +58,3 @@ index 3d55bafd64e..493e328d968 100644
  void EXPORT_FUNC(grub_real_dprintf) (const char *file,
                                       const int line,
                                       const char *condition,
--- 
-2.14.3
-

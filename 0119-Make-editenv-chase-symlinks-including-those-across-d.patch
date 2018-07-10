@@ -1,7 +1,7 @@
 From fd1a89c8bef603ec33937f122ae25013a724601a Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 3 Sep 2014 10:38:00 -0400
-Subject: [PATCH 119/250] Make editenv chase symlinks including those across
+Subject: [PATCH] Make editenv chase symlinks including those across
  devices.
 
 This lets us make /boot/grub2/grubenv a symlink to
@@ -101,6 +101,3 @@ index c6f8d2298c3..d8d1dad6ab9 100644
    free (namenew);
 +  free (rename_target);
  }
--- 
-2.14.3
-

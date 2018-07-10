@@ -1,7 +1,7 @@
 From da2f323f72641219714b2ae448c62db6a7f64898 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Sun, 10 Jul 2016 23:46:31 +0800
-Subject: [PATCH 244/250] efinet: Setting network from UEFI device path
+Subject: [PATCH] efinet: Setting network from UEFI device path
 
 The PXE Base Code protocol used to obtain cached PXE DHCPACK packet is no
 longer provided for HTTP Boot. Instead, we have to get the HTTP boot
@@ -397,6 +397,3 @@ index 6a545cc6d5d..eba987de00a 100644
  #define GRUB_EFI_VENDOR_MESSAGING_DEVICE_PATH_SUBTYPE	10
  
  /* Media Device Path.  */
--- 
-2.14.3
-

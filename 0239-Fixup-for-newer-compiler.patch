@@ -1,7 +1,7 @@
 From 0724038a6f554f688cfcd6e05d52329c384d8a6d Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 10 May 2018 13:40:19 -0400
-Subject: [PATCH 239/250] Fixup for newer compiler
+Subject: [PATCH] Fixup for newer compiler
 
 ---
  grub-core/fs/btrfs.c         | 2 +-
@@ -48,6 +48,3 @@ index 044ab3abe88..c75848f5c06 100644
  
  CFLAGS_MODULE = $(CFLAGS_PLATFORM) -ffreestanding
  LDFLAGS_MODULE = $(LDFLAGS_PLATFORM) -nostdlib $(TARGET_LDFLAGS_OLDMAGIC) -Wl,-r,-d
--- 
-2.14.3
-

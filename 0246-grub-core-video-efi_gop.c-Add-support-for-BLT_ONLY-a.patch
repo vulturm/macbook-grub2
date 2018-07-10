@@ -1,7 +1,7 @@
 From f332a348642ef45df2445c4ec04a629a234e04fd Mon Sep 17 00:00:00 2001
 From: Alexander Graf <agraf@suse.de>
 Date: Wed, 1 Feb 2017 23:10:45 +0100
-Subject: [PATCH 246/250] grub-core/video/efi_gop.c: Add support for BLT_ONLY
+Subject: [PATCH] grub-core/video/efi_gop.c: Add support for BLT_ONLY
  adapters
 
 EFI GOP has support for multiple different bitness types of frame buffers
@@ -55,6 +55,3 @@ index 12977741192..e4388127c66 100644
    }
    grub_efi_gop_pixel_format_t;
  
--- 
-2.14.3
-

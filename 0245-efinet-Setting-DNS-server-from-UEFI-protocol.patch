@@ -1,7 +1,7 @@
 From bb5acb2cc50c1fbd6e214ca66268e04733a906eb Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 14 Jul 2016 17:48:45 +0800
-Subject: [PATCH 245/250] efinet: Setting DNS server from UEFI protocol
+Subject: [PATCH] efinet: Setting DNS server from UEFI protocol
 
 In the URI device path node, any name rahter than address can be used for
 looking up the resources so that DNS service become needed to get answer of the
@@ -335,6 +335,3 @@ index eba987de00a..48302449170 100644
  #if (GRUB_TARGET_SIZEOF_VOID_P == 4) || defined (__ia64__) \
    || defined (__aarch64__) || defined (__MINGW64__) || defined (__CYGWIN__)
  
--- 
-2.14.3
-

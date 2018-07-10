@@ -1,7 +1,7 @@
 From 2ba7c6d3c99c669ce20d26fdc9ed7851fc10b6b4 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Wed, 22 Feb 2017 14:27:50 +0800
-Subject: [PATCH 247/250] Support UEFI networking protocols
+Subject: [PATCH] Support UEFI networking protocols
 
 References: fate#320130, bsc#1015589, bsc#1076132
 Patch-Mainline: no
@@ -5038,6 +5038,3 @@ index 00000000000..de90d223e8e
 +extern grub_command_func_t grub_efi_net_bootp6;
 +
 +#endif /* ! GRUB_NET_EFI_HEADER */
--- 
-2.14.3
-

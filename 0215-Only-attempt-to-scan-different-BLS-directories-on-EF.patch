@@ -1,7 +1,7 @@
 From 5f0417c63a4dd2252a5a801568f4369ac74a47e6 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 3 Apr 2018 15:42:47 +0200
-Subject: [PATCH 215/250] Only attempt to scan different BLS directories on EFI
+Subject: [PATCH] Only attempt to scan different BLS directories on EFI
  machines
 
 Current BLS support attempted to scan for BLS directories, but this only
@@ -44,6 +44,3 @@ index e5617c3bc6c..c0973ff83ea 100644
  #endif
  
  finish:
--- 
-2.14.3
-

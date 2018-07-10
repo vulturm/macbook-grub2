@@ -1,7 +1,7 @@
 From d7e857c8a02ae15a940faacc6e8b688cc590c4d7 Mon Sep 17 00:00:00 2001
 From: Sebastian Krahmer <krahmer@suse.com>
 Date: Tue, 28 Nov 2017 17:24:38 +0800
-Subject: [PATCH 248/250] AUDIT-0: http boot tracker bug
+Subject: [PATCH] AUDIT-0: http boot tracker bug
 
 Fixing a memory leak in case of error, and a integer overflow, leading to a
 heap overflow due to overly large chunk sizes.
@@ -60,6 +60,3 @@ index f182d7b871d..5004ecfee42 100644
        grub_errno = GRUB_ERR_NONE;
        if (data->chunk_rem == 0)
  	{
--- 
-2.14.3
-

@@ -1,7 +1,7 @@
 From 49c719a6f6e223b95733e18720a48993ab6e5317 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Tue, 6 Feb 2018 09:09:00 +0100
-Subject: [PATCH 205/250] Add linux and initrd commands for grub-emu
+Subject: [PATCH] Add linux and initrd commands for grub-emu
 
 When using grub-emu, the linux and initrd commands are used as arguments
 to the kexec command line tool, to allow booting the selected menu entry.
@@ -349,6 +349,3 @@ index f7b4d29b0b3..75e8715e631 100644
  if COND_GRUB_EMU_SDL
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/sdl.h
  endif
--- 
-2.14.3
-

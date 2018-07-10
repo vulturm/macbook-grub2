@@ -1,7 +1,7 @@
 From 5334ed8ae9c8f15928139be986a1e877e9837630 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 25 Jun 2015 15:41:06 -0400
-Subject: [PATCH 10002/10006] Make it possible to enabled --build-id=sha1
+Subject: [PATCH] Make it possible to enabled --build-id=sha1
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
@@ -59,6 +59,4 @@ index d6ef6c3..3e897bd 100644
  if test "x$target_cpu" = xi386; then
    if test "$platform" != emu && test "x$TARGET_APPLE_LINKER" != x1 ; then
      if test ! -z "$TARGET_IMG_LDSCRIPT"; then
--- 
-2.5.0
 

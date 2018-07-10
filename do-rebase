@@ -6,7 +6,7 @@ shopt -qs expand_aliases
 export LC_COLLATE=C
 export LC_ALL=C
 
-format_patch_ops="--stat=80 --summary -O.git.diff.order --patience -l0"
+format_patch_ops="--no-signature --no-numbered --stat=80 --summary -O.git.diff.order --patience -l0"
 alias othergit="GIT_DIR=$PWD/.rhboot.git GIT_WORK_TREE=$PWD git"
 alias formatpatch="othergit format-patch $format_patch_ops"
 
@@ -17,7 +17,8 @@ usage()
 		exec 1>&2
 		retcode=$1
 	fi
-	echo usage: do-rebase \$releasever \$gitrepo
+	echo usage: do-rebase [OPTIONS] [--dist RELEASEVER | RELEASEVER ] [GITREPO]
+	echo OPTIONS: --dist=RELEASEVER --repo=REPO --amend --nocommit --nobumpspec
 	exit $retcode
 }
 
@@ -29,6 +30,8 @@ fi
 gitrepo="git@github.com:rhboot/grub2.git"
 releasever=""
 amend=""
+commit=1
+bumpspec=1
 
 declare -a savedargs
 savedargs=()
@@ -53,6 +56,21 @@ while [ $# -gt 0 ]; do
 		;;
 	--amend)
 		amend="--amend"
+		;;
+	--commit)
+		commit=1
+		;;
+	--nocommit)
+		# --nocommit implies nobumpspec, but --bumpspec after it will
+		# force bumpspec to get run.
+		commit=0
+		bumpspec=0
+		;;
+	--bumpspec)
+		bumpspec=2
+		;;
+	--nobumpspec)
+		bumpspec=0
 		;;
 	*)
 		savedargs[${#savedargs[@]}]="$1"
@@ -138,12 +156,14 @@ patches=$(formatpatch grub-2.02..refs/remotes/rhboot/${releasever})
 for x in $patches ; do
 	echo Patch$(echo ${x} | cut -d- -f1): ${x} >> grub.patches
 done
-if [ -z "$amend" ];  then
+if [[ -z "$amend" && ${bumpspec} -gt 0 ]] || [[ ${bumpspec} -ge 2 ]] ;  then
     rpmdev-bumpspec -c "- Rebased to newer upstream for ${releasever}" grub2.spec
 fi
 git add 0*.patch grub2.spec grub.patches
-if [ -z "$amend" ]; then
-	fedpkg commit -s -c $amend
-else
-	git commit --amend
+if [[ ${commit} -eq 1 ]] ; then
+  if [ -z "$amend" ]; then
+    fedpkg commit -s -c
+  else
+    git commit --amend
+  fi
 fi

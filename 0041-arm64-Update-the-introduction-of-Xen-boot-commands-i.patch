@@ -1,8 +1,8 @@
 From 26c2f306fd425d2c0348023b8dcb7eb40a01851a Mon Sep 17 00:00:00 2001
 From: Fu Wei <fu.wei@linaro.org>
 Date: Sun, 14 May 2017 15:43:47 +0800
-Subject: [PATCH 041/250] arm64: Update the introduction of Xen boot commands
- in docs/grub.texi
+Subject: [PATCH] arm64: Update the introduction of Xen boot commands in
+ docs/grub.texi
 
 delete: xen_linux, xen_initrd, xen_xsm
 add: xen_module
@@ -88,6 +88,3 @@ index e935af33ea5..a0c4b9e4e8e 100644
  @node Networking commands
  @section The list of networking commands
  
--- 
-2.14.3
-

@@ -1,7 +1,7 @@
 From bf59d76ca82eb4eaa20a747f5890d09632ba93d0 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 14 Jul 2015 16:58:51 -0700
-Subject: [PATCH 148/250] Fix race in EFI validation
+Subject: [PATCH] Fix race in EFI validation
 
 ---
  grub-core/loader/i386/efi/linux.c | 44 ++++++++++-----------------------------
@@ -92,6 +92,3 @@ index e5b778577f9..7ccf32d9d45 100644
    if (grub_errno != GRUB_ERR_NONE)
      {
        grub_dl_unref (my_mod);
--- 
-2.14.3
-

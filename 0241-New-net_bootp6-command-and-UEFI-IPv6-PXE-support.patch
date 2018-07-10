@@ -1,7 +1,7 @@
 From 77e75c900368ef656c00d4c485eff7b1d66d58eb Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Sun, 10 Jul 2016 23:46:06 +0800
-Subject: [PATCH 241/250] New net_bootp6 command and UEFI IPv6 PXE support
+Subject: [PATCH] New net_bootp6 command and UEFI IPv6 PXE support
 
 When grub2 image is booted from UEFI IPv6 PXE, the DHCPv6 Reply packet is
 cached in firmware buffer which can be obtained by PXE Base Code protocol. The
@@ -1349,6 +1349,3 @@ index 24232ec71fc..373ad1080cf 100644
  int
  grub_net_hwaddr_cmp (const grub_net_link_level_address_t *a,
  		     const grub_net_link_level_address_t *b);
--- 
-2.14.3
-

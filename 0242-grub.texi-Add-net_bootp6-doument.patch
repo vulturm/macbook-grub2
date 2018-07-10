@@ -1,7 +1,7 @@
 From a0c969d3c591c21eeeb0ba032ec8ea1257efb898 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Tue, 5 May 2015 14:19:24 +0800
-Subject: [PATCH 242/250] grub.texi: Add net_bootp6 doument
+Subject: [PATCH] grub.texi: Add net_bootp6 doument
 
 Update grub documentation for net_bootp6 command.
 
@@ -46,6 +46,3 @@ index f28c4cd5247..0e14a78ceaa 100644
  
  @node net_del_addr
  @subsection net_del_addr
--- 
-2.14.3
-
