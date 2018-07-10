@@ -1,0 +1,32 @@
+From 72b425b640f67ad7e6e0056a7a793bddc9997985 Mon Sep 17 00:00:00 2001
+From: Joakim Bech <joakim.bech@linaro.org>
+Date: Mon, 26 Feb 2018 09:57:34 +0100
+Subject: [PATCH] ieee1275: fix build regression in of_path_of_nvme
+
+The of_path_of_nvme function (commit 2391d57, ieee1275: add nvme
+support within ofpath) introduced a build regression:
+    grub-core/osdep/linux/ofpath.c:365:21: error: comparison between pointer
+    and zero character constant [-Werror=pointer-compare]
+       if ((digit_string != '\0') && (*part_end == 'p'))
+
+Update digit_string to compare against the char instead of the pointer.
+
+Signed-off-by: Joakim Bech <joakim.bech@linaro.org>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/osdep/linux/ofpath.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/grub-core/osdep/linux/ofpath.c b/grub-core/osdep/linux/ofpath.c
+index 4308fceda35..1c30e723305 100644
+--- a/grub-core/osdep/linux/ofpath.c
++++ b/grub-core/osdep/linux/ofpath.c
+@@ -362,7 +362,7 @@ of_path_of_nvme(const char *sys_devname __attribute__((unused)),
+   digit_string = trailing_digits (device);
+   part_end = devicenode + strlen (devicenode) - 1;
+ 
+-  if ((digit_string != '\0') && (*part_end == 'p'))
++  if ((*digit_string != '\0') && (*part_end == 'p'))
+     {
+       /* We have a partition number, strip it off. */
+       int part;

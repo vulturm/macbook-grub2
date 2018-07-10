@@ -1,0 +1,39 @@
+From a244d9ebc7547f7ed373d9796a3bf186e7c035a1 Mon Sep 17 00:00:00 2001
+From: Leif Lindholm <leif.lindholm@linaro.org>
+Date: Thu, 1 Feb 2018 18:18:56 +0000
+Subject: [PATCH] arm: make linux.h safe to include for non-native builds
+
+<grub/machine/loader.h> (for machine arm/efi) and
+<grub/machine/kernel.h> (for machine arm/coreboot) will not always
+resolve (and will likely not be valid to) if pulled in when building
+non-native commands, such as host tools or the "file" command.
+So explicitly include them with their expanded pathnames.
+
+Signed-off-by: Leif Lindholm <leif.lindholm@linaro.org>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ include/grub/arm/linux.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/grub/arm/linux.h b/include/grub/arm/linux.h
+index 64dd3173cf7..cceb9c4a9cb 100644
+--- a/include/grub/arm/linux.h
++++ b/include/grub/arm/linux.h
+@@ -43,7 +43,7 @@ struct linux_arm_kernel_header {
+ # define grub_arm_firmware_get_machine_type grub_uboot_get_machine_type
+ #elif defined GRUB_MACHINE_EFI
+ # include <grub/efi/efi.h>
+-# include <grub/machine/loader.h>
++# include <grub/arm/efi/loader.h>
+ /* On UEFI platforms - load the images at the lowest available address not
+    less than *_PHYS_OFFSET from the first available memory location. */
+ # define LINUX_PHYS_OFFSET        (0x00008000)
+@@ -57,7 +57,7 @@ grub_arm_firmware_get_machine_type (void)
+ }
+ #elif defined (GRUB_MACHINE_COREBOOT)
+ #include <grub/fdtbus.h>
+-#include <grub/machine/kernel.h>
++#include <grub/arm/coreboot/kernel.h>
+ # define LINUX_ADDRESS        (start_of_ram + 0x8000)
+ # define LINUX_INITRD_ADDRESS (start_of_ram + 0x02000000)
+ # define LINUX_FDT_ADDRESS    (LINUX_INITRD_ADDRESS - 0x10000)

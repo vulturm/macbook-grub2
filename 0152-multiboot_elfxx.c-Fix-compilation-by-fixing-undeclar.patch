@@ -1,0 +1,38 @@
+From ec2de93f8d96b914af5834137bffdc9759c362b8 Mon Sep 17 00:00:00 2001
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+Date: Fri, 29 Jun 2018 14:15:11 +0200
+Subject: [PATCH] multiboot_elfxx.c: Fix compilation by fixing undeclared
+ variable
+
+Without that fix we have:
+  In file included from ../../include/grub/command.h:25:0,
+                   from ../../grub-core/loader/multiboot.c:30:
+  ../../grub-core/loader/multiboot_elfxx.c: In function 'grub_multiboot_load_elf64':
+  ../../grub-core/loader/multiboot_elfxx.c:130:28: error: 'relocatable' undeclared (first use in this function)
+     "load_base_addr=0x%x\n", relocatable,
+
+This happens due to mistake in the commit 14ec665
+(mbi: Use per segment a separate relocator chunk).
+
+So, let's fix it.
+
+Signed-off-by: Ignat Korchagin <ignat@cloudflare.com>
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+Signed-off-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/loader/multiboot_elfxx.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/grub-core/loader/multiboot_elfxx.c b/grub-core/loader/multiboot_elfxx.c
+index ae36d9d49da..70cd1db513e 100644
+--- a/grub-core/loader/multiboot_elfxx.c
++++ b/grub-core/loader/multiboot_elfxx.c
+@@ -127,7 +127,7 @@ CONCAT(grub_multiboot_load_elf, XX) (mbi_load_data_t *mld)
+     mld->load_base_addr = mld->link_base_addr;
+ 
+   grub_dprintf ("multiboot_loader", "relocatable=%d, link_base_addr=0x%x, "
+-		"load_base_addr=0x%x\n", relocatable,
++		"load_base_addr=0x%x\n", mld->relocatable,
+ 		mld->link_base_addr, mld->load_base_addr);
+ 
+   /* Load every loadable segment in memory.  */

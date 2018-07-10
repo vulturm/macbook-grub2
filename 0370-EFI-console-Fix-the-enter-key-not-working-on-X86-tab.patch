@@ -1,0 +1,42 @@
+From 48565c3ac763f71918f75c1f22c10a119a05f1a8 Mon Sep 17 00:00:00 2001
+From: Hans de Goede <hdegoede@redhat.com>
+Date: Tue, 26 Jun 2018 20:05:32 +0200
+Subject: [PATCH] EFI: console: Fix the "enter" key not working on X86 tablets
+
+Most 8" or 7" x86 Windows 10 tablets come with volume up/down buttons and
+a power-button. In their UEFI these are almost always mapped to arrow
+up/down and enter.
+
+Pressing the volume buttons (sometimes by accident) will stop the
+menu countdown, but the power-button / "enter" key was not being recognized
+as enter, so the user would be stuck at the grub menu.
+
+The problem is that these tablets send scan_code 13 or 0x0d for the
+power-button, which officialy maps to the F3 key. They also set
+unicode_char to 0x0d.
+
+This commit recognizes the special case of both scan_code and unicode_char
+being set to 0x0d and treats this as an enter key press.
+
+This fixes things getting stuck at the grub-menu and allows the user
+to choice a grub-menu entry using the buttons on the tablet.
+
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+---
+ grub-core/term/efi/console.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/grub-core/term/efi/console.c b/grub-core/term/efi/console.c
+index a5abaf8e722..59786e30d66 100644
+--- a/grub-core/term/efi/console.c
++++ b/grub-core/term/efi/console.c
+@@ -127,6 +127,9 @@ grub_efi_translate_key (grub_efi_input_key_t key)
+       else
+ 	return key.unicode_char;
+     }
++  /* Some devices send enter with scan_code 0x0d (F3) and unicode_char 0x0d */
++  else if (key.scan_code == '\r' && key.unicode_char == '\r')
++    return key.unicode_char;
+   else if (key.scan_code < ARRAY_SIZE (efi_codes))
+     return efi_codes[key.scan_code];
+ 

@@ -1,0 +1,33 @@
+From d73badfd0aa6683212136e8d6ef439070176722b Mon Sep 17 00:00:00 2001
+From: dann frazier <dann.frazier@canonical.com>
+Date: Fri, 2 Mar 2018 10:02:19 -0700
+Subject: [PATCH] Revert "Keep the native terminal active when enabling
+ gfxterm"
+
+This can cause an issue where GRUB is trying to display both a text and
+graphical menu on the display at the same time, resulting in a flickering
+effect when e.g. scrolling quickly through a menu (LP: #1752767).
+
+Revert for now while we look for a better solution for the original issue.
+
+This reverts commit 52ef7b23f528ce844716661d586497a177e80d5b.
+
+Signed-off-by: dann frazier <dann.frazier@canonical.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ util/grub.d/00_header.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/util/grub.d/00_header.in b/util/grub.d/00_header.in
+index 8d46fc973c1..93a90233ead 100644
+--- a/util/grub.d/00_header.in
++++ b/util/grub.d/00_header.in
+@@ -221,7 +221,7 @@ case x${GRUB_TERMINAL_OUTPUT} in
+   ;;
+   x*)
+     cat << EOF
+-terminal_output --append ${GRUB_TERMINAL_OUTPUT}
++terminal_output ${GRUB_TERMINAL_OUTPUT}
+ EOF
+   ;;
+ esac

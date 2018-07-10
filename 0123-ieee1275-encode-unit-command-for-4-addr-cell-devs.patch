@@ -1,0 +1,102 @@
+From 820c64e4c002090bcd9df10ab79d5851b28ac503 Mon Sep 17 00:00:00 2001
+From: Eric Snowberg <eric.snowberg@oracle.com>
+Date: Mon, 26 Feb 2018 17:34:15 -0800
+Subject: [PATCH] ieee1275: encode-unit command for 4 addr cell devs
+
+Convert physical address to text unit-string.
+
+Convert phys.lo ... phys-high, the numerical representation, to unit-string,
+the text string representation of a physical address within the address
+space defined by this device node. The number of cells in the list
+phys.lo ... phys.hi is determined by the value of the #address-cells property
+of this node.
+
+This function is for devices with #address-cells == 4
+
+Signed-off-by: Eric Snowberg <eric.snowberg@oracle.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/kern/ieee1275/ieee1275.c | 45 ++++++++++++++++++++++++++++++++++++++
+ include/grub/ieee1275/ieee1275.h   |  6 +++++
+ 2 files changed, 51 insertions(+)
+
+diff --git a/grub-core/kern/ieee1275/ieee1275.c b/grub-core/kern/ieee1275/ieee1275.c
+index b0ac6f9f9a8..41503ead090 100644
+--- a/grub-core/kern/ieee1275/ieee1275.c
++++ b/grub-core/kern/ieee1275/ieee1275.c
+@@ -19,6 +19,7 @@
+ 
+ #include <grub/ieee1275/ieee1275.h>
+ #include <grub/types.h>
++#include <grub/misc.h>
+ 
+ #define IEEE1275_PHANDLE_INVALID  ((grub_ieee1275_cell_t) -1)
+ #define IEEE1275_IHANDLE_INVALID  ((grub_ieee1275_cell_t) 0)
+@@ -523,6 +524,50 @@ grub_ieee1275_decode_unit4 (grub_ieee1275_ihandle_t ihandle,
+   return 0;
+ }
+ 
++char *
++grub_ieee1275_encode_uint4 (grub_ieee1275_ihandle_t ihandle,
++                            grub_uint32_t phy_lo, grub_uint32_t phy_hi,
++                            grub_uint32_t lun_lo, grub_uint32_t lun_hi,
++                            grub_size_t *size)
++{
++  char *addr;
++  struct encode_args
++  {
++    struct grub_ieee1275_common_hdr common;
++    grub_ieee1275_cell_t method;
++    grub_ieee1275_cell_t ihandle;
++    grub_ieee1275_cell_t tgt_h;
++    grub_ieee1275_cell_t tgt_l;
++    grub_ieee1275_cell_t lun_h;
++    grub_ieee1275_cell_t lun_l;
++    grub_ieee1275_cell_t catch_result;
++    grub_ieee1275_cell_t size;
++    grub_ieee1275_cell_t addr;
++  }
++  args;
++
++  INIT_IEEE1275_COMMON (&args.common, "call-method", 6, 3);
++  args.method = (grub_ieee1275_cell_t) "encode-unit";
++  args.ihandle = ihandle;
++
++  args.tgt_l = phy_lo;
++  args.tgt_h = phy_hi;
++  args.lun_l = lun_lo;
++  args.lun_h = lun_hi;
++  args.catch_result = 1;
++
++  if ((IEEE1275_CALL_ENTRY_FN (&args) == -1) || (args.catch_result))
++    {
++      grub_error (GRUB_ERR_OUT_OF_RANGE, "encode-unit failed\n");
++      return 0;
++    }
++
++  addr = (void *)args.addr;
++  *size = args.size;
++  addr = grub_strdup ((char *)args.addr);
++  return addr;
++}
++
+ int
+ grub_ieee1275_claim (grub_addr_t addr, grub_size_t size, unsigned int align,
+ 		     grub_addr_t *result)
+diff --git a/include/grub/ieee1275/ieee1275.h b/include/grub/ieee1275/ieee1275.h
+index 534406458b2..c93a97e695e 100644
+--- a/include/grub/ieee1275/ieee1275.h
++++ b/include/grub/ieee1275/ieee1275.h
+@@ -216,6 +216,12 @@ int EXPORT_FUNC(grub_ieee1275_decode_unit4) (grub_ieee1275_ihandle_t ihandle,
+                                              grub_uint32_t *phy_hi,
+                                              grub_uint32_t *lun_lo,
+                                              grub_uint32_t *lun_hi);
++char *EXPORT_FUNC(grub_ieee1275_encode_uint4) (grub_ieee1275_ihandle_t ihandle,
++                                             grub_uint32_t phy_lo,
++                                             grub_uint32_t phy_hi,
++                                             grub_uint32_t lun_lo,
++                                             grub_uint32_t lun_hi,
++                                             grub_size_t *size);
+ 
+ grub_err_t EXPORT_FUNC(grub_claimmap) (grub_addr_t addr, grub_size_t size);
+ 

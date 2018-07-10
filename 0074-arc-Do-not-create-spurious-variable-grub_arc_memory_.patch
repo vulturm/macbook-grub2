@@ -1,0 +1,22 @@
+From 3d86efda0074285fb86aa6ffe5d97327ebd134a4 Mon Sep 17 00:00:00 2001
+From: Vladimir Serbinenko <phcoder@gmail.com>
+Date: Wed, 30 Aug 2017 15:18:24 +0200
+Subject: [PATCH] arc: Do not create spurious variable grub_arc_memory_type_t.
+
+---
+ include/grub/arc/arc.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/grub/arc/arc.h b/include/grub/arc/arc.h
+index 7615a49a92c..999de719675 100644
+--- a/include/grub/arc/arc.h
++++ b/include/grub/arc/arc.h
+@@ -53,7 +53,7 @@ enum grub_arc_memory_type
+ #ifndef GRUB_CPU_WORDS_BIGENDIAN
+     GRUB_ARC_MEMORY_FREE_CONTIGUOUS,
+ #endif
+-  } grub_arc_memory_type_t;
++  };
+ 
+ struct grub_arc_timeinfo
+ {

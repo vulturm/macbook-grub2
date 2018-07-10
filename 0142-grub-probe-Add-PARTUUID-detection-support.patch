@@ -1,0 +1,100 @@
+From 0c0bcffc2378f7427f14f7f878b08ba8f1a1f508 Mon Sep 17 00:00:00 2001
+From: Nicholas Vinson <nvinson234@gmail.com>
+Date: Mon, 16 Apr 2018 22:36:25 -0700
+Subject: [PATCH] grub-probe: Add PARTUUID detection support
+
+Add PARTUUID detection support grub-probe for MBR and GPT partition schemes.
+
+Signed-off-by: Nicholas Vinson <nvinson234@gmail.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ util/grub-probe.c | 48 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
+
+diff --git a/util/grub-probe.c b/util/grub-probe.c
+index 21cb80fbe15..e45dbf9e049 100644
+--- a/util/grub-probe.c
++++ b/util/grub-probe.c
+@@ -28,6 +28,7 @@
+ #include <grub/partition.h>
+ #include <grub/msdos_partition.h>
+ #include <grub/gpt_partition.h>
++#include <grub/i386/pc/boot.h>
+ #include <grub/emu/hostdisk.h>
+ #include <grub/emu/getroot.h>
+ #include <grub/term.h>
+@@ -62,6 +63,7 @@ enum {
+   PRINT_DRIVE,
+   PRINT_DEVICE,
+   PRINT_PARTMAP,
++  PRINT_PARTUUID,
+   PRINT_ABSTRACTION,
+   PRINT_CRYPTODISK_UUID,
+   PRINT_HINT_STR,
+@@ -85,6 +87,7 @@ static const char *targets[] =
+     [PRINT_DRIVE]              = "drive",
+     [PRINT_DEVICE]             = "device",
+     [PRINT_PARTMAP]            = "partmap",
++    [PRINT_PARTUUID]           = "partuuid",
+     [PRINT_ABSTRACTION]        = "abstraction",
+     [PRINT_CRYPTODISK_UUID]    = "cryptodisk_uuid",
+     [PRINT_HINT_STR]           = "hints_string",
+@@ -181,6 +184,45 @@ probe_partmap (grub_disk_t disk, char delim)
+     }
+ }
+ 
++static void
++probe_partuuid (grub_disk_t disk, char delim)
++{
++  grub_partition_t p = disk->partition;
++
++  /*
++   * Nested partitions not supported for now.
++   * Non-nested partitions must have disk->partition->parent == NULL
++   */
++  if (p && p->parent == NULL)
++    {
++      disk->partition = p->parent;
++
++      if (strcmp(p->partmap->name, "msdos") == 0)
++	{
++	    /*
++	     * The partition GUID for MSDOS is the partition number (starting
++	     * with 1) prepended with the NT disk signature.
++	     */
++	    grub_uint32_t nt_disk_sig;
++
++	    if (grub_disk_read (disk, 0, GRUB_BOOT_MACHINE_WINDOWS_NT_MAGIC,
++				sizeof(nt_disk_sig), &nt_disk_sig) == 0)
++	      grub_printf ("%08x-%02x",
++			   grub_le_to_cpu32(nt_disk_sig), 1 + p->number);
++	}
++      else if (strcmp(p->partmap->name, "gpt") == 0)
++	{
++	  struct grub_gpt_partentry gptdata;
++
++	  if (grub_disk_read (disk, p->offset, p->index,
++			      sizeof(gptdata), &gptdata) == 0)
++	    print_gpt_guid(gptdata.guid);
++	}
++
++      disk->partition = p;
++    }
++}
++
+ static void
+ probe_cryptodisk_uuid (grub_disk_t disk, char delim)
+ {
+@@ -635,6 +677,12 @@ probe (const char *path, char **device_names, char delim)
+ 	/* Check if dev->disk itself is contained in a partmap.  */
+ 	probe_partmap (dev->disk, delim);
+ 
++      else if (print == PRINT_PARTUUID)
++	{
++	  probe_partuuid (dev->disk, delim);
++	  putchar (delim);
++	}
++
+       else if (print == PRINT_MSDOS_PARTTYPE)
+ 	{
+ 	  if (dev->disk->partition

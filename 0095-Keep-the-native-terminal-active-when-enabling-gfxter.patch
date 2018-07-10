@@ -1,0 +1,31 @@
+From 52ef7b23f528ce844716661d586497a177e80d5b Mon Sep 17 00:00:00 2001
+From: dann frazier <dann.frazier@canonical.com>
+Date: Thu, 18 Jan 2018 11:57:26 -0700
+Subject: [PATCH] Keep the native terminal active when enabling gfxterm
+
+grub-mkconfig will set GRUB_TERMINAL_OUTPUT to "gfxterm" unless the user
+has overridden it. On EFI systems, this will stop output from going to the
+default "console" terminal. When the EFI fw console is configured to output to
+both serial and video, this will cause GRUB to only display on video - while
+continuing to accept input from both video and serial.
+
+Instead of switching from "console" to "gfxterm", let's output to both.
+
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ util/grub.d/00_header.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/util/grub.d/00_header.in b/util/grub.d/00_header.in
+index 93a90233ead..8d46fc973c1 100644
+--- a/util/grub.d/00_header.in
++++ b/util/grub.d/00_header.in
+@@ -221,7 +221,7 @@ case x${GRUB_TERMINAL_OUTPUT} in
+   ;;
+   x*)
+     cat << EOF
+-terminal_output ${GRUB_TERMINAL_OUTPUT}
++terminal_output --append ${GRUB_TERMINAL_OUTPUT}
+ EOF
+   ;;
+ esac

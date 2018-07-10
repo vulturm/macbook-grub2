@@ -1,0 +1,87 @@
+From f02037afe363f31218b4e0c63ef3a1176f51c232 Mon Sep 17 00:00:00 2001
+From: Eric Snowberg <eric.snowberg@oracle.com>
+Date: Mon, 26 Feb 2018 17:34:16 -0800
+Subject: [PATCH] ieee1275: set-address bus specific method
+
+IEEE 1275-1994 Standard for Boot (Initialization Configuration)
+Firmware: Core Requirements and Practices
+E.3.2.2 Bus-specific methods for bus nodes
+
+A package implementing the scsi-2 device type shall implement the
+following bus-specific method:
+
+ set-address ( unit# target# -- )
+   Sets the SCSI target number (0x0..0xf) and unit number (0..7) to which
+   subsequent commands apply.
+
+This function is for devices with #address-cells == 2
+
+Signed-off-by: Eric Snowberg <eric.snowberg@oracle.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/kern/ieee1275/ieee1275.c | 40 ++++++++++++++++++++++++++++++++++++++
+ include/grub/ieee1275/ieee1275.h   |  3 +++
+ 2 files changed, 43 insertions(+)
+
+diff --git a/grub-core/kern/ieee1275/ieee1275.c b/grub-core/kern/ieee1275/ieee1275.c
+index 41503ead090..497f170fb6b 100644
+--- a/grub-core/kern/ieee1275/ieee1275.c
++++ b/grub-core/kern/ieee1275/ieee1275.c
+@@ -693,3 +693,43 @@ grub_ieee1275_milliseconds (grub_uint32_t *msecs)
+   *msecs = args.msecs;
+   return 0;
+ }
++
++int
++grub_ieee1275_set_address (grub_ieee1275_ihandle_t ihandle,
++                           grub_uint32_t target, grub_uint32_t lun)
++{
++  struct set_address
++  {
++    struct grub_ieee1275_common_hdr common;
++    grub_ieee1275_cell_t method;
++    grub_ieee1275_cell_t ihandle;
++    grub_ieee1275_cell_t tgt;
++    grub_ieee1275_cell_t lun;
++    grub_ieee1275_cell_t catch_result;
++  }
++  args;
++
++  INIT_IEEE1275_COMMON (&args.common, "call-method", 4, 1);
++
++  /*
++   * IEEE 1275-1994 Standard for Boot (Initialization Configuration)
++   * Firmware: Core Requirements and Practices
++   * E.3.2.2 Bus-specific methods for bus nodes
++   *
++   * A package implementing the scsi-2 device type shall implement the
++   * following bus-specific method:
++   *
++   * set-address ( unit# target# -- )
++   * Sets the SCSI target number (0x0..0xf) and unit number (0..7) to which
++   * subsequent commands apply.
++   */
++  args.method = (grub_ieee1275_cell_t) "set-address";
++  args.ihandle = ihandle;
++  args.tgt = target;
++  args.lun = lun;
++
++  if (IEEE1275_CALL_ENTRY_FN (&args) == -1)
++    return -1;
++
++  return args.catch_result;
++}
+diff --git a/include/grub/ieee1275/ieee1275.h b/include/grub/ieee1275/ieee1275.h
+index c93a97e695e..55e920e816f 100644
+--- a/include/grub/ieee1275/ieee1275.h
++++ b/include/grub/ieee1275/ieee1275.h
+@@ -210,6 +210,9 @@ int EXPORT_FUNC(grub_ieee1275_set_property) (grub_ieee1275_phandle_t phandle,
+ int EXPORT_FUNC(grub_ieee1275_set_color) (grub_ieee1275_ihandle_t ihandle,
+ 					  int index, int r, int g, int b);
+ int EXPORT_FUNC(grub_ieee1275_milliseconds) (grub_uint32_t *msecs);
++int EXPORT_FUNC(grub_ieee1275_set_address) (grub_ieee1275_ihandle_t ihandle,
++                                            grub_uint32_t target,
++                                            grub_uint32_t lun);
+ int EXPORT_FUNC(grub_ieee1275_decode_unit4) (grub_ieee1275_ihandle_t ihandle,
+                                              void *addr, grub_size_t size,
+                                              grub_uint32_t *phy_lo,

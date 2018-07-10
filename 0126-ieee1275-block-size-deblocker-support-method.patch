@@ -1,0 +1,67 @@
+From ad6d8f5063a272e2f1e4857751db70058b977239 Mon Sep 17 00:00:00 2001
+From: Eric Snowberg <eric.snowberg@oracle.com>
+Date: Mon, 26 Feb 2018 17:34:18 -0800
+Subject: [PATCH] ieee1275: block-size deblocker support method
+
+IEEE Std 1275-1994 Standard for Boot (Initialization Configuration)
+Firmware: Core Requirements and Practices
+
+3.8.3 deblocker support package
+
+Any package that uses the "deblocker" support package must define
+the following method, which the deblocker uses as a low-level
+interface to the device
+
+block-size ( -- block-len ) Return "granularity" for accesses to this
+device.
+
+Signed-off-by: Eric Snowberg <eric.snowberg@oracle.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/kern/ieee1275/ieee1275.c | 23 +++++++++++++++++++++++
+ include/grub/ieee1275/ieee1275.h   |  1 +
+ 2 files changed, 24 insertions(+)
+
+diff --git a/grub-core/kern/ieee1275/ieee1275.c b/grub-core/kern/ieee1275/ieee1275.c
+index cd2dead832d..86f81a3c467 100644
+--- a/grub-core/kern/ieee1275/ieee1275.c
++++ b/grub-core/kern/ieee1275/ieee1275.c
+@@ -784,3 +784,26 @@ grub_ieee1275_no_data_command (grub_ieee1275_ihandle_t ihandle,
+ 
+   return args.catch_result;
+ }
++
++int
++grub_ieee1275_get_block_size (grub_ieee1275_ihandle_t ihandle)
++{
++  struct size_args_ieee1275
++    {
++      struct grub_ieee1275_common_hdr common;
++      grub_ieee1275_cell_t method;
++      grub_ieee1275_cell_t ihandle;
++      grub_ieee1275_cell_t result;
++      grub_ieee1275_cell_t size;
++    } args;
++
++  INIT_IEEE1275_COMMON (&args.common, "call-method", 2, 2);
++  args.method = (grub_ieee1275_cell_t) "block-size";
++  args.ihandle = ihandle;
++  args.result = 1;
++
++  if ((IEEE1275_CALL_ENTRY_FN (&args) == -1) || (args.result))
++    return 0;
++
++  return args.size;
++}
+diff --git a/include/grub/ieee1275/ieee1275.h b/include/grub/ieee1275/ieee1275.h
+index 6dfb57b8bf8..d0dc2746ead 100644
+--- a/include/grub/ieee1275/ieee1275.h
++++ b/include/grub/ieee1275/ieee1275.h
+@@ -228,6 +228,7 @@ char *EXPORT_FUNC(grub_ieee1275_encode_uint4) (grub_ieee1275_ihandle_t ihandle,
+                                              grub_uint32_t lun_lo,
+                                              grub_uint32_t lun_hi,
+                                              grub_size_t *size);
++int EXPORT_FUNC(grub_ieee1275_get_block_size) (grub_ieee1275_ihandle_t ihandle);
+ 
+ grub_err_t EXPORT_FUNC(grub_claimmap) (grub_addr_t addr, grub_size_t size);
+ 

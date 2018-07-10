@@ -1,0 +1,27 @@
+From e1ead149efadf420fe16d2ce0b109a6982b8a5f6 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Wed, 21 Feb 2018 15:20:23 -0500
+Subject: [PATCH] aout.h: Fix missing include.
+
+grub_aout_load() has a grub_file_t parameter, and depending on what order
+includes land in, it's sometimes not defined.  This patch explicitly adds
+file.h to aout.h so that it will always be defined.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ include/grub/aout.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/grub/aout.h b/include/grub/aout.h
+index 10d7dde61ec..c8c1d94eca5 100644
+--- a/include/grub/aout.h
++++ b/include/grub/aout.h
+@@ -52,6 +52,7 @@
+ #define GRUB_AOUT_HEADER 1
+ 
+ #include <grub/types.h>
++#include <grub/file.h>
+ 
+ struct grub_aout32_header
+ {

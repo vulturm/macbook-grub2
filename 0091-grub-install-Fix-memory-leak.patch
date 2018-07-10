@@ -1,0 +1,23 @@
+From 2a8856401774d86ec78481e2188a54bbf689f25e Mon Sep 17 00:00:00 2001
+From: Eric Snowberg <eric.snowberg@oracle.com>
+Date: Mon, 27 Nov 2017 09:12:49 -0800
+Subject: [PATCH] grub-install: Fix memory leak
+
+Signed-off-by: Eric Snowberg <eric.snowberg@oracle.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ util/grub-install.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/util/grub-install.c b/util/grub-install.c
+index 75e3e5ba6f0..5e4cdfd2b52 100644
+--- a/util/grub-install.c
++++ b/util/grub-install.c
+@@ -1472,6 +1472,7 @@ main (int argc, char *argv[])
+ 		{
+ 		  grub_util_fprint_full_disk_name (load_cfg_f, g, dev);
+ 		  fprintf (load_cfg_f, " ");
++		  free (g);
+ 		}
+ 	      if (dev != grub_dev)
+ 		grub_device_close (dev);

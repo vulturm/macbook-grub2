@@ -1,0 +1,28 @@
+From 5ceb55b7a079cdaa61437f652e90bf2d1011ad0e Mon Sep 17 00:00:00 2001
+From: Eric Snowberg <eric.snowberg@oracle.com>
+Date: Wed, 14 Mar 2018 08:51:17 -0700
+Subject: [PATCH] ieee1275: NULL pointer dereference in
+ grub_machine_get_bootlocation()
+
+Read from NULL pointer canon in function grub_machine_get_bootlocation().
+Function grub_ieee1275_canonicalise_devname() may return NULL.
+
+Signed-off-by: Eric Snowberg <eric.snowberg@oracle.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/kern/ieee1275/init.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/grub-core/kern/ieee1275/init.c b/grub-core/kern/ieee1275/init.c
+index 62dfb8a3bad..0d8ebf58b95 100644
+--- a/grub-core/kern/ieee1275/init.c
++++ b/grub-core/kern/ieee1275/init.c
+@@ -110,6 +110,8 @@ grub_machine_get_bootlocation (char **device, char **path)
+       char *ptr;
+       dev = grub_ieee1275_get_aliasdevname (bootpath);
+       canon = grub_ieee1275_canonicalise_devname (dev);
++      if (! canon)
++        return;
+       ptr = canon + grub_strlen (canon) - 1;
+       while (ptr > canon && (*ptr == ',' || *ptr == ':'))
+ 	ptr--;

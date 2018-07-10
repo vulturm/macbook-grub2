@@ -1,0 +1,65 @@
+From 352868d1234c94393e84871072372d73cb1166fa Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Wed, 21 Feb 2018 15:20:24 -0500
+Subject: [PATCH] mkimage: make it easier to run syntax checkers on
+ grub-mkimagexx.c
+
+This makes it so you can treat grub-mkimagexx.c as a file you can build
+directly, so syntax checkers like vim's "syntastic" plugin, which uses
+"gcc -x c -fsyntax-only" to build it, will work.
+
+One still has to do whatever setup is required to make it pick the right
+include dirs, which -W options we use, etc., but this makes it so you
+can do the checking on the file you're editing, rather than on a
+different file.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ util/grub-mkimage32.c | 2 ++
+ util/grub-mkimage64.c | 2 ++
+ util/grub-mkimagexx.c | 9 +++++++++
+ 3 files changed, 13 insertions(+)
+
+diff --git a/util/grub-mkimage32.c b/util/grub-mkimage32.c
+index 9b31397bc40..1f2ccccd225 100644
+--- a/util/grub-mkimage32.c
++++ b/util/grub-mkimage32.c
+@@ -19,4 +19,6 @@
+ # define ELF_ST_TYPE(val)		ELF32_ST_TYPE(val)
+ #define XEN_NOTE_SIZE 132
+ 
++#ifndef GRUB_MKIMAGEXX
+ #include "grub-mkimagexx.c"
++#endif
+diff --git a/util/grub-mkimage64.c b/util/grub-mkimage64.c
+index d8334592470..4ff72a625e0 100644
+--- a/util/grub-mkimage64.c
++++ b/util/grub-mkimage64.c
+@@ -19,4 +19,6 @@
+ # define ELF_ST_TYPE(val)		ELF64_ST_TYPE(val)
+ #define XEN_NOTE_SIZE 120
+ 
++#ifndef GRUB_MKIMAGEXX
+ #include "grub-mkimagexx.c"
++#endif
+diff --git a/util/grub-mkimagexx.c b/util/grub-mkimagexx.c
+index 39d7efb914a..97ff599f073 100644
+--- a/util/grub-mkimagexx.c
++++ b/util/grub-mkimagexx.c
+@@ -50,6 +50,15 @@
+ 
+ #pragma GCC diagnostic ignored "-Wcast-align"
+ 
++#define GRUB_MKIMAGEXX
++#if !defined(MKIMAGE_ELF32) && !defined(MKIMAGE_ELF64)
++#if __SIZEOF_POINTER__ == 8
++#include "grub-mkimage64.c"
++#else
++#include "grub-mkimage32.c"
++#endif
++#endif
++
+ /* These structures are defined according to the CHRP binding to IEEE1275,
+    "Client Program Format" section.  */
+ 

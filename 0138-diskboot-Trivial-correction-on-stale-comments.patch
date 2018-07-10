@@ -1,0 +1,28 @@
+From 9dcac673ed08e874d883c6dc5af2017fb28eb3d5 Mon Sep 17 00:00:00 2001
+From: Cao jin <caoj.fnst@cn.fujitsu.com>
+Date: Wed, 11 Apr 2018 11:23:10 +0800
+Subject: [PATCH] diskboot: Trivial correction on stale comments
+
+diskboot.img now is loaded at 0x8000 and is jumped to with 0:0x8000.
+
+Signed-off-by: Cao jin <caoj.fnst@cn.fujitsu.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/boot/i386/pc/diskboot.S | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/grub-core/boot/i386/pc/diskboot.S b/grub-core/boot/i386/pc/diskboot.S
+index 1ee4cf5b2e0..c1addc0df29 100644
+--- a/grub-core/boot/i386/pc/diskboot.S
++++ b/grub-core/boot/i386/pc/diskboot.S
+@@ -37,8 +37,8 @@
+ start:
+ _start:
+ 	/*
+-	 * _start is loaded at 0x2000 and is jumped to with
+-	 * CS:IP 0:0x2000 in kernel.
++	 * _start is loaded at 0x8000 and is jumped to with
++	 * CS:IP 0:0x8000 in kernel.
+ 	 */
+ 
+ 	/*

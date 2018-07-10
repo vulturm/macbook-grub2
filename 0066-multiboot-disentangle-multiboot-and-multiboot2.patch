@@ -1,0 +1,617 @@
+From 21e4a6fa039bb7dc6be42e1e4c171ddc398b8431 Mon Sep 17 00:00:00 2001
+From: Vladimir Serbinenko <phcoder@gmail.com>
+Date: Mon, 14 Aug 2017 12:51:26 +0200
+Subject: [PATCH] multiboot: disentangle multiboot and multiboot2.
+
+Previously we had multiboot and multiboot2 declaring the same symbols.
+This can potentially lead to aliasing and strange behaviours when e.g.
+module instead of module2 is used with multiboot2.
+
+Bug: #51137
+---
+ grub-core/loader/i386/multiboot_mbi.c |  4 +--
+ grub-core/loader/multiboot.c          | 66 ++++++++++++++++++++--------------
+ grub-core/loader/multiboot_elfxx.c    | 14 ++++----
+ grub-core/loader/multiboot_mbi2.c     | 68 +++++++++++++++++------------------
+ include/grub/i386/multiboot.h         |  9 ++++-
+ include/grub/mips/multiboot.h         |  4 +--
+ include/grub/multiboot.h              | 11 +-----
+ include/multiboot2.h                  |  4 +--
+ 8 files changed, 95 insertions(+), 85 deletions(-)
+
+diff --git a/grub-core/loader/i386/multiboot_mbi.c b/grub-core/loader/i386/multiboot_mbi.c
+index fd7b41b0cad..dc98dbcae25 100644
+--- a/grub-core/loader/i386/multiboot_mbi.c
++++ b/grub-core/loader/i386/multiboot_mbi.c
+@@ -239,7 +239,7 @@ grub_multiboot_get_mbi_size (void)
+   ret = sizeof (struct multiboot_info) + ALIGN_UP (cmdline_size, 4)
+     + modcnt * sizeof (struct multiboot_mod_list) + total_modcmd
+     + ALIGN_UP (sizeof(PACKAGE_STRING), 4) 
+-    + grub_get_multiboot_mmap_count () * sizeof (struct multiboot_mmap_entry)
++    + grub_multiboot_get_mmap_count () * sizeof (struct multiboot_mmap_entry)
+     + elf_sec_entsize * elf_sec_num
+     + 256 * sizeof (struct multiboot_color)
+ #if GRUB_MACHINE_HAS_VBE || GRUB_MACHINE_HAS_VGA_TEXT
+@@ -542,7 +542,7 @@ grub_multiboot_make_mbi (grub_uint32_t *target)
+       mbi->mods_count = 0;
+     }
+ 
+-  mmap_size = grub_get_multiboot_mmap_count () 
++  mmap_size = grub_multiboot_get_mmap_count () 
+     * sizeof (struct multiboot_mmap_entry);
+   grub_fill_multiboot_mmap ((struct multiboot_mmap_entry *) ptrorig);
+   mbi->mmap_length = mmap_size;
+diff --git a/grub-core/loader/multiboot.c b/grub-core/loader/multiboot.c
+index bd9d5b3e698..bd3dc1990e3 100644
+--- a/grub-core/loader/multiboot.c
++++ b/grub-core/loader/multiboot.c
+@@ -28,7 +28,15 @@
+ 
+ #include <grub/loader.h>
+ #include <grub/command.h>
++#ifdef GRUB_USE_MULTIBOOT2
++#include <grub/multiboot2.h>
++#define GRUB_MULTIBOOT_CONSOLE_FRAMEBUFFER GRUB_MULTIBOOT2_CONSOLE_FRAMEBUFFER
++#define GRUB_MULTIBOOT_CONSOLE_EGA_TEXT GRUB_MULTIBOOT2_CONSOLE_EGA_TEXT
++#define GRUB_MULTIBOOT(x) grub_multiboot2_ ## x
++#else
+ #include <grub/multiboot.h>
++#define GRUB_MULTIBOOT(x) grub_multiboot_ ## x
++#endif
+ #include <grub/cpu/multiboot.h>
+ #include <grub/elf.h>
+ #include <grub/aout.h>
+@@ -49,8 +57,8 @@ GRUB_MOD_LICENSE ("GPLv3+");
+ #include <grub/efi/efi.h>
+ #endif
+ 
+-struct grub_relocator *grub_multiboot_relocator = NULL;
+-grub_uint32_t grub_multiboot_payload_eip;
++struct grub_relocator *GRUB_MULTIBOOT (relocator) = NULL;
++grub_uint32_t GRUB_MULTIBOOT (payload_eip);
+ #if defined (GRUB_MACHINE_PCBIOS) || defined (GRUB_MACHINE_MULTIBOOT) || defined (GRUB_MACHINE_COREBOOT) || defined (GRUB_MACHINE_QEMU)
+ #define DEFAULT_VIDEO_MODE "text"
+ #else
+@@ -78,7 +86,7 @@ count_hook (grub_uint64_t addr __attribute__ ((unused)),
+ /* Return the length of the Multiboot mmap that will be needed to allocate
+    our platform's map.  */
+ grub_uint32_t
+-grub_get_multiboot_mmap_count (void)
++GRUB_MULTIBOOT (get_mmap_count) (void)
+ {
+   grub_size_t count = 0;
+ 
+@@ -88,7 +96,7 @@ grub_get_multiboot_mmap_count (void)
+ }
+ 
+ grub_err_t
+-grub_multiboot_set_video_mode (void)
++GRUB_MULTIBOOT (set_video_mode) (void)
+ {
+   grub_err_t err;
+   const char *modevar;
+@@ -164,19 +172,23 @@ static grub_err_t
+ grub_multiboot_boot (void)
+ {
+   grub_err_t err;
++
++#ifdef GRUB_USE_MULTIBOOT2
++  struct grub_relocator32_state state = MULTIBOOT2_INITIAL_STATE;
++#else
+   struct grub_relocator32_state state = MULTIBOOT_INITIAL_STATE;
++#endif
++  state.MULTIBOOT_ENTRY_REGISTER = GRUB_MULTIBOOT (payload_eip);
+ 
+-  state.MULTIBOOT_ENTRY_REGISTER = grub_multiboot_payload_eip;
+-
+-  err = grub_multiboot_make_mbi (&state.MULTIBOOT_MBI_REGISTER);
++  err = GRUB_MULTIBOOT (make_mbi) (&state.MULTIBOOT_MBI_REGISTER);
+ 
+   if (err)
+     return err;
+ 
+   if (grub_efi_is_finished)
+-    normal_boot (grub_multiboot_relocator, state);
++    normal_boot (GRUB_MULTIBOOT (relocator), state);
+   else
+-    efi_boot (grub_multiboot_relocator, state.MULTIBOOT_MBI_REGISTER);
++    efi_boot (GRUB_MULTIBOOT (relocator), state.MULTIBOOT_MBI_REGISTER);
+ 
+   /* Not reached.  */
+   return GRUB_ERR_NONE;
+@@ -185,10 +197,10 @@ grub_multiboot_boot (void)
+ static grub_err_t
+ grub_multiboot_unload (void)
+ {
+-  grub_multiboot_free_mbi ();
++  GRUB_MULTIBOOT (free_mbi) ();
+ 
+-  grub_relocator_unload (grub_multiboot_relocator);
+-  grub_multiboot_relocator = NULL;
++  grub_relocator_unload (GRUB_MULTIBOOT (relocator));
++  GRUB_MULTIBOOT (relocator) = NULL;
+ 
+   grub_dl_unref (my_mod);
+ 
+@@ -207,7 +219,7 @@ static grub_uint64_t highest_load;
+ 
+ /* Load ELF32 or ELF64.  */
+ grub_err_t
+-grub_multiboot_load_elf (mbi_load_data_t *mld)
++GRUB_MULTIBOOT (load_elf) (mbi_load_data_t *mld)
+ {
+   if (grub_multiboot_is_elf32 (mld->buffer))
+     return grub_multiboot_load_elf32 (mld);
+@@ -218,9 +230,9 @@ grub_multiboot_load_elf (mbi_load_data_t *mld)
+ }
+ 
+ grub_err_t
+-grub_multiboot_set_console (int console_type, int accepted_consoles,
+-			    int width, int height, int depth,
+-			    int console_req)
++GRUB_MULTIBOOT (set_console) (int console_type, int accepted_consoles,
++			      int width, int height, int depth,
++			      int console_req)
+ {
+   console_required = console_req;
+   if (!(accepted_consoles 
+@@ -313,19 +325,19 @@ grub_cmd_multiboot (grub_command_t cmd __attribute__ ((unused)),
+   grub_dl_ref (my_mod);
+ 
+   /* Skip filename.  */
+-  grub_multiboot_init_mbi (argc - 1, argv + 1);
++  GRUB_MULTIBOOT (init_mbi) (argc - 1, argv + 1);
+ 
+-  grub_relocator_unload (grub_multiboot_relocator);
+-  grub_multiboot_relocator = grub_relocator_new ();
++  grub_relocator_unload (GRUB_MULTIBOOT (relocator));
++  GRUB_MULTIBOOT (relocator) = grub_relocator_new ();
+ 
+-  if (!grub_multiboot_relocator)
++  if (!GRUB_MULTIBOOT (relocator))
+     goto fail;
+ 
+-  err = grub_multiboot_load (file, argv[0]);
++  err = GRUB_MULTIBOOT (load) (file, argv[0]);
+   if (err)
+     goto fail;
+ 
+-  grub_multiboot_set_bootdev ();
++  GRUB_MULTIBOOT (set_bootdev) ();
+ 
+   grub_loader_set (grub_multiboot_boot, grub_multiboot_unload, 0);
+ 
+@@ -335,8 +347,8 @@ grub_cmd_multiboot (grub_command_t cmd __attribute__ ((unused)),
+ 
+   if (grub_errno != GRUB_ERR_NONE)
+     {
+-      grub_relocator_unload (grub_multiboot_relocator);
+-      grub_multiboot_relocator = NULL;
++      grub_relocator_unload (GRUB_MULTIBOOT (relocator));
++      GRUB_MULTIBOOT (relocator) = NULL;
+       grub_dl_unref (my_mod);
+     }
+ 
+@@ -368,7 +380,7 @@ grub_cmd_module (grub_command_t cmd __attribute__ ((unused)),
+   if (argc == 0)
+     return grub_error (GRUB_ERR_BAD_ARGUMENT, N_("filename expected"));
+ 
+-  if (!grub_multiboot_relocator)
++  if (!GRUB_MULTIBOOT (relocator))
+     return grub_error (GRUB_ERR_BAD_ARGUMENT,
+ 		       N_("you need to load the kernel first"));
+ 
+@@ -389,7 +401,7 @@ grub_cmd_module (grub_command_t cmd __attribute__ ((unused)),
+   if (size)
+   {
+     grub_relocator_chunk_t ch;
+-    err = grub_relocator_alloc_chunk_align (grub_multiboot_relocator, &ch,
++    err = grub_relocator_alloc_chunk_align (GRUB_MULTIBOOT (relocator), &ch,
+ 					    lowest_addr, (0xffffffff - size) + 1,
+ 					    size, MULTIBOOT_MOD_ALIGN,
+ 					    GRUB_RELOCATOR_PREFERENCE_NONE, 1);
+@@ -407,7 +419,7 @@ grub_cmd_module (grub_command_t cmd __attribute__ ((unused)),
+       target = 0;
+     }
+ 
+-  err = grub_multiboot_add_module (target, size, argc - 1, argv + 1);
++  err = GRUB_MULTIBOOT (add_module) (target, size, argc - 1, argv + 1);
+   if (err)
+     {
+       grub_file_close (file);
+diff --git a/grub-core/loader/multiboot_elfxx.c b/grub-core/loader/multiboot_elfxx.c
+index 5e649ed2545..67daf5944b0 100644
+--- a/grub-core/loader/multiboot_elfxx.c
++++ b/grub-core/loader/multiboot_elfxx.c
+@@ -104,13 +104,13 @@ CONCAT(grub_multiboot_load_elf, XX) (mbi_load_data_t *mld)
+       if (load_size > mld->max_addr || mld->min_addr > mld->max_addr - load_size)
+ 	return grub_error (GRUB_ERR_BAD_OS, "invalid min/max address and/or load size");
+ 
+-      err = grub_relocator_alloc_chunk_align (grub_multiboot_relocator, &ch,
++      err = grub_relocator_alloc_chunk_align (GRUB_MULTIBOOT (relocator), &ch,
+ 					      mld->min_addr, mld->max_addr - load_size,
+ 					      load_size, mld->align ? mld->align : 1,
+ 					      mld->preference, mld->avoid_efi_boot_services);
+     }
+   else
+-    err = grub_relocator_alloc_chunk_addr (grub_multiboot_relocator, &ch,
++    err = grub_relocator_alloc_chunk_addr (GRUB_MULTIBOOT (relocator), &ch,
+ 					   mld->link_base_addr, load_size);
+ 
+   if (err)
+@@ -167,7 +167,7 @@ CONCAT(grub_multiboot_load_elf, XX) (mbi_load_data_t *mld)
+     if (phdr(i)->p_vaddr <= ehdr->e_entry
+ 	&& phdr(i)->p_vaddr + phdr(i)->p_memsz > ehdr->e_entry)
+       {
+-	grub_multiboot_payload_eip = (ehdr->e_entry - phdr(i)->p_vaddr)
++	GRUB_MULTIBOOT (payload_eip) = (ehdr->e_entry - phdr(i)->p_vaddr)
+ 	  + phdr(i)->p_paddr;
+ #ifdef MULTIBOOT_LOAD_ELF64
+ # ifdef __mips
+@@ -191,7 +191,7 @@ CONCAT(grub_multiboot_load_elf, XX) (mbi_load_data_t *mld)
+ #if defined (__i386__) || defined (__x86_64__)
+   
+ #elif defined (__mips)
+-  grub_multiboot_payload_eip |= 0x80000000;
++  GRUB_MULTIBOOT (payload_eip) |= 0x80000000;
+ #else
+ #error Please complete this
+ #endif
+@@ -238,7 +238,7 @@ CONCAT(grub_multiboot_load_elf, XX) (mbi_load_data_t *mld)
+ 	  if (sh->sh_size == 0)
+ 	    continue;
+ 
+-	  err = grub_relocator_alloc_chunk_align (grub_multiboot_relocator, &ch, 0,
++	  err = grub_relocator_alloc_chunk_align (GRUB_MULTIBOOT (relocator), &ch, 0,
+ 						  (0xffffffff - sh->sh_size) + 1,
+ 						  sh->sh_size, sh->sh_addralign,
+ 						  GRUB_RELOCATOR_PREFERENCE_NONE,
+@@ -264,8 +264,8 @@ CONCAT(grub_multiboot_load_elf, XX) (mbi_load_data_t *mld)
+ 	    }
+ 	  sh->sh_addr = target;
+ 	}
+-      grub_multiboot_add_elfsyms (ehdr->e_shnum, ehdr->e_shentsize,
+-				  ehdr->e_shstrndx, shdr);
++      GRUB_MULTIBOOT (add_elfsyms) (ehdr->e_shnum, ehdr->e_shentsize,
++				    ehdr->e_shstrndx, shdr);
+     }
+ 
+ #undef phdr
+diff --git a/grub-core/loader/multiboot_mbi2.c b/grub-core/loader/multiboot_mbi2.c
+index b0679a9f6c9..4df6595954d 100644
+--- a/grub-core/loader/multiboot_mbi2.c
++++ b/grub-core/loader/multiboot_mbi2.c
+@@ -22,7 +22,7 @@
+ #include <grub/machine/apm.h>
+ #include <grub/machine/memory.h>
+ #endif
+-#include <grub/multiboot.h>
++#include <grub/multiboot2.h>
+ #include <grub/cpu/multiboot.h>
+ #include <grub/cpu/relocator.h>
+ #include <grub/disk.h>
+@@ -71,7 +71,7 @@ static int keep_bs = 0;
+ static grub_uint32_t load_base_addr;
+ 
+ void
+-grub_multiboot_add_elfsyms (grub_size_t num, grub_size_t entsize,
++grub_multiboot2_add_elfsyms (grub_size_t num, grub_size_t entsize,
+ 			    unsigned shndx, void *data)
+ {
+   elf_sec_num = num;
+@@ -90,17 +90,17 @@ find_header (grub_properly_aligned_t *buffer, grub_ssize_t len)
+        ((char *) header <= (char *) buffer + len - 12);
+        header = (struct multiboot_header *) ((grub_uint32_t *) header + MULTIBOOT_HEADER_ALIGN / 4))
+     {
+-      if (header->magic == MULTIBOOT_HEADER_MAGIC
++      if (header->magic == MULTIBOOT2_HEADER_MAGIC
+ 	  && !(header->magic + header->architecture
+ 	       + header->header_length + header->checksum)
+-	  && header->architecture == MULTIBOOT_ARCHITECTURE_CURRENT)
++	  && header->architecture == MULTIBOOT2_ARCHITECTURE_CURRENT)
+ 	return header;
+     }
+   return NULL;
+ }
+ 
+ grub_err_t
+-grub_multiboot_load (grub_file_t file, const char *filename)
++grub_multiboot2_load (grub_file_t file, const char *filename)
+ {
+   grub_ssize_t len;
+   struct multiboot_header *header;
+@@ -112,7 +112,7 @@ grub_multiboot_load (grub_file_t file, const char *filename)
+   grub_addr_t entry = 0, efi_entry = 0;
+   grub_uint32_t console_required = 0;
+   struct multiboot_header_tag_framebuffer *fbtag = NULL;
+-  int accepted_consoles = GRUB_MULTIBOOT_CONSOLE_EGA_TEXT;
++  int accepted_consoles = GRUB_MULTIBOOT2_CONSOLE_EGA_TEXT;
+   mbi_load_data_t mld;
+ 
+   mld.mbi_ver = 2;
+@@ -210,7 +210,7 @@ grub_multiboot_load (grub_file_t file, const char *filename)
+       case MULTIBOOT_HEADER_TAG_CONSOLE_FLAGS:
+ 	if (!(((struct multiboot_header_tag_console_flags *) tag)->console_flags
+ 	    & MULTIBOOT_CONSOLE_FLAGS_EGA_TEXT_SUPPORTED))
+-	  accepted_consoles &= ~GRUB_MULTIBOOT_CONSOLE_EGA_TEXT;
++	  accepted_consoles &= ~GRUB_MULTIBOOT2_CONSOLE_EGA_TEXT;
+ 	if (((struct multiboot_header_tag_console_flags *) tag)->console_flags
+ 	    & MULTIBOOT_CONSOLE_FLAGS_CONSOLE_REQUIRED)
+ 	  console_required = 1;
+@@ -218,7 +218,7 @@ grub_multiboot_load (grub_file_t file, const char *filename)
+ 
+       case MULTIBOOT_HEADER_TAG_FRAMEBUFFER:
+ 	fbtag = (struct multiboot_header_tag_framebuffer *) tag;
+-	accepted_consoles |= GRUB_MULTIBOOT_CONSOLE_FRAMEBUFFER;
++	accepted_consoles |= GRUB_MULTIBOOT2_CONSOLE_FRAMEBUFFER;
+ 	break;
+ 
+       case MULTIBOOT_HEADER_TAG_RELOCATABLE:
+@@ -295,13 +295,13 @@ grub_multiboot_load (grub_file_t file, const char *filename)
+ 	      return grub_error (GRUB_ERR_BAD_OS, "invalid min/max address and/or load size");
+ 	    }
+ 
+-	  err = grub_relocator_alloc_chunk_align (grub_multiboot_relocator, &ch,
++	  err = grub_relocator_alloc_chunk_align (grub_multiboot2_relocator, &ch,
+ 						  mld.min_addr, mld.max_addr - code_size,
+ 						  code_size, mld.align ? mld.align : 1,
+ 						  mld.preference, keep_bs);
+ 	}
+       else
+-	err = grub_relocator_alloc_chunk_addr (grub_multiboot_relocator,
++	err = grub_relocator_alloc_chunk_addr (grub_multiboot2_relocator,
+ 					       &ch, load_addr, code_size);
+       if (err)
+ 	{
+@@ -343,7 +343,7 @@ grub_multiboot_load (grub_file_t file, const char *filename)
+       mld.file = file;
+       mld.filename = filename;
+       mld.avoid_efi_boot_services = keep_bs;
+-      err = grub_multiboot_load_elf (&mld);
++      err = grub_multiboot2_load_elf (&mld);
+       if (err)
+ 	{
+ 	  grub_free (mld.buffer);
+@@ -354,9 +354,9 @@ grub_multiboot_load (grub_file_t file, const char *filename)
+   load_base_addr = mld.load_base_addr;
+ 
+   if (keep_bs && efi_entry_specified)
+-    grub_multiboot_payload_eip = efi_entry;
++    grub_multiboot2_payload_eip = efi_entry;
+   else if (entry_specified)
+-    grub_multiboot_payload_eip = entry;
++    grub_multiboot2_payload_eip = entry;
+ 
+   if (mld.relocatable)
+     {
+@@ -370,20 +370,20 @@ grub_multiboot_load (grub_file_t file, const char *filename)
+        * 64-bit int here.
+        */
+       if (mld.load_base_addr >= mld.link_base_addr)
+-	grub_multiboot_payload_eip += mld.load_base_addr - mld.link_base_addr;
++	grub_multiboot2_payload_eip += mld.load_base_addr - mld.link_base_addr;
+       else
+-	grub_multiboot_payload_eip -= mld.link_base_addr - mld.load_base_addr;
++	grub_multiboot2_payload_eip -= mld.link_base_addr - mld.load_base_addr;
+     }
+ 
+   if (fbtag)
+-    err = grub_multiboot_set_console (GRUB_MULTIBOOT_CONSOLE_FRAMEBUFFER,
+-				      accepted_consoles,
+-				      fbtag->width, fbtag->height,
+-				      fbtag->depth, console_required);
++    err = grub_multiboot2_set_console (GRUB_MULTIBOOT2_CONSOLE_FRAMEBUFFER,
++				       accepted_consoles,
++				       fbtag->width, fbtag->height,
++				       fbtag->depth, console_required);
+   else
+-    err = grub_multiboot_set_console (GRUB_MULTIBOOT_CONSOLE_EGA_TEXT,
+-				      accepted_consoles,
+-				      0, 0, 0, console_required);
++    err = grub_multiboot2_set_console (GRUB_MULTIBOOT2_CONSOLE_EGA_TEXT,
++				       accepted_consoles,
++				       0, 0, 0, console_required);
+   return err;
+ }
+ 
+@@ -459,7 +459,7 @@ net_size (void)
+ }
+ 
+ static grub_size_t
+-grub_multiboot_get_mbi_size (void)
++grub_multiboot2_get_mbi_size (void)
+ {
+ #ifdef GRUB_MACHINE_EFI
+   if (!keep_bs && !efi_mmap_size)
+@@ -478,7 +478,7 @@ grub_multiboot_get_mbi_size (void)
+     + ALIGN_UP (sizeof (struct multiboot_tag_elf_sections), MULTIBOOT_TAG_ALIGN)
+     + ALIGN_UP (elf_sec_entsize * elf_sec_num, MULTIBOOT_TAG_ALIGN)
+     + ALIGN_UP ((sizeof (struct multiboot_tag_mmap)
+-		 + grub_get_multiboot_mmap_count ()
++		 + grub_multiboot2_get_mmap_count ()
+ 		 * sizeof (struct multiboot_mmap_entry)), MULTIBOOT_TAG_ALIGN)
+     + ALIGN_UP (sizeof (struct multiboot_tag_framebuffer), MULTIBOOT_TAG_ALIGN)
+     + ALIGN_UP (sizeof (struct multiboot_tag_old_acpi)
+@@ -522,7 +522,7 @@ grub_fill_multiboot_mmap (struct multiboot_tag_mmap *tag)
+ 
+   tag->type = MULTIBOOT_TAG_TYPE_MMAP;
+   tag->size = sizeof (struct multiboot_tag_mmap)
+-    + sizeof (struct multiboot_mmap_entry) * grub_get_multiboot_mmap_count (); 
++    + sizeof (struct multiboot_mmap_entry) * grub_multiboot2_get_mmap_count (); 
+   tag->entry_size = sizeof (struct multiboot_mmap_entry);
+   tag->entry_version = 0;
+ 
+@@ -588,7 +588,7 @@ retrieve_video_parameters (grub_properly_aligned_t **ptrorig)
+   struct multiboot_tag_framebuffer *tag
+     = (struct multiboot_tag_framebuffer *) *ptrorig;
+ 
+-  err = grub_multiboot_set_video_mode ();
++  err = grub_multiboot2_set_video_mode ();
+   if (err)
+     {
+       grub_print_error ();
+@@ -731,7 +731,7 @@ retrieve_video_parameters (grub_properly_aligned_t **ptrorig)
+ }
+ 
+ grub_err_t
+-grub_multiboot_make_mbi (grub_uint32_t *target)
++grub_multiboot2_make_mbi (grub_uint32_t *target)
+ {
+   grub_properly_aligned_t *ptrorig;
+   grub_properly_aligned_t *mbistart;
+@@ -739,11 +739,11 @@ grub_multiboot_make_mbi (grub_uint32_t *target)
+   grub_size_t bufsize;
+   grub_relocator_chunk_t ch;
+ 
+-  bufsize = grub_multiboot_get_mbi_size ();
++  bufsize = grub_multiboot2_get_mbi_size ();
+ 
+   COMPILE_TIME_ASSERT (MULTIBOOT_TAG_ALIGN % sizeof (grub_properly_aligned_t) == 0);
+ 
+-  err = grub_relocator_alloc_chunk_align (grub_multiboot_relocator, &ch,
++  err = grub_relocator_alloc_chunk_align (grub_multiboot2_relocator, &ch,
+ 					  0, 0xffffffff - bufsize,
+ 					  bufsize, MULTIBOOT_TAG_ALIGN,
+ 					  GRUB_RELOCATOR_PREFERENCE_NONE, 1);
+@@ -1039,7 +1039,7 @@ grub_multiboot_make_mbi (grub_uint32_t *target)
+ }
+ 
+ void
+-grub_multiboot_free_mbi (void)
++grub_multiboot2_free_mbi (void)
+ {
+   struct module *cur, *next;
+ 
+@@ -1061,11 +1061,11 @@ grub_multiboot_free_mbi (void)
+ }
+ 
+ grub_err_t
+-grub_multiboot_init_mbi (int argc, char *argv[])
++grub_multiboot2_init_mbi (int argc, char *argv[])
+ {
+   grub_ssize_t len = 0;
+ 
+-  grub_multiboot_free_mbi ();
++  grub_multiboot2_free_mbi ();
+ 
+   len = grub_loader_cmdline_size (argc, argv);
+ 
+@@ -1081,7 +1081,7 @@ grub_multiboot_init_mbi (int argc, char *argv[])
+ }
+ 
+ grub_err_t
+-grub_multiboot_add_module (grub_addr_t start, grub_size_t size,
++grub_multiboot2_add_module (grub_addr_t start, grub_size_t size,
+ 			   int argc, char *argv[])
+ {
+   struct module *newmod;
+@@ -1119,7 +1119,7 @@ grub_multiboot_add_module (grub_addr_t start, grub_size_t size,
+ }
+ 
+ void
+-grub_multiboot_set_bootdev (void)
++grub_multiboot2_set_bootdev (void)
+ {
+   grub_device_t dev;
+ 
+diff --git a/include/grub/i386/multiboot.h b/include/grub/i386/multiboot.h
+index 807a1de27f9..9cd97dfced8 100644
+--- a/include/grub/i386/multiboot.h
++++ b/include/grub/i386/multiboot.h
+@@ -19,6 +19,13 @@
+ #ifndef GRUB_MULTIBOOT_CPU_HEADER
+ #define GRUB_MULTIBOOT_CPU_HEADER	1
+ 
++#define MULTIBOOT2_INITIAL_STATE  { .eax = MULTIBOOT2_BOOTLOADER_MAGIC,	\
++    .ecx = 0,								\
++    .edx = 0,								\
++    /* Set esp to some random location in low memory to avoid breaking */ \
++    /* non-compliant kernels.  */					\
++    .esp = 0x7ff00							\
++      }
+ #define MULTIBOOT_INITIAL_STATE  { .eax = MULTIBOOT_BOOTLOADER_MAGIC,	\
+     .ecx = 0,								\
+     .edx = 0,								\
+@@ -28,7 +35,7 @@
+       }
+ #define MULTIBOOT_ENTRY_REGISTER eip
+ #define MULTIBOOT_MBI_REGISTER ebx
+-#define MULTIBOOT_ARCHITECTURE_CURRENT MULTIBOOT_ARCHITECTURE_I386
++#define MULTIBOOT2_ARCHITECTURE_CURRENT MULTIBOOT2_ARCHITECTURE_I386
+ 
+ #ifdef GRUB_MACHINE_EFI
+ #ifdef __x86_64__
+diff --git a/include/grub/mips/multiboot.h b/include/grub/mips/multiboot.h
+index 4aebf29e732..c4eee2dd01b 100644
+--- a/include/grub/mips/multiboot.h
++++ b/include/grub/mips/multiboot.h
+@@ -19,11 +19,11 @@
+ #ifndef GRUB_MULTIBOOT_CPU_HEADER
+ #define GRUB_MULTIBOOT_CPU_HEADER	1
+ 
+-#define MULTIBOOT_INITIAL_STATE  { .gpr[4] = MULTIBOOT_BOOTLOADER_MAGIC, \
++#define MULTIBOOT2_INITIAL_STATE  { .gpr[4] = MULTIBOOT2_BOOTLOADER_MAGIC, \
+     .jumpreg = 1 }
+ #define MULTIBOOT_ENTRY_REGISTER gpr[1]
+ #define MULTIBOOT_MBI_REGISTER gpr[5]
+-#define MULTIBOOT_ARCHITECTURE_CURRENT MULTIBOOT_ARCHITECTURE_MIPS32
++#define MULTIBOOT2_ARCHITECTURE_CURRENT MULTIBOOT_ARCHITECTURE_MIPS32
+ 
+ #define MULTIBOOT_ELF32_MACHINE EM_MIPS
+ #define MULTIBOOT_ELF64_MACHINE EM_MIPS
+diff --git a/include/grub/multiboot.h b/include/grub/multiboot.h
+index c96492bb5fa..bd0a9873e6c 100644
+--- a/include/grub/multiboot.h
++++ b/include/grub/multiboot.h
+@@ -22,19 +22,11 @@
+ 
+ #include <grub/file.h>
+ 
+-#ifdef GRUB_USE_MULTIBOOT2
+-#include <multiboot2.h>
+-/* Same thing as far as our loader is concerned.  */
+-#define MULTIBOOT_BOOTLOADER_MAGIC	MULTIBOOT2_BOOTLOADER_MAGIC
+-#define MULTIBOOT_HEADER_MAGIC		MULTIBOOT2_HEADER_MAGIC
+-#else
+ #include <multiboot.h>
+-#endif
+ 
+ #include <grub/types.h>
+ #include <grub/err.h>
+ 
+-#ifndef GRUB_USE_MULTIBOOT2
+ typedef enum
+   {
+     GRUB_MULTIBOOT_QUIRKS_NONE = 0,
+@@ -42,7 +34,6 @@ typedef enum
+     GRUB_MULTIBOOT_QUIRK_MODULES_AFTER_KERNEL = 2
+   } grub_multiboot_quirks_t;
+ extern grub_multiboot_quirks_t grub_multiboot_quirks;
+-#endif
+ 
+ extern struct grub_relocator *grub_multiboot_relocator;
+ 
+@@ -60,7 +51,7 @@ void
+ grub_multiboot_add_elfsyms (grub_size_t num, grub_size_t entsize,
+ 			    unsigned shndx, void *data);
+ 
+-grub_uint32_t grub_get_multiboot_mmap_count (void);
++grub_uint32_t grub_multiboot_get_mmap_count (void);
+ grub_err_t grub_multiboot_set_video_mode (void);
+ 
+ /* FIXME: support coreboot as well.  */
+diff --git a/include/multiboot2.h b/include/multiboot2.h
+index 5a3db5a7cae..5693923c014 100644
+--- a/include/multiboot2.h
++++ b/include/multiboot2.h
+@@ -75,8 +75,8 @@
+ #define MULTIBOOT_HEADER_TAG_ENTRY_ADDRESS_EFI64  9
+ #define MULTIBOOT_HEADER_TAG_RELOCATABLE  10
+ 
+-#define MULTIBOOT_ARCHITECTURE_I386  0
+-#define MULTIBOOT_ARCHITECTURE_MIPS32  4
++#define MULTIBOOT2_ARCHITECTURE_I386  0
++#define MULTIBOOT2_ARCHITECTURE_MIPS32  4
+ #define MULTIBOOT_HEADER_TAG_OPTIONAL 1
+ 
+ #define MULTIBOOT_LOAD_PREFERENCE_NONE 0

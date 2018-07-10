@@ -1,0 +1,62 @@
+From 599efeb6220d01e0b9788ba796849f945ec0d4c1 Mon Sep 17 00:00:00 2001
+From: Eric Snowberg <eric.snowberg@oracle.com>
+Date: Mon, 26 Feb 2018 17:34:20 -0800
+Subject: [PATCH] sparc64: #blocks64 disk node method
+
+Return the 64bit number of blocks of storage associated with the device or
+instance. Where a "block" is a unit of storage consisting of the number of
+bytes returned by the package's "block-size" method. If the size cannot be
+determined, or if the number of blocks exceeds the range return -1.
+
+Signed-off-by: Eric Snowberg <eric.snowberg@oracle.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/kern/sparc64/ieee1275/ieee1275.c | 25 +++++++++++++++++++++++++
+ include/grub/sparc64/ieee1275/ieee1275.h   |  1 +
+ 2 files changed, 26 insertions(+)
+
+diff --git a/grub-core/kern/sparc64/ieee1275/ieee1275.c b/grub-core/kern/sparc64/ieee1275/ieee1275.c
+index 67933a45b35..5a59aaf0619 100644
+--- a/grub-core/kern/sparc64/ieee1275/ieee1275.c
++++ b/grub-core/kern/sparc64/ieee1275/ieee1275.c
+@@ -120,3 +120,28 @@ grub_ieee1275_num_blocks (grub_ieee1275_ihandle_t ihandle)
+ 
+   return args.blocks;
+ }
++
++grub_uint64_t
++grub_ieee1275_num_blocks64 (grub_ieee1275_ihandle_t ihandle)
++{
++  struct nblocks_args_ieee1275
++  {
++    struct grub_ieee1275_common_hdr common;
++    grub_ieee1275_cell_t method;
++    grub_ieee1275_cell_t ihandle;
++    grub_ieee1275_cell_t catch_result;
++    grub_ieee1275_cell_t hi_blocks;
++    grub_ieee1275_cell_t lo_blocks;
++  }
++  args;
++
++  INIT_IEEE1275_COMMON (&args.common, "call-method", 2, 3);
++  args.method = (grub_ieee1275_cell_t) "#blocks64";
++  args.ihandle = ihandle;
++  args.catch_result = 1;
++
++  if ((IEEE1275_CALL_ENTRY_FN (&args) == -1) || (args.catch_result != 0))
++    return -1;
++
++  return ((args.hi_blocks << 32) | (args.lo_blocks));
++}
+diff --git a/include/grub/sparc64/ieee1275/ieee1275.h b/include/grub/sparc64/ieee1275/ieee1275.h
+index 2ddf44d41df..4b18468d8d6 100644
+--- a/include/grub/sparc64/ieee1275/ieee1275.h
++++ b/include/grub/sparc64/ieee1275/ieee1275.h
+@@ -43,6 +43,7 @@ extern int EXPORT_FUNC(grub_ieee1275_alloc_physmem) (grub_addr_t *paddr,
+ 						     grub_size_t size,
+ 						     grub_uint32_t align);
+ extern grub_uint64_t EXPORT_FUNC(grub_ieee1275_num_blocks) (grub_uint32_t ihandle);
++extern grub_uint64_t EXPORT_FUNC(grub_ieee1275_num_blocks64) (grub_uint32_t ihandle);
+ 
+ extern grub_addr_t EXPORT_VAR (grub_ieee1275_original_stack);
+ 

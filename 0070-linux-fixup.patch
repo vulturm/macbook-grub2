@@ -1,0 +1,29 @@
+From 6cc79ec10ccafc5935d776e4a396193b93d7e842 Mon Sep 17 00:00:00 2001
+From: Vladimir Serbinenko <phcoder@gmail.com>
+Date: Mon, 14 Aug 2017 16:23:52 +0200
+Subject: [PATCH] linux fixup
+
+---
+ grub-core/Makefile.core.def | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 66144222c5f..6edf68286c3 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -770,7 +770,6 @@ module = {
+ module = {
+   name = boot;
+   common = commands/boot.c;
+-  common = lib/cmdline.c;
+   i386_pc = lib/i386/pc/biosnum.c;
+   enable = x86;
+   enable = emu;
+@@ -1696,6 +1695,7 @@ module = {
+   arm = loader/arm/linux.c;
+   arm64 = loader/arm64/linux.c;
+   common = loader/linux.c;
++  common = lib/cmdline.c;
+   enable = noemu;
+ };
+ 

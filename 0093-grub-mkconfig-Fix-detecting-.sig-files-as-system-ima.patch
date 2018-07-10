@@ -1,0 +1,27 @@
+From 5033080eb6cb784a3d7f36b3d66b71f4603bf0aa Mon Sep 17 00:00:00 2001
+From: Jordan Glover <Golden_Miller83@protonmail.ch>
+Date: Wed, 29 Nov 2017 08:35:37 -0500
+Subject: [PATCH] grub-mkconfig: Fix detecting .sig files as system images
+
+grub-mkconfig detects detached RSA signatures for kernel images used for
+signature checking as valid images and adds them to grub.cfg as separate
+menu entries. This patch adds .sig extension to common blacklist.
+
+Signed-off-by: Jordan Glover <Golden_Miller83@protonmail.ch>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ util/grub-mkconfig_lib.in | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/util/grub-mkconfig_lib.in b/util/grub-mkconfig_lib.in
+index 60b31caddeb..0f801cab3e4 100644
+--- a/util/grub-mkconfig_lib.in
++++ b/util/grub-mkconfig_lib.in
+@@ -188,6 +188,7 @@ grub_file_is_not_garbage ()
+       *.dpkg-*) return 1 ;; # debian dpkg
+       *.rpmsave|*.rpmnew) return 1 ;;
+       README*|*/README*)  return 1 ;; # documentation
++      *.sig) return 1 ;; # signatures
+     esac
+   else
+     return 1

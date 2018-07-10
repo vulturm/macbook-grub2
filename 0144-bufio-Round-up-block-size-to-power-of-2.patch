@@ -1,0 +1,32 @@
+From b66e364f131228f4215ff8f0b8173f14931d9b6c Mon Sep 17 00:00:00 2001
+From: Michael Chang <mchang@suse.com>
+Date: Tue, 24 Apr 2018 14:13:04 +0800
+Subject: [PATCH] bufio: Round up block size to power of 2
+
+Rounding up the bufio->block_size to meet power of 2 to facilitate next_buf
+calculation in grub_bufio_read().
+
+Signed-off-by: Michael Chang <mchang@suse.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/io/bufio.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/grub-core/io/bufio.c b/grub-core/io/bufio.c
+index 22438277d74..dbed6474431 100644
+--- a/grub-core/io/bufio.c
++++ b/grub-core/io/bufio.c
+@@ -61,6 +61,13 @@ grub_bufio_open (grub_file_t io, int size)
+     size = ((io->size > GRUB_BUFIO_MAX_SIZE) ? GRUB_BUFIO_MAX_SIZE :
+             io->size);
+ 
++  /*
++   * Round up size to power of 2 which the binary math to
++   * calculate next_buf in grub_bufio_read() requires.
++   */
++  while (size & (size - 1))
++    size = (size | (size - 1)) + 1;
++
+   bufio = grub_zalloc (sizeof (struct grub_bufio) + size);
+   if (! bufio)
+     {

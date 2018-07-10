@@ -1,0 +1,26 @@
+From 3732816bc08ef605ed3b6c016ff0ed562829f243 Mon Sep 17 00:00:00 2001
+From: Vladimir Serbinenko <phcoder@gmail.com>
+Date: Mon, 14 Aug 2017 14:10:48 +0200
+Subject: [PATCH] genmoddep: Check that no modules provide the same symbol.
+
+The semantics of 2 modules providing the same symbol are undefined. So
+ensure that it doesn't happen.
+---
+ grub-core/genmoddep.awk | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/grub-core/genmoddep.awk b/grub-core/genmoddep.awk
+index bd98d84cdd7..8976beb91d0 100644
+--- a/grub-core/genmoddep.awk
++++ b/grub-core/genmoddep.awk
+@@ -18,6 +18,10 @@ BEGIN {
+ 
+ {
+   if ($1 == "defined") {
++    if ($3 in symtab) {
++      printf "%s in %s is duplicated in %s\n", $3, $2, symtab[$3] >"/dev/stderr";
++      error++;
++    }
+     symtab[$3] = $2;
+     modtab[$2] = "" modtab[$2]
+   } else if ($1 == "undefined") {
