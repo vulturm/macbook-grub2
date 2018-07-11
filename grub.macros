@@ -26,7 +26,7 @@
 		-e 's/-mregparm=3/-mregparm=4/g'		\\\
 		-e 's/-fexceptions//g'				\\\
 		-e 's/-fasynchronous-unwind-tables//g'		\\\
-		-e 's/-mfloat-abi=hard/-mfloat-abi=float/g'	\\\
+		-e 's/-mfloat-abi=hard/-mfloat-abi=soft/g'	\\\
 		-e 's/^/ -fno-strict-aliasing /'		\\\
 		%{nil}
 
