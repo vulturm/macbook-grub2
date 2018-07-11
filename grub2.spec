@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	38%{?dist}
+Release:	39%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -28,7 +28,7 @@ Source9:	20-grub.install
 # generate with do-rebase
 %include %{SOURCE2}
 
-BuildRequires:  gcc
+BuildRequires:	gcc
 BuildRequires:	flex bison binutils python
 BuildRequires:	ncurses-devel xz-devel bzip2-devel
 BuildRequires:	freetype-devel libusb-devel
@@ -454,10 +454,27 @@ fi
 %endif
 
 %changelog
-* Tue Jul 10 2018 pjones <pjones@redhat.com> - 1:2.02-38
-- Rebased to newer upstream for fedora-29
+* Mon Jul 09 2018 pjones <pjones@redhat.com> - 2.02-39
+- Fix my fix of grub2-switch-to-blscfg (javierm and pjones)
 
-* Wed May 16 2018 Peter Jones <pjones@redhat.com> - 2.02-37
+* Mon Jul 02 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-38
+- Use BLS fragment filename as menu entry id and for sort criterion
+
+* Tue Jun 26 2018 Javier Martinez Canillas <javierm@redhat.com>
+- Cleanups and fixes for grub2-switch-to-blscfg (pjones)
+- Use /boot/loader/entries as BLS dir also on EFI (javierm)
+
+* Tue Jun 19 2018 Peter Jones <pjones@redhat.com> - 2.02-37
+- Fix some TPM errors on 32-bit (hdegoede)
+- More fixups to avoid compiler changes (pjones)
+- Put lsmmap into the EFI builds (pjones)
+  Related: rhbz#1572126
+- Make 20-grub.install to exit if there is no machine ID set (javierm)
+  Resolves: rhbz#1576573
+- More fixes for BLS (javierm)
+  Resolves: rhbz#1588184
+
+* Wed May 16 2018 Peter Jones <pjones@redhat.com> - 2.02-37.fc29
 - Fixups to work with gcc 8
 - Experimental https boot support on UEFI
 - XFS fixes for sparse inode support
@@ -490,11 +507,11 @@ fi
 - Set the default boot entry to the first entry when we're using BLS.
 
 * Tue Apr 03 2018 Peter Jones <pjones@redhat.com> - 2.02-29
-- Add grub2-switch-to-blscfg
 - Fix for BLS paths on BIOS / non-UEFI (javierm)
 
-* Fri Mar 09 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-28
-- Install kernel-install scripts.
+* Fri Mar 16 2018 Peter Jones <pjones@redhat.com> - 2.02-28
+- Install kernel-install scripts. (javierm)
+- Add grub2-switch-to-blscfg
 
 * Tue Mar 06 2018 Peter Jones <pjones@redhat.com> - 2.02-27
 - Build the blscfg module in on EFI builds.
