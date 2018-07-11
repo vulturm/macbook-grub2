@@ -84,9 +84,9 @@
 
 ### fixme
 %ifarch aarch64 %{arm}
-%global efi_modules " http linux "
+%global efi_modules " "
 %else
-%global efi_modules " backtrace http linuxefi usb usbserial_common usbserial_pl2303 usbserial_ftdi usbserial_usbdebug "
+%global efi_modules " backtrace usb usbserial_common usbserial_pl2303 usbserial_ftdi usbserial_usbdebug "
 %endif
 
 %ifarch aarch64 %{arm}
@@ -164,9 +164,6 @@
 %global grubaltefiarch %{alt_target_cpu_name}-efi
 %endif
 
-# Figure out the right file path to use
-%global efidir %(eval echo $(grep ^ID= /etc/os-release | sed -e 's/^ID=//' -e 's/rhel/redhat/'))
-
 %ifnarch %{efi_only}
 %global with_legacy_arch 1
 %global grublegacyarch %{legacy_target_cpu_name}-%{platform}
@@ -235,6 +232,7 @@ This subpackage provides tools for support of %%{1} platforms.		\
 %{expand:%%package %{1}}						\
 Summary:	GRUB for EFI systems.					\
 Group:		System Environment/Base					\
+Requires:	efi-filesystem						\
 Requires:	%{name}-common = %{evr}					\
 Requires:	%{name}-tools-minimal >= %{evr}				\
 Requires:	%{name}-tools-extra = %{evr}				\
@@ -280,7 +278,8 @@ git init							\
 echo '![[:digit:]][[:digit:]]_*.in' > util/grub.d/.gitignore	\
 echo '!*.[[:digit:]]' > util/.gitignore				\
 echo '!config.h' > include/grub/emu/.gitignore			\
-./autogen.sh							\
+patch -p1 < %{SOURCE10}						\
+PYTHON=python3 ./autogen.sh					\
 git config user.email "%{name}-owner@fedoraproject.org"		\
 git config user.name "Fedora Ninjas"				\
 git config gc.auto 0						\
@@ -323,7 +322,7 @@ done								\
 %ifarch x86_64 aarch64 %{arm}
 %define mkimage()						\
 %{4}./grub-mkimage -O %{1} -o %{2}.orig				\\\
-	-p /EFI/%{efidir} -d grub-core ${GRUB_MODULES}		\
+	-p /EFI/%{efi_vendor} -d grub-core ${GRUB_MODULES}	\
 %{4}./grub-mkimage -O %{1} -o %{3}.orig				\\\
 	-p /EFI/BOOT -d grub-core ${GRUB_MODULES}		\
 %{expand:%%{pesign -s -i %%{2}.orig -o %%{2} -a %%{5} -c %%{6} -n %%{7}}}	\
@@ -332,7 +331,7 @@ done								\
 %else
 %define mkimage()						\
 %{4}./grub-mkimage -O %{1} -o %{2}				\\\
-	-p /EFI/%{efidir} -d grub-core ${GRUB_MODULES}		\
+	-p /EFI/%{efi_vendor} -d grub-core ${GRUB_MODULES}	\
 %{4}./grub-mkimage -O %{1} -o %{3}				\\\
 	-p /EFI/BOOT -d grub-core ${GRUB_MODULES}		\
 %{nil}
@@ -340,14 +339,16 @@ done								\
 
 %define do_efi_build_images()					\
 GRUB_MODULES="	all_video boot blscfg btrfs			\\\
-		cat chain configfile echo			\\\
-		efifwsetup efinet ext2 fat font gfxmenu gfxterm \\\
-		gzio halt hfsplus iso9660 jpeg loadenv loopback \\\
-		lvm lsefi mdraid09 mdraid1x minicmd		\\\
+		cat chain configfile				\\\
+		echo efi_netfs efifwsetup efinet ext2		\\\
+		fat font gfxmenu gfxterm gzio			\\\
+		halt hfsplus http iso9660 jpeg			\\\
+		loadenv loopback linux lvm lsefi		\\\
+		mdraid09 mdraid1x minicmd net			\\\
 		normal part_apple part_msdos part_gpt		\\\
-		password_pbkdf2 png reboot			\\\
+		password_pbkdf2 png				\\\
 		search search_fs_uuid search_fs_file		\\\
-		search_label serial sleep syslinuxcfg test tftp \\\
+		search_label serial sleep syslinuxcfg test tftp	\\\
 		video xfs"					\
 GRUB_MODULES+=%{efi_modules}					\
 %{expand:%%{mkimage %{1} %{2} %{3} %{4}}}			\
@@ -400,15 +401,15 @@ find . '(' -iname gdb_grub					\\\
 	')'							\\\
 	-exec cp {} $RPM_BUILD_ROOT/usr/lib/grub/%{grubaltefiarch}/ \\\; \
 find $RPM_BUILD_ROOT -type f -iname "*.mod*" -exec chmod a-x {} '\;'	\
-install -m 700 %{2} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{2}	\
-install -m 700 %{3} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{3} \
+install -m 700 %{2} $RPM_BUILD_ROOT%{efi_esp_dir}/%{2}	\
+install -m 700 %{3} $RPM_BUILD_ROOT%{efi_esp_dir}/%{3} \
 cd ..								\
 %{nil}
 
 %define do_efi_install()					\
 cd grub-%{1}-%{tarversion}					\
-install -m 700 -d $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/	\
-install -m 700 -d $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/loader/entries \
+install -m 700 -d $RPM_BUILD_ROOT%{efi_esp_dir}/		\
+install -m 700 -d $RPM_BUILD_ROOT%{efi_esp_dir}/loader/entries \
 install -m 700 -d $RPM_BUILD_ROOT/boot/grub2/			\
 make DESTDIR=$RPM_BUILD_ROOT install				\
 if [ -f $RPM_BUILD_ROOT%{_infodir}/grub.info ]; then		\
@@ -418,13 +419,17 @@ if [ -f $RPM_BUILD_ROOT%{_infodir}/grub-dev.info ]; then	\
 	rm -f $RPM_BUILD_ROOT%{_infodir}/grub-dev.info		\
 fi								\
 find $RPM_BUILD_ROOT -iname "*.module" -exec chmod a-x {} '\;'	\
-touch $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/grub.cfg		\
-ln -sf ../boot/efi/EFI/%{efidir}/grub.cfg			\\\
+touch $RPM_BUILD_ROOT%{efi_esp_dir}/grub.cfg			\
+ln -sf ..%{efi_esp_dir}/grub.cfg				\\\
 	$RPM_BUILD_ROOT%{_sysconfdir}/%{name}-efi.cfg		\
-install -m 700 %{2} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{2}	\
-install -m 700 %{3} $RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/%{3} \
+install -m 700 %{2} $RPM_BUILD_ROOT%{efi_esp_dir}/%{2}		\
+install -m 700 %{3} $RPM_BUILD_ROOT%{efi_esp_dir}/%{3}		\
 install -D -m 700 unicode.pf2					\\\
-	$RPM_BUILD_ROOT/boot/efi/EFI/%{efidir}/fonts/unicode.pf2\
+	$RPM_BUILD_ROOT%{efi_esp_dir}/fonts/unicode.pf2		\
+${RPM_BUILD_ROOT}/%{_bindir}/%{name}-editenv			\\\
+	${RPM_BUILD_ROOT}%{efi_esp_dir}/grubenv create		\
+ln -sf ../efi/EFI/%{efi_vendor}/grubenv				\\\
+	$RPM_BUILD_ROOT/boot/grub2/grubenv			\
 cd ..								\
 %{nil}
 
@@ -443,6 +448,10 @@ if [ -f $RPM_BUILD_ROOT/%{_libdir}/grub/%{1}/grub2.chrp ]; then \
 	mv $RPM_BUILD_ROOT/%{_libdir}/grub/%{1}/grub2.chrp	\\\
 	   $RPM_BUILD_ROOT/%{_libdir}/grub/%{1}/grub.chrp	\
 fi								\
+if [ %{3} -eq 0 ]; then						\
+	${RPM_BUILD_ROOT}/%{_bindir}/%{name}-editenv		\\\
+		${RPM_BUILD_ROOT}/boot/%{name}/grubenv create	\
+fi								\
 cd ..								\
 install -d -m 0755 ${RPM_BUILD_ROOT}/boot/loader/entries	\
 %{nil}
@@ -458,7 +467,7 @@ cp docs/grub.info $RPM_BUILD_ROOT%{_infodir}/%{name}.info	\
 cp docs/grub-dev.info						\\\
 	$RPM_BUILD_ROOT%{_infodir}/%{name}-dev.info		\
 # Ghost config file						\
-install -d -m 0700 ${RPM_BUILD_ROOT}/boot/efi/EFI/%{efidir}/	\
+install -d -m 0700 ${RPM_BUILD_ROOT}%{efi_esp_dir}/		\
 install -d -m 0700 ${RPM_BUILD_ROOT}/boot/grub2/		\
 install -d -m 0755 ${RPM_BUILD_ROOT}/boot/%{name}/themes/system	\
 install -d -m 0755 ${RPM_BUILD_ROOT}%{_sysconfdir}/default	\
@@ -466,8 +475,6 @@ install -d -m 0755 ${RPM_BUILD_ROOT}%{_sysconfdir}/sysconfig	\
 touch ${RPM_BUILD_ROOT}%{_sysconfdir}/default/grub		\
 ln -sf ../default/grub						\\\
 	${RPM_BUILD_ROOT}%{_sysconfdir}/sysconfig/grub		\
-ln -sf ../efi/EFI/%{efidir}/grubenv				\\\
-	$RPM_BUILD_ROOT/boot/grub2/grubenv			\
 touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 %{nil}
 
@@ -493,16 +500,15 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 
 %define define_efi_variant_files()				\
 %{expand:%%files %{1}}						\
-%defattr(-,root,root,-)						\
+%defattr(0700,root,root,-)					\
 %config(noreplace) %{_sysconfdir}/%{name}-efi.cfg		\
-%dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}		\
-%attr(0700,root,root)/boot/efi/EFI/%{efidir}/%{2}		\
-%dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}/fonts		\
-%dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}/loader	\
-%dir %attr(0700,root,root)/boot/efi/EFI/%{efidir}/loader/entries \
-%ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grub.cfg	\
+%attr(0700,root,root)%{efi_esp_dir}/%{2}			\
+%dir %attr(0700,root,root)%{efi_esp_dir}/fonts			\
+%dir %attr(0700,root,root)%{efi_esp_dir}/loader			\
+%dir %attr(0700,root,root)%{efi_esp_dir}/loader/entries		\
+%ghost %config(noreplace) %attr(0700,root,root)%{efi_esp_dir}/grub.cfg	\
 /boot/grub2/grubenv						\
-%ghost %config(noreplace) %attr(0700,root,root)/boot/efi/EFI/%{efidir}/grubenv \
+%ghost %config(noreplace) %attr(0700,root,root)%{efi_esp_dir}/grubenv	\
 %{expand:%if 0%{?without_efi_modules}				\
 %exclude %{_libdir}/grub/%{6}					\
 %exclude %{_libdir}/grub/%{6}/*					\
@@ -518,6 +524,6 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 								\
 %{expand:%%files %{1}-cdboot}					\
 %defattr(-,root,root,-)						\
-%attr(0700,root,root)/boot/efi/EFI/%{efidir}/%{3}		\
-%attr(0700,root,root)/boot/efi/EFI/%{efidir}/fonts		\
+%attr(0700,root,root)%{efi_esp_dir}/%{3}			\
+%attr(0700,root,root)%{efi_esp_dir}/fonts			\
 %{nil}

@@ -9,3 +9,4 @@ kojilogs
 .*.git/
 tmp/
 .*.sw?
+results_grub2/

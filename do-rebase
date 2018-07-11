@@ -60,7 +60,7 @@ while [ $# -gt 0 ]; do
 	--commit)
 		commit=1
 		;;
-	--nocommit)
+	--nocommit|--no-commit|--nc)
 		# --nocommit implies nobumpspec, but --bumpspec after it will
 		# force bumpspec to get run.
 		commit=0
@@ -69,7 +69,7 @@ while [ $# -gt 0 ]; do
 	--bumpspec)
 		bumpspec=2
 		;;
-	--nobumpspec)
+	--nobumpspec|--no-bumpspec|--nb)
 		bumpspec=0
 		;;
 	*)
