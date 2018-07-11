@@ -1,0 +1,40 @@
+From b09601dabd607da4bbd3e7c36331ee49acc019a8 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Wed, 11 Jul 2018 13:49:17 -0400
+Subject: [PATCH] Make the linuxefi module just be the x86 efi version of linux
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ grub-core/Makefile.core.def | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
+
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 81509b86a0d..8da0a01dfce 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1724,6 +1724,9 @@ module = {
+   fdt = lib/fdt.c;
+   common = loader/linux.c;
+   common = lib/cmdline.c;
++
++  efi = loader/i386/efi/linux.c;
++  efi = loader/efi/linux.c;
+ };
+ 
+ module = {
+@@ -1784,15 +1787,6 @@ module = {
+   enable = x86_64_efi;
+ };
+ 
+-module = {
+-  name = linuxefi;
+-  efi = loader/i386/efi/linux.c;
+-  efi = lib/cmdline.c;
+-  efi = loader/efi/linux.c;
+-  enable = i386_efi;
+-  enable = x86_64_efi;
+-};
+-
+ module = {
+   name = chain;
+   efi = loader/efi/chainloader.c;

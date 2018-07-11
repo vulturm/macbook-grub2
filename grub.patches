@@ -372,4 +372,9 @@ Patch0371: 0371-00_menu_auto_hide-Use-a-timeout-of-60s-for-menu_show.patch
 Patch0372: 0372-00_menu_auto_hide-Reduce-number-of-save_env-calls.patch
 Patch0373: 0373-Minor-fixes-to-make-armv7hl-build-as-arm-efi.patch
 Patch0374: 0374-30_uefi-firmware-fix-use-with-sys-firmware-efi-efiva.patch
-Patch0375: 0375-Force-gentply.py-to-use-python3.patch
+Patch0375: 0375-gentpl-add-disable-support.patch
+Patch0376: 0376-gentpl-add-pc-firmware-type.patch
+Patch0377: 0377-Disable-the-reboot-module-on-EFI-builds-it-is-in-ker.patch
+Patch0378: 0378-Disable-multiboot-multiboot2-and-linux16-modules-on-.patch
+Patch0379: 0379-Make-the-linuxefi-module-just-be-the-x86-efi-version.patch
+Patch0380: 0380-Make-efi_netfs-not-duplicate-symbols-from-efinet.patch
