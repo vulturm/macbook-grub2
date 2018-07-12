@@ -1,4 +1,4 @@
-From c4b8bec5fee4e30a165fd14a188cf3ab8eccd095 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 14:27:52 +0200
 Subject: [PATCH] at_keyboard: Fix falco chromebook case.

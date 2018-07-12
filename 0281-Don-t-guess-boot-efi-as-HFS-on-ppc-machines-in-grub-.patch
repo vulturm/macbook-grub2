@@ -1,4 +1,4 @@
-From f51d40b664310c3f7b198dd5c1b87ce68905a172 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 20 Apr 2017 13:29:06 -0400
 Subject: [PATCH] Don't guess /boot/efi/ as HFS+ on ppc machines in

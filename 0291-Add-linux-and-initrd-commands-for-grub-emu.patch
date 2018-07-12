@@ -1,4 +1,4 @@
-From 66022d237950cdae4686ed2d2f82d1cee3bba481 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Tue, 6 Feb 2018 09:09:00 +0100
 Subject: [PATCH] Add linux and initrd commands for grub-emu

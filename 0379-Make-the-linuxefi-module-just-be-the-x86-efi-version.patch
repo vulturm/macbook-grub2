@@ -1,15 +1,15 @@
-From daf2e12adfb61d8c1f7a61322bc2a09bda2335ee Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 11 Jul 2018 13:49:17 -0400
 Subject: [PATCH] Make the linuxefi module just be the x86 efi version of linux
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
- grub-core/Makefile.core.def | 14 +++++---------
- 1 file changed, 5 insertions(+), 9 deletions(-)
+ grub-core/Makefile.core.def | 16 +++++-----------
+ 1 file changed, 5 insertions(+), 11 deletions(-)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 81509b86a0d..524330ee829 100644
+index 81509b86a0d..804c964431e 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -1710,6 +1710,8 @@ module = {
@@ -21,8 +21,13 @@ index 81509b86a0d..524330ee829 100644
    xen = loader/i386/xen.c;
    i386_pc = lib/i386/pc/vesa_modes_table.c;
    mips = loader/mips/linux.c;
-@@ -1722,8 +1724,11 @@ module = {
-   arm64 = loader/efi/linux.c;
+@@ -1717,13 +1719,14 @@ module = {
+   sparc64_ieee1275 = loader/sparc64/ieee1275/linux.c;
+   ia64_efi = loader/ia64/efi/linux.c;
+   arm = loader/arm/linux.c;
+-  arm = loader/efi/linux.c;
+   arm64 = loader/arm64/linux.c;
+-  arm64 = loader/efi/linux.c;
    emu = loader/emu/linux.c;
    fdt = lib/fdt.c;
 +
@@ -33,7 +38,7 @@ index 81509b86a0d..524330ee829 100644
  };
  
  module = {
-@@ -1784,15 +1789,6 @@ module = {
+@@ -1784,15 +1787,6 @@ module = {
    enable = x86_64_efi;
  };
  

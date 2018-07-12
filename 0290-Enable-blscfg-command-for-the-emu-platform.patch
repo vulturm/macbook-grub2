@@ -1,4 +1,4 @@
-From 9fc6d75b2422788adebf187d338b8c988d5816e1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 2 Feb 2018 11:36:29 +0100
 Subject: [PATCH] Enable blscfg command for the emu platform

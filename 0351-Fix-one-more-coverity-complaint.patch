@@ -1,4 +1,4 @@
-From 998c3f2d8291e796d956b20ef215985aea51d3e1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 25 May 2017 11:27:40 -0400
 Subject: [PATCH] Fix one more coverity complaint

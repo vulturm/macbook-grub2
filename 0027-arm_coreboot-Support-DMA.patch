@@ -1,4 +1,4 @@
-From 265292f2b0da0eb414c409871ba0f94a99ec33c1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:06:04 +0200
 Subject: [PATCH] arm_coreboot: Support DMA.

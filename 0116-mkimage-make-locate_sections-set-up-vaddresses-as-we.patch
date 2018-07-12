@@ -1,4 +1,4 @@
-From e30de94926ec5250d7a0a091aef38b9071c97f6a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 21 Feb 2018 15:20:26 -0500
 Subject: [PATCH] mkimage: make locate_sections() set up vaddresses as well.

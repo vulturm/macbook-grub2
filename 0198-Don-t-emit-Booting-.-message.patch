@@ -1,4 +1,4 @@
-From aa1ca267489b5650e38beb075d28be673af6c804 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 18 Feb 2014 09:37:49 -0500
 Subject: [PATCH] Don't emit "Booting ..." message.

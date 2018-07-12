@@ -1,4 +1,4 @@
-From ea4352b9673c0f8db665307bbd668192d3f679ce Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Wed, 19 Feb 2014 15:58:43 -0500
 Subject: [PATCH] use fw_path prefix when fallback searching for grub config

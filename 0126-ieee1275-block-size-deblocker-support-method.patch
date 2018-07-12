@@ -1,4 +1,4 @@
-From ad6d8f5063a272e2f1e4857751db70058b977239 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Mon, 26 Feb 2018 17:34:18 -0800
 Subject: [PATCH] ieee1275: block-size deblocker support method

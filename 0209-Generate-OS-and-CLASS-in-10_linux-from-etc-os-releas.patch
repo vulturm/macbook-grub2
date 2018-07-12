@@ -1,4 +1,4 @@
-From 04f4a4abaadd10777aaa2958a34f1824a257a93f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 4 Sep 2014 14:23:23 -0400
 Subject: [PATCH] Generate OS and CLASS in 10_linux from /etc/os-release

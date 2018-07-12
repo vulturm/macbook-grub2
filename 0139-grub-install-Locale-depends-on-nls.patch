@@ -1,4 +1,4 @@
-From 3d8439da8c9a4acf9bc1c41b364ec6e1680ef052 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Olaf Hering <olaf@aepfle.de>
 Date: Fri, 13 Apr 2018 23:36:49 +0200
 Subject: [PATCH] grub-install: Locale depends on nls

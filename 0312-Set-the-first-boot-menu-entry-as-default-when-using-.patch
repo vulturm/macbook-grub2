@@ -1,4 +1,4 @@
-From e73ac6cf8f166b6a87a06a504af66730e5c37e22 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 6 Apr 2018 14:08:36 +0200
 Subject: [PATCH] Set the first boot menu entry as default when using BLS

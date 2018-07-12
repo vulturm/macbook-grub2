@@ -1,4 +1,4 @@
-From e7afe9e80f5cf9a2b542b8684595c9219189aa6c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Jan Hlavac <jhlavac@redhat.com>
 Date: Tue, 10 Apr 2018 16:07:36 +0200
 Subject: [PATCH] BLS: Fix grub2-switch-to-blscfg on non-EFI machines

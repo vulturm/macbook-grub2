@@ -1,4 +1,4 @@
-From c2b86ae1fcd22d6d5d275306795c0645ca6cad3d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Nicholas Vinson <nvinson234@gmail.com>
 Date: Mon, 16 Apr 2018 22:36:23 -0700
 Subject: [PATCH] grub-probe: Centralize GUID prints

@@ -1,4 +1,4 @@
-From 1040fa6b94822cdf56ee0cf992fdbab7dedb53db Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Wed, 6 Jun 2018 08:44:11 +0200
 Subject: [PATCH] Add auto-hide menu support

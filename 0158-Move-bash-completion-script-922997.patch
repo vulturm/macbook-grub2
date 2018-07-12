@@ -1,4 +1,4 @@
-From a5376ff36a34dae179f3d47e1af8937b2738e29e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 3 Apr 2013 14:35:34 -0400
 Subject: [PATCH] Move bash completion script (#922997)

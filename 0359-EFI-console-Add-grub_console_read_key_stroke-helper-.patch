@@ -1,4 +1,4 @@
-From 42372b0aeaa7a80c77bbab336678d07f46447cc7 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Wed, 6 Jun 2018 15:54:44 +0200
 Subject: [PATCH] EFI: console: Add grub_console_read_key_stroke() helper

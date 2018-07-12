@@ -1,4 +1,4 @@
-From 951d4021795726813d90eaf378078d1b73e40ff0 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Jun 2016 09:50:25 -0400
 Subject: [PATCH] linuxefi: fix double free on verification failure.

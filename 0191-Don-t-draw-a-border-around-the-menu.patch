@@ -1,4 +1,4 @@
-From 2796581ffc968157ab01926ae7a229a8920f0193 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Wed, 15 May 2013 16:47:33 -0400
 Subject: [PATCH] Don't draw a border around the menu

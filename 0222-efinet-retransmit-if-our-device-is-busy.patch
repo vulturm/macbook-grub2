@@ -1,4 +1,4 @@
-From 5b575d6339e07e0992256b4a899bd886d2db2275 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Josef Bacik <jbacik@fb.com>
 Date: Mon, 31 Aug 2015 13:34:35 -0400
 Subject: [PATCH] efinet: retransmit if our device is busy

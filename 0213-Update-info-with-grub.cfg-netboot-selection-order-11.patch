@@ -1,4 +1,4 @@
-From f09c2755eee9ece0c0d45ed6e12906635e4aae36 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Robert Marshall <rmarshall@redhat.com>
 Date: Mon, 16 Mar 2015 16:34:51 -0400
 Subject: [PATCH] Update info with grub.cfg netboot selection order (#1148650)

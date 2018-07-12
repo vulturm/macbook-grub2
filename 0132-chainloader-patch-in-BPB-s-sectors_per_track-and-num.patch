@@ -1,4 +1,4 @@
-From c225298038f0e7e7ec2d783776fba880d9965f16 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: "C. Masloch" <pushbx@38.de>
 Date: Thu, 1 Feb 2018 15:51:55 +0100
 Subject: [PATCH] chainloader: patch in BPB's sectors_per_track and num_heads

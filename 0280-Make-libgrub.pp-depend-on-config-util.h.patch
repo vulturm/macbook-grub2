@@ -1,4 +1,4 @@
-From 01a32e6d379551b92358580da8084f25ab75bb1c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 23 Aug 2017 10:37:27 -0400
 Subject: [PATCH] Make libgrub.pp depend on config-util.h

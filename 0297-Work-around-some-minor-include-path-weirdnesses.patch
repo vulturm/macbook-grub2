@@ -1,4 +1,4 @@
-From 32aad065ce76974f25968b1d23846fcac3870e7b Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 16 Mar 2018 13:28:57 -0400
 Subject: [PATCH] Work around some minor include path weirdnesses

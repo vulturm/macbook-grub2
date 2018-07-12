@@ -1,4 +1,4 @@
-From a537d6501871c17a7e09289ab86aeda122138a91 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: "mike.travis@hpe.com" <mike.travis@hpe.com>
 Date: Wed, 28 Mar 2018 11:42:18 -0500
 Subject: [PATCH] efi/uga: Fix PCIe LER when GRUB2 accesses non-enabled MMIO

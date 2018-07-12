@@ -1,4 +1,4 @@
-From 6662372053bb7f580cf1b6a56b11e1190d81a40c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 14 Aug 2017 12:48:58 +0200
 Subject: [PATCH] hdparm: Depend on hexdump rather than having a second copy of

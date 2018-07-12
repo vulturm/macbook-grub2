@@ -1,4 +1,4 @@
-From e5ba6b26181b8e3ffb09232a935a60e3b733bfac Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Sun, 11 Feb 2018 00:18:12 +0000
 Subject: [PATCH] libgcrypt: Import replacement CRC operations

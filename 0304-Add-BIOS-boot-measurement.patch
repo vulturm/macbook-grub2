@@ -1,4 +1,4 @@
-From 78278fb7d962eb5fcf9cecc514687207bc7f4dbe Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Sun, 9 Aug 2015 15:48:51 -0700
 Subject: [PATCH] Add BIOS boot measurement

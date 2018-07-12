@@ -1,4 +1,4 @@
-From 412098fed27a315ee0c8d3ca659eeea509a907a6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Andrzej Kacprowski <andrzej.kacprowski@intel.com>
 Date: Fri, 21 Apr 2017 10:06:20 +0200
 Subject: [PATCH] Add support for non-Ethernet network cards

@@ -1,4 +1,4 @@
-From 9e3a3bf6cf57af1205198f506110639ad059bd39 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Thu, 16 Jul 2015 15:22:34 -0700
 Subject: [PATCH] Measure kernel + initrd

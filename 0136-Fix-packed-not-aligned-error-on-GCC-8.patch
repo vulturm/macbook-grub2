@@ -1,4 +1,4 @@
-From 563b1da6e6ae7af46cc8354cadb5dab416989f0a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Mon, 26 Mar 2018 16:52:34 +0800
 Subject: [PATCH] Fix packed-not-aligned error on GCC 8

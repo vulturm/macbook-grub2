@@ -1,4 +1,4 @@
-From de81ab552e77435f75222b7e06b9e3ffba98077b Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Fri, 22 May 2015 11:45:25 +0000
 Subject: [PATCH] grub2-btrfs-06-subvol-mount

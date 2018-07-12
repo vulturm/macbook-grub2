@@ -1,4 +1,4 @@
-From 9d90c71c213ce1f7ccbd052b882778c4059c82d6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 21 Jun 2013 14:44:08 -0400
 Subject: [PATCH] Use -2 instead of -1 for our right-hand margin, so

@@ -1,4 +1,4 @@
-From 3bc226b6606b734c166d2fe5e0d98291627426ef Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:46:23 -0400
 Subject: [PATCH] make GRUB_MOD_INIT() declare its function prototypes.

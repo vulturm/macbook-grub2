@@ -1,4 +1,4 @@
-From c42acc23ff91ea0170eab5f1e10499dcfc4e0c92 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 30 Aug 2017 15:56:19 +0200
 Subject: [PATCH] xfs: Don't attempt to iterate over empty directory.

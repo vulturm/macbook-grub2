@@ -1,4 +1,4 @@
-From e5fd6fcb30e673e29576be205e80e7bf8cbb135c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Tue, 12 Jun 2018 13:25:16 +0200
 Subject: [PATCH] Add grub-set-bootflag utility

@@ -1,4 +1,4 @@
-From 7db97ecd4fe7dfafe539094f92f2844307e920bd Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 27 Apr 2018 17:53:41 +0200
 Subject: [PATCH] Use BLS version field to compare entries if id field isn't

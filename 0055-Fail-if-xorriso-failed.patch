@@ -1,4 +1,4 @@
-From e66dc5d71ebfc9763420a76c274e6980d54641c3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 7 Aug 2017 18:08:39 +0200
 Subject: [PATCH] Fail if xorriso failed.

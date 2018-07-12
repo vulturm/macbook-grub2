@@ -1,4 +1,4 @@
-From 983d40ddb1c4eaaaa0c3ff1c4feded9a20cde4e8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 1 May 2017 11:19:40 -0400
 Subject: [PATCH] print more debug info in our module loader.

@@ -1,4 +1,4 @@
-From 0ba90a7f017889d32a47897d9107ef45cc50a049 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alexander Graf <agraf@suse.de>
 Date: Thu, 31 Aug 2017 16:40:18 +0200
 Subject: [PATCH] efi: Move grub_reboot() into kernel

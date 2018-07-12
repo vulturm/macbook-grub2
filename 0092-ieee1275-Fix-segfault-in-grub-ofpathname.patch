@@ -1,4 +1,4 @@
-From 2dc163bf692c18275de7b0d6716138c676e3bf92 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Tue, 28 Nov 2017 11:51:39 -0800
 Subject: [PATCH] ieee1275: Fix segfault in grub-ofpathname

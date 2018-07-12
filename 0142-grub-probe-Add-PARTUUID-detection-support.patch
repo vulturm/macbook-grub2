@@ -1,4 +1,4 @@
-From 0c0bcffc2378f7427f14f7f878b08ba8f1a1f508 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Nicholas Vinson <nvinson234@gmail.com>
 Date: Mon, 16 Apr 2018 22:36:25 -0700
 Subject: [PATCH] grub-probe: Add PARTUUID detection support

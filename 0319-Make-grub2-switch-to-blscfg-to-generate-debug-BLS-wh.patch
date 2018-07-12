@@ -1,4 +1,4 @@
-From 8cf8b269718c39276a55d9ba7b455156b38118fd Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Wed, 11 Apr 2018 11:49:24 +0200
 Subject: [PATCH] Make grub2-switch-to-blscfg to generate debug BLS when

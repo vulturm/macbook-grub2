@@ -1,4 +1,4 @@
-From b459fc6496dfe6defa8ced4eccdafa21b7999f94 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 22 Jun 2018 14:01:06 -0400
 Subject: [PATCH] grub-switch-to-blscfg.in: get rid of a bunch of bashisms

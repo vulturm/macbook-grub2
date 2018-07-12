@@ -1,4 +1,4 @@
-From 5435aaac3c8bfb14bb01a826ec747b783947c86f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Xuan Guo <nbdd0121>
 Date: Mon, 14 Aug 2017 16:27:53 +0200
 Subject: [PATCH] Set have_exec to y on cygwin so we have grub_mkrescue.

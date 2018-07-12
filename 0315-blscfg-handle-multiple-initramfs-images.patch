@@ -1,4 +1,4 @@
-From 37524f9812e2d3db624830e5486c997b12f78e76 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 11 Apr 2018 13:44:29 -0400
 Subject: [PATCH] blscfg: handle multiple initramfs images.

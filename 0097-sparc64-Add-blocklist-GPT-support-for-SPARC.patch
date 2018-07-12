@@ -1,4 +1,4 @@
-From 69e0a67bfb419a8d6c905fb23330a8afc2435de6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Thu, 11 May 2017 18:25:24 -0700
 Subject: [PATCH] sparc64: Add blocklist GPT support for SPARC

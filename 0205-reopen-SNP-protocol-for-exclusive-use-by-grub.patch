@@ -1,4 +1,4 @@
-From 203727d71eac6c8442c91001341190fae62311cf Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Sat, 15 Feb 2014 15:10:22 -0500
 Subject: [PATCH] reopen SNP protocol for exclusive use by grub

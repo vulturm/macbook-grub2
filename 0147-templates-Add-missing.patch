@@ -1,4 +1,4 @@
-From ba474d531a63850bf2e8e8c225ccd6f5e2a594e9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Daniel Kiper <daniel.kiper@oracle.com>
 Date: Tue, 5 Jun 2018 13:04:04 +0200
 Subject: [PATCH] templates: Add missing "]"

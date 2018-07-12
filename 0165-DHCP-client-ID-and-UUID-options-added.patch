@@ -1,4 +1,4 @@
-From 8fd0604ff665948ea0ac9bc316d19f40e7aae166 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Tue, 27 Nov 2012 17:18:53 -0200
 Subject: [PATCH] DHCP client ID and UUID options added.

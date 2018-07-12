@@ -1,4 +1,4 @@
-From 72b425b640f67ad7e6e0056a7a793bddc9997985 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Joakim Bech <joakim.bech@linaro.org>
 Date: Mon, 26 Feb 2018 09:57:34 +0100
 Subject: [PATCH] ieee1275: fix build regression in of_path_of_nvme

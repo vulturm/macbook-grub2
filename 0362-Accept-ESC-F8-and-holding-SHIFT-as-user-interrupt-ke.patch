@@ -1,4 +1,4 @@
-From f4fe7a729b2426d4d29a728b44b2570d93345975 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Mon, 26 Mar 2018 16:15:53 +0200
 Subject: [PATCH] Accept ESC, F8 and holding SHIFT as user interrupt keys

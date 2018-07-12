@@ -1,4 +1,4 @@
-From e8c8329bf8336fe861640694559106011f384db6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 25 Jun 2015 15:41:06 -0400
 Subject: [PATCH] Make it possible to enabled --build-id=sha1

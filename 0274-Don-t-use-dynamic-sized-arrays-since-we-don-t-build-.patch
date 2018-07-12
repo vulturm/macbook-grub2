@@ -1,4 +1,4 @@
-From 448b5622df98d26537b10f608817af94c01c1988 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:42:57 -0400
 Subject: [PATCH] Don't use dynamic sized arrays since we don't build with

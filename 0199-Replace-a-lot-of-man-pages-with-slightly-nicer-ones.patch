@@ -1,4 +1,4 @@
-From 3c3a2f5ad9505a0a8b87a6582576ff59832f60be Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 4 Mar 2014 11:00:23 -0500
 Subject: [PATCH] Replace a lot of man pages with slightly nicer ones.

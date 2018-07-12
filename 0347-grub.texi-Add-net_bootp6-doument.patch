@@ -1,4 +1,4 @@
-From a314663766dd526d60aade60bb06a4b597bb759a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Tue, 5 May 2015 14:19:24 +0800
 Subject: [PATCH] grub.texi: Add net_bootp6 doument

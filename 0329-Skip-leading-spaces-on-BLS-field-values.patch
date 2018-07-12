@@ -1,4 +1,4 @@
-From e6fb0f244c109f42288203654db19f4f0af113ed Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Thu, 7 Jun 2018 00:44:51 +0200
 Subject: [PATCH] Skip leading spaces on BLS field values

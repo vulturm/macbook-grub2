@@ -1,4 +1,4 @@
-From fcff875198d2e85720fe7c29a8ad28cef61d611b Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Fri, 15 Jun 2018 09:58:50 +0200
 Subject: [PATCH] TPM: Fix compiler warnings

@@ -1,4 +1,4 @@
-From c61b0b1d2351a514b8741b188eae009e93c705f9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 13:04:37 -0400
 Subject: [PATCH] Add secureboot support on efi chainloader

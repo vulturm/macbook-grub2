@@ -1,4 +1,4 @@
-From 7108c0c86ea26f75dfba4e21e78bf8464c433143 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 14 Aug 2017 11:36:50 +0200
 Subject: [PATCH] grub.texi: Fix typo

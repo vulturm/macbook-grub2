@@ -1,4 +1,4 @@
-From 04999ca2777e45a00a76aa0aa535eeda337f48ae Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 14 Mar 2011 14:27:42 -0400
 Subject: [PATCH] Don't say "GNU/Linux" in generated menus.

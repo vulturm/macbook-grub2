@@ -1,4 +1,4 @@
-From 3b5388e0ac31e508c241ee9cec433a4bc318caa6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Mark Salter <msalter@redhat.com>
 Date: Tue, 7 Mar 2017 18:26:17 -0500
 Subject: [PATCH] Fix malformed tftp packets

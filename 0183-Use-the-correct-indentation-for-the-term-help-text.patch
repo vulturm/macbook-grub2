@@ -1,4 +1,4 @@
-From 57db40fb428695a1e076bc5d2bed433fffdb626e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Fri, 7 Jun 2013 14:08:49 -0400
 Subject: [PATCH] Use the correct indentation for the term help text

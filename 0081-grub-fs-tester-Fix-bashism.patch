@@ -1,4 +1,4 @@
-From 4f31bfe1d36e95ca3b1cdaf6a9d45d1e3722ad2f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@google.com>
 Date: Wed, 30 Aug 2017 17:22:58 +0200
 Subject: [PATCH] grub-fs-tester: Fix bashism

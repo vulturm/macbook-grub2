@@ -1,4 +1,4 @@
-From 7be725d0ff77d8ebd0a7e3e3fccf193334c5c319 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Aaron Miller <aaronmiller@fb.com>
 Date: Fri, 29 Jul 2016 17:41:38 +0800
 Subject: [PATCH] net: read bracketed ipv6 addrs and port numbers (pjones

@@ -1,4 +1,4 @@
-From 6494d2b08ea9a24118631438a69e238367565008 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 7 Dec 2015 14:20:49 -0500
 Subject: [PATCH] Make efi machines load an env block from a variable

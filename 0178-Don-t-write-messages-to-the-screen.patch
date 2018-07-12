@@ -1,4 +1,4 @@
-From 03163e0b1df429ae707d5e166f1668133ce615fb Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Wed, 15 May 2013 13:30:20 -0400
 Subject: [PATCH] Don't write messages to the screen

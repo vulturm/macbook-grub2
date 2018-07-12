@@ -1,4 +1,4 @@
-From 7c1816f96484ad413dab750a6a8d9b99749116d0 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:39:47 -0500
 Subject: [PATCH] Add quicksort implementation

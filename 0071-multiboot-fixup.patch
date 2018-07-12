@@ -1,4 +1,4 @@
-From 4bfd26623f590c8f19c516f4edd342ff18f07bc1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 14 Aug 2017 16:24:05 +0200
 Subject: [PATCH] multiboot fixup

@@ -1,4 +1,4 @@
-From d61ff8a2e5f0938527ff0102c733e2f6c1fd3610 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 18 Sep 2014 11:26:14 -0400
 Subject: [PATCH] Load arm with SB enabled.

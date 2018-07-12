@@ -1,4 +1,4 @@
-From 284afab081ef7ed7db2c59151853aa3c92d988f2 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Sun, 9 Jul 2017 21:31:19 +0200
 Subject: [PATCH] ehci: Fix compilation on i386

@@ -1,4 +1,4 @@
-From 413f1e13e69e1df130e9f39684fb7c0c216e5035 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 21 Feb 2018 15:20:29 -0500
 Subject: [PATCH] .mod files: Strip annobin annotations and .eh_frame, and

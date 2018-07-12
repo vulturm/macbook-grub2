@@ -1,4 +1,4 @@
-From ec2de93f8d96b914af5834137bffdc9759c362b8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 Date: Fri, 29 Jun 2018 14:15:11 +0200
 Subject: [PATCH] multiboot_elfxx.c: Fix compilation by fixing undeclared

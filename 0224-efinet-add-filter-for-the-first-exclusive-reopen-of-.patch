@@ -1,4 +1,4 @@
-From 54766c756f1fbc941c25bda607810e11a675ba10 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: RHEL Ninjas <example@example.com>
 Date: Fri, 25 Sep 2015 16:24:23 +0900
 Subject: [PATCH] efinet: add filter for the first exclusive reopen of SNP

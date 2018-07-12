@@ -1,4 +1,4 @@
-From 6cb89a7f64e4a5b1bd39d4fa9f588c8ecf3ea1f5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 27 Oct 2014 09:22:55 -0400
 Subject: [PATCH] Try to emit linux16/initrd16 and linuxefi/initrdefi in

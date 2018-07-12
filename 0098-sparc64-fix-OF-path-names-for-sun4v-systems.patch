@@ -1,4 +1,4 @@
-From d85c76b501edda038b68bc23eee946e6cc600513 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Tue, 30 Jan 2018 20:49:48 -0800
 Subject: [PATCH] sparc64: fix OF path names for sun4v systems

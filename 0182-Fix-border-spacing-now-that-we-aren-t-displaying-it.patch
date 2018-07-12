@@ -1,4 +1,4 @@
-From a5a6538390446ca1f52652480e91934736bcc0e6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Fri, 7 Jun 2013 14:08:23 -0400
 Subject: [PATCH] Fix border spacing now that we aren't displaying it

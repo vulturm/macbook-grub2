@@ -1,4 +1,4 @@
-From 3b4b6c83c08487f8f063d877c8ed7f03f28ba3d8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 28 Apr 2015 11:15:03 -0400
 Subject: [PATCH] Make grub2-mkconfig construct titles that look like the ones

@@ -1,4 +1,4 @@
-From 207ad8688667666661a9546a8409d4e312e98341 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 30 Nov 2017 15:11:39 -0500
 Subject: [PATCH] Add grub_debug_enabled()

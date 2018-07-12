@@ -1,4 +1,4 @@
-From 820c64e4c002090bcd9df10ab79d5851b28ac503 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Mon, 26 Feb 2018 17:34:15 -0800
 Subject: [PATCH] ieee1275: encode-unit command for 4 addr cell devs

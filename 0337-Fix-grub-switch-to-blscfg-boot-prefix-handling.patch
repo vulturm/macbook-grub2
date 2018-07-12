@@ -1,4 +1,4 @@
-From a0453398e525b89f1d7e381a63c3b4d09dc89046 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Mon, 9 Jul 2018 12:19:03 +0200
 Subject: [PATCH] Fix grub-switch-to-blscfg boot prefix handling

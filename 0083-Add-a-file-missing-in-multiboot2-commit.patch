@@ -1,4 +1,4 @@
-From 1b18d6b0d34872ced6b3dbfc3e7957c80efbcb7a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 5 Sep 2017 23:13:55 +0200
 Subject: [PATCH] Add a file missing in multiboot2 commit.

@@ -1,4 +1,4 @@
-From 0bcd68876e531078880a7a4ddd15474f1ca81b68 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 30 May 2017 14:16:07 -0400
 Subject: [PATCH] Fix up linux params usage...

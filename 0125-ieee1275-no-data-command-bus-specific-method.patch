@@ -1,4 +1,4 @@
-From c422bb60193512663c4854ee1ac6c1217f5e3178 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Daniel Kiper <daniel.kiper@oracle.com>
 Date: Mon, 5 Mar 2018 15:11:18 +0100
 Subject: [PATCH] ieee1275: no-data-command bus specific method

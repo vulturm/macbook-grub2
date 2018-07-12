@@ -1,4 +1,4 @@
-From c2b051c8a5daac6cf874e6cc7eb79878e2203153 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 16 Jul 2012 18:57:11 -0400
 Subject: [PATCH] Use "linuxefi" and "initrdefi" where appropriate.

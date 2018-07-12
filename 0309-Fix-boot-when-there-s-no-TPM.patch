@@ -1,4 +1,4 @@
-From 54444026651f712d55c1dbff142745283a18990c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Wed, 23 Mar 2016 16:49:42 -0700
 Subject: [PATCH] Fix boot when there's no TPM

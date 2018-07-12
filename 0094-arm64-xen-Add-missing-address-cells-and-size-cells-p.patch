@@ -1,4 +1,4 @@
-From d34977cb662d9d3c74532dc175103758c47f552f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Julien Grall <julien.grall@linaro.org>
 Date: Wed, 29 Nov 2017 17:08:12 +0000
 Subject: [PATCH] arm64/xen: Add missing #address-cells and #size-cells

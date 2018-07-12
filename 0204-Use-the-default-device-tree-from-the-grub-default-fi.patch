@@ -1,4 +1,4 @@
-From 226c5f786b48c5fc7692f18c99f526e8ac9a3702 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Wed, 12 Feb 2014 14:54:04 -0500
 Subject: [PATCH] Use the default device tree from the grub default file

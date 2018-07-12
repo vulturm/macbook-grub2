@@ -1,4 +1,4 @@
-From d08c9685149e7788001ac9a209baa1d84c3628e0 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 17:47:57 +0200
 Subject: [PATCH] Refactor arm-uboot code to make it genereic.

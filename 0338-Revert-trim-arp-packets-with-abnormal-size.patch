@@ -1,4 +1,4 @@
-From 45540e20eb3bcbd46ce13e7ac3f28b1ab7508b04 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 18 May 2017 14:25:45 -0400
 Subject: [PATCH] Revert "trim arp packets with abnormal size"

@@ -1,4 +1,4 @@
-From 5033080eb6cb784a3d7f36b3d66b71f4603bf0aa Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Jordan Glover <Golden_Miller83@protonmail.ch>
 Date: Wed, 29 Nov 2017 08:35:37 -0500
 Subject: [PATCH] grub-mkconfig: Fix detecting .sig files as system images

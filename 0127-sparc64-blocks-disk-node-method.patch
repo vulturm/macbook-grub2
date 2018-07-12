@@ -1,4 +1,4 @@
-From ab4c93cb4bb443620e141cc70f274b89a51a1d05 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Mon, 26 Feb 2018 17:34:19 -0800
 Subject: [PATCH] sparc64: #blocks disk node method

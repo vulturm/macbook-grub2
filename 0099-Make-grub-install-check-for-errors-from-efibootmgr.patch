@@ -1,4 +1,4 @@
-From 6400613ad0b463abc93362086a491cd2a5e99b0d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Steve McIntyre <steve@einval.com>
 Date: Wed, 31 Jan 2018 21:49:36 +0000
 Subject: [PATCH] Make grub-install check for errors from efibootmgr

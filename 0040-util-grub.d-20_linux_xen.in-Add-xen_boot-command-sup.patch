@@ -1,4 +1,4 @@
-From d33045ce7ffcb7c1e4a60c14d5ca64b36e3c5abe Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Fu Wei <fu.wei@linaro.org>
 Date: Sun, 14 May 2017 15:43:46 +0800
 Subject: [PATCH] util/grub.d/20_linux_xen.in: Add xen_boot command support for

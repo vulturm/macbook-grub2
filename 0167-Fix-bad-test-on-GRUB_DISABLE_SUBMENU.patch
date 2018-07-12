@@ -1,4 +1,4 @@
-From 1164ef4fbd4c09056e3e5da42a251cb5b5ce7b64 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Prarit Bhargava <prarit@redhat.com>
 Date: Wed, 12 Mar 2014 10:58:16 -0400
 Subject: [PATCH] Fix bad test on GRUB_DISABLE_SUBMENU.

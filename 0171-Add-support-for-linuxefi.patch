@@ -1,4 +1,4 @@
-From 69ee71058e03bbdd7ad74591ab1b9bc4830c0c24 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg@redhat.com>
 Date: Tue, 10 Jul 2012 11:58:52 -0400
 Subject: [PATCH] Add support for linuxefi

@@ -1,4 +1,4 @@
-From 31090515d4b7c4d56074ea3eb8609a0d7aa6ed11 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Wed, 18 Dec 2013 09:57:04 +0000
 Subject: [PATCH] export btrfs_subvol and btrfs_subvolid

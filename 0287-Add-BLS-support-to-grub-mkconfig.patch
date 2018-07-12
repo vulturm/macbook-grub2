@@ -1,4 +1,4 @@
-From 7de48355c3f9494c2394aefa5e5ad88f53ea06ef Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:40:29 -0500
 Subject: [PATCH] Add BLS support to grub-mkconfig

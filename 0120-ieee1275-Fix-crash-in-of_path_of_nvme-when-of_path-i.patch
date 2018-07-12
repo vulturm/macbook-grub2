@@ -1,4 +1,4 @@
-From 25b2b22d5457b21ccd764c4e5af6ce37ba25b975 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
 Date: Thu, 1 Mar 2018 23:34:53 +0100
 Subject: [PATCH] ieee1275: Fix crash in of_path_of_nvme when of_path is empty

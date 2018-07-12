@@ -1,4 +1,4 @@
-From ddd8c2df98b86c252bca06172d8de755c378a52e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Mon, 13 Jan 2014 21:50:59 -0500
 Subject: [PATCH] Add .eh_frame to list of relocations stripped

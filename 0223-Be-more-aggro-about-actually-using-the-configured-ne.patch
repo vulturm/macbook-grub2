@@ -1,4 +1,4 @@
-From e3859e9688f5dfed44386a5a852e4b24515be162 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 11 Sep 2015 17:30:49 -0400
 Subject: [PATCH] Be more aggro about actually using the *configured* network

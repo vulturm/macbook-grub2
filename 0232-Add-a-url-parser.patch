@@ -1,4 +1,4 @@
-From 375387fa8910eebc484d8cd2ba16a5bae577aeb9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Jun 2016 16:18:44 -0400
 Subject: [PATCH] Add a url parser.

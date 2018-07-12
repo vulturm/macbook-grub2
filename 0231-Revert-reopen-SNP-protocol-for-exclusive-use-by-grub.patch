@@ -1,4 +1,4 @@
-From f59970dae17765dd3f2e510284bb960e1c124808 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 7 Apr 2016 10:58:06 -0400
 Subject: [PATCH] Revert "reopen SNP protocol for exclusive use by grub"

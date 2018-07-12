@@ -1,4 +1,4 @@
-From f02037afe363f31218b4e0c63ef3a1176f51c232 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Mon, 26 Feb 2018 17:34:16 -0800
 Subject: [PATCH] ieee1275: set-address bus specific method

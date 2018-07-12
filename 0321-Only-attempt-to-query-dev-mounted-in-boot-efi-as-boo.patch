@@ -1,4 +1,4 @@
-From f6531c4888e80512c40ff144399f91919e4afff2 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 24 Apr 2018 02:16:38 +0200
 Subject: [PATCH] Only attempt to query dev mounted in /boot/efi as boot dev on

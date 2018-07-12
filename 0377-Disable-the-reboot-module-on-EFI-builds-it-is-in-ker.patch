@@ -1,4 +1,4 @@
-From 89b6fa058d944d1b77f85a7ee78b0e37efdf89aa Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 11 Jul 2018 13:47:56 -0400
 Subject: [PATCH] Disable the reboot module on EFI builds; it is in kernel.

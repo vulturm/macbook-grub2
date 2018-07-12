@@ -1,4 +1,4 @@
-From 737db141d6cebf096ccc4ba82a73b0fa9b8ab389 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:43:22 -0400
 Subject: [PATCH] don't ignore const

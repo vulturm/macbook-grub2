@@ -1,4 +1,4 @@
-From 914002731bb90e7266f8fc53352ca5a9bb6aabf1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 11 May 2018 23:47:31 +0200
 Subject: [PATCH] Simplify BLS entry key val pairs lookup

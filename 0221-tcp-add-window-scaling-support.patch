@@ -1,4 +1,4 @@
-From cb04e63baac6392b1c08c58305981d6cf59df988 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Josef Bacik <jbacik@fb.com>
 Date: Wed, 12 Aug 2015 08:57:55 -0700
 Subject: [PATCH] tcp: add window scaling support

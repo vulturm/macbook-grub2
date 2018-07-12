@@ -1,4 +1,4 @@
-From ff1cf2548a3f33da19278829687d074ad746dd0a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Thu, 1 Feb 2018 18:18:53 +0000
 Subject: [PATCH] arm64: align linux kernel header struct naming with i386

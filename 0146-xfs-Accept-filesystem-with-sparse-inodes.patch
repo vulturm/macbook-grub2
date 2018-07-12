@@ -1,4 +1,4 @@
-From cda0a857dd7a27cd5d621747464bfe71e8727fff Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Daniel Kiper <daniel.kiper@oracle.com>
 Date: Tue, 29 May 2018 16:16:02 +0200
 Subject: [PATCH] xfs: Accept filesystem with sparse inodes

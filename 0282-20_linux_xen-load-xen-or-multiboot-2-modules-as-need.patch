@@ -1,4 +1,4 @@
-From b3743b26b4ba3acf7963d7362791b17440d28e54 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 19 Oct 2017 11:29:11 -0400
 Subject: [PATCH] 20_linux_xen: load xen or multiboot{,2} modules as needed.

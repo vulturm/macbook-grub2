@@ -1,4 +1,4 @@
-From 4fd66df9601a7a259edd1cdda0d864e4d9d8f7e5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Mon, 30 Jun 2014 14:16:46 -0400
 Subject: [PATCH] Don't munge raw spaces when we're doing our cmdline escaping

@@ -1,4 +1,4 @@
-From 461bfab7b7e47fd0a76bf6076a438af1b7e2184a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 19:06:22 +0200
 Subject: [PATCH] coreboot: Split parts that are platform-independent.

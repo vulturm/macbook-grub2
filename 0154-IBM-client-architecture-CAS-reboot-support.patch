@@ -1,4 +1,4 @@
-From 2b4fd2084bd3a3b75ee06cd4e670c0675078f6ab Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Thu, 20 Sep 2012 18:07:39 -0300
 Subject: [PATCH] IBM client architecture (CAS) reboot support

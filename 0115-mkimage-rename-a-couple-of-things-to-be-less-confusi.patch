@@ -1,4 +1,4 @@
-From 594ac31571970611958b00284f9ca4c6f6c1286d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 21 Feb 2018 15:20:25 -0500
 Subject: [PATCH] mkimage: rename a couple of things to be less confusing

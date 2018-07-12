@@ -1,4 +1,4 @@
-From 8b5617835e6c1042493707d9f2174fef16872f71 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Sat, 12 May 2018 11:29:07 +0200
 Subject: [PATCH] Don't attempt to export the start and _start symbols for

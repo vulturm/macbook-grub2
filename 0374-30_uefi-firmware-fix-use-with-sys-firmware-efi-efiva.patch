@@ -1,4 +1,4 @@
-From 9975710681e407c26e70510ea01b4652b6883f29 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Fri, 29 Jun 2018 10:08:22 +0200
 Subject: [PATCH] 30_uefi-firmware: fix use with /sys/firmware/efi/efivars

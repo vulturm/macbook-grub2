@@ -1,4 +1,4 @@
-From f277e243380790a7bcf8ca16a7f93b72e70ea59d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Thu, 13 Oct 2016 13:55:26 -0700
 Subject: [PATCH] Make TPM errors less fatal

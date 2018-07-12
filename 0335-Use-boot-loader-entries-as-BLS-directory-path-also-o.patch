@@ -1,4 +1,4 @@
-From 11f7d8759ba2f116f8b516836ff2b40189159fa3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Mon, 25 Jun 2018 11:45:33 +0200
 Subject: [PATCH] Use /boot/loader/entries as BLS directory path also on EFI

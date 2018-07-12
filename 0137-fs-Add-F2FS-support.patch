@@ -1,4 +1,4 @@
-From 71f9e4ac44142af52c3fc1860436cf9e432bf764 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 Date: Thu, 29 Mar 2018 16:37:39 +0100
 Subject: [PATCH] fs: Add F2FS support

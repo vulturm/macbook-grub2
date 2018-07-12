@@ -1,4 +1,4 @@
-From 2abe387d568cd015afc9cbf88f9f2099cdb93ccf Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 6 Nov 2017 18:31:56 -0500
 Subject: [PATCH] make better backtraces

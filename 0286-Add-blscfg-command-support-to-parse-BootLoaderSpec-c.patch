@@ -1,4 +1,4 @@
-From 0ea2f92fef2c8a2d585698ed1039ce2a9a8d4ee5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 9 Dec 2016 15:40:58 -0500
 Subject: [PATCH] Add blscfg command support to parse BootLoaderSpec config

@@ -1,4 +1,4 @@
-From 14b2ca58f7fc8bc3b1a6d9ada3e084a629daf189 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Mon, 4 Jun 2018 19:49:47 +0200
 Subject: [PATCH] grub-editenv: Add "incr" command to increment integer value

@@ -1,4 +1,4 @@
-From 1b670f37f3b1fafd40db2c01c1fdd14215728274 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Wed, 6 Jun 2018 16:47:11 +0200
 Subject: [PATCH] Make grub_getkeystatus helper funtion available everywhere

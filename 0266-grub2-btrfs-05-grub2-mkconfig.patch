@@ -1,4 +1,4 @@
-From bcf4024d12d2a33ea07b1dce23153ea11c439b83 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 21 Aug 2014 03:39:11 +0000
 Subject: [PATCH] grub2-btrfs-05-grub2-mkconfig

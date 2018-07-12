@@ -1,4 +1,4 @@
-From ca4270e242c0c4876e14555e1eee43ab05e19cac Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:31:52 -0500
 Subject: [PATCH] linuxefi: minor cleanups

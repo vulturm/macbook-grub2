@@ -1,4 +1,4 @@
-From 1deebd85ef87cc581e995ce0a51dc0802ac9c367 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Mon, 7 Aug 2017 16:23:12 +0100
 Subject: [PATCH] io: add a GRUB_GZ prefix to gzio specific defines

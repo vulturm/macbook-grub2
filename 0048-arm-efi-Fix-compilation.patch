@@ -1,4 +1,4 @@
-From cb8b7e4e36bf32dccbbba8252aa44ad3ada4fbc1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Sun, 9 Jul 2017 21:48:37 +0000
 Subject: [PATCH] arm-efi: Fix compilation

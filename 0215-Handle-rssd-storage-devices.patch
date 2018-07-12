@@ -1,4 +1,4 @@
-From 4435cfb4a3666abf615d51eaaf0aa70ddc08a70c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 30 Jun 2015 15:50:41 -0400
 Subject: [PATCH] Handle rssd storage devices.

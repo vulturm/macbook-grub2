@@ -1,4 +1,4 @@
-From 5e975fd52229bbbc6e9e09566216e90977ba75b4 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Tue, 27 Nov 2012 16:58:39 -0200
 Subject: [PATCH] Add %X option to printf functions.

@@ -1,4 +1,4 @@
-From a698240df0c43278b2d1d7259c8e7a6926c63112 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: "Matthew S. Turnbull" <sparky@bluefang-logic.com>
 Date: Sat, 24 Feb 2018 17:44:58 -0500
 Subject: [PATCH] grub-mkconfig/10_linux: Support multiple early initrd images

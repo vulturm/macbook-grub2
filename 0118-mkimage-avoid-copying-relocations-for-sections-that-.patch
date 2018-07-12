@@ -1,4 +1,4 @@
-From ebc825b5491185b39ecd24b1674a76f60492dc60 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 21 Feb 2018 15:20:28 -0500
 Subject: [PATCH] mkimage: avoid copying relocations for sections that won't be

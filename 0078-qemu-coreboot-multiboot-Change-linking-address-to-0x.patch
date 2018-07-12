@@ -1,4 +1,4 @@
-From ec763ed00ac55deb1c429bda5057bd5a147183d1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 30 Aug 2017 16:29:59 +0200
 Subject: [PATCH] qemu, coreboot, multiboot: Change linking address to 0x9000.

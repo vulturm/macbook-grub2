@@ -1,4 +1,4 @@
-From 2a8856401774d86ec78481e2188a54bbf689f25e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Mon, 27 Nov 2017 09:12:49 -0800
 Subject: [PATCH] grub-install: Fix memory leak

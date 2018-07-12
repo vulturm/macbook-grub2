@@ -1,4 +1,4 @@
-From 216950a4eea1a1ead1c28eaca94e34ea2ef2ad19 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:41:22 +0200
 Subject: [PATCH] at_keyboard: Split protocol from controller code.

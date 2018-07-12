@@ -1,4 +1,4 @@
-From 28b0d19061d66e3633148ac8e44decda914bf266 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Tue, 6 Mar 2018 13:38:58 -0800
 Subject: [PATCH] mkimage: fix build regression in grub_mkimage_load_image

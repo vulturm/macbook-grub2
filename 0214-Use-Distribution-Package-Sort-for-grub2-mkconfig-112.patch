@@ -1,4 +1,4 @@
-From 4f2512d8cf86908327923d9ab188d9041ee80936 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Robert Marshall <rmarshall@redhat.com>
 Date: Mon, 16 Mar 2015 14:14:19 -0400
 Subject: [PATCH] Use Distribution Package Sort for grub2-mkconfig (#1124074)

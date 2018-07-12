@@ -1,4 +1,4 @@
-From 95da0629418b268bce357954f63e3d11564ec8d9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Marcel Kolaja <mkolaja@redhat.com>
 Date: Tue, 21 Jan 2014 10:57:08 -0500
 Subject: [PATCH] Honor a symlink when generating configuration by

@@ -1,4 +1,4 @@
-From 7970d7fc3eee5b9d4d064ef372e8574787a065b7 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Wed, 11 Apr 2018 11:36:43 +0200
 Subject: [PATCH] Add missing options to grub2-switch-to-blscfg man page

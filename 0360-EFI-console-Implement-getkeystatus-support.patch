@@ -1,4 +1,4 @@
-From f66a8009366b6f32049f499def7087d1eb1c61e1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Wed, 6 Jun 2018 16:16:47 +0200
 Subject: [PATCH] EFI: console: Implement getkeystatus() support

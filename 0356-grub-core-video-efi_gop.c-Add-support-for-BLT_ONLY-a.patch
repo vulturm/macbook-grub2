@@ -1,4 +1,4 @@
-From e0984418abb27979b7813722594b31ba89e134e6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alexander Graf <agraf@suse.de>
 Date: Wed, 1 Feb 2017 23:10:45 +0100
 Subject: [PATCH] grub-core/video/efi_gop.c: Add support for BLT_ONLY adapters

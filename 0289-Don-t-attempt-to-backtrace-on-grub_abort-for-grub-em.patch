@@ -1,4 +1,4 @@
-From 4d108b640b3f3f46c1af6131375b38f1da2331d8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 6 Feb 2018 11:16:28 +0100
 Subject: [PATCH] Don't attempt to backtrace on grub_abort() for grub-emu

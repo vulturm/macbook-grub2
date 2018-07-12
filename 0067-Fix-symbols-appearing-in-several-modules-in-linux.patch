@@ -1,4 +1,4 @@
-From 26e5aea9418aab83df0debd0c672086fa9f2d9c8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 14 Aug 2017 14:09:30 +0200
 Subject: [PATCH] Fix symbols appearing in several modules in linux*.

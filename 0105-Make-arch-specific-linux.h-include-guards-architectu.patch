@@ -1,4 +1,4 @@
-From 8776e5a942582adaadc67865ed74cdd199e56a16 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Thu, 1 Feb 2018 18:18:50 +0000
 Subject: [PATCH] Make arch-specific linux.h include guards architecture unique

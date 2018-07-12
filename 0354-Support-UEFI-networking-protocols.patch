@@ -1,4 +1,4 @@
-From 43067144cfaade754e61a73dc2057807fb668a8f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Wed, 22 Feb 2017 14:27:50 +0800
 Subject: [PATCH] Support UEFI networking protocols

@@ -1,4 +1,4 @@
-From 848bed9d92cf20e9f25db4c69a20efad23996ca0 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:42:37 +0200
 Subject: [PATCH] arm_coreboot: Support keyboard for vexpress.

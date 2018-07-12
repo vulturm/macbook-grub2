@@ -1,4 +1,4 @@
-From 799084dd0953cbe2fb016f97f0a354b78c581a9f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Andrzej Kacprowski <andrzej.kacprowski@intel.com>
 Date: Fri, 21 Apr 2017 09:20:38 +0200
 Subject: [PATCH] Use xid to match DHCP replies

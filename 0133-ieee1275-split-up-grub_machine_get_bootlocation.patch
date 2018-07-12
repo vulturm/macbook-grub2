@@ -1,4 +1,4 @@
-From e2faabacff9eccb80a75d7e00d810cdc26b5e866 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Thu, 8 Mar 2018 20:42:22 -0800
 Subject: [PATCH] ieee1275: split up grub_machine_get_bootlocation

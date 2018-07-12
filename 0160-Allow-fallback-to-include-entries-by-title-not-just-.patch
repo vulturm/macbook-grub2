@@ -1,4 +1,4 @@
-From 8b0e6304860a8d0684e8887028f62add7e7620d3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 5 Sep 2014 10:07:04 -0400
 Subject: [PATCH] Allow "fallback" to include entries by title, not just

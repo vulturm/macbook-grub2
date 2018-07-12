@@ -1,4 +1,4 @@
-From bf43c6f1b92a5c97edbd2541b67cf2e794fff074 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 1 Oct 2012 13:24:37 -0400
 Subject: [PATCH] Pass "\x[[:hex:]][[:hex:]]" straight through unmolested.

@@ -1,4 +1,4 @@
-From 5857f0023c2bd3eb57159597518461b1e1f0bf5e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Fedora Ninjas <grub2-owner@fedoraproject.org>
 Date: Tue, 22 Jan 2013 06:31:38 +0100
 Subject: [PATCH] blscfg: add blscfg module to parse Boot Loader Specification

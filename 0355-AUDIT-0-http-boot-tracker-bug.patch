@@ -1,4 +1,4 @@
-From fbf7e38ebae25ad21cc6c2100ad79ba83d2ed9f9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Sebastian Krahmer <krahmer@suse.com>
 Date: Tue, 28 Nov 2017 17:24:38 +0800
 Subject: [PATCH] AUDIT-0: http boot tracker bug

@@ -1,4 +1,4 @@
-From 3edabad8fefb112cc4b2d43be6e97d43c909ceee Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:59:48 +0200
 Subject: [PATCH] arm_coreboot: Support grub-mkstandalone.

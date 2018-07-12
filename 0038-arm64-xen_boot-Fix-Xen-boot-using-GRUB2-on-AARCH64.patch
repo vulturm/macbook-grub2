@@ -1,4 +1,4 @@
-From ae5817f1dcbf0b99f7a849f56afe442165317840 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Julien Grall <julien.grall@linaro.org>
 Date: Fri, 19 Feb 2016 16:28:52 +0000
 Subject: [PATCH] arm64/xen_boot: Fix Xen boot using GRUB2 on AARCH64

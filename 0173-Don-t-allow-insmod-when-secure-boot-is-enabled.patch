@@ -1,4 +1,4 @@
-From 03107c1c375938f29e9cda832b64db57cb30bb94 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Tue, 23 Oct 2012 10:40:49 -0400
 Subject: [PATCH] Don't allow insmod when secure boot is enabled.

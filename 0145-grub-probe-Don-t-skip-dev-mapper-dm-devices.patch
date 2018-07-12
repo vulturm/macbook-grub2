@@ -1,4 +1,4 @@
-From 6d28b3bd266e1d935de5916860645ea8cabf2335 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Oleg Solovyov <mcpain@altlinux.org>
 Date: Fri, 11 May 2018 13:55:46 +0300
 Subject: [PATCH] grub-probe: Don't skip /dev/mapper/dm-* devices

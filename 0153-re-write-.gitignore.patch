@@ -1,4 +1,4 @@
-From 9bb01748b4e2eb13dee87c4595f378afbfaadb3f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 8 Aug 2017 12:48:04 -0400
 Subject: [PATCH] re-write .gitignore

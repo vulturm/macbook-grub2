@@ -1,4 +1,4 @@
-From 4656c44d4b0665b901401dac398f26ef2fede036 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 15 Mar 2018 14:12:40 -0400
 Subject: [PATCH] Add grub2-switch-to-blscfg

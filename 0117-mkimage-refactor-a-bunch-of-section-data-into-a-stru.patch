@@ -1,4 +1,4 @@
-From 7542af695f338a2b5b86d8cab5cac0d235d47c38 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 21 Feb 2018 15:20:27 -0500
 Subject: [PATCH] mkimage: refactor a bunch of section data into a struct.

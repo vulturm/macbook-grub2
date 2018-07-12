@@ -1,4 +1,4 @@
-From 567b25844138fe8179ed99a42adf46d4e3130c22 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 26 Feb 2014 21:49:12 -0500
 Subject: [PATCH] Make "exit" take a return code.

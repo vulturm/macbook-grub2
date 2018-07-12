@@ -1,4 +1,4 @@
-From 6152b93a644b2c2cdf14e1ab836448eb8b7bde13 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Jan Hlavac <jhlavac@redhat.com>
 Date: Tue, 10 Apr 2018 16:56:28 +0200
 Subject: [PATCH] BLS: Use ${etcdefaultgrub} instead of /etc/...

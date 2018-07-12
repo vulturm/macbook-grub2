@@ -1,4 +1,4 @@
-From 5aa188746a040b193e04f7e98b87c905c4c2854e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 7 Nov 2017 17:12:17 -0500
 Subject: [PATCH] Make pmtimer tsc calibration not take 51 seconds to fail.

@@ -1,4 +1,4 @@
-From 9dcac673ed08e874d883c6dc5af2017fb28eb3d5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Cao jin <caoj.fnst@cn.fujitsu.com>
 Date: Wed, 11 Apr 2018 11:23:10 +0800
 Subject: [PATCH] diskboot: Trivial correction on stale comments

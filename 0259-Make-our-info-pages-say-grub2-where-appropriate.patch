@@ -1,4 +1,4 @@
-From 56598e6a330816e6f1c3867d455ff463f3e24f52 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 6 May 2016 18:43:08 -0400
 Subject: [PATCH] Make our info pages say "grub2" where appropriate.

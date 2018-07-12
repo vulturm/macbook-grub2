@@ -1,4 +1,4 @@
-From 94b34bfe8f2ca2a3d9bd9cb6f40faaaf605cfa12 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Mark Salter <msalter@redhat.com>
 Date: Tue, 22 Aug 2017 12:21:12 -0400
 Subject: [PATCH] Fix grub_net_hwaddr_to_str

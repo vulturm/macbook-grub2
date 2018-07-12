@@ -1,4 +1,4 @@
-From 1493c58177ab5b3d17b94d9336ab3a50050a76f9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 24 May 2017 12:42:32 -0400
 Subject: [PATCH] macos: just build chainloader entries, don't try any xnu xnu.

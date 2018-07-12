@@ -1,4 +1,4 @@
-From a8e0f1adf7019238fff263111794c86f4eea79ac Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 Date: Tue, 29 Aug 2017 16:40:52 -0400
 Subject: [PATCH] Fix util/grub.d/20_linux_xen.in: Add xen_boot command support

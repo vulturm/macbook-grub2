@@ -1,4 +1,4 @@
-From b719c9816d5a234658da3c54218e8a30c73afeb3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 23 Jun 2016 11:01:39 -0400
 Subject: [PATCH] Add grub-get-kernel-settings and use it in 10_linux

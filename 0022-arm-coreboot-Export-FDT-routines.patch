@@ -1,4 +1,4 @@
-From ac6b41b89fbb82a3ba843a7ed19115d81432b604 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 21:29:48 +0200
 Subject: [PATCH] arm-coreboot: Export FDT routines.

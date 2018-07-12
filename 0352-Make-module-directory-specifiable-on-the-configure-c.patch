@@ -1,4 +1,4 @@
-From 658da7bd0ff62b35395012ccfb10aef13756eb2b Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 25 May 2017 13:45:01 -0400
 Subject: [PATCH] Make module directory specifiable on the configure command

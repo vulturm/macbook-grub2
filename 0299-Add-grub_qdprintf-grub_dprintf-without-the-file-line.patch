@@ -1,4 +1,4 @@
-From e68712bfde21a61aa1ad269935318f7ddc1143a0 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Sun, 28 Jun 2015 13:09:58 -0400
 Subject: [PATCH] Add grub_qdprintf() - grub_dprintf() without the file+line

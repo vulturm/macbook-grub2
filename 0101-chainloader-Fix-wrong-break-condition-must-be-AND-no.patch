@@ -1,4 +1,4 @@
-From ae2a2745185c08d194775f28588f58ac90ae4351 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Daniel Kiper <daniel.kiper@oracle.com>
 Date: Fri, 23 Feb 2018 22:32:55 +0100
 Subject: [PATCH] chainloader: Fix wrong break condition (must be AND not, OR)

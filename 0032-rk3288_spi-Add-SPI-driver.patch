@@ -1,4 +1,4 @@
-From b0b1b81a11f8bae8ab9e8edd87ac3f4f7949d03b Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 08:42:14 +0200
 Subject: [PATCH] rk3288_spi: Add SPI driver

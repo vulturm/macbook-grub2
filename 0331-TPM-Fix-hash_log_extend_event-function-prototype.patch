@@ -1,4 +1,4 @@
-From 04216b9900e47cd22e1f1c5108e028f55bb40ded Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Fri, 15 Jun 2018 09:25:00 +0200
 Subject: [PATCH] TPM: Fix hash_log_extend_event function prototype

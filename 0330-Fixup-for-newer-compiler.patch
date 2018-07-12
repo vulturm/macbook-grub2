@@ -1,4 +1,4 @@
-From b58159634e533163d126f2f6387680cf68c02333 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 10 May 2018 13:40:19 -0400
 Subject: [PATCH] Fixup for newer compiler

@@ -1,4 +1,4 @@
-From f962615901c9bf5775a27db5b42119f9e07df7a5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 24 Apr 2018 02:28:04 +0200
 Subject: [PATCH] Include OSTree path when searching kernels images if BLS

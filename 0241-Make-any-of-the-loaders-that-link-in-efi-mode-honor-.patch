@@ -1,4 +1,4 @@
-From 0ef9d4fbab2b9f206ff911f005c2d2dc14e965cc Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 16:09:25 -0400
 Subject: [PATCH] Make any of the loaders that link in efi mode honor secure

@@ -1,4 +1,4 @@
-From b66e364f131228f4215ff8f0b8173f14931d9b6c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Tue, 24 Apr 2018 14:13:04 +0800
 Subject: [PATCH] bufio: Round up block size to power of 2

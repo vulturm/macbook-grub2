@@ -1,4 +1,4 @@
-From bdd89d239cd9b4089630bfb5ec862aab8086dca2 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pete Batard <pete@akeo.ie>
 Date: Mon, 7 Aug 2017 16:20:30 +0100
 Subject: [PATCH] core: use GRUB_TERM_ definitions when handling term

@@ -1,4 +1,4 @@
-From 21e4a6fa039bb7dc6be42e1e4c171ddc398b8431 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 14 Aug 2017 12:51:26 +0200
 Subject: [PATCH] multiboot: disentangle multiboot and multiboot2.

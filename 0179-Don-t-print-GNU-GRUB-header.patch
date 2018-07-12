@@ -1,4 +1,4 @@
-From e1c8193f46a43545315b6c0fa47d92916b206ef4 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Wed, 15 May 2013 13:53:48 -0400
 Subject: [PATCH] Don't print GNU GRUB header

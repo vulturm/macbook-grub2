@@ -1,4 +1,4 @@
-From c43a523e3b257fbba68d7b67397c7ab64e89dd26 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Laszlo Ersek <lersek@redhat.com>
 Date: Mon, 21 Nov 2016 15:34:00 +0100
 Subject: [PATCH] efi/chainloader: fix wrong sanity check in relocate_coff()

@@ -1,4 +1,4 @@
-From 48565c3ac763f71918f75c1f22c10a119a05f1a8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Tue, 26 Jun 2018 20:05:32 +0200
 Subject: [PATCH] EFI: console: Fix the "enter" key not working on X86 tablets

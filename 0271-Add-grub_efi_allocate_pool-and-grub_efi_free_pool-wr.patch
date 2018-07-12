@@ -1,4 +1,4 @@
-From 77a5aafc52bd5755a35d971bc8f58f9cf34c3d8d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 1 Jun 2017 09:59:56 -0400
 Subject: [PATCH] Add grub_efi_allocate_pool() and grub_efi_free_pool()

@@ -1,4 +1,4 @@
-From 0f397d70eb49555316cbe08f883ffbd0724d4cd6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 26 Jun 2018 14:01:26 +0200
 Subject: [PATCH] Use BLS fragment filename as menu entry id and for criteria

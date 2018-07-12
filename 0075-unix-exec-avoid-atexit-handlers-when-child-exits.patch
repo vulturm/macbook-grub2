@@ -1,4 +1,4 @@
-From e75cf4a58b5eaf482804e5e1b2cc7d4399df350e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Patrick Steinhardt <ps@pks.im>
 Date: Mon, 28 Aug 2017 20:57:19 +0200
 Subject: [PATCH] unix exec: avoid atexit handlers when child exits

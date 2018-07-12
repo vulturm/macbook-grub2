@@ -1,4 +1,4 @@
-From dc6e1b5af83eb1c4290baf97c2d221c0865127be Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 10 Aug 2016 17:49:42 +0200
 Subject: [PATCH] strtoull: Fix behaviour on chars between '9' and 'a'.

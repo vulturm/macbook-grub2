@@ -1,4 +1,4 @@
-From 3d86efda0074285fb86aa6ffe5d97327ebd134a4 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 30 Aug 2017 15:18:24 +0200
 Subject: [PATCH] arc: Do not create spurious variable grub_arc_memory_type_t.

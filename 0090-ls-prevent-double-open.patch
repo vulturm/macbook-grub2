@@ -1,4 +1,4 @@
-From 3d8df86d825ff07a8eeb202329b8731fd1a4a24e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Mon, 13 Nov 2017 08:27:28 -0800
 Subject: [PATCH] ls: prevent double open

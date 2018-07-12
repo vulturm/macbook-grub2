@@ -1,4 +1,4 @@
-From e560fbd93be355c5eeb756ae46592716d5e5a209 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Tue, 27 Nov 2012 17:22:07 -0200
 Subject: [PATCH] Search for specific config file for netboot

@@ -1,4 +1,4 @@
-From f35826423ed9e7618696c382e062de60bb655569 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Thu, 1 Mar 2018 19:25:09 -0800
 Subject: [PATCH] sparc64: Limit nvme of_path_of_nvme to just SPARC

@@ -1,4 +1,4 @@
-From 95acd4cbdac495c088fc3401fa365455f7039151 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@google.com>
 Date: Wed, 30 Aug 2017 20:46:14 +0200
 Subject: [PATCH] gzio: fix unaligned access

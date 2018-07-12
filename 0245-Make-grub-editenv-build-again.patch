@@ -1,4 +1,4 @@
-From a240dddb6daecc418ac8a7582e5f062ee3b71a3c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 4 Mar 2016 16:29:13 -0500
 Subject: [PATCH] Make grub-editenv build again.

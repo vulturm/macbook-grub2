@@ -1,4 +1,4 @@
-From c4313c812dc14e82a774b580b5e34d40e7f3fae6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Tue, 9 May 2017 08:40:29 +0200
 Subject: [PATCH] fdtbus: Add ability to send/receive messages on parent

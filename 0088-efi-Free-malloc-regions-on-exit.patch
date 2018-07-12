@@ -1,4 +1,4 @@
-From 92bfc33db984eec22966a163eed7b6f2ab0266bf Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alexander Graf <agraf@suse.de>
 Date: Thu, 31 Aug 2017 16:40:19 +0200
 Subject: [PATCH] efi: Free malloc regions on exit

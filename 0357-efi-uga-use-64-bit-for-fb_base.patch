@@ -1,4 +1,4 @@
-From 57c68ef5851da2e350372a5a845b623ef9773ad9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Andrei Borzenkov <arvidjaar@gmail.com>
 Date: Wed, 16 May 2018 13:06:04 -0400
 Subject: [PATCH] efi/uga: use 64 bit for fb_base

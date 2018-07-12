@@ -1,4 +1,4 @@
-From acf0963284d23476b94306bfe8d16d0934a59653 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Tue, 19 Jun 2018 15:20:54 +0200
 Subject: [PATCH] docs: Add grub-boot-indeterminate.service example

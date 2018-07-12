@@ -1,4 +1,4 @@
-From bc02c1f43c8238c09ad5d51d98a53f3d0425b25e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Fri, 7 Jun 2013 10:52:32 -0400
 Subject: [PATCH] Use the standard margin for the timeout string

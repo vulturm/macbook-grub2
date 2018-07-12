@@ -1,4 +1,4 @@
-From 13138c79ad110cf651c78dd81c36f3adc23fa254 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 18 Feb 2014 11:34:00 -0500
 Subject: [PATCH] Fix convert function to support NVMe devices

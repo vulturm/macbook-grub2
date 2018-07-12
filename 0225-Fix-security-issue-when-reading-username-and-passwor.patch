@@ -1,4 +1,4 @@
-From 82bcdf5e9d9df6772e86ee59a54d735e21cec5a3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hector Marco-Gisbert <hecmargi@upv.es>
 Date: Fri, 13 Nov 2015 16:21:09 +0100
 Subject: [PATCH] Fix security issue when reading username and password

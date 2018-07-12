@@ -1,4 +1,4 @@
-From d11ced1e1fb93676942e51618eb53c140f541890 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:14:28 +0200
 Subject: [PATCH] arm_coreboot: Support EHCI.

@@ -1,4 +1,4 @@
-From 78d2b81bd1af0a3a84d0c23c9ff4af3caa2df23b Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Thu, 7 Sep 2017 13:55:22 +0200
 Subject: [PATCH] Fix compilation for x86_64-efi.

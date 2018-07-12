@@ -1,4 +1,4 @@
-From 6ecaa168ca522c9022545ca52c28233313d54279 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 11 May 2017 08:56:57 +0000
 Subject: [PATCH] Grub not working correctly with btrfs snapshots (bsc#1026511)

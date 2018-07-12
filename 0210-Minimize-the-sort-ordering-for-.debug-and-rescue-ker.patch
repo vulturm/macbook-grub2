@@ -1,4 +1,4 @@
-From 799c61af332124497809ce468f88aa359f7079e7 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 4 Sep 2014 15:52:08 -0400
 Subject: [PATCH] Minimize the sort ordering for .debug and -rescue- kernels.

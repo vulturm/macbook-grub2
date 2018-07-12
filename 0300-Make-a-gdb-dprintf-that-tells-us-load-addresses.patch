@@ -1,4 +1,4 @@
-From 42ae171b4132b72b01d47416db44094341608641 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 25 Jun 2015 15:11:36 -0400
 Subject: [PATCH] Make a "gdb" dprintf that tells us load addresses.

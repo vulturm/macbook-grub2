@@ -1,4 +1,4 @@
-From f92d2a62582a8f5982044a556366ebcd7f7c961d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Tue, 26 Jun 2018 12:44:29 +0200
 Subject: [PATCH] 00_menu_auto_hide: Use a timeout of 60s for menu_show_once,

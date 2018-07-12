@@ -1,4 +1,4 @@
-From 7de678cfab12bfe4ceddc5a32e0bf18f884bfa17 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Tue, 3 Apr 2018 15:42:47 +0200
 Subject: [PATCH] Only attempt to scan different BLS directories on EFI

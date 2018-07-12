@@ -1,4 +1,4 @@
-From 2391d579094cfab65a0fd89a3c617cb3a33fb715 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Tue, 20 Feb 2018 09:57:14 -0800
 Subject: [PATCH] ieee1275: add nvme support within ofpath

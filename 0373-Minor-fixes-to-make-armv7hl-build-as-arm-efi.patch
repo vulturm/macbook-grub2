@@ -1,4 +1,4 @@
-From 2cdd22ab9b7d938249ff6e84ac3b4657b2f43b99 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 26 Jun 2018 17:16:06 -0400
 Subject: [PATCH] Minor fixes to make armv7hl build as arm-efi

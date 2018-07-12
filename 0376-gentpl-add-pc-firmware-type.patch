@@ -1,4 +1,4 @@
-From 2fb1d1f257c3e17639c40a44feaf48824ede7ed9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 11 Jul 2018 13:43:34 -0400
 Subject: [PATCH] gentpl: add 'pc' firmware type

@@ -1,4 +1,4 @@
-From 36e4cdbca69dba054c98eaaa56c6b0fb5003a9b1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Wed, 5 Feb 2014 09:42:42 -0200
 Subject: [PATCH] trim arp packets with abnormal size

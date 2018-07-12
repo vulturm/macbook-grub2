@@ -1,4 +1,4 @@
-From b18ce97c672615bb5ac44883676b37a9ec758d83 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Stefan Fritsch <sf@sfritsch.de>
 Date: Sun, 1 May 2016 14:32:30 +0200
 Subject: [PATCH] Implement checksum verification for gunzip

@@ -1,4 +1,4 @@
-From 061258a05edd7077f3cb15f51bda2823f513d261 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 30 Aug 2017 17:12:04 +0200
 Subject: [PATCH] Regenerate checksum.h with newer unifont.

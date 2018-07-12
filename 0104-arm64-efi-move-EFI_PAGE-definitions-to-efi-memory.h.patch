@@ -1,4 +1,4 @@
-From 083c6e2455dcd4aafb6062d89fd6029dd3adddb6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Thu, 1 Feb 2018 18:18:49 +0000
 Subject: [PATCH] arm64/efi: move EFI_PAGE definitions to efi/memory.h

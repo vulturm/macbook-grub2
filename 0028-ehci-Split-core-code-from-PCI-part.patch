@@ -1,4 +1,4 @@
-From 058df7b5a9cc7aaa9872eaa916b715544a8f9840 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 22:10:26 +0200
 Subject: [PATCH] ehci: Split core  code from PCI part.

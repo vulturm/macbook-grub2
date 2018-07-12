@@ -1,4 +1,4 @@
-From 86e21b75aee82e1cec2087e1d1754677b251d1ce Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 3 Aug 2015 11:46:42 -0400
 Subject: [PATCH] Try to make sure configure.ac and grub-rpm-sort play nice.

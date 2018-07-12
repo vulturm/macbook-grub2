@@ -1,4 +1,4 @@
-From c56e633bdb9d92c5293cee2c72ac346cd34d5ec7 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Tue, 6 Mar 2018 17:11:15 +0100
 Subject: [PATCH] EFI: console: Do not set text-mode until we actually need it

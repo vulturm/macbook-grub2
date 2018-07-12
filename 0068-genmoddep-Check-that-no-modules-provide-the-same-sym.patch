@@ -1,4 +1,4 @@
-From 3732816bc08ef605ed3b6c016ff0ed562829f243 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 14 Aug 2017 14:10:48 +0200
 Subject: [PATCH] genmoddep: Check that no modules provide the same symbol.

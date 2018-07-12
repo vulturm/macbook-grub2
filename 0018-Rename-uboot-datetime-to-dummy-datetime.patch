@@ -1,4 +1,4 @@
-From 9808c3ef956c6472a96790b60cf74f4eaa742010 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Mon, 8 May 2017 19:37:29 +0200
 Subject: [PATCH] Rename uboot/datetime to dummy/datetime.

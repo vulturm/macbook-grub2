@@ -1,4 +1,4 @@
-From 7b54125d8f410b5ac89866823866a160703b80ef Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 11 Jul 2018 13:43:15 -0400
 Subject: [PATCH] gentpl: add 'disable = ' support

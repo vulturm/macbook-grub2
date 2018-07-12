@@ -1,4 +1,4 @@
-From 566a03a623ca5ec07c815683625aecc410dc3095 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Stefan Fritsch <fritsch@genua.de>
 Date: Fri, 19 Jan 2018 14:13:29 +0100
 Subject: [PATCH] ahci: Improve error handling

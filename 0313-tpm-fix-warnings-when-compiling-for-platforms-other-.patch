@@ -1,4 +1,4 @@
-From 79bf745df763b79c6797fbe19e739aa1853530bc Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Marineau <michael.marineau@coreos.com>
 Date: Sun, 21 Aug 2016 18:24:58 -0700
 Subject: [PATCH] tpm: fix warnings when compiling for platforms other than pc

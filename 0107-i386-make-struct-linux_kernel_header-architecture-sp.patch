@@ -1,4 +1,4 @@
-From 7d36709d5e769eb49b41cca709bd64336b47ab4f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Thu, 1 Feb 2018 18:18:52 +0000
 Subject: [PATCH] i386: make struct linux_kernel_header architecture specific

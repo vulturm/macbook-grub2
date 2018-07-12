@@ -1,4 +1,4 @@
-From d4c21cd0f3dedd1d99c0a3acb7c6743138745f22 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 27 Feb 2018 13:55:35 -0500
 Subject: [PATCH] align struct efi_variable better...

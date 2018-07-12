@@ -1,4 +1,4 @@
-From e9729f3100b7ca0576a4b7359f857d0f526df0b5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Dusty Mabe <dusty@dustymabe.com>
 Date: Sat, 18 Jul 2015 15:38:08 +0000
 Subject: [PATCH] No more "Bootable Snapshot" submenu in grub.cfg.

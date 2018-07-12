@@ -1,4 +1,4 @@
-From c22d8b839bd9e609a3fa69cb7a42d0c7d2f71a55 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Jan 2014 16:15:46 -0500
 Subject: [PATCH] Don't print during fdt loading method.

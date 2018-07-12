@@ -1,4 +1,4 @@
-From 38bab91cc61eb9a233c4c735ec733072acbc306d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Jon McCann <william.jon.mccann@gmail.com>
 Date: Wed, 15 May 2013 17:49:45 -0400
 Subject: [PATCH] Don't add '*' to highlighted row

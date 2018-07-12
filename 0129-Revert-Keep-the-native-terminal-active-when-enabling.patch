@@ -1,4 +1,4 @@
-From d73badfd0aa6683212136e8d6ef439070176722b Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: dann frazier <dann.frazier@canonical.com>
 Date: Fri, 2 Mar 2018 10:02:19 -0700
 Subject: [PATCH] Revert "Keep the native terminal active when enabling

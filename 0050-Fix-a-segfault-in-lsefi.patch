@@ -1,4 +1,4 @@
-From e8ab5a1a9e2889eb59d1fa494ba441a53698dcd2 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rob Clark <rclark@redhat.com>
 Date: Wed, 19 Jul 2017 15:47:41 -0400
 Subject: [PATCH] Fix a segfault in lsefi

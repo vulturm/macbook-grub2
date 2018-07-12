@@ -1,4 +1,4 @@
-From 21e499e4636764dcd4ac605e89620bb543819350 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Mark Hamzy <hamzy@us.ibm.com>
 Date: Wed, 28 Mar 2012 14:46:41 -0500
 Subject: [PATCH] Migrate PPC from Yaboot to Grub2

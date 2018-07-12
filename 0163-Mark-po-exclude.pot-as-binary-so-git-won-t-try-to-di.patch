@@ -1,4 +1,4 @@
-From 7097ef3bc5499126f38f6bab06c3ff1cf376ecec Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 22 Jul 2015 11:21:01 -0400
 Subject: [PATCH] Mark po/exclude.pot as binary so git won't try to diff
