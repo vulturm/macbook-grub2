@@ -86,7 +86,7 @@
 %ifarch aarch64 %{arm}
 %global efi_modules " "
 %else
-%global efi_modules " backtrace usb usbserial_common usbserial_pl2303 usbserial_ftdi usbserial_usbdebug "
+%global efi_modules " backtrace chain usb usbserial_common usbserial_pl2303 usbserial_ftdi usbserial_usbdebug "
 %endif
 
 %ifarch aarch64 %{arm}
@@ -339,7 +339,7 @@ done								\
 
 %define do_efi_build_images()					\
 GRUB_MODULES="	all_video boot blscfg btrfs			\\\
-		cat chain configfile				\\\
+		cat configfile					\\\
 		echo efi_netfs efifwsetup efinet ext2		\\\
 		fat font gfxmenu gfxterm gzio			\\\
 		halt hfsplus http iso9660 jpeg			\\\
