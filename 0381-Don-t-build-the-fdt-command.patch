@@ -5,29 +5,25 @@ Subject: [PATCH] Don't build the fdt command.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
- grub-core/Makefile.core.def | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ grub-core/Makefile.core.def | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 9039a6f73a3..785be805c11 100644
+index 9039a6f73a3..a6cb7b9009c 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -1729,12 +1729,12 @@ module = {
+@@ -1729,12 +1729,14 @@ module = {
    efi = loader/efi/linux.c;
  };
  
--module = {
--  name = fdt;
--  arm64 = loader/efi/fdt.c;
--  common = lib/fdt.c;
--  enable = fdt;
--};
-+#module = {
-+#  name = fdt;
-+#  arm64 = loader/efi/fdt.c;
-+#  common = lib/fdt.c;
-+#  enable = fdt;
-+#};
++/*
+ module = {
+   name = fdt;
+   arm64 = loader/efi/fdt.c;
+   common = lib/fdt.c;
+   enable = fdt;
+ };
++*/
  
  module = {
    name = xnu;
