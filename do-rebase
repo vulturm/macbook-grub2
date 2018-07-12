@@ -6,7 +6,7 @@ shopt -qs expand_aliases
 export LC_COLLATE=C
 export LC_ALL=C
 
-format_patch_ops="--no-signature --no-numbered --stat=80 --summary -O.git.diff.order --patience -l0"
+format_patch_ops="--zero-commit --no-signature --no-numbered --stat=80 --summary -O.git.diff.order --patience -l0"
 alias othergit="GIT_DIR=$PWD/.rhboot.git GIT_WORK_TREE=$PWD git"
 alias formatpatch="othergit format-patch $format_patch_ops"
 
