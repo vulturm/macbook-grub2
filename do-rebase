@@ -17,7 +17,7 @@ usage()
 		exec 1>&2
 		retcode=$1
 	fi
-	echo usage: do-rebase [OPTIONS] [--dist RELEASEVER | RELEASEVER ] [GITREPO]
+	echo usage: "do-rebase [OPTIONS] [--dist RELEASEVER | RELEASEVER ] [GITREPO]"
 	echo OPTIONS: --dist=RELEASEVER --repo=REPO --amend --nocommit --nobumpspec
 	exit $retcode
 }
