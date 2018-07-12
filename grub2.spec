@@ -47,7 +47,7 @@ BuildRequires:	pesign >= 0.99-8
 BuildRequires:	ccache
 %endif
 
-ExcludeArch:	s390 s390x
+ExcludeArch:	s390 s390x %{arm}
 Obsoletes:	%{name} <= %{evr}
 
 %if 0%{with_legacy_arch}
