@@ -378,3 +378,4 @@ Patch0377: 0377-Disable-the-reboot-module-on-EFI-builds-it-is-in-ker.patch
 Patch0378: 0378-Disable-multiboot-multiboot2-and-linux16-modules-on-.patch
 Patch0379: 0379-Make-the-linuxefi-module-just-be-the-x86-efi-version.patch
 Patch0380: 0380-Make-efi_netfs-not-duplicate-symbols-from-efinet.patch
+Patch0381: 0381-Don-t-build-the-fdt-command.patch
