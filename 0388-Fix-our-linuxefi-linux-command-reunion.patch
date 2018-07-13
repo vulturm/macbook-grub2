@@ -1,4 +1,4 @@
-From 23dbe2faf748d828fb847769c16cf97895dc31bb Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 12 Jul 2018 19:39:51 -0400
 Subject: [PATCH] Fix our linuxefi/linux command reunion.
