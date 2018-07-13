@@ -1,4 +1,4 @@
-From a0bf57e044141d5807759da2da67a71d2f7f4f42 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 12 Jul 2018 11:00:45 -0400
 Subject: [PATCH] Don't build the fdt command
@@ -14,8 +14,6 @@ grub_fdt_install in xen_boot is not defined
 grub_fdt_load in xen_boot is not defined
 grub_fdt_unload in xen_boot is not defined
 
-Don't build the fdt command separately but *do* build it into the arm64 kernel.
-
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
  grub-core/Makefile.core.def | 15 ++++++++++++---
@@ -23,6 +21,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  grub-core/loader/efi/fdt.c  | 22 ++++++++++++++++++++++
  include/grub/efi/efi.h      |  4 ----
  4 files changed, 34 insertions(+), 50 deletions(-)
+ delete mode 100644 grub-core/kern/efi/fdt.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
 index 9039a6f73a3..ff6fa4bd000 100644

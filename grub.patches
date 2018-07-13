@@ -379,3 +379,11 @@ Patch0378: 0378-Disable-multiboot-multiboot2-and-linux16-modules-on-.patch
 Patch0379: 0379-Make-the-linuxefi-module-just-be-the-x86-efi-version.patch
 Patch0380: 0380-Make-efi_netfs-not-duplicate-symbols-from-efinet.patch
 Patch0381: 0381-Don-t-build-the-fdt-command.patch
+Patch0382: 0382-blscfg-remove-unused-typedef.patch
+Patch0383: 0383-blscfg-don-t-dynamically-allocate-default_blsdir.patch
+Patch0384: 0384-blscfg-sort-BLS-entries-by-version-field.patch
+Patch0385: 0385-blscfg-remove-NULL-guards-around-grub_free.patch
+Patch0386: 0386-blscfg-fix-filename-in-no-linux-key-error.patch
+Patch0387: 0387-blscfg-don-t-leak-bls_entry.filename.patch
+Patch0388: 0388-blscfg-fix-compilation-on-EFI-and-EMU.patch
+Patch0389: 0389-Fix-our-linuxefi-linux-command-reunion.patch

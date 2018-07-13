@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	40%{?dist}
+Release:	41%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -457,6 +457,9 @@ fi
 %endif
 
 %changelog
+* Thu Jul 12 2018 Peter Jones <pjones@redhat.com> - 2.02-41
+- Fix our linuxefi/linux command reunion.
+
 * Wed Jul 11 2018 Peter Jones <pjones@redhat.com> - 2.02-40
 - Port several fixes from the F28 tree and a WIP tree.
 
