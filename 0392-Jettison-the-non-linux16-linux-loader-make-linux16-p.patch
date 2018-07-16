@@ -1,0 +1,75 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Fri, 13 Jul 2018 16:15:27 -0400
+Subject: [PATCH] Jettison the non-linux16 "linux" loader; make linux16 provide
+ the command.
+
+---
+ grub-core/Makefile.core.def      |  9 +--------
+ grub-core/loader/i386/pc/linux.c | 10 +++++++++-
+ 2 files changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 4168097732b..f96b1933eea 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1650,13 +1650,6 @@ module = {
+   enable = i386_pc;
+ };
+ 
+-
+-module = {
+-  name = linux16;
+-  common = loader/i386/pc/linux.c;
+-  enable = i386_pc;
+-};
+-
+ module = {
+   name = ntldr;
+   i386_pc = loader/i386/pc/ntldr.c;
+@@ -1715,7 +1708,7 @@ module = {
+ 
+ module = {
+   name = linux;
+-  i386_pc = loader/i386/linux.c;
++  i386_pc = loader/i386/pc/linux.c;
+   x86_64_efi = loader/i386/efi/linux.c;
+   i386_efi = loader/i386/efi/linux.c;
+   xen = loader/i386/xen.c;
+diff --git a/grub-core/loader/i386/pc/linux.c b/grub-core/loader/i386/pc/linux.c
+index 1e369afcbad..cfff25c21b5 100644
+--- a/grub-core/loader/i386/pc/linux.c
++++ b/grub-core/loader/i386/pc/linux.c
+@@ -481,7 +481,7 @@ grub_cmd_initrd (grub_command_t cmd __attribute__ ((unused)),
+   return grub_errno;
+ }
+ 
+-static grub_command_t cmd_linux, cmd_initrd;
++static grub_command_t cmd_linux, cmd_linux16, cmd_initrd, cmd_initrd16;
+ 
+ GRUB_MOD_INIT(linux16)
+ {
+@@ -489,9 +489,15 @@ GRUB_MOD_INIT(linux16)
+     return;
+ 
+   cmd_linux =
++    grub_register_command ("linux", grub_cmd_linux,
++			   0, N_("Load Linux."));
++  cmd_linux16 =
+     grub_register_command ("linux16", grub_cmd_linux,
+ 			   0, N_("Load Linux."));
+   cmd_initrd =
++    grub_register_command ("initrd", grub_cmd_initrd,
++			   0, N_("Load initrd."));
++  cmd_initrd16 =
+     grub_register_command ("initrd16", grub_cmd_initrd,
+ 			   0, N_("Load initrd."));
+   my_mod = mod;
+@@ -503,5 +509,7 @@ GRUB_MOD_FINI(linux16)
+     return;
+ 
+   grub_unregister_command (cmd_linux);
++  grub_unregister_command (cmd_linux16);
+   grub_unregister_command (cmd_initrd);
++  grub_unregister_command (cmd_initrd16);
+ }

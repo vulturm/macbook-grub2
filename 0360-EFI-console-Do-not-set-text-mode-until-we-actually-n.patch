@@ -12,7 +12,7 @@ Signed-off-by: Hans de Goede <hdegoede@redhat.com>
  1 file changed, 44 insertions(+), 21 deletions(-)
 
 diff --git a/grub-core/term/efi/console.c b/grub-core/term/efi/console.c
-index 02f64ea7441..6772feaa2f9 100644
+index 4840cc59d3f..051633d71e9 100644
 --- a/grub-core/term/efi/console.c
 +++ b/grub-core/term/efi/console.c
 @@ -24,6 +24,11 @@
@@ -44,7 +44,7 @@ index 02f64ea7441..6772feaa2f9 100644
      return;
  
    o = grub_efi_system_table->con_out;
-@@ -220,14 +225,15 @@ grub_console_getkey (struct grub_term_input *term)
+@@ -223,14 +228,15 @@ grub_console_getkey (struct grub_term_input *term)
  }
  
  static struct grub_term_coordinate
@@ -63,7 +63,7 @@ index 02f64ea7441..6772feaa2f9 100644
      {
        /* Why does this fail?  */
        columns = 80;
-@@ -242,7 +248,7 @@ grub_console_getxy (struct grub_term_output *term __attribute__ ((unused)))
+@@ -245,7 +251,7 @@ grub_console_getxy (struct grub_term_output *term __attribute__ ((unused)))
  {
    grub_efi_simple_text_output_interface_t *o;
  
@@ -72,7 +72,7 @@ index 02f64ea7441..6772feaa2f9 100644
      return (struct grub_term_coordinate) { 0, 0 };
  
    o = grub_efi_system_table->con_out;
-@@ -250,12 +256,12 @@ grub_console_getxy (struct grub_term_output *term __attribute__ ((unused)))
+@@ -253,12 +259,12 @@ grub_console_getxy (struct grub_term_output *term __attribute__ ((unused)))
  }
  
  static void
@@ -87,7 +87,7 @@ index 02f64ea7441..6772feaa2f9 100644
      return;
  
    o = grub_efi_system_table->con_out;
-@@ -268,7 +274,7 @@ grub_console_cls (struct grub_term_output *term __attribute__ ((unused)))
+@@ -271,7 +277,7 @@ grub_console_cls (struct grub_term_output *term __attribute__ ((unused)))
    grub_efi_simple_text_output_interface_t *o;
    grub_efi_int32_t orig_attr;
  
@@ -96,7 +96,7 @@ index 02f64ea7441..6772feaa2f9 100644
      return;
  
    o = grub_efi_system_table->con_out;
-@@ -288,6 +294,12 @@ grub_console_setcolorstate (struct grub_term_output *term
+@@ -291,6 +297,12 @@ grub_console_setcolorstate (struct grub_term_output *term
    if (grub_efi_is_finished)
      return;
  
@@ -109,7 +109,7 @@ index 02f64ea7441..6772feaa2f9 100644
    o = grub_efi_system_table->con_out;
  
    switch (state) {
-@@ -312,7 +324,7 @@ grub_console_setcursor (struct grub_term_output *term __attribute__ ((unused)),
+@@ -315,7 +327,7 @@ grub_console_setcursor (struct grub_term_output *term __attribute__ ((unused)),
  {
    grub_efi_simple_text_output_interface_t *o;
  
@@ -118,7 +118,7 @@ index 02f64ea7441..6772feaa2f9 100644
      return;
  
    o = grub_efi_system_table->con_out;
-@@ -320,18 +332,38 @@ grub_console_setcursor (struct grub_term_output *term __attribute__ ((unused)),
+@@ -323,18 +335,38 @@ grub_console_setcursor (struct grub_term_output *term __attribute__ ((unused)),
  }
  
  static grub_err_t
@@ -159,7 +159,7 @@ index 02f64ea7441..6772feaa2f9 100644
    return 0;
  }
  
-@@ -345,7 +377,6 @@ static struct grub_term_input grub_console_term_input =
+@@ -348,7 +380,6 @@ static struct grub_term_input grub_console_term_input =
  static struct grub_term_output grub_console_term_output =
    {
      .name = "console",
@@ -167,7 +167,7 @@ index 02f64ea7441..6772feaa2f9 100644
      .fini = grub_efi_console_output_fini,
      .putchar = grub_console_putchar,
      .getwh = grub_console_getwh,
-@@ -361,14 +392,6 @@ static struct grub_term_output grub_console_term_output =
+@@ -364,14 +395,6 @@ static struct grub_term_output grub_console_term_output =
  void
  grub_console_init (void)
  {

@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	42%{?dist}
+Release:	43%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -457,6 +457,9 @@ fi
 %endif
 
 %changelog
+* Mon Jul 16 2018 pjones <pjones@redhat.com> - 2.02-43
+- Rework SB patches and 10_linux.in changes
+
 * Fri Jul 13 2018 Peter Jones <pjones@redhat.com> - 2.02-42
 - Revert broken moduledir fix *again*.
 
