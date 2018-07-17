@@ -408,9 +408,6 @@ cd ..								\
 
 %define do_efi_install()					\
 cd grub-%{1}-%{tarversion}					\
-install -m 700 -d $RPM_BUILD_ROOT%{efi_esp_dir}/		\
-install -m 700 -d $RPM_BUILD_ROOT%{efi_esp_dir}/loader/entries \
-install -m 700 -d $RPM_BUILD_ROOT/boot/grub2/			\
 make DESTDIR=$RPM_BUILD_ROOT install				\
 if [ -f $RPM_BUILD_ROOT%{_infodir}/grub.info ]; then		\
 	rm -f $RPM_BUILD_ROOT%{_infodir}/grub.info		\
@@ -453,7 +450,6 @@ if [ %{3} -eq 0 ]; then						\
 		${RPM_BUILD_ROOT}/boot/%{name}/grubenv create	\
 fi								\
 cd ..								\
-install -d -m 0755 ${RPM_BUILD_ROOT}/boot/loader/entries	\
 %{nil}
 
 %define do_common_install()					\
@@ -466,12 +462,12 @@ cp -a $RPM_BUILD_ROOT%{_datarootdir}/locale/en\@quot		\\\
 cp docs/grub.info $RPM_BUILD_ROOT%{_infodir}/%{name}.info	\
 cp docs/grub-dev.info						\\\
 	$RPM_BUILD_ROOT%{_infodir}/%{name}-dev.info		\
-# Ghost config file						\
 install -d -m 0700 ${RPM_BUILD_ROOT}%{efi_esp_dir}/		\
 install -d -m 0700 ${RPM_BUILD_ROOT}/boot/grub2/		\
-install -d -m 0755 ${RPM_BUILD_ROOT}/boot/%{name}/themes/system	\
-install -d -m 0755 ${RPM_BUILD_ROOT}%{_sysconfdir}/default	\
-install -d -m 0755 ${RPM_BUILD_ROOT}%{_sysconfdir}/sysconfig	\
+install -d -m 0700 ${RPM_BUILD_ROOT}/boot/loader/entries	\
+install -d -m 0700 ${RPM_BUILD_ROOT}/boot/%{name}/themes/system	\
+install -d -m 0700 ${RPM_BUILD_ROOT}%{_sysconfdir}/default	\
+install -d -m 0700 ${RPM_BUILD_ROOT}%{_sysconfdir}/sysconfig	\
 touch ${RPM_BUILD_ROOT}%{_sysconfdir}/default/grub		\
 ln -sf ../default/grub						\\\
 	${RPM_BUILD_ROOT}%{_sysconfdir}/sysconfig/grub		\
@@ -504,8 +500,7 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 %config(noreplace) %{_sysconfdir}/%{name}-efi.cfg		\
 %attr(0700,root,root)%{efi_esp_dir}/%{2}			\
 %dir %attr(0700,root,root)%{efi_esp_dir}/fonts			\
-%dir %attr(0700,root,root)%{efi_esp_dir}/loader			\
-%dir %attr(0700,root,root)%{efi_esp_dir}/loader/entries		\
+%dir %attr(0700,root,root)/boot/loader/entries			\
 %ghost %config(noreplace) %attr(0700,root,root)%{efi_esp_dir}/grub.cfg	\
 /boot/grub2/grubenv						\
 %ghost %config(noreplace) %attr(0700,root,root)%{efi_esp_dir}/grubenv	\
