@@ -1,0 +1,55 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Tue, 26 Jun 2018 17:16:06 -0400
+Subject: [PATCH] Minor fixes to make armv7hl build as arm-efi
+
+- /remove/ the code to use use softfloat unconditionally on arm
+  (I can't get our arm bins to build with it for whatever reason...)
+- Fix one type error
+- build the secure boot loader code on arm
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ configure.ac                 | 2 +-
+ grub-core/Makefile.core.def  | 1 +
+ grub-core/loader/efi/linux.c | 2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 5f47a9265f3..b3af931e958 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -854,7 +854,7 @@ fi
+ # that floats are a good fit to run instead of what's written in the code.
+ # Given that floating point unit is disabled (if present to begin with)
+ # when GRUB is running which may result in various hard crashes.
+-if test x"$platform" != xemu ; then
++if test x"$platform" != xemu -a "x$target_cpu" != xarm ; then
+   AC_CACHE_CHECK([for options to get soft-float], grub_cv_target_cc_soft_float, [
+     grub_cv_target_cc_soft_float=no
+     if test "x$target_cpu" = xarm64; then
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 8e542acd589..4041472fe68 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1709,6 +1709,7 @@ module = {
+   sparc64_ieee1275 = loader/sparc64/ieee1275/linux.c;
+   ia64_efi = loader/ia64/efi/linux.c;
+   arm = loader/arm/linux.c;
++  arm = loader/efi/linux.c;
+   arm64 = loader/arm64/linux.c;
+   arm64 = loader/efi/linux.c;
+   emu = loader/emu/linux.c;
+diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
+index 7fe7201a388..8453b5c8017 100644
+--- a/grub-core/loader/efi/linux.c
++++ b/grub-core/loader/efi/linux.c
+@@ -50,7 +50,7 @@ grub_linuxefi_secure_validate (void *data, grub_uint32_t size)
+ 
+   grub_dprintf ("secureboot", "Asking shim to verify kernel signature\n");
+   status = shim_lock->verify (data, size);
+-  grub_dprintf ("secureboot", "shim_lock->verify(): %ld\n", status);
++  grub_dprintf ("secureboot", "shim_lock->verify(): %ld\n", (long int)status);
+   if (status == GRUB_EFI_SUCCESS)
+     {
+       grub_dprintf ("secureboot", "Kernel signature verification passed\n");
