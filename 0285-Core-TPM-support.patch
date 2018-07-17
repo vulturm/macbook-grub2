@@ -23,7 +23,7 @@ will measure all modules as they're loaded.
  create mode 100644 include/grub/tpm.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 242bf178d5c..e03835b9dc1 100644
+index 17e758543a5..40940d33a6d 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -131,6 +131,7 @@ kernel = {

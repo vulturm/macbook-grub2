@@ -12,15 +12,15 @@ GRUB2 already has a blscfg modle that can parse the config snippets using
 the bls_import command, change it to blscfg and improve the BLS support.
 ---
  grub-core/Makefile.core.def  |   4 +-
- grub-core/commands/blscfg.c  | 788 ++++++++++++++++++++++++++++++++++++++++---
+ grub-core/commands/blscfg.c  | 796 ++++++++++++++++++++++++++++++++++++++++---
  grub-core/commands/loadenv.c |  77 +----
  grub-core/commands/loadenv.h |  93 +++++
  include/grub/compiler.h      |   2 +
- 5 files changed, 832 insertions(+), 132 deletions(-)
+ 5 files changed, 840 insertions(+), 132 deletions(-)
  create mode 100644 grub-core/commands/loadenv.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 9983d5fa6ad..5cbebe50661 100644
+index 86c8e38e880..27ee5117b79 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -129,6 +129,7 @@ kernel = {
@@ -42,7 +42,7 @@ index 9983d5fa6ad..5cbebe50661 100644
  };
  
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 4274aca5a9d..9ab45631465 100644
+index 4274aca5a9d..86796c8cd83 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -30,32 +30,405 @@
@@ -920,7 +920,11 @@ index 4274aca5a9d..9ab45631465 100644
  
  finish:
    if (dev)
-@@ -187,8 +864,9 @@ static grub_extcmd_t cmd;
+@@ -184,18 +861,27 @@ finish:
+ }
+ 
+ static grub_extcmd_t cmd;
++static grub_extcmd_t oldcmd;
  
  GRUB_MOD_INIT(bls)
  {
@@ -932,6 +936,20 @@ index 4274aca5a9d..9ab45631465 100644
  			      0,
  			      NULL,
  			      N_("Import Boot Loader Specification snippets."),
+ 			      NULL);
++  oldcmd = grub_register_extcmd ("bls_import",
++				 grub_cmd_blscfg,
++				 0,
++				 NULL,
++				 N_("Import Boot Loader Specification snippets."),
++				 NULL);
+ }
+ 
+ GRUB_MOD_FINI(bls)
+ {
+   grub_unregister_extcmd (cmd);
++  grub_unregister_extcmd (oldcmd);
+ }
 diff --git a/grub-core/commands/loadenv.c b/grub-core/commands/loadenv.c
 index acd93d123ed..91c99456091 100644
 --- a/grub-core/commands/loadenv.c

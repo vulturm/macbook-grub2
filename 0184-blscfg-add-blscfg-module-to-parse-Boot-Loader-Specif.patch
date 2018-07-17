@@ -21,7 +21,7 @@ Signed-off-by: Peter Jones <grub2-owner@fedoraproject.org>
  create mode 100644 grub-core/commands/blscfg.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 6b652231ecc..7ed07b3e2fd 100644
+index 5c06c7b845c..bd529ee8c45 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -769,6 +769,14 @@ module = {

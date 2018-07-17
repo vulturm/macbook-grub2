@@ -13,7 +13,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  3 files changed, 88 insertions(+), 37 deletions(-)
 
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index dbf63e20ed8..7fe7201a388 100644
+index 5c2c614c380..8453b5c8017 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
 @@ -66,12 +66,17 @@ grub_linuxefi_secure_validate (void *data, grub_uint32_t size)

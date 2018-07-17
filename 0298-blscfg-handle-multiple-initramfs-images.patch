@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 44 insertions(+), 10 deletions(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index c0973ff83ea..1e5972422d6 100644
+index e775c6b8794..6ab85df6b3a 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -587,6 +587,7 @@ static void create_entry (struct bls_entry *entry, const char *cfgfile)

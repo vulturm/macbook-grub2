@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 4041472fe68..67a2f997dcb 100644
+index b49ada8eb4f..b5a4e991f81 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -192,6 +192,7 @@ kernel = {

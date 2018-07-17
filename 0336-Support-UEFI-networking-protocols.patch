@@ -53,10 +53,10 @@ V3:
  create mode 100644 include/grub/net/efi.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index e03835b9dc1..8e542acd589 100644
+index 40940d33a6d..b49ada8eb4f 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -2181,6 +2181,18 @@ module = {
+@@ -2180,6 +2180,18 @@ module = {
    common = hook/datehook.c;
  };
  
@@ -75,7 +75,7 @@ index e03835b9dc1..8e542acd589 100644
  module = {
    name = net;
    common = net/net.c;
-@@ -2195,6 +2207,12 @@ module = {
+@@ -2194,6 +2206,12 @@ module = {
    common = net/arp.c;
    common = net/netbuff.c;
    common = net/url.c;

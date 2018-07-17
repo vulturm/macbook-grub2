@@ -13,7 +13,7 @@ Signed-off-by: Will Thompson <wjt@endlessm.com>
  1 file changed, 6 insertions(+), 17 deletions(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 84714f0e534..f9a5b2d5afa 100644
+index 9c928dda470..bd78559ef68 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -600,23 +600,12 @@ static void create_entry (struct bls_entry *entry, const char *cfgfile)

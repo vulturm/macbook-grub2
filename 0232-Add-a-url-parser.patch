@@ -20,10 +20,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  create mode 100644 include/grub/net/url.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 7ed07b3e2fd..8a0193fa5e3 100644
+index bd529ee8c45..6e7c4a4999d 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -2185,6 +2185,7 @@ module = {
+@@ -2184,6 +2184,7 @@ module = {
    common = net/ethernet.c;
    common = net/arp.c;
    common = net/netbuff.c;

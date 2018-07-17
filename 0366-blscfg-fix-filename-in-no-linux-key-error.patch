@@ -15,7 +15,7 @@ Signed-off-by: Will Thompson <wjt@endlessm.com>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index f9a5b2d5afa..077ca5dfbe6 100644
+index bd78559ef68..a45f40fe67e 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -514,7 +514,7 @@ static char **bls_make_list (struct bls_entry *entry, const char *key, int *num)

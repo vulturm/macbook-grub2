@@ -9,7 +9,7 @@ Signed-off-by: Will Thompson <wjt@endlessm.com>
  1 file changed, 3 insertions(+), 6 deletions(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 243fcda57f9..1d0e6ceaf7d 100644
+index 82fb6cdd182..b61dddb7f43 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -623,7 +623,7 @@ static int find_entry (const char *filename,

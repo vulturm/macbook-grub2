@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 3 insertions(+), 11 deletions(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index f4283708e21..6f9f8e773c5 100644
+index 53676576ba5..c6addc4dc12 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -43,14 +43,6 @@ GRUB_MOD_LICENSE ("GPLv3+");

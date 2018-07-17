@@ -12,7 +12,7 @@ Signed-off-by: Will Thompson <wjt@endlessm.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 077ca5dfbe6..3339d62d541 100644
+index a45f40fe67e..11a356de81a 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -166,8 +166,8 @@ static void bls_free_entry(struct bls_entry *entry)

@@ -19,7 +19,7 @@ Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
  2 files changed, 38 insertions(+), 14 deletions(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index cd5c29fdf74..11fe6e2c29f 100644
+index 831cdcaccdf..70939a81826 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -381,9 +381,14 @@ static int bls_cmp(const void *p0, const void *p1, void *state UNUSED)

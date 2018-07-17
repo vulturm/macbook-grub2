@@ -38,7 +38,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  create mode 100644 include/grub/sparc64/linux.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 622381f5208..52911374be5 100644
+index 7a18bf28c7c..c16907b5f91 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -195,6 +195,7 @@ kernel = {

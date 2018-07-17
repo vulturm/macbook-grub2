@@ -20,7 +20,7 @@ Signed-off-by: Will Thompson <wjt@endlessm.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 3339d62d541..f4283708e21 100644
+index 11a356de81a..53676576ba5 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -843,7 +843,7 @@ grub_cmd_blscfg (grub_extcmd_context_t ctxt UNUSED,

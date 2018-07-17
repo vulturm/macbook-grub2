@@ -14,7 +14,7 @@ Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
  2 files changed, 37 insertions(+), 10 deletions(-)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 5cbebe50661..5c5bdc32275 100644
+index 27ee5117b79..3ff206bf6cc 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -778,6 +778,7 @@ module = {
@@ -26,7 +26,7 @@ index 5cbebe50661..5c5bdc32275 100644
  
  module = {
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 9ab45631465..e5617c3bc6c 100644
+index 86796c8cd83..e0b65534af4 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -37,7 +37,12 @@ GRUB_MOD_LICENSE ("GPLv3+");
@@ -144,21 +144,21 @@ index 9ab45631465..e5617c3bc6c 100644
    grub_dprintf ("blscfg", "scanning %s\n", GRUB_BLS_CONFIG_PATH);
    r = fs->dir (dev, "/", find_entry, &info);
  #endif
-@@ -862,7 +888,7 @@ finish:
- 
+@@ -863,7 +889,7 @@ finish:
  static grub_extcmd_t cmd;
+ static grub_extcmd_t oldcmd;
  
 -GRUB_MOD_INIT(bls)
 +GRUB_MOD_INIT(blscfg)
  {
    grub_dprintf("blscfg", "%s got here\n", __func__);
    cmd = grub_register_extcmd ("blscfg",
-@@ -873,7 +899,7 @@ GRUB_MOD_INIT(bls)
- 			      NULL);
+@@ -880,7 +906,7 @@ GRUB_MOD_INIT(bls)
+ 				 NULL);
  }
  
 -GRUB_MOD_FINI(bls)
 +GRUB_MOD_FINI(blscfg)
  {
    grub_unregister_extcmd (cmd);
- }
+   grub_unregister_extcmd (oldcmd);

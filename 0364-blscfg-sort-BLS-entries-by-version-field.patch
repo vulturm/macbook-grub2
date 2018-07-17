@@ -26,7 +26,7 @@ Signed-off-by: Will Thompson <wjt@endlessm.com>
  1 file changed, 16 insertions(+)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 1d0e6ceaf7d..84714f0e534 100644
+index b61dddb7f43..9c928dda470 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -327,10 +327,26 @@ finish:

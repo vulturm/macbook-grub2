@@ -18,7 +18,7 @@ Signed-off-by: Will Thompson <wjt@endlessm.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 5fae7db10f9..e823233cc67 100644
+index 83e71aeb844..f96b1933eea 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -781,6 +781,7 @@ module = {

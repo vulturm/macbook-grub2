@@ -24,7 +24,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  delete mode 100644 grub-core/kern/efi/fdt.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 5372d88f77e..5fae7db10f9 100644
+index 8a967f42ef9..83e71aeb844 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -242,10 +242,8 @@ kernel = {
@@ -56,9 +56,9 @@ index 5372d88f77e..5fae7db10f9 100644
  
  module = {
    name = linux;
-@@ -1716,7 +1720,9 @@ module = {
+@@ -1714,7 +1718,9 @@ module = {
+   arm = loader/arm/linux.c;
    arm64 = loader/arm64/linux.c;
-   arm64 = loader/efi/linux.c;
    emu = loader/emu/linux.c;
 +
    fdt = lib/fdt.c;
@@ -66,7 +66,7 @@ index 5372d88f77e..5fae7db10f9 100644
  
    common = loader/linux.c;
    common = lib/cmdline.c;
-@@ -1724,12 +1730,14 @@ module = {
+@@ -1722,12 +1728,14 @@ module = {
    efi = loader/efi/linux.c;
  };
  
@@ -81,7 +81,7 @@ index 5372d88f77e..5fae7db10f9 100644
  
  module = {
    name = xnu;
-@@ -1790,7 +1798,8 @@ module = {
+@@ -1788,7 +1796,8 @@ module = {
    i386_coreboot = lib/LzmaDec.c;
    enable = i386_pc;
    enable = i386_coreboot;

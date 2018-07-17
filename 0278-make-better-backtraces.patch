@@ -37,7 +37,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  delete mode 100644 grub-core/lib/i386/backtrace.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index ac3af772572..242bf178d5c 100644
+index e07d769d896..17e758543a5 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -130,6 +130,12 @@ kernel = {
@@ -63,7 +63,7 @@ index ac3af772572..242bf178d5c 100644
    i386 = kern/i386/dl.c;
    i386_xen = kern/i386/dl.c;
  
-@@ -2277,13 +2280,11 @@ module = {
+@@ -2276,13 +2279,11 @@ module = {
  
  module = {
    name = backtrace;

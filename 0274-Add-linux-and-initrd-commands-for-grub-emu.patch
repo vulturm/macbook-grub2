@@ -18,10 +18,10 @@ to the kexec command line tool, to allow booting the selected menu entry.
  create mode 100644 grub-core/loader/emu/linux.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 5c5bdc32275..ac3af772572 100644
+index 3ff206bf6cc..e07d769d896 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -1710,7 +1710,6 @@ module = {
+@@ -1709,7 +1709,6 @@ module = {
  
    common = loader/linux.c;
    common = lib/cmdline.c;

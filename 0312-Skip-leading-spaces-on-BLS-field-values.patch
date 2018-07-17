@@ -38,7 +38,7 @@ Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 111972d5f67..cd5c29fdf74 100644
+index fb08d8e4c12..831cdcaccdf 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -448,7 +448,11 @@ static int read_entry (

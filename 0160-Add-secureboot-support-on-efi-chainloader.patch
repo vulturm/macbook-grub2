@@ -1173,7 +1173,7 @@ index adc85636633..af2189619a3 100644
  
    return grub_errno;
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index aea378adf5c..dbf63e20ed8 100644
+index aea378adf5c..5c2c614c380 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
 @@ -33,21 +33,34 @@ struct grub_efi_shim_lock
@@ -1202,7 +1202,7 @@ index aea378adf5c..dbf63e20ed8 100644
 -    return 1;
 +  grub_dprintf ("secureboot", "Asking shim to verify kernel signature\n");
 +  status = shim_lock->verify (data, size);
-+  grub_dprintf ("secureboot", "shim_lock->verify(): %ld\n", status);
++  grub_dprintf ("secureboot", "shim_lock->verify(): %ld\n", (long int)status);
 +  if (status == GRUB_EFI_SUCCESS)
 +    {
 +      grub_dprintf ("secureboot", "Kernel signature verification passed\n");

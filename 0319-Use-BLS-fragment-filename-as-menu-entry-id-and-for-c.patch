@@ -13,7 +13,7 @@ Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
  1 file changed, 12 insertions(+), 50 deletions(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index 11fe6e2c29f..23d15adfadc 100644
+index 70939a81826..cd8659384e4 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -70,6 +70,7 @@ struct bls_entry
