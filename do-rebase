@@ -139,6 +139,8 @@ elif othergit remote show -n rhboot | grep -q "URL: github$" ; then
 		echo "Could not add remote: rhboot" 1>&2
 		exit 1
 	fi
+else
+	othergit remote set-url rhboot ${gitrepo}
 fi
 
 othergit fetch rhboot
