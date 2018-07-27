@@ -278,14 +278,18 @@ git init							\
 echo '![[:digit:]][[:digit:]]_*.in' > util/grub.d/.gitignore	\
 echo '!*.[[:digit:]]' > util/.gitignore				\
 echo '!config.h' > include/grub/emu/.gitignore			\
-patch -p1 < %{SOURCE10}						\
-PYTHON=python3 ./autogen.sh					\
 git config user.email "%{name}-owner@fedoraproject.org"		\
 git config user.name "Fedora Ninjas"				\
 git config gc.auto 0						\
+rm -f configure							\
 git add .							\
 git commit -a -q -m "%{tarversion} baseline."			\
 git am %%{patches} </dev/null					\
+autoreconf -vi							\
+git add .							\
+git commit -a -q -m "autoreconf"				\
+autoconf							\
+PYTHON=python3 ./autogen.sh					\
 git config --unset user.email					\
 git config --unset user.name					\
 %{nil}

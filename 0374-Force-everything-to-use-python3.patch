@@ -1,4 +1,4 @@
-From b5c1a6068757af5b45297f7a981677681a534c2e Mon Sep 17 00:00:00 2001
+0rom 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 10 Jul 2018 16:54:02 -0400
 Subject: [PATCH] Force everything to use python3
@@ -13,10 +13,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/conf/Makefile.common b/conf/Makefile.common
-index d2fedeaa3a5..3d21ed54031 100644
+index c4d72cd96e1..657253d5e46 100644
 --- a/conf/Makefile.common
 +++ b/conf/Makefile.common
-@@ -128,11 +128,11 @@ BUILT_SOURCES =
+@@ -129,11 +129,11 @@ BUILT_SOURCES =
  
  .PRECIOUS: $(top_srcdir)/Makefile.util.am
  $(top_srcdir)/Makefile.util.am: $(top_srcdir)/gentpl.py $(top_srcdir)/Makefile.util.def $(top_srcdir)/Makefile.utilgcry.def
@@ -31,7 +31,7 @@ index d2fedeaa3a5..3d21ed54031 100644
 +	python3 $^ > $@.new || (rm -f $@.new; exit 1)
  	mv $@.new $@
 diff --git a/gentpl.py b/gentpl.py
-index bf8439fa743..6ab9eb3af71 100644
+index baac6a2af69..6409736e81c 100644
 --- a/gentpl.py
 +++ b/gentpl.py
 @@ -1,4 +1,4 @@
@@ -40,4 +40,3 @@ index bf8439fa743..6ab9eb3af71 100644
  #  GRUB  --  GRand Unified Bootloader
  #  Copyright (C) 2010,2011,2012,2013  Free Software Foundation, Inc.
  #
-

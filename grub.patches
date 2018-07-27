@@ -370,3 +370,5 @@ Patch0369: 0369-Add-loadenv-to-blscfg-and-loadenv-source-file-list.patch
 Patch0370: 0370-blscfg-Get-rid-of-the-linuxefi-linux16-linux-distinc.patch
 Patch0371: 0371-grub-switch-to-blscfg-Only-fix-boot-prefix-for-non-g.patch
 Patch0372: 0372-Have-another-stab-at-fixing-fdt-build-issues.patch
+Patch0373: 0373-autogen-don-t-run-autoreconf-in-the-topdir.patch
+Patch0374: 0374-Force-everything-to-use-python3.patch
