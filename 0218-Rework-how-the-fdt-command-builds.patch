@@ -1,0 +1,379 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Thu, 12 Jul 2018 11:00:45 -0400
+Subject: [PATCH] Rework how the fdt command builds.
+
+Trying to avoid all variants of:
+cat syminfo.lst | sort | gawk -f ../../grub-core/genmoddep.awk > moddep.lst || (rm -f moddep.lst; exit 1)
+grub_fdt_install in linux is not defined
+grub_fdt_load in linux is not defined
+grub_fdt_unload in linux is not defined
+grub_fdt_install in xen_boot is not defined
+grub_fdt_load in xen_boot is not defined
+grub_fdt_unload in xen_boot is not defined
+
+This is an egregious hack until I can figure out how linking this thing is
+supposed to work.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ grub-core/Makefile.core.def       | 10 ++++-----
+ grub-core/bus/fdt.c               |  6 ++++++
+ grub-core/kern/efi/fdt.c          | 43 ---------------------------------------
+ grub-core/lib/fdt.c               | 29 +++++++++++++++++++++-----
+ grub-core/loader/arm/linux.c      |  2 ++
+ grub-core/loader/arm64/linux.c    |  4 ++++
+ grub-core/loader/arm64/xen_boot.c |  3 +++
+ grub-core/loader/efi/fdt.c        | 27 ++++++++++++++++++++++++
+ include/grub/fdt.h                | 16 ---------------
+ 9 files changed, 70 insertions(+), 70 deletions(-)
+ delete mode 100644 grub-core/kern/efi/fdt.c
+
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index b89104f979e..b0d30a9bfee 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -166,7 +166,6 @@ kernel = {
+   arm_coreboot = kern/arm/coreboot/init.c;
+   arm_coreboot = kern/arm/coreboot/timer.c;
+   arm_coreboot = kern/arm/coreboot/coreboot.S;
+-  arm_coreboot = lib/fdt.c;
+   arm_coreboot = bus/fdt.c;
+   arm_coreboot = term/ps2.c;
+   arm_coreboot = term/arm/pl050.c;
+@@ -240,10 +239,9 @@ kernel = {
+   ia64_efi = kern/ia64/cache.c;
+ 
+   arm_efi = kern/arm/efi/init.c;
+-  arm_efi = kern/efi/fdt.c;
++  arm_efi = kern/arm/efi/misc.c;
+ 
+   arm64_efi = kern/arm64/efi/init.c;
+-  arm64_efi = kern/efi/fdt.c;
+ 
+   i386_pc = kern/i386/pc/init.c;
+   i386_pc = kern/i386/pc/mmap.c;
+@@ -1715,7 +1713,6 @@ module = {
+   arm_uboot = loader/arm/linux.c;
+   arm64 = loader/arm64/linux.c;
+   emu = loader/emu/linux.c;
+-  fdt = lib/fdt.c;
+ 
+   common = loader/linux.c;
+   common = lib/cmdline.c;
+@@ -1725,7 +1722,7 @@ module = {
+ 
+ module = {
+   name = fdt;
+-  efi = loader/efi/fdt.c;
++  arm64 = loader/efi/fdt.c;
+   common = lib/fdt.c;
+   enable = fdt;
+ };
+@@ -1789,7 +1786,8 @@ module = {
+   i386_coreboot = lib/LzmaDec.c;
+   enable = i386_pc;
+   enable = i386_coreboot;
+-  enable = efi;
++  enable = i386_efi;
++  enable = x86_64_efi;
+ };
+ 
+ module = {
+diff --git a/grub-core/bus/fdt.c b/grub-core/bus/fdt.c
+index 135da497ba6..4d1914d2c28 100644
+--- a/grub-core/bus/fdt.c
++++ b/grub-core/bus/fdt.c
+@@ -19,6 +19,12 @@
+ #include <grub/fdtbus.h>
+ #include <grub/fdt.h>
+ #include <grub/term.h>
++#include <grub/misc.h>
++#include <grub/mm.h>
++#include <grub/dl.h>
++
++
++#include "../lib/fdt.c"
+ 
+ static const void *dtb;
+ static grub_size_t root_address_cells, root_size_cells;
+diff --git a/grub-core/kern/efi/fdt.c b/grub-core/kern/efi/fdt.c
+deleted file mode 100644
+index 30100c61c14..00000000000
+--- a/grub-core/kern/efi/fdt.c
++++ /dev/null
+@@ -1,43 +0,0 @@
+-/* fdt.c - EFI Flattened Device Tree interaction */
+-/*
+- *  GRUB  --  GRand Unified Bootloader
+- *  Copyright (C) 2006,2007  Free Software Foundation, Inc.
+- *
+- *  GRUB is free software: you can redistribute it and/or modify
+- *  it under the terms of the GNU General Public License as published by
+- *  the Free Software Foundation, either version 3 of the License, or
+- *  (at your option) any later version.
+- *
+- *  GRUB is distributed in the hope that it will be useful,
+- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *  GNU General Public License for more details.
+- *
+- *  You should have received a copy of the GNU General Public License
+- *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+- */
+-
+-#include <grub/efi/efi.h>
+-#include <grub/mm.h>
+-
+-void *
+-grub_efi_get_firmware_fdt (void)
+-{
+-  grub_efi_configuration_table_t *tables;
+-  grub_efi_guid_t fdt_guid = GRUB_EFI_DEVICE_TREE_GUID;
+-  void *firmware_fdt = NULL;
+-  unsigned int i;
+-
+-  /* Look for FDT in UEFI config tables. */
+-  tables = grub_efi_system_table->configuration_table;
+-
+-  for (i = 0; i < grub_efi_system_table->num_table_entries; i++)
+-    if (grub_memcmp (&tables[i].vendor_guid, &fdt_guid, sizeof (fdt_guid)) == 0)
+-      {
+-	firmware_fdt = tables[i].vendor_table;
+-	grub_dprintf ("linux", "found registered FDT @ %p\n", firmware_fdt);
+-	break;
+-      }
+-
+-  return firmware_fdt;
+-}
+diff --git a/grub-core/lib/fdt.c b/grub-core/lib/fdt.c
+index 0d371c5633e..16128fd6f32 100644
+--- a/grub-core/lib/fdt.c
++++ b/grub-core/lib/fdt.c
+@@ -16,12 +16,22 @@
+  *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include <grub/fdt.h>
+-#include <grub/misc.h>
+-#include <grub/mm.h>
+-#include <grub/dl.h>
++static int grub_fdt_create_empty_tree (void *fdt, unsigned int size);
++static int grub_fdt_check_header (const void *fdt, unsigned int size);
++static int grub_fdt_check_header_nosize (const void *fdt);
++static int grub_fdt_find_subnode (const void *fdt, unsigned int parentoffset,
++					const char *name);
++static int grub_fdt_first_node (const void *fdt, unsigned int parentoffset);
++static int grub_fdt_next_node (const void *fdt, unsigned int currentoffset);
++static int grub_fdt_add_subnode (void *fdt, unsigned int parentoffset,
++			  const char *name);
++static const char *
++grub_fdt_get_nodename (const void *fdt, unsigned int nodeoffset);
++static const void *grub_fdt_get_prop (const void *fdt, unsigned int nodeoffset, const char *name,
++					    grub_uint32_t *len);
+ 
+-GRUB_MOD_LICENSE ("GPLv3+");
++static int grub_fdt_set_prop (void *fdt, unsigned int nodeoffset, const char *name,
++				    const void *val, grub_uint32_t len);
+ 
+ #define FDT_SUPPORTED_VERSION	17
+ 
+@@ -263,6 +273,7 @@ static grub_uint32_t *find_prop (const void *fdt, unsigned int nodeoffset,
+    the size allocated for the FDT; if this function is called before the other
+    functions in this file and returns success, the other functions are
+    guaranteed not to access memory locations outside the allocated memory. */
++static inline __attribute__((__unused__))
+ int grub_fdt_check_header_nosize (const void *fdt)
+ {
+   if (((grub_addr_t) fdt & 0x3) || (grub_fdt_get_magic (fdt) != FDT_MAGIC)
+@@ -281,6 +292,7 @@ int grub_fdt_check_header_nosize (const void *fdt)
+   return 0;
+ }
+ 
++static inline __attribute__((__unused__))
+ int grub_fdt_check_header (const void *fdt, unsigned int size)
+ {
+   if (size < sizeof (grub_fdt_header_t)
+@@ -327,6 +339,7 @@ advance_token (const void *fdt, const grub_uint32_t *token, const grub_uint32_t
+   return 0;
+ }
+ 
++static inline __attribute__((__unused__))
+ int grub_fdt_next_node (const void *fdt, unsigned int currentoffset)
+ {
+   const grub_uint32_t *token = (const grub_uint32_t *) fdt + (currentoffset + grub_fdt_get_off_dt_struct (fdt)) / 4;
+@@ -337,6 +350,7 @@ int grub_fdt_next_node (const void *fdt, unsigned int currentoffset)
+ 		- grub_fdt_get_off_dt_struct (fdt));
+ }			 
+ 
++static inline __attribute__((__unused__))
+ int grub_fdt_first_node (const void *fdt, unsigned int parentoffset)
+ {
+   const grub_uint32_t *token, *end;
+@@ -358,6 +372,7 @@ int grub_fdt_first_node (const void *fdt, unsigned int parentoffset)
+ }			 
+ 
+ /* Find a direct sub-node of a given parent node. */
++static inline __attribute__((__unused__))
+ int grub_fdt_find_subnode (const void *fdt, unsigned int parentoffset,
+ 			   const char *name)
+ {
+@@ -385,6 +400,7 @@ int grub_fdt_find_subnode (const void *fdt, unsigned int parentoffset,
+   }
+ }
+ 
++static inline __attribute__((__unused__))
+ const char *
+ grub_fdt_get_nodename (const void *fdt, unsigned int nodeoffset)
+ {
+@@ -407,6 +423,7 @@ int grub_fdt_add_subnode (void *fdt, unsigned int parentoffset,
+   return add_subnode (fdt, parentoffset, name);
+ }
+ 
++static inline __attribute__((__unused__))
+ const void *
+ grub_fdt_get_prop (const void *fdt, unsigned int nodeoffset, const char *name,
+ 		   grub_uint32_t *len)
+@@ -425,6 +442,7 @@ grub_fdt_get_prop (const void *fdt, unsigned int nodeoffset, const char *name,
+   return prop + 3;
+ }
+ 
++static inline __attribute__((__unused__))
+ int grub_fdt_set_prop (void *fdt, unsigned int nodeoffset, const char *name,
+ 		       const void *val, grub_uint32_t len)
+ {
+@@ -501,6 +519,7 @@ int grub_fdt_set_prop (void *fdt, unsigned int nodeoffset, const char *name,
+   return 0;
+ }
+ 
++static inline __attribute__((__unused__))
+ int
+ grub_fdt_create_empty_tree (void *fdt, unsigned int size)
+ {
+diff --git a/grub-core/loader/arm/linux.c b/grub-core/loader/arm/linux.c
+index b4f609d2d01..58594e9719f 100644
+--- a/grub-core/loader/arm/linux.c
++++ b/grub-core/loader/arm/linux.c
+@@ -29,6 +29,8 @@
+ #include <grub/lib/cmdline.h>
+ #include <grub/linux.h>
+ 
++#include "../../lib/fdt.c"
++
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+ static grub_dl_t my_mod;
+diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
+index fd014af7d82..2fb092ffec5 100644
+--- a/grub-core/loader/arm64/linux.c
++++ b/grub-core/loader/arm64/linux.c
+@@ -24,6 +24,8 @@
+ #include <grub/linux.h>
+ #include <grub/loader.h>
+ #include <grub/mm.h>
++#include <grub/misc.h>
++#include <grub/dl.h>
+ #include <grub/types.h>
+ #include <grub/cpu/linux.h>
+ #include <grub/efi/efi.h>
+@@ -34,6 +36,8 @@
+ #include <grub/i18n.h>
+ #include <grub/lib/cmdline.h>
+ 
++#include "../../lib/fdt.c"
++
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+ static grub_dl_t my_mod;
+diff --git a/grub-core/loader/arm64/xen_boot.c b/grub-core/loader/arm64/xen_boot.c
+index 1003a0b9997..5c71045551c 100644
+--- a/grub-core/loader/arm64/xen_boot.c
++++ b/grub-core/loader/arm64/xen_boot.c
+@@ -34,6 +34,9 @@
+ #include <grub/efi/pe32.h>	/* required by struct xen_hypervisor_header */
+ #include <grub/i18n.h>
+ #include <grub/lib/cmdline.h>
++#include <grub/dl.h>
++
++#include "../../lib/fdt.c"
+ 
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+diff --git a/grub-core/loader/efi/fdt.c b/grub-core/loader/efi/fdt.c
+index a4c6e803645..44555fd42f0 100644
+--- a/grub-core/loader/efi/fdt.c
++++ b/grub-core/loader/efi/fdt.c
+@@ -20,12 +20,17 @@
+ #include <grub/mm.h>
+ #include <grub/err.h>
+ #include <grub/dl.h>
++#include <grub/misc.h>
+ #include <grub/command.h>
+ #include <grub/file.h>
+ #include <grub/efi/efi.h>
+ #include <grub/efi/fdtload.h>
+ #include <grub/efi/memory.h>
+ 
++#include "../../lib/fdt.c"
++
++GRUB_MOD_LICENSE ("GPLv3+");
++
+ static void *loaded_fdt;
+ static void *fdt;
+ 
+@@ -35,6 +40,28 @@ static void *fdt;
+                              sizeof (FDT_ADDR_CELLS_STRING) + \
+                              sizeof (FDT_SIZE_CELLS_STRING))
+ 
++static void *
++grub_efi_get_firmware_fdt (void)
++{
++  grub_efi_configuration_table_t *tables;
++  grub_efi_guid_t fdt_guid = GRUB_EFI_DEVICE_TREE_GUID;
++  void *firmware_fdt = NULL;
++  unsigned int i;
++
++  /* Look for FDT in UEFI config tables. */
++  tables = grub_efi_system_table->configuration_table;
++
++  for (i = 0; i < grub_efi_system_table->num_table_entries; i++)
++    if (grub_memcmp (&tables[i].vendor_guid, &fdt_guid, sizeof (fdt_guid)) == 0)
++      {
++	firmware_fdt = tables[i].vendor_table;
++	grub_dprintf ("linux", "found registered FDT @ %p\n", firmware_fdt);
++	break;
++      }
++
++  return firmware_fdt;
++}
++
+ void *
+ grub_fdt_load (grub_size_t additional_size)
+ {
+diff --git a/include/grub/fdt.h b/include/grub/fdt.h
+index 158b1bc4b3a..6b39cfe4861 100644
+--- a/include/grub/fdt.h
++++ b/include/grub/fdt.h
+@@ -101,22 +101,6 @@ struct grub_fdt_empty_tree {
+ #define grub_fdt_set_size_dt_struct(fdt, value)	\
+ 	grub_fdt_set_header(fdt, size_dt_struct, value)
+ 
+-int EXPORT_FUNC(grub_fdt_create_empty_tree) (void *fdt, unsigned int size);
+-int EXPORT_FUNC(grub_fdt_check_header) (const void *fdt, unsigned int size);
+-int EXPORT_FUNC(grub_fdt_check_header_nosize) (const void *fdt);
+-int EXPORT_FUNC(grub_fdt_find_subnode) (const void *fdt, unsigned int parentoffset,
+-					const char *name);
+-int EXPORT_FUNC(grub_fdt_first_node) (const void *fdt, unsigned int parentoffset);
+-int EXPORT_FUNC(grub_fdt_next_node) (const void *fdt, unsigned int currentoffset);
+-int EXPORT_FUNC(grub_fdt_add_subnode) (void *fdt, unsigned int parentoffset,
+-			  const char *name);
+-const char *
+-EXPORT_FUNC(grub_fdt_get_nodename) (const void *fdt, unsigned int nodeoffset);
+-const void *EXPORT_FUNC(grub_fdt_get_prop) (const void *fdt, unsigned int nodeoffset, const char *name,
+-					    grub_uint32_t *len);
+-
+-int EXPORT_FUNC(grub_fdt_set_prop) (void *fdt, unsigned int nodeoffset, const char *name,
+-				    const void *val, grub_uint32_t len);
+ #define grub_fdt_set_prop32(fdt, nodeoffset, name, val)	\
+ ({ \
+   grub_uint32_t _val = grub_cpu_to_be32(val); \

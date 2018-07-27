@@ -153,8 +153,12 @@ fi
 unset LC_ALL
 git rm -q 0*.patch
 
+> release-to-master.patch
+othergit diff --full-index --binary grub-2.02..refs/remotes/rhboot/master > release-to-master.patch
+git add release-to-master.patch
+
 > grub.patches
-patches=$(formatpatch grub-2.02..refs/remotes/rhboot/${releasever})
+patches=$(formatpatch refs/remotes/rhboot/master..refs/remotes/rhboot/${releasever})
 for x in $patches ; do
 	echo Patch$(echo ${x} | cut -d- -f1): ${x} >> grub.patches
 done

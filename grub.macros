@@ -301,7 +301,9 @@ git config gc.auto 0						\
 rm -f configure							\
 git add .							\
 git commit -a -q -m "%{tarversion} baseline."			\
-git am %%{patches} </dev/null					\
+git apply --index --whitespace=nowarn %{SOURCE3}		\
+git commit -a -q -m "%{tarversion} master."			\
+git am --whitespace=nowarn %%{patches} </dev/null		\
 autoreconf -vi							\
 git add .							\
 git commit -a -q -m "autoreconf"				\
