@@ -48,7 +48,7 @@ BuildRequires:	pesign >= 0.99-8
 BuildRequires:	ccache
 %endif
 
-ExcludeArch:	s390 s390x %{arm}
+ExcludeArch:	s390 s390x
 Obsoletes:	%{name} <= %{evr}
 
 %if 0%{with_legacy_arch}
@@ -152,10 +152,10 @@ cp %{SOURCE4} grub-%{grublegacyarch}-%{tarversion}/unifont.pcf.gz
 
 %build
 %if 0%{with_efi_arch}
-%{expand:%do_primary_efi_build %%{grubefiarch} %%{grubefiname} %%{grubeficdname} %%{_target_platform} %%{efi_cflags}}
+%{expand:%do_primary_efi_build %%{grubefiarch} %%{grubefiname} %%{grubeficdname} %%{_target_platform} %%{efi_target_cflags} %%{efi_host_cflags}}
 %endif
 %if 0%{with_alt_efi_arch}
-%{expand:%do_alt_efi_build %%{grubaltefiarch} %%{grubaltefiname} %%{grubalteficdname} %%{_alt_target_platform} %%{alt_efi_cflags}}
+%{expand:%do_alt_efi_build %%{grubaltefiarch} %%{grubaltefiname} %%{grubalteficdname} %%{_alt_target_platform} %%{alt_efi_target_cflags} %%{alt_efi_host_cflags}}
 %endif
 %if 0%{with_legacy_arch}
 %{expand:%do_legacy_build %%{grublegacyarch}}

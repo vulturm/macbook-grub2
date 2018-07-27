@@ -351,7 +351,7 @@ Patch0350: 0350-Make-grub-set-password-be-named-like-all-the-other-g.patch
 Patch0351: 0351-docs-Add-grub-boot-indeterminate.service-example.patch
 Patch0352: 0352-00_menu_auto_hide-Use-a-timeout-of-60s-for-menu_show.patch
 Patch0353: 0353-00_menu_auto_hide-Reduce-number-of-save_env-calls.patch
-Patch0354: 0354-Minor-fixes-to-make-armv7hl-build-as-arm-efi.patch
+Patch0354: 0354-Make-it-so-we-can-tell-configure-which-cflags-utils-.patch
 Patch0355: 0355-30_uefi-firmware-fix-use-with-sys-firmware-efi-efiva.patch
 Patch0356: 0356-gentpl-add-disable-support.patch
 Patch0357: 0357-gentpl-add-pc-firmware-type.patch

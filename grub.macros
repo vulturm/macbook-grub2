@@ -26,19 +26,27 @@
 		-e 's/-mregparm=3/-mregparm=4/g'		\\\
 		-e 's/-fexceptions//g'				\\\
 		-e 's/-fasynchronous-unwind-tables//g'		\\\
-		-e 's/-mfloat-abi=hard/-mfloat-abi=soft/g'	\\\
 		-e 's/^/ -fno-strict-aliasing /'		\\\
 		%{nil}
 
-%global efi_cflags						\\\
-	%{expand:%%(echo %{optflags} | %{cflags_sed})}
+%global host_cflags %{expand:%%(echo %{optflags} | %{cflags_sed})}
+%global target_cflags %{expand:%%(echo %{optflags} | %{cflags_sed})}
 
-%global legacy_cflags						\\\
-	%{expand:%%(echo %{optflags} | 				\\\
+%global legacy_target_cflags					\\\
+	%{expand:%%(echo %{target_cflags} | 			\\\
 	%{cflags_sed}						\\\
 		-e 's/-m64//g'					\\\
 		-e 's/-mcpu=power[[:alnum:]]\\+/-mcpu=power6/g'	\\\
 	)}
+%global legacy_host_cflags					\\\
+	%{expand:%%(echo %{host_cflags} | 			\\\
+	%{cflags_sed}						\\\
+		-e 's/-m64//g'					\\\
+		-e 's/-mcpu=power[[:alnum:]]\\+/-mcpu=power6/g'	\\\
+	)}
+
+%global efi_host_cflags %{expand:%%(echo %{host_cflags})}
+%global efi_target_cflags %{expand:%%(echo %{target_cflags})}
 
 %global with_efi_arch 0
 %global with_alt_efi_arch 0
@@ -119,8 +127,10 @@
 %global alt_grub_target_name i386-efi
 %global alt_platform efi
 %global alt_package_arch efi-ia32
-%global alt_efi_cflags						\\\
-	%{expand:%%(echo %{optflags} | 				\\\
+
+%global alt_efi_host_cflags %{expand:%%(echo %{efi_host_cflags})}
+%global alt_efi_target_cflags					\\\
+	%{expand:%%(echo %{target_cflags} |			\\\
 	%{cflags_sed}						\\\
 		-e 's/-m64//g'					\\\
 	)}
@@ -138,6 +148,13 @@
 %global target_cpu_name arm
 %global grub_target_name arm-efi
 %global package_arch efi-arm
+%global efi_target_cflags						\\\
+	%{expand:%%(echo %{optflags} |					\\\
+	%{cflags_sed}							\\\
+		-e 's/-march=armv7-a[[:alnum:]+-]*/&+nofp/g'		\\\
+		-e 's/-mfpu=[[:alnum:]-]\\+//g'				\\\
+		-e 's/-mfloat-abi=[[:alpha:]]\\+/-mfloat-abi=soft/g'	\\\
+	)}
 %endif
 
 %global _target_platform %{target_cpu_name}-%{_vendor}-%{_target_os}%{?_gnu}
@@ -297,10 +314,13 @@ git config --unset user.name					\
 %define do_efi_configure()					\
 %configure							\\\
 	%{cc_equals}						\\\
-	CFLAGS="%{2} -I$(pwd)"					\\\
-	CPPFLAGS="${CPPFLAGS} -I$(pwd)"				\\\
+	HOST_CFLAGS="%{3} -I$(pwd)"				\\\
+	HOST_CPPFLAGS="${CPPFLAGS} -I$(pwd)"			\\\
+	TARGET_CFLAGS="%{2} -I$(pwd)"				\\\
+	TARGET_CPPFLAGS="${CPPFLAGS} -I$(pwd)"			\\\
 	TARGET_LDFLAGS=-static					\\\
 	--with-platform=efi					\\\
+	--with-utils=host					\\\
 	--target=%{1}						\\\
 	--with-grubdir=%{name}					\\\
 	--program-transform-name=s,grub,%{name},		\\\
@@ -360,7 +380,7 @@ GRUB_MODULES+=%{efi_modules}					\
 
 %define do_primary_efi_build()					\
 cd grub-%{1}-%{tarversion}					\
-%{expand:%%do_efi_configure %%{4} %%{5}}			\
+%{expand:%%do_efi_configure %%{4} %%{5} %%{6}}			\
 %do_efi_build_all						\
 %{expand:%%do_efi_build_images %{grub_target_name} %{2} %{3} ./ } \
 cd ..								\
@@ -368,7 +388,7 @@ cd ..								\
 
 %define do_alt_efi_build()					\
 cd grub-%{1}-%{tarversion}					\
-%{expand:%%do_efi_configure %%{4} %%{5}}			\
+%{expand:%%do_efi_configure %%{4} %%{5} %%{6}}			\
 %do_efi_build_modules						\
 %{expand:%%do_efi_link_utils %{grubefiarch}}			\
 %{expand:%%do_efi_build_images %{alt_grub_target_name} %{2} %{3} ../grub-%{grubefiarch}-%{tarversion}/ } \
@@ -379,9 +399,11 @@ cd ..								\
 cd grub-%{1}-%{tarversion}					\
 %configure							\\\
 	%{cc_equals}						\\\
-	CFLAGS="%{legacy_cflags} -I$(pwd)"			\\\
+	HOST_CFLAGS="%{legacy_host_cflags} -I$(pwd)"		\\\
+	TARGET_CFLAGS="%{legacy_target_cflags} -I$(pwd)"	\\\
 	TARGET_LDFLAGS=-static					\\\
 	--with-platform=%{platform}				\\\
+	--with-utils=host					\\\
 	--target=%{_target_platform}				\\\
 	--with-grubdir=%{name}					\\\
 	--program-transform-name=s,grub,%{name},		\\\
