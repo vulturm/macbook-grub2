@@ -300,10 +300,10 @@ git config --unset user.name					\
 	CFLAGS="%{2} -I$(pwd)"					\\\
 	CPPFLAGS="${CPPFLAGS} -I$(pwd)"				\\\
 	TARGET_LDFLAGS=-static					\\\
-        --with-platform=efi					\\\
+	--with-platform=efi					\\\
 	--target=%{1}						\\\
 	--with-grubdir=%{name}					\\\
-        --program-transform-name=s,grub,%{name},		\\\
+	--program-transform-name=s,grub,%{name},		\\\
 	--disable-grub-mount					\\\
 	--disable-werror || ( cat config.log ; exit 1 )		\
 %{nil}
@@ -381,10 +381,10 @@ cd grub-%{1}-%{tarversion}					\
 	%{cc_equals}						\\\
 	CFLAGS="%{legacy_cflags} -I$(pwd)"			\\\
 	TARGET_LDFLAGS=-static					\\\
-        --with-platform=%{platform}				\\\
+	--with-platform=%{platform}				\\\
 	--target=%{_target_platform}				\\\
 	--with-grubdir=%{name}					\\\
-        --program-transform-name=s,grub,%{name},		\\\
+	--program-transform-name=s,grub,%{name},		\\\
 	--disable-grub-mount					\\\
 	--disable-werror || ( cat config.log ; exit 1 )		\
 make %{?_smp_mflags}						\
