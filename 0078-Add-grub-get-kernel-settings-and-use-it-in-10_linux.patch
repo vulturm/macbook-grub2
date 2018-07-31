@@ -62,10 +62,10 @@ index fd91045bd6d..2d032643de7 100644
    name = grub-set-default;
    common = util/grub-set-default.in;
 diff --git a/.gitignore b/.gitignore
-index 387e3554cd5..9f258735aaa 100644
+index 4e9a0f6d9cf..ac92bfd4c3d 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -64,6 +64,8 @@ grub-*.tar.*
+@@ -67,6 +67,8 @@ grub-*.tar.*
  /grub*-fs-tester
  /grub*-fstest
  /grub*-fstest.1

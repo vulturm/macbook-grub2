@@ -140,16 +140,23 @@ This subpackage provides tools for support of all platforms.
 %do_common_setup
 %if 0%{with_efi_arch}
 mkdir grub-%{grubefiarch}-%{tarversion}
+grep -A100000 '# stuff "make" creates' .gitignore > grub-%{grubefiarch}-%{tarversion}/.gitignore
 cp %{SOURCE4} grub-%{grubefiarch}-%{tarversion}/unifont.pcf.gz
+git add grub-%{grubefiarch}-%{tarversion}
 %endif
 %if 0%{with_alt_efi_arch}
 mkdir grub-%{grubaltefiarch}-%{tarversion}
+grep -A100000 '# stuff "make" creates' .gitignore > grub-%{grubaltefiarch}-%{tarversion}/.gitignore
 cp %{SOURCE4} grub-%{grubaltefiarch}-%{tarversion}/unifont.pcf.gz
+git add grub-%{grubaltefiarch}-%{tarversion}
 %endif
 %if 0%{with_legacy_arch}
 mkdir grub-%{grublegacyarch}-%{tarversion}
+grep -A100000 '# stuff "make" creates' .gitignore > grub-%{grublegacyarch}-%{tarversion}/.gitignore
 cp %{SOURCE4} grub-%{grublegacyarch}-%{tarversion}/unifont.pcf.gz
+git add grub-%{grublegacyarch}-%{tarversion}
 %endif
+git commit -m "After making subdirs"
 
 %build
 %if 0%{with_efi_arch}

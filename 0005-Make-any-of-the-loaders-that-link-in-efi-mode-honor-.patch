@@ -444,7 +444,7 @@ index c9885b1bcd7..df8dfdb4ba0 100644
    grub_unregister_command (cmd_resume);
  #endif
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 4b7fdbdb869..63b042a582b 100644
+index 1061aee9726..39480b38674 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
 @@ -85,7 +85,6 @@ EXPORT_FUNC (grub_efi_set_variable) (const char *var,

@@ -164,11 +164,11 @@ index 71d2279a0c1..e6183a4c44d 100644
  }
  
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 64b8c8f96ef..cf3c899c40a 100644
+index 09a18e56302..570a69361a5 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
-@@ -133,7 +133,7 @@ grub_err_t grub_armxx_efi_linux_boot_image(grub_addr_t addr, grub_size_t size,
-                                            char *args);
+@@ -132,7 +132,7 @@ grub_err_t grub_armxx_efi_linux_check_image(struct linux_armxx_kernel_header *lh
+ grub_err_t grub_armxx_efi_linux_boot_image(grub_addr_t addr, char *args);
  #endif
  
 -grub_addr_t grub_efi_modules_addr (void);

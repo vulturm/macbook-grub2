@@ -14,7 +14,7 @@ make sure they exist.
  1 file changed, 15 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 0363c5438bd..fd014af7d82 100644
+index a1ac7a38867..93b5cd306eb 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -80,7 +80,21 @@ finalize_params_linux (void)

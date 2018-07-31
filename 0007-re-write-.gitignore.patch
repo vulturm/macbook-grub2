@@ -4,7 +4,7 @@ Date: Tue, 8 Aug 2017 12:48:04 -0400
 Subject: [PATCH] re-write .gitignore
 
 ---
- .gitignore                        | 352 ++++++++++++--------------------------
+ .gitignore                        | 356 +++++++++++++-------------------------
  build-aux/.gitignore              |   9 +
  docs/.gitignore                   |   4 +
  grub-core/.gitignore              |  15 ++
@@ -13,7 +13,7 @@ Subject: [PATCH] re-write .gitignore
  include/grub/gcrypt/.gitignore    |   2 +
  po/.gitignore                     |   4 +
  util/bash-completion.d/.gitignore |   1 +
- 9 files changed, 170 insertions(+), 240 deletions(-)
+ 9 files changed, 174 insertions(+), 240 deletions(-)
  create mode 100644 build-aux/.gitignore
  create mode 100644 docs/.gitignore
  create mode 100644 grub-core/.gitignore
@@ -24,10 +24,10 @@ Subject: [PATCH] re-write .gitignore
  create mode 100644 util/bash-completion.d/.gitignore
 
 diff --git a/.gitignore b/.gitignore
-index eca17bec9b8..d95fac5789c 100644
+index eca17bec9b8..2dda15a37b8 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -1,249 +1,121 @@
+@@ -1,249 +1,125 @@
 -00_header
 -10_*
 -20_linux_xen
@@ -319,6 +319,9 @@ index eca17bec9b8..d95fac5789c 100644
 +
 +# stuff "make" creates
 +/[[:digit:]][[:digit:]]_?*
++/ascii.h
++/build-grub-gen-asciih
++/build-grub-gen-widthspec
 +/build-grub-mkfont
 +/config-util.h.in
  /garbage-gen
@@ -389,6 +392,7 @@ index eca17bec9b8..d95fac5789c 100644
 +/libgrub_a_init.c
 +/libgrub_a_init.lst
 +/stamp-h.in
++/widthspec.h
 diff --git a/build-aux/.gitignore b/build-aux/.gitignore
 new file mode 100644
 index 00000000000..f2f17aab9ff

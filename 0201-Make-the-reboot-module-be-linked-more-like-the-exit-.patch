@@ -100,7 +100,7 @@ index 00000000000..6934a3b369e
 +  grub_efi_reboot();
 +}
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index cf3c899c40a..1e787b54164 100644
+index 570a69361a5..3f02db48279 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
 @@ -29,6 +29,7 @@ extern grub_efi_system_table_t *EXPORT_VAR(grub_efi_system_table);

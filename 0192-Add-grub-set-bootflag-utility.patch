@@ -34,12 +34,13 @@ Signed-off-by: Hans de Goede <hdegoede@redhat.com>
 ---
  Makefile.util.def              |   7 ++
  util/grub-set-bootflag.c       | 158 +++++++++++++++++++++++++++++++++++++++++
+ .gitignore                     |   2 +
  conf/Makefile.extra-dist       |   3 +
  docs/grub-boot-success.service |   6 ++
  docs/grub-boot-success.timer   |   5 ++
  docs/org.gnu.grub.policy       |  20 ++++++
  util/grub-set-bootflag.1       |  20 ++++++
- 7 files changed, 219 insertions(+)
+ 8 files changed, 221 insertions(+)
  create mode 100644 util/grub-set-bootflag.c
  create mode 100644 docs/grub-boot-success.service
  create mode 100644 docs/grub-boot-success.timer
@@ -225,6 +226,19 @@ index 00000000000..f8dc310909a
 +
 +  return 0;
 +}
+diff --git a/.gitignore b/.gitignore
+index b718546f993..99a3e801bc4 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -110,6 +110,8 @@ grub-*.tar.*
+ /grub*-rpm-sort.8
+ /grub*-script-check
+ /grub*-script-check.1
++/grub*-set-bootflag
++/grub*-set-bootflag.1
+ /grub*-set-default
+ /grub*-set-default.8
+ /grub*-setsetpassword
 diff --git a/conf/Makefile.extra-dist b/conf/Makefile.extra-dist
 index 39eb94bded6..5946ec24a65 100644
 --- a/conf/Makefile.extra-dist

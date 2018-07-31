@@ -13,10 +13,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  3 files changed, 89 insertions(+), 37 deletions(-)
 
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index 5c2c614c380..8453b5c8017 100644
+index c8ecce6dfd0..0622dfa48d4 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
-@@ -66,12 +66,17 @@ grub_linuxefi_secure_validate (void *data, grub_uint32_t size)
+@@ -69,12 +69,17 @@ grub_linuxefi_secure_validate (void *data, grub_uint32_t size)
  typedef void (*handover_func) (void *, grub_efi_system_table_t *, void *);
  
  grub_err_t

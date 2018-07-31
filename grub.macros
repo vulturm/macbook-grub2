@@ -328,6 +328,8 @@ git config --unset user.name					\
 	--program-transform-name=s,grub,%{name},		\\\
 	--disable-grub-mount					\\\
 	--disable-werror || ( cat config.log ; exit 1 )		\
+git add .							\
+git commit -m "After efi configure"				\
 %{nil}
 
 %define do_efi_build_modules()					\
@@ -411,6 +413,8 @@ cd grub-%{1}-%{tarversion}					\
 	--program-transform-name=s,grub,%{name},		\\\
 	--disable-grub-mount					\\\
 	--disable-werror || ( cat config.log ; exit 1 )		\
+git add .							\
+git commit -m "After legacy configure"					\
 make %{?_smp_mflags}						\
 cd ..								\
 %{nil}

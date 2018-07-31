@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Christian Glombek <lorbus@fedoraproject.org>
 Date: Tue, 31 Jul 2018 11:11:01 +0200
-Subject: [PATCH] Rename 00_menu_auto_hide.in to 01_menu_auto_hide.in This is
- necessary to accommodate the fallback counting script which needs to run
- before this one because the menu auto hide script sets boot_success = 0,
- which will be used by the boot counting script
+Subject: [PATCH] Rename 00_menu_auto_hide.in to 01_menu_auto_hide.in
 
+This is necessary to accommodate the fallback counting script which
+needs to run before this one because the menu auto hide script sets
+boot_success = 0, which will be used by the boot counting script
 ---
  Makefile.util.def                                          | 4 ++--
  util/grub.d/{00_menu_auto_hide.in => 01_menu_auto_hide.in} | 0

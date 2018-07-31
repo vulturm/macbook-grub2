@@ -29,15 +29,16 @@ moves the check into grub_dl_load_file.
  grub-core/kern/dl.c               |  21 +++
  grub-core/kern/efi/efi.c          |  28 ++++
  grub-core/kern/efi/mm.c           |  32 ++++
- grub-core/loader/arm64/linux.c    | 121 +++++++-------
- grub-core/loader/efi/linux.c      |  65 ++++++++
+ grub-core/loader/arm64/linux.c    | 118 +++++++-------
+ grub-core/loader/efi/linux.c      |  70 ++++++++
  grub-core/loader/i386/efi/linux.c | 335 ++++++++++++++++++++++++++++++++++++++
  grub-core/loader/i386/pc/linux.c  |  10 +-
- include/grub/arm64/linux.h        |   9 +
- include/grub/efi/efi.h            |   4 +
+ include/grub/arm/linux.h          |   9 +
+ include/grub/arm64/linux.h        |  10 ++
+ include/grub/efi/efi.h            |   7 +-
  include/grub/efi/linux.h          |  31 ++++
  include/grub/i386/linux.h         |   1 +
- 12 files changed, 607 insertions(+), 66 deletions(-)
+ 13 files changed, 620 insertions(+), 68 deletions(-)
  create mode 100644 grub-core/loader/efi/linux.c
  create mode 100644 grub-core/loader/i386/efi/linux.c
  create mode 100644 include/grub/efi/linux.h
@@ -208,7 +209,7 @@ index 42ad7c570a5..5cdf6c943f2 100644
  void *
  grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 1f86229f86b..0a44f7ea42f 100644
+index 1f86229f86b..6c00af98dce 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -29,6 +29,7 @@
@@ -237,7 +238,7 @@ index 1f86229f86b..0a44f7ea42f 100644
  
    void *fdt;
  
-@@ -101,79 +104,73 @@ finalize_params_linux (void)
+@@ -101,79 +104,70 @@ finalize_params_linux (void)
    if (grub_fdt_install() != GRUB_ERR_NONE)
      goto failure;
  
@@ -327,8 +328,7 @@ index 1f86229f86b..0a44f7ea42f 100644
 +  if (loaded_image)
 +    {
 +      if (loaded_image->load_options)
-+	grub_efi_free_pages ((grub_efi_physical_address_t)
-+			      loaded_image->load_options,
++	grub_efi_free_pages ((grub_efi_physical_address_t)(grub_efi_uintn_t)loaded_image->load_options,
 +			     GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
 +      loaded_image->load_options = NULL;
 +      loaded_image->load_options_size = 0;
@@ -336,7 +336,7 @@ index 1f86229f86b..0a44f7ea42f 100644
 +}
 +
 +grub_err_t
-+grub_armxx_efi_linux_boot_image (grub_addr_t addr, grub_size_t size, char *args)
++grub_armxx_efi_linux_boot_image (grub_addr_t addr, char *args)
 +{
 +  grub_err_t retval;
 +
@@ -346,8 +346,7 @@ index 1f86229f86b..0a44f7ea42f 100644
 +
 +  grub_dprintf ("linux", "linux command line: '%s'\n", args);
 +
-+  retval = grub_efi_linux_boot ((char *)kernel_addr, handover_offset,
-+				kernel_addr);
++  retval = grub_efi_linux_boot ((char *)addr, handover_offset, (void *)addr);
 +
 +  /* Never reached... */
 +  free_params();
@@ -362,20 +361,19 @@ index 1f86229f86b..0a44f7ea42f 100644
 -
 -  return (grub_armxx_efi_linux_boot_image((grub_addr_t)kernel_addr,
 -                                          kernel_size, linux_args));
-+  return grub_armxx_efi_linux_boot_image((grub_addr_t)kernel_addr,
-+					 kernel_size, linux_args);
++  return grub_armxx_efi_linux_boot_image((grub_addr_t)kernel_addr, linux_args);
  }
  
  static grub_err_t
-@@ -287,6 +284,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -287,6 +281,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  {
    grub_file_t file = 0;
    struct linux_armxx_kernel_header lh;
-+  struct grub_arm64_linux_pe_header *pe;
++  struct grub_armxx_linux_pe_header *pe;
  
    grub_dl_ref (my_mod);
  
-@@ -331,6 +329,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -331,6 +326,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    grub_dprintf ("linux", "kernel @ %p\n", kernel_addr);
  
@@ -393,10 +391,10 @@ index 1f86229f86b..0a44f7ea42f 100644
    if (!linux_args)
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
 new file mode 100644
-index 00000000000..aea378adf5c
+index 00000000000..c24202a5dd1
 --- /dev/null
 +++ b/grub-core/loader/efi/linux.c
-@@ -0,0 +1,65 @@
+@@ -0,0 +1,70 @@
 +/*
 + *  GRUB  --  GRand Unified Bootloader
 + *  Copyright (C) 2014 Free Software Foundation, Inc.
@@ -449,6 +447,9 @@ index 00000000000..aea378adf5c
 +  return 0;
 +}
 +
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wcast-align"
++
 +typedef void (*handover_func) (void *, grub_efi_system_table_t *, void *);
 +
 +grub_err_t
@@ -462,6 +463,8 @@ index 00000000000..aea378adf5c
 +
 +  return GRUB_ERR_BUG;
 +}
++
++#pragma GCC diagnostic pop
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
 new file mode 100644
 index 00000000000..3db82e782df
@@ -837,8 +840,38 @@ index b69cb7a3a7f..a3c87cf2fc2 100644
    grub_unregister_command (cmd_initrd);
 +  grub_unregister_command (cmd_initrd16);
  }
+diff --git a/include/grub/arm/linux.h b/include/grub/arm/linux.h
+index 712ba17b9ba..5900fc8a40c 100644
+--- a/include/grub/arm/linux.h
++++ b/include/grub/arm/linux.h
+@@ -20,6 +20,7 @@
+ #ifndef GRUB_ARM_LINUX_HEADER
+ #define GRUB_ARM_LINUX_HEADER 1
+ 
++#include <grub/efi/pe32.h>
+ #include "system.h"
+ 
+ #define GRUB_LINUX_ARM_MAGIC_SIGNATURE 0x016f2818
+@@ -34,9 +35,17 @@ struct linux_arm_kernel_header {
+   grub_uint32_t hdr_offset;
+ };
+ 
++struct grub_arm_linux_pe_header
++{
++  grub_uint32_t magic;
++  struct grub_pe32_coff_header coff;
++  struct grub_pe32_optional_header opt;
++};
++
+ #if defined(__arm__)
+ # define GRUB_LINUX_ARMXX_MAGIC_SIGNATURE GRUB_LINUX_ARM_MAGIC_SIGNATURE
+ # define linux_armxx_kernel_header linux_arm_kernel_header
++# define grub_armxx_linux_pe_header grub_arm_linux_pe_header
+ #endif
+ 
+ #if defined GRUB_MACHINE_UBOOT
 diff --git a/include/grub/arm64/linux.h b/include/grub/arm64/linux.h
-index 8655067e039..f18a7300fd7 100644
+index 8655067e039..7b533b57139 100644
 --- a/include/grub/arm64/linux.h
 +++ b/include/grub/arm64/linux.h
 @@ -19,6 +19,8 @@
@@ -850,9 +883,9 @@ index 8655067e039..f18a7300fd7 100644
  #define GRUB_LINUX_ARM64_MAGIC_SIGNATURE 0x644d5241 /* 'ARM\x64' */
  
  /* From linux/Documentation/arm64/booting.txt */
-@@ -41,4 +43,11 @@ struct linux_arm64_kernel_header
- # define linux_armxx_kernel_header linux_arm64_kernel_header
- #endif
+@@ -36,9 +38,17 @@ struct linux_arm64_kernel_header
+   grub_uint32_t hdr_offset;	/* Offset of PE/COFF header */
+ };
  
 +struct grub_arm64_linux_pe_header
 +{
@@ -861,9 +894,15 @@ index 8655067e039..f18a7300fd7 100644
 +  struct grub_pe64_optional_header opt;
 +};
 +
+ #if defined(__aarch64__)
+ # define GRUB_LINUX_ARMXX_MAGIC_SIGNATURE GRUB_LINUX_ARM64_MAGIC_SIGNATURE
+ # define linux_armxx_kernel_header linux_arm64_kernel_header
++# define grub_armxx_linux_pe_header grub_arm64_linux_pe_header
+ #endif
+ 
  #endif /* ! GRUB_ARM64_LINUX_HEADER */
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 2c6648d46fc..4b7fdbdb869 100644
+index 2c6648d46fc..1061aee9726 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
 @@ -47,6 +47,9 @@ EXPORT_FUNC(grub_efi_allocate_fixed) (grub_efi_physical_address_t address,
@@ -884,6 +923,16 @@ index 2c6648d46fc..4b7fdbdb869 100644
  int
  EXPORT_FUNC (grub_efi_compare_device_paths) (const grub_efi_device_path_t *dp1,
  					     const grub_efi_device_path_t *dp2);
+@@ -95,8 +99,7 @@ void *EXPORT_FUNC(grub_efi_get_firmware_fdt)(void);
+ grub_err_t EXPORT_FUNC(grub_efi_get_ram_base)(grub_addr_t *);
+ #include <grub/cpu/linux.h>
+ grub_err_t grub_armxx_efi_linux_check_image(struct linux_armxx_kernel_header *lh);
+-grub_err_t grub_armxx_efi_linux_boot_image(grub_addr_t addr, grub_size_t size,
+-                                           char *args);
++grub_err_t grub_armxx_efi_linux_boot_image(grub_addr_t addr, char *args);
+ #endif
+ 
+ grub_addr_t grub_efi_modules_addr (void);
 diff --git a/include/grub/efi/linux.h b/include/grub/efi/linux.h
 new file mode 100644
 index 00000000000..d9ede36773b

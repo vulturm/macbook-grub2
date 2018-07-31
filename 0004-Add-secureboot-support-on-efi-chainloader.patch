@@ -204,18 +204,18 @@ index c8a9d8307c0..91129e33566 100644
    if (*secure_boot && !*setup_mode)
      ret = 1;
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 0a44f7ea42f..0363c5438bd 100644
+index 6c00af98dce..a1ac7a38867 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
-@@ -285,6 +285,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -282,6 +282,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
    grub_file_t file = 0;
    struct linux_armxx_kernel_header lh;
-   struct grub_arm64_linux_pe_header *pe;
+   struct grub_armxx_linux_pe_header *pe;
 +  int rc;
  
    grub_dl_ref (my_mod);
  
-@@ -329,7 +330,8 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -326,7 +327,8 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    grub_dprintf ("linux", "kernel @ %p\n", kernel_addr);
  
@@ -1173,7 +1173,7 @@ index adc85636633..af2189619a3 100644
  
    return grub_errno;
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index aea378adf5c..5c2c614c380 100644
+index c24202a5dd1..c8ecce6dfd0 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
 @@ -33,21 +33,34 @@ struct grub_efi_shim_lock
@@ -1216,7 +1216,7 @@ index aea378adf5c..5c2c614c380 100644
 +  return -1;
  }
  
- typedef void (*handover_func) (void *, grub_efi_system_table_t *, void *);
+ #pragma GCC diagnostic push
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
 index 3db82e782df..8db228c5bf5 100644
 --- a/grub-core/loader/i386/efi/linux.c

@@ -10,7 +10,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 32 insertions(+), 4 deletions(-)
 
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 63b042a582b..64b8c8f96ef 100644
+index 39480b38674..09a18e56302 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
 @@ -24,6 +24,10 @@
@@ -58,7 +58,7 @@ index 63b042a582b..64b8c8f96ef 100644
  grub_efi_loaded_image_t *EXPORT_FUNC(grub_efi_get_loaded_image) (grub_efi_handle_t image_handle);
  void EXPORT_FUNC(grub_efi_print_device_path) (grub_efi_device_path_t *dp);
  char *EXPORT_FUNC(grub_efi_get_filename) (grub_efi_device_path_t *dp);
-@@ -110,10 +141,7 @@ void grub_efi_init (void);
+@@ -109,10 +140,7 @@ void grub_efi_init (void);
  void grub_efi_fini (void);
  void grub_efi_set_prefix (void);
  

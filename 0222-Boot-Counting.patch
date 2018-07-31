@@ -1,9 +1,10 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Christian Glombek <lorbus@fedoraproject.org>
 Date: Tue, 31 Jul 2018 11:12:06 +0200
-Subject: [PATCH] Boot Counting Adds 01_fallback_counting.in script to support
- boot counting before falling back to the previous menu entry automatically
+Subject: [PATCH] Boot Counting
 
+Adds 01_fallback_counting.in script to support boot counting before
+falling back to the previous menu entry automatically
 ---
  Makefile.util.def                   |  6 ++++++
  util/grub.d/01_fallback_counting.in | 12 ++++++++++++
