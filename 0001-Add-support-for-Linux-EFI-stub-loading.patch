@@ -30,6 +30,7 @@ moves the check into grub_dl_load_file.
  grub-core/kern/efi/efi.c          |  28 ++++
  grub-core/kern/efi/mm.c           |  32 ++++
  grub-core/loader/arm64/linux.c    | 118 +++++++-------
+ grub-core/loader/arm64/xen_boot.c |   1 -
  grub-core/loader/efi/linux.c      |  70 ++++++++
  grub-core/loader/i386/efi/linux.c | 335 ++++++++++++++++++++++++++++++++++++++
  grub-core/loader/i386/pc/linux.c  |  10 +-
@@ -38,7 +39,7 @@ moves the check into grub_dl_load_file.
  include/grub/efi/efi.h            |   7 +-
  include/grub/efi/linux.h          |  31 ++++
  include/grub/i386/linux.h         |   1 +
- 13 files changed, 620 insertions(+), 68 deletions(-)
+ 14 files changed, 620 insertions(+), 69 deletions(-)
  create mode 100644 grub-core/loader/efi/linux.c
  create mode 100644 grub-core/loader/i386/efi/linux.c
  create mode 100644 include/grub/efi/linux.h
@@ -389,6 +390,18 @@ index 1f86229f86b..6c00af98dce 100644
    cmdline_size = grub_loader_cmdline_size (argc, argv) + sizeof (LINUX_IMAGE);
    linux_args = grub_malloc (cmdline_size);
    if (!linux_args)
+diff --git a/grub-core/loader/arm64/xen_boot.c b/grub-core/loader/arm64/xen_boot.c
+index 1003a0b9997..f35b16caa92 100644
+--- a/grub-core/loader/arm64/xen_boot.c
++++ b/grub-core/loader/arm64/xen_boot.c
+@@ -266,7 +266,6 @@ xen_boot (void)
+     return err;
+ 
+   return grub_armxx_efi_linux_boot_image (xen_hypervisor->start,
+-					  xen_hypervisor->size,
+ 					  xen_hypervisor->cmdline);
+ }
+ 
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
 new file mode 100644
 index 00000000000..c24202a5dd1
