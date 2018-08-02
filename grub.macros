@@ -309,8 +309,6 @@ git add .							\
 git commit -a -q -m "autoreconf"				\
 autoconf							\
 PYTHON=python3 ./autogen.sh					\
-git config --unset user.email					\
-git config --unset user.name					\
 %{nil}
 
 %define do_efi_configure()					\
