@@ -1,7 +1,10 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 30 Jul 2018 16:39:57 -0400
-Subject: [PATCH] Make root_url reflect the protocol+hostname of our boot url.
+Subject: [PATCH] efi/http: Make root_url reflect the protocol+hostname of our
+ boot url.
+
+This lets you write config files that don't know urls.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---

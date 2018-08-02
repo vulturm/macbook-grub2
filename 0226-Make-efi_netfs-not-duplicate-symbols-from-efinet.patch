@@ -9,10 +9,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 6 deletions(-)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 895ed1430d5..36ae895f10c 100644
+index d3e3bfd4d7a..715d3a3ec02 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -2185,12 +2185,6 @@ module = {
+@@ -2186,12 +2186,6 @@ module = {
  module = {
    name = efi_netfs;
    common = net/efi/efi_netfs.c;

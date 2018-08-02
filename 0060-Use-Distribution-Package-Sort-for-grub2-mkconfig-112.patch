@@ -389,10 +389,10 @@ index 00000000000..f33bd1ed568
 +  return 0;
 +}
 diff --git a/.gitignore b/.gitignore
-index 2dda15a37b8..56c641b5f7b 100644
+index 43f04d47277..fa2e5b609b1 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -104,6 +104,8 @@ grub-*.tar.*
+@@ -105,6 +105,8 @@ grub-*.tar.*
  /grub*-reboot.8
  /grub*-render-label
  /grub*-render-label.1

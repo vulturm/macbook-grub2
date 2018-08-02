@@ -32,10 +32,10 @@ index 879e8eb98a4..f4fbd250630 100644
    name = grub-glue-efi;
    mansection = 1;
 diff --git a/.gitignore b/.gitignore
-index ac92bfd4c3d..b718546f993 100644
+index 54795fa60be..42475592123 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -120,6 +120,8 @@ grub-*.tar.*
+@@ -121,6 +121,8 @@ grub-*.tar.*
  /grub*-sparc64-setup.8
  /grub*-syslinux2cfg
  /grub*-syslinux2cfg.1

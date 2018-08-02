@@ -10,10 +10,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 9b39c8e3cea..895ed1430d5 100644
+index aa44d66aca4..d3e3bfd4d7a 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -1679,7 +1679,7 @@ module = {
+@@ -1680,7 +1680,7 @@ module = {
  
    common = loader/multiboot.c;
    common = loader/multiboot_mbi2.c;
@@ -22,7 +22,7 @@ index 9b39c8e3cea..895ed1430d5 100644
    enable = mips;
  };
  
-@@ -1688,7 +1688,7 @@ module = {
+@@ -1689,7 +1689,7 @@ module = {
    common = loader/multiboot.c;
    x86 = loader/i386/multiboot_mbi.c;
    extra_dist = loader/multiboot_elfxx.c;

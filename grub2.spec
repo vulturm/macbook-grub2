@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	46%{?dist}
+Release:	47%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -486,6 +486,9 @@ fi
 %endif
 
 %changelog
+* Thu Aug 02 2018 Peter Jones <pjones@redhat.com> - 2.02-47
+- Enable armv7 EFI builds.  This was way harder than I expected.
+
 * Tue Jul 17 2018 Peter Jones <pjones@redhat.com> - 2.02-46
 - Fix some minor BLS issues
 - Rework the FDT module linking to make aarch64 build and boot right

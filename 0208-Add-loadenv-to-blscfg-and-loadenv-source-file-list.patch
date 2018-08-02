@@ -18,7 +18,7 @@ Signed-off-by: Will Thompson <wjt@endlessm.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 36ae895f10c..b89104f979e 100644
+index 2851437e098..aa44d66aca4 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -781,6 +781,7 @@ module = {
@@ -29,7 +29,7 @@ index 36ae895f10c..b89104f979e 100644
    enable = efi;
    enable = i386_pc;
    enable = emu;
-@@ -948,6 +949,7 @@ module = {
+@@ -947,6 +948,7 @@ module = {
  module = {
    name = loadenv;
    common = commands/loadenv.c;

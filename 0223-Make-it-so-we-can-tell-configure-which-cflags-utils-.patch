@@ -11,12 +11,13 @@ float for grub.efi.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
- configure.ac         | 48 +++++++++++++++++++++++++++++++++++++++++++++++-
- conf/Makefile.common | 15 ++++++++-------
- 2 files changed, 55 insertions(+), 8 deletions(-)
+ configure.ac         | 49 ++++++++++++++++++++++++++++++++++++++++++++++++-
+ conf/Makefile.common | 23 ++++++++++++-----------
+ gentpl.py            |  8 ++++----
+ 3 files changed, 64 insertions(+), 16 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 9ab683fefac..c0609d87702 100644
+index 9ab683fefac..819212095ff 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -850,11 +850,23 @@ if ( test "x$target_cpu" = xi386 || test "x$target_cpu" = xx86_64 ) && test "x$p
@@ -44,7 +45,7 @@ index 9ab683fefac..c0609d87702 100644
    AC_CACHE_CHECK([for options to get soft-float], grub_cv_target_cc_soft_float, [
      grub_cv_target_cc_soft_float=no
      if test "x$target_cpu" = xarm64; then
-@@ -1939,6 +1951,40 @@ HOST_CPPFLAGS="$HOST_CPPFLAGS -I\$(top_builddir)/include"
+@@ -1939,6 +1951,41 @@ HOST_CPPFLAGS="$HOST_CPPFLAGS -I\$(top_builddir)/include"
  TARGET_CPPFLAGS="$TARGET_CPPFLAGS -I\$(top_srcdir)/include"
  TARGET_CPPFLAGS="$TARGET_CPPFLAGS -I\$(top_builddir)/include"
  
@@ -54,21 +55,18 @@ index 9ab683fefac..c0609d87702 100644
 +    UTILS_CPPFLAGS=$HOST_CPPFLAGS
 +    UTILS_CCASFLAGS=$HOST_CCASFLAGS
 +    UTILS_LDFLAGS=$HOST_LDFLAGS
-+    BUILD_UTILS_LIBS=true
 +    ;;
 +  target)
 +    UTILS_CFLAGS=$TARGET_CFLAGS
 +    UTILS_CPPFLAGS=$TARGET_CPPFLAGS
 +    UTILS_CCASFLAGS=$TARGET_CCASFLAGS
 +    UTILS_LDFLAGS=$TARGET_LDFLAGS
-+    BUILD_UTILS_LIBS=false
 +    ;;
 +  build)
 +    UTILS_CFLAGS=$BUILD_CFLAGS
 +    UTILS_CPPFLAGS=$BUILD_CPPFLAGS
 +    UTILS_CCASFLAGS=$BUILD_CCASFLAGS
 +    UTILS_LDFLAGS=$BUILD_LDFLAGS
-+    BUILD_UTILS_LIBS=true
 +    ;;
 +  *)
 +    AC_MSG_ERROR([--with-utils must be either host, target, or build])
@@ -76,20 +74,38 @@ index 9ab683fefac..c0609d87702 100644
 +esac
 +AC_MSG_NOTICE([Using $with_utils flags for utilities.])
 +
++unset CFLAGS
++unset CPPFLAGS
++unset CCASFLAGS
++unset LDFLAGS
++
 +AC_SUBST(UTILS_CFLAGS)
 +AC_SUBST(UTILS_CPPFLAGS)
 +AC_SUBST(UTILS_CCASFLAGS)
 +AC_SUBST(UTILS_LDFLAGS)
-+AC_SUBST(BUILD_UTILS_LIBS)
 +
  GRUB_TARGET_CPU="${target_cpu}"
  GRUB_PLATFORM="${platform}"
  
 diff --git a/conf/Makefile.common b/conf/Makefile.common
-index 1ecb921db65..657253d5e46 100644
+index 1ecb921db65..b93879804c0 100644
 --- a/conf/Makefile.common
 +++ b/conf/Makefile.common
-@@ -50,14 +50,15 @@ LDFLAGS_IMAGE = $(LDFLAGS_PLATFORM) -nostdlib $(TARGET_LDFLAGS_OLDMAGIC) -Wl,-S
+@@ -40,24 +40,25 @@ CPPFLAGS_KERNEL = $(CPPFLAGS_CPU) $(CPPFLAGS_PLATFORM) -DGRUB_KERNEL=1
+ CCASFLAGS_KERNEL = $(CCASFLAGS_CPU) $(CCASFLAGS_PLATFORM)
+ STRIPFLAGS_KERNEL = -R .eh_frame -R .rel.dyn -R .reginfo -R .note -R .comment -R .drectve -R .note.gnu.gold-version -R .MIPS.abiflags -R .ARM.exidx -R .note.gnu.property -R .gnu.build.attributes
+ 
+-CFLAGS_MODULE = $(CFLAGS_PLATFORM) -ffreestanding
+-LDFLAGS_MODULE = $(LDFLAGS_PLATFORM) -nostdlib $(TARGET_LDFLAGS_OLDMAGIC) -Wl,-r,-d
+-CPPFLAGS_MODULE = $(CPPFLAGS_CPU) $(CPPFLAGS_PLATFORM)
+-CCASFLAGS_MODULE = $(CCASFLAGS_CPU) $(CCASFLAGS_PLATFORM)
++CFLAGS_MODULE = $(TARGET_CFLAGS) $(CFLAGS_PLATFORM) -ffreestanding
++LDFLAGS_MODULE = $(TARGET_LDFLAGS) $(LDFLAGS_PLATFORM) -nostdlib $(TARGET_LDFLAGS_OLDMAGIC) -Wl,-r,-d
++CPPFLAGS_MODULE = $(TARGET_CPPFLAGS) $(CPPFLAGS_DEFAULT) $(CPPFLAGS_CPU) $(CPPFLAGS_PLATFORM)
++CCASFLAGS_MODULE = $(TARGET_CCASFLAGS) $(CCASFLAGS_DEFAULT) $(CCASFLAGS_CPU) $(CCASFLAGS_PLATFORM)
+ 
+ CFLAGS_IMAGE = $(CFLAGS_PLATFORM) -fno-builtin
+ LDFLAGS_IMAGE = $(LDFLAGS_PLATFORM) -nostdlib $(TARGET_LDFLAGS_OLDMAGIC) -Wl,-S
  CPPFLAGS_IMAGE = $(CPPFLAGS_CPU) $(CPPFLAGS_PLATFORM)
  CCASFLAGS_IMAGE = $(CCASFLAGS_CPU) $(CCASFLAGS_PLATFORM)
  
@@ -112,3 +128,22 @@ index 1ecb921db65..657253d5e46 100644
  
  # Other variables
  
+diff --git a/gentpl.py b/gentpl.py
+index 6409736e81c..1e4635f4426 100644
+--- a/gentpl.py
++++ b/gentpl.py
+@@ -694,10 +694,10 @@ def module(defn, platform):
+     var_set(cname(defn) + "_SOURCES", platform_sources(defn, platform) + " ## platform sources")
+     var_set("nodist_" + cname(defn) + "_SOURCES", platform_nodist_sources(defn, platform) + " ## platform nodist sources")
+     var_set(cname(defn) + "_LDADD", platform_ldadd(defn, platform))
+-    var_set(cname(defn) + "_CFLAGS", "$(AM_CFLAGS) $(CFLAGS_MODULE) " + platform_cflags(defn, platform))
+-    var_set(cname(defn) + "_LDFLAGS", "$(AM_LDFLAGS) $(LDFLAGS_MODULE) " + platform_ldflags(defn, platform))
+-    var_set(cname(defn) + "_CPPFLAGS", "$(AM_CPPFLAGS) $(CPPFLAGS_MODULE) " + platform_cppflags(defn, platform))
+-    var_set(cname(defn) + "_CCASFLAGS", "$(AM_CCASFLAGS) $(CCASFLAGS_MODULE) " + platform_ccasflags(defn, platform))
++    var_set(cname(defn) + "_CFLAGS", "$(CFLAGS_MODULE) " + platform_cflags(defn, platform))
++    var_set(cname(defn) + "_LDFLAGS", "$(LDFLAGS_MODULE) " + platform_ldflags(defn, platform))
++    var_set(cname(defn) + "_CPPFLAGS", "$(CPPFLAGS_MODULE) " + platform_cppflags(defn, platform))
++    var_set(cname(defn) + "_CCASFLAGS", "$(CCASFLAGS_MODULE) " + platform_ccasflags(defn, platform))
+     var_set(cname(defn) + "_DEPENDENCIES", "$(TARGET_OBJ2ELF) " + platform_dependencies(defn, platform))
+ 
+     gvar_add("dist_noinst_DATA", extra_dist(defn))
