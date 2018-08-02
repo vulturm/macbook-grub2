@@ -17,8 +17,9 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  grub-core/Makefile.core.def | 5 ++---
  grub-core/lib/fdt.c         | 2 --
  grub-core/loader/efi/fdt.c  | 2 ++
+ include/grub/fdt.h          | 4 ++++
  grub-core/Makefile.am       | 1 +
- 4 files changed, 5 insertions(+), 5 deletions(-)
+ 5 files changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
 index 715d3a3ec02..203584fb00b 100644
@@ -83,6 +84,26 @@ index a4c6e803645..a9dbcfdfeaf 100644
  static void *loaded_fdt;
  static void *fdt;
  
+diff --git a/include/grub/fdt.h b/include/grub/fdt.h
+index 158b1bc4b3a..6ee57e11ab3 100644
+--- a/include/grub/fdt.h
++++ b/include/grub/fdt.h
+@@ -19,6 +19,8 @@
+ #ifndef GRUB_FDT_HEADER
+ #define GRUB_FDT_HEADER	1
+ 
++#if defined(__arm__) || defined(__aarch64__)
++
+ #include <grub/types.h>
+ #include <grub/symbol.h>
+ 
+@@ -141,4 +143,6 @@ int EXPORT_FUNC(grub_fdt_set_prop) (void *fdt, unsigned int nodeoffset, const ch
+   grub_fdt_set_prop ((fdt), (nodeoffset), "reg", reg_64, 16);  \
+ })
+ 
++#endif /* defined(__arm__) || defined(__aarch64__) */
++
+ #endif	/* ! GRUB_FDT_HEADER */
 diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
 index 3781bb9cbb9..4062652506d 100644
 --- a/grub-core/Makefile.am
