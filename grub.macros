@@ -548,7 +548,7 @@ touch ${RPM_BUILD_ROOT}/boot/%{name}/grub.cfg			\
 %endif}								\
 								\
 %{expand:%%files %{1}-cdboot}					\
-%defattr(-,root,root,-)						\
-%attr(0700,root,root)%{efi_esp_dir}/%{3}			\
-%attr(0700,root,root)%{efi_esp_dir}/fonts			\
+%defattr(0755,root,root,-)					\
+%attr(0755,root,root)%{efi_esp_dir}/%{3}			\
+%attr(0755,root,root)%{efi_esp_dir}/fonts			\
 %{nil}
