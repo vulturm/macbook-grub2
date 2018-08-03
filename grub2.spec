@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	47%{?dist}
+Release:	48%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -486,6 +486,10 @@ fi
 %endif
 
 %changelog
+* Fri Aug 03 2018 Peter Jones <pjones@redhat.com> - 2.02-48
+- Kill .note.gnu.property with fire.
+  Resolves: rhbz#1612339
+
 * Thu Aug 02 2018 Peter Jones <pjones@redhat.com> - 2.02-47
 - Enable armv7 EFI builds.  This was way harder than I expected.
 
