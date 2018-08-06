@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	49%{?dist}
+Release:	50%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -23,6 +23,9 @@ Source5:	theme.tar.bz2
 Source6:	gitignore
 Source8:	strtoull_test.c
 Source9:	20-grub.install
+Source10:	Force-everything-to-use-python3.patch
+Source11:	installkernel-bls
+Source12:	installkernel.in
 
 %include %{SOURCE1}
 
@@ -72,6 +75,7 @@ hardware devices.\
 Summary:	grub2 common layout
 Group:		System Environment/Base
 BuildArch:	noarch
+Conflicts:	grubby < 8.40-18%{?dist}
 
 %description common
 This package provides some directories which are required by various grub2
@@ -235,6 +239,12 @@ install -d -m 0755 %{buildroot}%{_unitdir}/system-update.target.wants
 ln -s ../grub-boot-indeterminate.service \
 	%{buildroot}%{_unitdir}/system-update.target.wants
 
+# Install installkernel script
+mkdir -p %{buildroot}%{_libexecdir}/installkernel/
+cp -v %{SOURCE11} %{buildroot}%{_libexecdir}/installkernel/
+sed -e "s,@@LIBEXECDIR@@,%{_libexecdir}/installkernel,g" %{SOURCE12} \
+	> %{buildroot}%{_sbindir}/installkernel
+
 # Don't run debuginfo on all the grub modules and whatnot; it just
 # rejects them, complains, and slows down extraction.
 %global finddebugroot "%{_builddir}/%{?buildsubdir}/debug"
@@ -330,6 +340,9 @@ fi
 %{_prefix}/lib/kernel/install.d/20-grub.install
 %{_sysconfdir}/kernel/install.d/20-grubby.install
 %{_sysconfdir}/kernel/install.d/90-loaderentry.install
+%dir %{_libexecdir}/installkernel
+%{_libexecdir}/installkernel/installkernel-bls
+%attr(0755,root,root) %{_sbindir}/installkernel
 %dir %{_datarootdir}/grub
 %exclude %{_datarootdir}/grub/*
 %dir /boot/%{name}
@@ -486,6 +499,9 @@ fi
 %endif
 
 %changelog
+* Fri Aug 10 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-50
+- Add an installkernel script for BLS configurations
+
 * Tue Aug 07 2018 Peter Jones <pjones@redhat.com> - 2.02-49
 - Temporarily make -cdboot perms 0700 again.
 
