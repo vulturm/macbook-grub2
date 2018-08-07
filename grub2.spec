@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	48%{?dist}
+Release:	49%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -486,6 +486,9 @@ fi
 %endif
 
 %changelog
+* Tue Aug 07 2018 Peter Jones <pjones@redhat.com> - 2.02-49
+- Temporarily make -cdboot perms 0700 again.
+
 * Fri Aug 03 2018 Peter Jones <pjones@redhat.com> - 2.02-48
 - Kill .note.gnu.property with fire.
   Resolves: rhbz#1612339
