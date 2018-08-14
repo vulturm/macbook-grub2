@@ -30,14 +30,14 @@ index cba4d500198..c8cb91308d9 100644
    common = util/grub.d/01_menu_auto_hide.in;
 diff --git a/util/grub.d/01_fallback_counting.in b/util/grub.d/01_fallback_counting.in
 new file mode 100644
-index 00000000000..37ee9e6ee85
+index 00000000000..ecfc7401474
 --- /dev/null
 +++ b/util/grub.d/01_fallback_counting.in
 @@ -0,0 +1,12 @@
 +#! /bin/sh -e
 +
 +# Boot Counting
-+if [ "\${boot_counter}" -a "\${boot_success}" = "0"]; then
++if [ "\${boot_counter}" -a "\${boot_success}" = "0" ]; then
 +  if  [ "\${boot_counter}" = "0" -o "\${boot_counter}" = "-1" ]; then
 +    set default=1
 +    set boot_counter=-1

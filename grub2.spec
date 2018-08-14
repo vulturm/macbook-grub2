@@ -499,6 +499,10 @@ fi
 %endif
 
 %changelog
+* Tue Aug 14 2018 Peter Jones <pjones@redhat.com> - 2.02-50
+- Fix typo in /etc/grub.d/01_fallback_counting
+  Resolves: rhbz#1614637
+
 * Fri Aug 10 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-50
 - Add an installkernel script for BLS configurations
 
