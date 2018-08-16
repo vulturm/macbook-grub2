@@ -499,6 +499,9 @@ fi
 %endif
 
 %changelog
+* Thu Aug 16 2018 Peter Jones <pjones@redhat.com> - 2.02-50
+- Fix arm32 off-by-one error on reading the PE header.
+
 * Tue Aug 14 2018 Peter Jones <pjones@redhat.com> - 2.02-50
 - Fix typo in /etc/grub.d/01_fallback_counting
   Resolves: rhbz#1614637
