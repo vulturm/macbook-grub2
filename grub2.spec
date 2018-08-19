@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	50%{?dist}
+Release:	51%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -498,6 +498,9 @@ fi
 %endif
 
 %changelog
+* Sun Aug 19 2018 Peter Jones <pjones@redhat.com> - 2.02-51
+- Make it quieter.
+
 * Thu Aug 16 2018 Peter Jones <pjones@redhat.com> - 2.02-50
 - Fix arm32 off-by-one error on reading the PE header.
 

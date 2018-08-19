@@ -42,43 +42,6 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  include/grub/arm/linux.h     | 2 +-
  3 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/grub-core/kern/dl.c b/grub-core/kern/dl.c
-index 91105bc4677..3625bd656aa 100644
---- a/grub-core/kern/dl.c
-+++ b/grub-core/kern/dl.c
-@@ -701,6 +701,7 @@ grub_dl_load_core_noinit (void *addr, grub_size_t size)
-   Elf_Ehdr *e;
-   grub_dl_t mod;
- 
-+  grub_env_set ("debug", "linux,modules,gdb,secureboot");
-   grub_dprintf ("modules", "module at %p, size 0x%lx\n", addr,
- 		(unsigned long) size);
-   e = addr;
-@@ -768,6 +769,7 @@ grub_dl_load_core (void *addr, grub_size_t size)
- {
-   grub_dl_t mod;
- 
-+  grub_env_set ("debug", "linux,modules,gdb,secureboot");
-   grub_boot_time ("Parsing module");
- 
-   mod = grub_dl_load_core_noinit (addr, size);
-@@ -791,6 +793,7 @@ grub_dl_load_file (const char *filename)
-   void *core = 0;
-   grub_dl_t mod = 0;
- 
-+  grub_env_set ("debug", "linux,modules,gdb,secureboot");
- #ifdef GRUB_MACHINE_EFI
-   if (grub_efi_secure_boot ())
-     {
-@@ -850,6 +853,8 @@ grub_dl_load (const char *name)
-   grub_dl_t mod;
-   const char *grub_dl_dir = grub_env_get ("prefix");
- 
-+  grub_env_set ("debug", "linux,modules,gdb,secureboot");
-+
-   mod = grub_dl_get (name);
-   if (mod)
-     return mod;
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
 index 0622dfa48d4..b56ea0bc041 100644
 --- a/grub-core/loader/efi/linux.c
