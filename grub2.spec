@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	52%{?dist}
+Release:	53%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -74,7 +74,7 @@ hardware devices.\
 Summary:	grub2 common layout
 Group:		System Environment/Base
 BuildArch:	noarch
-Conflicts:	grubby < 8.40-18%{?dist}
+Conflicts:	grubby < 8.40-18
 
 %description common
 This package provides some directories which are required by various grub2
@@ -498,13 +498,16 @@ fi
 %endif
 
 %changelog
-* Thu Aug 30 2018 Peter Jones <pjones@redhat.com> - 2.02-52
+* Thu Aug 30 2018 Peter Jones <pjones@redhat.com> - 2.02-53
 - Fix AArch64 machines with no RAM latched lower than 1GB 
   Resolves: rhbz#1615969
 - Set http_path and http_url when HTTP booting
 - Hopefully slightly better error reporting in some cases
 - Better allocation of kernel+initramfs on x86_64 and aarch64
   Resolves: rhbz#1572126
+
+* Mon Aug 20 2018 Peter Jones <pjones@redhat.com> - 2.02-52
+- Update conflicts on grubby not to care about %%{?dist}
 
 * Sun Aug 19 2018 Peter Jones <pjones@redhat.com> - 2.02-51
 - Make it quieter.
