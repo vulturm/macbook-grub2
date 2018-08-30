@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	51%{?dist}
+Release:	52%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -498,6 +498,14 @@ fi
 %endif
 
 %changelog
+* Thu Aug 30 2018 Peter Jones <pjones@redhat.com> - 2.02-52
+- Fix AArch64 machines with no RAM latched lower than 1GB 
+  Resolves: rhbz#1615969
+- Set http_path and http_url when HTTP booting
+- Hopefully slightly better error reporting in some cases
+- Better allocation of kernel+initramfs on x86_64 and aarch64
+  Resolves: rhbz#1572126
+
 * Sun Aug 19 2018 Peter Jones <pjones@redhat.com> - 2.02-51
 - Make it quieter.
 

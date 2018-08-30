@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Peter Jones <pjones@redhat.com>
+Date: Mon, 27 Aug 2018 14:31:37 -0400
+Subject: [PATCH] Fix GRUB_EFI_MAX_USABLE_ADDRESS to be 64-bit on x86_64 EFI
+ machines.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+---
+ include/grub/x86_64/efi/memory.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/grub/x86_64/efi/memory.h b/include/grub/x86_64/efi/memory.h
+index 46e9145a308..fb7437f7b5f 100644
+--- a/include/grub/x86_64/efi/memory.h
++++ b/include/grub/x86_64/efi/memory.h
+@@ -2,9 +2,9 @@
+ #include <grub/efi/memory.h>
+ 
+ #if defined (__code_model_large__)
+-#define GRUB_EFI_MAX_USABLE_ADDRESS 0xffffffff
++#define GRUB_EFI_MAX_USABLE_ADDRESS 0xffffffffffffffffULL
+ #else
+-#define GRUB_EFI_MAX_USABLE_ADDRESS 0x7fffffff
++#define GRUB_EFI_MAX_USABLE_ADDRESS 0x7fffffffffffffffULL
+ #endif
+ 
+ #endif /* ! GRUB_MEMORY_CPU_HEADER */
