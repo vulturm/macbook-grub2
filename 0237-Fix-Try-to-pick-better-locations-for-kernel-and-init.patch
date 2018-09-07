@@ -1,0 +1,63 @@
+From d2332fd171c4ed22aa4f226bdbc5aec24589144f Mon Sep 17 00:00:00 2001
+From: Hans de Goede <hdegoede@redhat.com>
+Date: Mon, 3 Sep 2018 10:44:40 +0200
+Subject: [PATCH] Fix "Try to pick better locations for kernel and initrd"
+ causing boot to fail on some UEFI x86_64 systems
+
+The "Try to pick better locations for kernel and initrd" commit causes boot
+to fail on some UEFI x86_64 systems (Sandy Bridge) with these errors:
+
+grub-core/loader/i386/efi/linux.c:217:cannot allocate kernel parameters.
+grub-core/loader/i386/efi/linux.c:94:you need to load the kernel first.
+
+This commit fixes this by retrying the memory allocations changed by
+the "Try to pick better locations for kernel and initrd" commit with
+the old memory limit of 0x3fffffff.
+
+BugLink: https://bugzilla.redhat.com/show_bug.cgi?id=1624525
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+---
+ grub-core/loader/i386/efi/linux.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
+index fddf547..15f6b40 100644
+--- a/grub-core/loader/i386/efi/linux.c
++++ b/grub-core/loader/i386/efi/linux.c
+@@ -110,6 +110,10 @@ grub_cmd_initrd (grub_command_t cmd __attribute__ ((unused)),
+     }
+ 
+   initrd_mem = grub_efi_allocate_pages_max (GRUB_EFI_MAX_USABLE_ADDRESS, BYTES_TO_PAGES(size));
++
++  if (!initrd_mem)
++    initrd_mem = grub_efi_allocate_pages_max (0x3fffffff, BYTES_TO_PAGES(size));
++
+   if (!initrd_mem)
+     {
+       grub_error (GRUB_ERR_OUT_OF_MEMORY, N_("can't allocate initrd"));
+@@ -212,6 +216,11 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+ 
+   params = grub_efi_allocate_pages_max (GRUB_EFI_MAX_USABLE_ADDRESS,
+ 					BYTES_TO_PAGES(sizeof(*params)));
++
++  if (! params)
++    params = grub_efi_allocate_pages_max (0x3fffffff,
++					  BYTES_TO_PAGES(sizeof(*params)));
++
+   if (! params)
+     {
+       grub_error (GRUB_ERR_OUT_OF_MEMORY, "cannot allocate kernel parameters");
+@@ -313,6 +322,10 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+     kernel_mem = grub_efi_allocate_pages_max(GRUB_EFI_MAX_USABLE_ADDRESS,
+ 					     BYTES_TO_PAGES(lh->init_size));
+ 
++  if (!kernel_mem)
++    kernel_mem = grub_efi_allocate_pages_max(0x3fffffff,
++					     BYTES_TO_PAGES(lh->init_size));
++
+   if (!kernel_mem)
+     {
+       grub_error (GRUB_ERR_OUT_OF_MEMORY, N_("can't allocate kernel"));
+-- 
+2.19.0.rc1
+

@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	53%{?dist}
+Release:	54%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -498,6 +498,10 @@ fi
 %endif
 
 %changelog
+* Fri Sep 07 2018 Kevin Fenzi <kevin@scrye.com> - 2.02-54
+- Add patch from https://github.com/rhboot/grub2/pull/30 to fix uefi booting
+- Resolves: rhbz#1624532
+
 * Thu Aug 30 2018 Peter Jones <pjones@redhat.com> - 2.02-53
 - Fix AArch64 machines with no RAM latched lower than 1GB 
   Resolves: rhbz#1615969
