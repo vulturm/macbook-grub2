@@ -9,7 +9,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/kern/main.c b/grub-core/kern/main.c
-index fc8d8c6c9d4..c59b89f0a09 100644
+index fc8d8c6c9d4..db5238179f8 100644
 --- a/grub-core/kern/main.c
 +++ b/grub-core/kern/main.c
 @@ -130,8 +130,12 @@ grub_set_prefix_and_root (void)
@@ -22,7 +22,7 @@ index fc8d8c6c9d4..c59b89f0a09 100644
 +      if (!grub_strncmp(fwdevice, "http", 4) && fwpath[0] != '/')
 +	separator = '/';
 +
-+      fw_path = grub_xasprintf ("(%s)%c%s", fwdevice, seperator, fwpath);
++      fw_path = grub_xasprintf ("(%s)%c%s", fwdevice, separator, fwpath);
        if (fw_path)
  	{
  	  grub_env_set ("fw_path", fw_path);
