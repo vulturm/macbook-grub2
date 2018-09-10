@@ -234,4 +234,4 @@ Patch0233: 0233-Make-grub_error-more-verbose.patch
 Patch0234: 0234-arm-arm64-loader-Better-memory-allocation-and-error-.patch
 Patch0235: 0235-Fix-GRUB_EFI_MAX_USABLE_ADDRESS-to-be-64-bit-on-x86_.patch
 Patch0236: 0236-Try-to-pick-better-locations-for-kernel-and-initrd.patch
-Patch0237: 0237-Fix-Try-to-pick-better-locations-for-kernel-and-init.patch
+Patch0237: 0237-Try-again-to-pick-better-locations-for-kernel-and-in.patch
