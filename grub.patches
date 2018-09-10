@@ -235,3 +235,4 @@ Patch0234: 0234-arm-arm64-loader-Better-memory-allocation-and-error-.patch
 Patch0235: 0235-Fix-GRUB_EFI_MAX_USABLE_ADDRESS-to-be-64-bit-on-x86_.patch
 Patch0236: 0236-Try-to-pick-better-locations-for-kernel-and-initrd.patch
 Patch0237: 0237-Try-again-to-pick-better-locations-for-kernel-and-in.patch
+Patch0238: 0238-fw_path-don-t-prepend-unless-we-re-on-http-s.patch

@@ -499,9 +499,10 @@ fi
 
 %changelog
 * Mon Sep 10 2018 Peter Jones <pjones@redhat.com> - 2.02-55
-- Fix UEFI booting in a different way.
-  Related: rhbz#1626844
+- Fix UEFI memory problem in a different way.
   Related: rhbz#1624532
+- Don't mangle fw_path with a / unless we're on http
+  Resolves: rhbz#1626844
 
 * Fri Sep 07 2018 Kevin Fenzi <kevin@scrye.com> - 2.02-54
 - Add patch from https://github.com/rhboot/grub2/pull/30 to fix uefi booting
