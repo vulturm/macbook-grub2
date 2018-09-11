@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	55%{?dist}
+Release:	56%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -498,6 +498,13 @@ fi
 %endif
 
 %changelog
+* Tue Sep 11 2018 Peter Jones <pjones@redhat.com> - 2.02-56
+- Don't mangle fw_path even harder.
+  Resolves: rhbz#1626844
+- Fix reboot being missing on some platforms, and make it alias to
+  "reset" as well.
+- More dprintf().
+
 * Mon Sep 10 2018 Peter Jones <pjones@redhat.com> - 2.02-55
 - Fix UEFI memory problem in a different way.
   Related: rhbz#1624532
