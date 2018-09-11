@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	56%{?dist}
+Release:	57%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -498,6 +498,18 @@ fi
 %endif
 
 %changelog
+* Tue Sep 11 2018 Peter Jones <pjones@redhat.com> - 2.02-57
+- Limit grub_malloc() on x86_64 to < 31bit addresses, as some devices seem to
+  have a colossally broken storage controller (or UEFI driver) that can't do
+  DMA to higher memory addresses, but fails silently.
+  Resolves: rhbz#1626844 (possibly really resolving it this time.)
+- Also integrate Hans's attempt to fix the related error from -54, but do it
+  the other way around: try the low addresses first and *then* the high one if
+  the allocation fails.  This way we'll get low regions by default, and if
+  kernel/initramfs don't fit anywhere, it'll try the higher addresses.
+  Related: rhbz#1624532
+- Coalesce all the intermediate debugging junk from -54/-55/-56.
+
 * Tue Sep 11 2018 Peter Jones <pjones@redhat.com> - 2.02-56
 - Don't mangle fw_path even harder.
   Resolves: rhbz#1626844

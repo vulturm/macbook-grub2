@@ -9,23 +9,35 @@ http_url: http://www.example.com/foo/bar
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
- grub-core/kern/main.c    |  2 +-
+ grub-core/kern/main.c    | 10 +++++-
  grub-core/net/efi/http.c | 82 ++++++++++++++++++++++++++++++++++++------------
- 2 files changed, 63 insertions(+), 21 deletions(-)
+ 2 files changed, 71 insertions(+), 21 deletions(-)
 
 diff --git a/grub-core/kern/main.c b/grub-core/kern/main.c
-index da47b18b50e..fc8d8c6c9d4 100644
+index da47b18b50e..dcf48726d54 100644
 --- a/grub-core/kern/main.c
 +++ b/grub-core/kern/main.c
-@@ -131,7 +131,7 @@ grub_set_prefix_and_root (void)
+@@ -130,11 +130,19 @@ grub_set_prefix_and_root (void)
+   if (fwdevice && fwpath)
      {
        char *fw_path;
++      char separator[3] = ")";
  
 -      fw_path = grub_xasprintf ("(%s)/%s", fwdevice, fwpath);
-+      fw_path = grub_xasprintf ("(%s)%s%s", fwdevice, fwpath[0] == '/' ? "" : "/", fwpath);
++      grub_dprintf ("fw_path", "\n");
++      grub_dprintf ("fw_path", "fwdevice:\"%s\" fwpath:\"%s\"\n", fwdevice, fwpath);
++
++      if (!grub_strncmp(fwdevice, "http", 4) && fwpath[0] != '/')
++	grub_strcpy(separator, ")/");
++
++      fw_path = grub_xasprintf ("(%s%s%s", fwdevice, separator, fwpath);
        if (fw_path)
  	{
  	  grub_env_set ("fw_path", fw_path);
++	  grub_dprintf ("fw_path", "fw_path:\"%s\"\n", fw_path);
+ 	  grub_free (fw_path);
+ 	}
+     }
 diff --git a/grub-core/net/efi/http.c b/grub-core/net/efi/http.c
 index 243acbaa35b..2a9624dacc4 100644
 --- a/grub-core/net/efi/http.c
