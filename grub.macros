@@ -372,7 +372,7 @@ GRUB_MODULES="	all_video boot blscfg btrfs			\\\
 		loadenv loopback linux lvm lsefi		\\\
 		mdraid09 mdraid1x minicmd net			\\\
 		normal part_apple part_msdos part_gpt		\\\
-		password_pbkdf2 png				\\\
+		password_pbkdf2 png reboot			\\\
 		search search_fs_uuid search_fs_file		\\\
 		search_label serial sleep syslinuxcfg test tftp	\\\
 		video xfs"					\
