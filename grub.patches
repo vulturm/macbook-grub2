@@ -237,3 +237,6 @@ Patch0236: 0236-Add-a-version-command.patch
 Patch0237: 0237-Add-more-dprintf-and-nerf-dprintf-in-script.c.patch
 Patch0238: 0238-arm-arm64-loader-Better-memory-allocation-and-error-.patch
 Patch0239: 0239-Try-to-pick-better-locations-for-kernel-and-initrd.patch
+Patch0240: 0240-Attempt-to-fix-up-all-the-places-Wsign-compare-error.patch
+Patch0241: 0241-Don-t-use-Wno-sign-compare-Wno-conversion-Wno-error-.patch
+Patch0242: 0242-grub-boot-success.timer-Add-a-few-Conditions-for-run.patch
