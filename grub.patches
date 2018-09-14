@@ -244,3 +244,4 @@ Patch0243: 0243-x86-efi-Use-bounce-buffers-for-reading-to-addresses-.patch
 Patch0244: 0244-x86-efi-Re-arrange-grub_cmd_linux-a-little-bit.patch
 Patch0245: 0245-x86-efi-Make-our-own-allocator-for-kernel-stuff.patch
 Patch0246: 0246-x86-efi-Allow-initrd-params-cmdline-allocations-abov.patch
+Patch0247: 0247-docs-Stop-using-polkit-pkexec-for-grub-boot-success..patch

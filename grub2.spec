@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	58%{?dist}
+Release:	59%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -223,9 +223,6 @@ install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE9}
 install -d -m 0755 %{buildroot}%{_sysconfdir}/kernel/install.d/
 install -m 0644 /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/20-grubby.install
 install -m 0644 /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/90-loaderentry.install
-# Install grub2-set-bootflag polkit policy
-install -D -m 0755 -t %{buildroot}%{_datadir}/polkit-1/actions \
-	docs/org.gnu.grub.policy
 # Install systemd user service to set the boot_success flag
 install -D -m 0755 -t %{buildroot}%{_userunitdir} \
 	docs/grub-boot-success.{timer,service}
@@ -366,7 +363,7 @@ fi
 %files tools-minimal
 %{_sysconfdir}/prelink.conf.d/grub2.conf
 %{_sbindir}/%{name}-get-kernel-settings
-%{_sbindir}/%{name}-set-bootflag
+%attr(4755, root, root) %{_sbindir}/%{name}-set-bootflag
 %{_sbindir}/%{name}-set-default
 %{_sbindir}/%{name}-set*password
 %{_bindir}/%{name}-editenv
@@ -390,7 +387,6 @@ fi
 %attr(0644,root,root) %ghost %config(noreplace) %{_sysconfdir}/default/grub
 %config %{_sysconfdir}/grub.d/??_*
 %{_sysconfdir}/grub.d/README
-%{_datadir}/polkit-1/actions/org.gnu.grub.policy
 %{_userunitdir}/grub-boot-success.timer
 %{_userunitdir}/grub-boot-success.service
 %{_userunitdir}/timers.target.wants
@@ -498,6 +494,10 @@ fi
 %endif
 
 %changelog
+* Tue Sep 25 2018 Hans de Goede <hdegoede@redhat.com> - 2.02-59
+- Stop using pkexec for grub2-set-bootflag, it does not work under gdm
+  instead make it suid root (it was written with this in mind)
+
 * Tue Sep 25 2018 Peter Jones <pjones@redhat.com>
 - Use bounce buffers for addresses above 4GB
 - Allow initramfs, cmdline, and params >4GB, but not kernel
