@@ -240,3 +240,7 @@ Patch0239: 0239-Try-to-pick-better-locations-for-kernel-and-initrd.patch
 Patch0240: 0240-Attempt-to-fix-up-all-the-places-Wsign-compare-error.patch
 Patch0241: 0241-Don-t-use-Wno-sign-compare-Wno-conversion-Wno-error-.patch
 Patch0242: 0242-grub-boot-success.timer-Add-a-few-Conditions-for-run.patch
+Patch0243: 0243-x86-efi-Use-bounce-buffers-for-reading-to-addresses-.patch
+Patch0244: 0244-x86-efi-Re-arrange-grub_cmd_linux-a-little-bit.patch
+Patch0245: 0245-x86-efi-Make-our-own-allocator-for-kernel-stuff.patch
+Patch0246: 0246-x86-efi-Allow-initrd-params-cmdline-allocations-abov.patch

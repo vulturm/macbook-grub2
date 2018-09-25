@@ -498,6 +498,10 @@ fi
 %endif
 
 %changelog
+* Tue Sep 25 2018 Peter Jones <pjones@redhat.com>
+- Use bounce buffers for addresses above 4GB
+- Allow initramfs, cmdline, and params >4GB, but not kernel
+
 * Wed Sep 12 2018 Peter Jones <pjones@redhat.com> - 2.02-58
 - Add 2 conditions to boot-success timer and service:
   - Don't run it for system users
