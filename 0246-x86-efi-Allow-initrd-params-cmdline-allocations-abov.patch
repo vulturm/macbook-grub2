@@ -14,7 +14,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 65 insertions(+), 8 deletions(-)
 
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
-index 36b3c989c39..09908b62644 100644
+index 1811f4b3d56..65d1b5cc034 100644
 --- a/grub-core/loader/i386/efi/linux.c
 +++ b/grub-core/loader/i386/efi/linux.c
 @@ -53,13 +53,22 @@ struct allocation_choice {
@@ -53,7 +53,7 @@ index 36b3c989c39..09908b62644 100644
        if (max == prev_max)
  	continue;
  
-@@ -164,6 +178,9 @@ read(grub_file_t file, grub_uint8_t *bufp, grub_size_t len)
+@@ -169,6 +183,9 @@ read(grub_file_t file, grub_uint8_t *bufp, grub_size_t len)
    return bufpos;
  }
  
@@ -63,7 +63,7 @@ index 36b3c989c39..09908b62644 100644
  static grub_err_t
  grub_cmd_initrd (grub_command_t cmd __attribute__ ((unused)),
                   int argc, char *argv[])
-@@ -204,8 +221,12 @@ grub_cmd_initrd (grub_command_t cmd __attribute__ ((unused)),
+@@ -209,8 +226,12 @@ grub_cmd_initrd (grub_command_t cmd __attribute__ ((unused)),
      goto fail;
    grub_dprintf ("linux", "initrd_mem = %p\n", initrd_mem);
  
@@ -78,7 +78,7 @@ index 36b3c989c39..09908b62644 100644
  
    ptr = initrd_mem;
  
-@@ -340,6 +361,18 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -345,6 +366,18 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
      }
  #endif
  
@@ -97,7 +97,7 @@ index 36b3c989c39..09908b62644 100644
    params = kernel_alloc (sizeof(*params), "cannot allocate kernel parameters");
    if (!params)
      goto fail;
-@@ -373,21 +406,40 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -378,21 +411,40 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    grub_dprintf ("linux", "cmdline:%s\n", linux_cmdline);
    grub_dprintf ("linux", "setting lh->cmd_line_ptr to 0x%08x\n",
@@ -140,13 +140,13 @@ index 36b3c989c39..09908b62644 100644
    if (!kernel_mem)
      goto fail;
    grub_dprintf("linux", "kernel_mem = %p\n", kernel_mem);
-@@ -396,8 +448,9 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -401,8 +453,9 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    loaded = 1;
  
 -  grub_dprintf ("linux", "setting lh->code32_start to %p\n", kernel_mem);
 -  lh->code32_start = (grub_uint32_t)(grub_addr_t) kernel_mem;
-+  grub_dprintf ("linux", "setting lh->code32_start to %p\n",
++  grub_dprintf ("linux", "setting lh->code32_start to 0x%08x\n",
 +		LOW_U32(kernel_mem));
 +  lh->code32_start = LOW_U32(kernel_mem);
  

@@ -245,3 +245,11 @@ Patch0244: 0244-x86-efi-Re-arrange-grub_cmd_linux-a-little-bit.patch
 Patch0245: 0245-x86-efi-Make-our-own-allocator-for-kernel-stuff.patch
 Patch0246: 0246-x86-efi-Allow-initrd-params-cmdline-allocations-abov.patch
 Patch0247: 0247-docs-Stop-using-polkit-pkexec-for-grub-boot-success..patch
+Patch0248: 0248-drop-TPM-support-for-legacy-BIOS.patch
+Patch0249: 0249-Move-quicksort-function-from-kernel.exec-to-the-blsc.patch
+Patch0250: 0250-Include-blscfg-module-for-powerpc-ieee1275.patch
+Patch0251: 0251-grub-switch-to-blscfg-copy-blscfg-module-for-legacy-.patch
+Patch0252: 0252-Fix-getroot.c-s-trampolines.patch
+Patch0253: 0253-Do-not-allow-stack-trampolines-anywhere.patch
+Patch0254: 0254-fixup-arm-arm64-loader-Better-memory-allocation-and-.patch
+Patch0255: 0255-Fix-boot-counting-grub.cfg-snippet-creation.patch
