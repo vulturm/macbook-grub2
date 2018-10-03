@@ -74,12 +74,12 @@ per-platform constraints on its given address are maintained.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
- grub-core/kern/efi/mm.c        | 32 ++++++++++++-----
+ grub-core/kern/efi/mm.c        | 35 ++++++++++++++-----
  grub-core/loader/arm64/linux.c | 78 ++++++++++++++++++++++++++++++++----------
- 2 files changed, 82 insertions(+), 28 deletions(-)
+ 2 files changed, 85 insertions(+), 28 deletions(-)
 
 diff --git a/grub-core/kern/efi/mm.c b/grub-core/kern/efi/mm.c
-index 7692e63ba24..306924f73a4 100644
+index 7692e63ba24..2c41a528f27 100644
 --- a/grub-core/kern/efi/mm.c
 +++ b/grub-core/kern/efi/mm.c
 @@ -154,6 +154,7 @@ grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
@@ -90,7 +90,7 @@ index 7692e63ba24..306924f73a4 100644
  
    /* Limit the memory access to less than 4GB for 32-bit platforms.  */
    if (address > GRUB_EFI_MAX_USABLE_ADDRESS)
-@@ -165,19 +166,19 @@ grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
+@@ -165,19 +166,22 @@ grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
      }
  
    b = grub_efi_system_table->boot_services;
@@ -98,6 +98,9 @@ index 7692e63ba24..306924f73a4 100644
 +  status = efi_call_4 (b->allocate_pages, alloctype, memtype, pages, &ret);
    if (status != GRUB_EFI_SUCCESS)
      {
++      grub_dprintf ("efi",
++		    "allocate_pages(%d, %d, 0x%0lx, 0x%016lx) = 0x%016lx\n",
++		    alloctype, memtype, pages, address, status);
        grub_error (GRUB_ERR_OUT_OF_MEMORY, N_("out of memory"));
        return NULL;
      }
@@ -114,7 +117,7 @@ index 7692e63ba24..306924f73a4 100644
        grub_efi_free_pages (0, pages);
        if (status != GRUB_EFI_SUCCESS)
  	{
-@@ -186,9 +187,9 @@ grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
+@@ -186,9 +190,9 @@ grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
  	}
      }
  
@@ -126,7 +129,7 @@ index 7692e63ba24..306924f73a4 100644
  }
  
  void *
-@@ -696,11 +697,24 @@ grub_efi_get_ram_base(grub_addr_t *base_addr)
+@@ -696,11 +700,24 @@ grub_efi_get_ram_base(grub_addr_t *base_addr)
    if (ret < 1)
      return GRUB_ERR_BUG;
  

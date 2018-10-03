@@ -251,5 +251,5 @@ Patch0250: 0250-Include-blscfg-module-for-powerpc-ieee1275.patch
 Patch0251: 0251-grub-switch-to-blscfg-copy-blscfg-module-for-legacy-.patch
 Patch0252: 0252-Fix-getroot.c-s-trampolines.patch
 Patch0253: 0253-Do-not-allow-stack-trampolines-anywhere.patch
-Patch0254: 0254-fixup-arm-arm64-loader-Better-memory-allocation-and-.patch
-Patch0255: 0255-Fix-boot-counting-grub.cfg-snippet-creation.patch
+Patch0254: 0254-Fix-boot-counting-grub.cfg-snippet-creation.patch
+Patch0255: 0255-Fix-the-fallback-counting-script-even-harder.patch

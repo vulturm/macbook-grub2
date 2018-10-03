@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	60%{?dist}
+Release:	61%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -494,6 +494,11 @@ fi
 %endif
 
 %changelog
+* Wed Oct 03 2018 Peter Jones <pjones@redhat.com> - 2.02-61
+- Fix the fallback counting script even harder. Apparently, this wasn't
+  tested well enough.
+  Resolves: rhbz#1614637
+
 * Tue Oct 02 2018 Peter Jones <pjones@redhat.com> - 2.02-60
 - Fix grub.cfg boot counting snippet generation (lorbus)
   Resolves: rhbz#1614637
