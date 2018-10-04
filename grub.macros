@@ -368,7 +368,7 @@ GRUB_MODULES="	all_video boot blscfg btrfs			\\\
 		cat configfile					\\\
 		echo efi_netfs efifwsetup efinet ext2		\\\
 		fat font gfxmenu gfxterm gzio			\\\
-		halt hfsplus http iso9660 jpeg			\\\
+		halt hfsplus http increment iso9660 jpeg	\\\
 		loadenv loopback linux lvm lsefi lsefimmap	\\\
 		mdraid09 mdraid1x minicmd net			\\\
 		normal part_apple part_msdos part_gpt		\\\

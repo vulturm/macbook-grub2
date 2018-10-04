@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	61%{?dist}
+Release:	62%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -386,6 +386,7 @@ fi
 %files tools
 %attr(0644,root,root) %ghost %config(noreplace) %{_sysconfdir}/default/grub
 %config %{_sysconfdir}/grub.d/??_*
+%exclude %{_sysconfdir}/grub.d/01_fallback_counting
 %{_sysconfdir}/grub.d/README
 %{_userunitdir}/grub-boot-success.timer
 %{_userunitdir}/grub-boot-success.service
@@ -494,6 +495,11 @@ fi
 %endif
 
 %changelog
+* Thu Oct 04 2018 Peter Jones <pjones@redhat.com> - 2.02-62
+- Exclude /etc/grub.d/01_fallback_counting until we work through some design
+  questions.
+  Resolves: rhbz#1614637
+
 * Wed Oct 03 2018 Peter Jones <pjones@redhat.com> - 2.02-61
 - Fix the fallback counting script even harder. Apparently, this wasn't
   tested well enough.
