@@ -114,6 +114,12 @@ case "$COMMAND" in
             fi
             grub2-editenv - set "saved_entry=${NEWDEFAULT}"
 
+            # this probably isn't the best place to do this, but it will do for now.
+            if [ -e "${BOOTPREFIX}${INITRD}" -a -e "${BOOTPREFIX}${LINUX}" -a \
+                 "${BOOTPREFIX}${INITRD}" -ot "${BOOTPREFIX}${LINUX}" -a \
+                 -x /usr/lib/kernel/install.d/50-dracut.install ]; then
+                rm -f "${BOOTPREFIX}${INITRD}"
+            fi
             exit 0
         fi
 
