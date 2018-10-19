@@ -101,8 +101,8 @@ case "$COMMAND" in
             NEWDEFAULT="${BLS_ID}"
             if [ "x$GRUB_LINUX_MAKE_DEBUG" = "xtrue" ]; then
                 ARCH="$(uname -m)"
-                BLS_DEBUG_ID="$(echo ${BLS_ID} | sed -e "s/\.${ARCH}/-debug.${ARCH}/")"
-                BLS_DEBUG="$(echo ${BLS_TARGET} | sed -e "s/\.${ARCH}/-debug.${ARCH}/")"
+                BLS_DEBUG_ID="$(echo ${BLS_ID} | sed -e "s/${KERNEL_VERSION}/${KERNEL_VERSION}~debug/")"
+                BLS_DEBUG="$(echo ${BLS_TARGET} | sed -e "s/${KERNEL_VERSION}/${KERNEL_VERSION}~debug/")"
                 cp -aT  "${BLS_TARGET}" "${BLS_DEBUG}"
                 TITLE="$(grep '^title[ \t]' "${BLS_DEBUG}" | sed -e 's/^title[ \t]*//')"
                 sed -i -e "s/^title.*/title ${TITLE}${GRUB_LINUX_DEBUG_TITLE_POSTFIX}/" "${BLS_DEBUG}"
@@ -134,7 +134,7 @@ case "$COMMAND" in
         if [[ "x${GRUB_ENABLE_BLSCFG}" = "xtrue" ]] || [[ ! -f /sbin/new-kernel-pkg ]]; then
             ARCH="$(uname -m)"
             BLS_TARGET="${BLS_DIR}/${MACHINE_ID}-${KERNEL_VERSION}.conf"
-            BLS_DEBUG="$(echo ${BLS_TARGET} | sed -e "s/\.${ARCH}/-debug.${ARCH}/")"
+            BLS_DEBUG="$(echo ${BLS_TARGET} | sed -e "s/${KERNEL_VERSION}/${KERNEL_VERSION}~debug/")"
             rm -f "${BLS_TARGET}" "${BLS_DEBUG}"
 
             for i in vmlinuz System.map config zImage.stub dtb; do
