@@ -25,6 +25,7 @@ Source8:	strtoull_test.c
 Source9:	20-grub.install
 Source11:	installkernel-bls
 Source12:	installkernel.in
+Source13:	99-grub-mkconfig.install
 
 %include %{SOURCE1}
 
@@ -220,6 +221,7 @@ EOF
 # Install kernel-install scripts
 install -d -m 0755 %{buildroot}%{_prefix}/lib/kernel/install.d/
 install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE9}
+install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE13}
 install -d -m 0755 %{buildroot}%{_sysconfdir}/kernel/install.d/
 install -m 0644 /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/20-grubby.install
 install -m 0644 /dev/null %{buildroot}%{_sysconfdir}/kernel/install.d/90-loaderentry.install
@@ -336,6 +338,7 @@ fi
 %{_prefix}/lib/kernel/install.d/20-grub.install
 %{_sysconfdir}/kernel/install.d/20-grubby.install
 %{_sysconfdir}/kernel/install.d/90-loaderentry.install
+%{_prefix}/lib/kernel/install.d/99-grub-mkconfig.install
 %dir %{_libexecdir}/installkernel
 %{_libexecdir}/installkernel/installkernel-bls
 %attr(0755,root,root) %{_sbindir}/installkernel
@@ -386,6 +389,11 @@ fi
 %files tools
 %attr(0644,root,root) %ghost %config(noreplace) %{_sysconfdir}/default/grub
 %config %{_sysconfdir}/grub.d/??_*
+%ifarch ppc64 ppc64le
+%exclude %{_sysconfdir}/grub.d/10_linux
+%else
+%exclude %{_sysconfdir}/grub.d/10_linux_bls
+%endif
 %exclude %{_sysconfdir}/grub.d/01_fallback_counting
 %{_sysconfdir}/grub.d/README
 %{_userunitdir}/grub-boot-success.timer
@@ -495,6 +503,24 @@ fi
 %endif
 
 %changelog
+* Tue Oct 23 2018 Javier Martinez Canillas <javierm@redhat.com>
+- add 10_linux_bls grub.d snippet to generate menu entries from BLS files
+  Resolves: rhbz#1636013
+- Only set kernelopts in grubenv if it wasn't set before
+  Resolves: rhbz#1636466
+- kernel-install: Remove existing initramfs if it's older than the kernel (pjones)
+  Resolves: rhbz#1638405
+- Update the saved entry correctly after a kernel install (pjones)
+  Resolves: rhbz#1638117
+- blscfg: sort everything with rpm *package* comparison (pjones)
+  Related: rhbz#1638103
+- blscfg: Make 10_linux_bls sort the same way as well
+  Related: rhbz#1638103
+- don't set saved_entry on grub2-mkconfig
+  Resolves: rhbz#1636466
+- Fix menu entry selection based on ID and title (pjones)
+  Resolves: rhbz#1640979
+
 * Thu Oct 04 2018 Peter Jones <pjones@redhat.com> - 2.02-62
 - Exclude /etc/grub.d/01_fallback_counting until we work through some design
   questions.

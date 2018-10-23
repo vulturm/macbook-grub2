@@ -251,3 +251,15 @@ Patch0250: 0250-grub-switch-to-blscfg-copy-blscfg-module-for-legacy-.patch
 Patch0251: 0251-Fix-getroot.c-s-trampolines.patch
 Patch0252: 0252-Do-not-allow-stack-trampolines-anywhere.patch
 Patch0253: 0253-Reimplement-boot_counter.patch
+Patch0254: 0254-blscfg-don-t-include-.conf-at-the-end-of-our-id.patch
+Patch0255: 0255-grub-get-kernel-settings-expose-some-more-config-var.patch
+Patch0256: 0256-Reimplement-boot_counter.patch
+Patch0257: 0257-add-10_linux_bls-grub.d-snippet-to-generate-menu-ent.patch
+Patch0258: 0258-Only-set-kernelopts-in-grubenv-if-it-wasn-t-set-befo.patch
+Patch0259: 0259-blscfg-sort-everything-with-rpm-package-comparison.patch
+Patch0260: 0260-10_linux_bls-use-grub2-rpm-sort-instead-of-ls-vr-to-.patch
+Patch0261: 0261-don-t-set-saved_entry-on-grub2-mkconfig.patch
+Patch0262: 0262-grub-switch-to-blscfg-use-debug-instead-of-debug-as-.patch
+Patch0263: 0263-Make-blscfg-debug-messages-more-useful.patch
+Patch0264: 0264-Make-grub_strtoul-end-pointer-have-the-right-constif.patch
+Patch0265: 0265-Fix-menu-entry-selection-based-on-ID-and-title.patch
