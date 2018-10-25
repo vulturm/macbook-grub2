@@ -520,6 +520,8 @@ fi
   Resolves: rhbz#1636466
 - Fix menu entry selection based on ID and title (pjones)
   Resolves: rhbz#1640979
+- Don't unconditionally set default entry when installing debug kernels
+  Resolves: rhbz#1636346
 
 * Thu Oct 04 2018 Peter Jones <pjones@redhat.com> - 2.02-62
 - Exclude /etc/grub.d/01_fallback_counting until we work through some design

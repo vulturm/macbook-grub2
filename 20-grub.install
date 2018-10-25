@@ -98,7 +98,14 @@ case "$COMMAND" in
                 sed -i -e "s,^initrd.*,initrd ${BOOTPREFIX}${INITRD},g" "${BLS_TARGET}"
             fi
 
-            NEWDEFAULT="${BLS_ID}"
+            if [[ "$KERNEL_VERSION" == *\+* ]] && [ "x$GRUB_DEFAULT_TO_DEBUG" != "xtrue" ]; then
+                GRUB_UPDATE_DEFAULT_KERNEL=false
+            fi
+
+            if [ "x$GRUB_UPDATE_DEFAULT_KERNEL" = "xtrue" ]; then
+                NEWDEFAULT="${BLS_ID}"
+            fi
+
             if [ "x$GRUB_LINUX_MAKE_DEBUG" = "xtrue" ]; then
                 ARCH="$(uname -m)"
                 BLS_DEBUG_ID="$(echo ${BLS_ID} | sed -e "s/${KERNEL_VERSION}/${KERNEL_VERSION}~debug/")"
@@ -108,11 +115,13 @@ case "$COMMAND" in
                 sed -i -e "s/^title.*/title ${TITLE}${GRUB_LINUX_DEBUG_TITLE_POSTFIX}/" "${BLS_DEBUG}"
                 sed -i -e "s/^id.*/id ${BLS_DEBUG_ID}/" "${BLS_DEBUG}"
                 sed -i -e "s/^options.*/options \$kernelopts ${GRUB_CMDLINE_LINUX_DEBUG}/" "${BLS_DEBUG}"
-                if [ "x$GRUB_UPDATE_DEFAULT_KERNEL" = "xtrue" -a "x$GRUB_DEFAULT_TO_DEBUG" = "xtrue" ]; then
+                if [ -n "$NEWDEFAULT" -a "x$GRUB_DEFAULT_TO_DEBUG" = "xtrue" ]; then
                     NEWDEFAULT="${BLS_DEBUG_ID}"
                 fi
             fi
-            grub2-editenv - set "saved_entry=${NEWDEFAULT}"
+            if [ -n "$NEWDEFAULT" ]; then
+                grub2-editenv - set "saved_entry=${NEWDEFAULT}"
+            fi
 
             # this probably isn't the best place to do this, but it will do for now.
             if [ -e "${BOOTPREFIX}${INITRD}" -a -e "${BOOTPREFIX}${LINUX}" -a \
