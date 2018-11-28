@@ -215,7 +215,7 @@ Requires(pre):	dracut							\
 Requires(post): dracut							\
 %{expand:%%description %%{1}}						\
 %{desc}									\
-This subpackage provides support for %%{1} systems.			\
+This subpackage provides support for %{1} systems.			\
 									\
 %{expand:%%{?!buildsubdir:%%define buildsubdir grub-%%{1}-%{tarversion}}}\
 %{expand:%%if 0%%{with_legacy_modules}					\
