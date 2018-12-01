@@ -318,10 +318,10 @@ index 2869482fe06..4e55adc557b 100644
  	  grub_netbuff_push (nb, sizeof (*udph));
  
 diff --git a/grub-core/net/drivers/efi/efinet.c b/grub-core/net/drivers/efi/efinet.c
-index 329024b6f2c..bf36b446dc4 100644
+index a57189e8bb3..4444e8e60ee 100644
 --- a/grub-core/net/drivers/efi/efinet.c
 +++ b/grub-core/net/drivers/efi/efinet.c
-@@ -329,6 +329,9 @@ grub_efinet_find_snp_cards (int preferred_only, grub_efi_handle_t preferred,
+@@ -280,6 +280,9 @@ grub_efinet_findcards (void)
  	/* This should not happen... Why?  */
  	continue;
  
@@ -331,8 +331,8 @@ index 329024b6f2c..bf36b446dc4 100644
        if (net->mode->state == GRUB_EFI_NETWORK_STOPPED
  	  && efi_call_1 (net->start, net) != GRUB_EFI_SUCCESS)
  	continue;
-@@ -366,10 +369,11 @@ grub_efinet_find_snp_cards (int preferred_only, grub_efi_handle_t preferred,
-       *i = (*i)+1;
+@@ -316,10 +319,11 @@ grub_efinet_findcards (void)
+       card->name = grub_xasprintf ("efinet%d", i++);
        card->driver = &efidriver;
        card->flags = 0;
 -      card->default_address.type = GRUB_NET_LINK_LEVEL_PROTOCOL_ETHERNET;

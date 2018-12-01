@@ -26,7 +26,7 @@ index 106eb10a362..3630b0cbf2d 100644
    efi_status = grub_efi_free_pool (buffer);
  
 diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
-index 02488ec35ae..ddc5ecfb03d 100644
+index 28b6adf7648..e5b521bd9be 100644
 --- a/include/grub/efi/api.h
 +++ b/include/grub/efi/api.h
 @@ -527,6 +527,14 @@ typedef grub_uint8_t grub_efi_char8_t;

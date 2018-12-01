@@ -1125,10 +1125,10 @@ index 4e55adc557b..ff1d7776e7f 100644
 +  grub_unregister_command (cmd_bootp6);
  }
 diff --git a/grub-core/net/drivers/efi/efinet.c b/grub-core/net/drivers/efi/efinet.c
-index bf36b446dc4..da90f0f40ce 100644
+index 4444e8e60ee..00d7d37b8de 100644
 --- a/grub-core/net/drivers/efi/efinet.c
 +++ b/grub-core/net/drivers/efi/efinet.c
-@@ -477,9 +477,6 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
+@@ -394,9 +394,6 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
      pxe_mode = pxe->mode;
      if (pxe_mode->using_ipv6)
        {
@@ -1138,7 +1138,7 @@ index bf36b446dc4..da90f0f40ce 100644
  	grub_dprintf ("efinet", "using ipv6 and dhcpv6\n");
  	grub_dprintf ("efinet", "dhcp_ack_received: %s%s\n",
  		      pxe_mode->dhcp_ack_received ? "yes" : "no",
-@@ -487,15 +484,14 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
+@@ -404,15 +401,14 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
  	if (!pxe_mode->dhcp_ack_received)
  	  continue;
  
@@ -1213,10 +1213,10 @@ index b2ca74b6eb1..9a4e589aa39 100644
        {
  	const struct grub_net_bootp_packet *bootp;
 diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
-index ddc5ecfb03d..6a545cc6d5d 100644
+index e5b521bd9be..1250d493e25 100644
 --- a/include/grub/efi/api.h
 +++ b/include/grub/efi/api.h
-@@ -1511,7 +1511,7 @@ typedef struct grub_efi_pxe_ip_filter
+@@ -1507,7 +1507,7 @@ typedef struct grub_efi_pxe_ip_filter
  {
    grub_efi_uint8_t filters;
    grub_efi_uint8_t ip_count;

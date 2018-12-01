@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	63%{?dist}
+Release:	64%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -492,6 +492,23 @@ fi
 %endif
 
 %changelog
+* Fri Nov 30 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-64
+- Add comments and revert logic changes in 01_fallback_counting
+- Remove quotes when reading ID value from /etc/os-release
+  Related: rhbz#1650706
+- blscfg: expand grub_users before passing to grub_normal_add_menu_entry()
+  Resolves: rhbz#1650706
+- Drop buggy downstream patch "efinet: retransmit if our device is busy"
+  Resolves: rhbz#1649048
+- Make the menu entry users option argument to be optional
+  Related: rhbz#1652434
+- 10_linux_bls: add missing menu entries options
+  Resolves: rhbz#1652434
+- Drop "Be more aggro about actually using the *configured* network device."
+  Resolves: rhbz#1654388
+- Fix menu entry selection based on title
+  Resolves: rhbz#1654936
+
 * Wed Nov 21 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-63
 - add 10_linux_bls grub.d snippet to generate menu entries from BLS files
   Resolves: rhbz#1636013
