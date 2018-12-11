@@ -267,3 +267,6 @@ Patch0266: 0266-blscfg-expand-grub_users-before-passing-to-grub_norm.patch
 Patch0267: 0267-Make-the-menu-entry-users-option-argument-to-be-opti.patch
 Patch0268: 0268-10_linux_bls-add-missing-menu-entries-options.patch
 Patch0269: 0269-Fix-menu-entry-selection-based-on-title.patch
+Patch0270: 0270-BLS-files-should-only-be-copied-by-grub-switch-to-bl.patch
+Patch0271: 0271-Fix-get_entry_number-wrongly-dereferencing-the-tail-.patch
+Patch0272: 0272-Make-grub2-mkconfig-to-honour-GRUB_CMDLINE_LINUX-in-.patch
