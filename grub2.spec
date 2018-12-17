@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	65%{?dist}
+Release:	66%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 Group:		System Environment/Base
 License:	GPLv3+
@@ -383,7 +383,6 @@ fi
 %else
 %exclude %{_sysconfdir}/grub.d/10_linux_bls
 %endif
-%exclude %{_sysconfdir}/grub.d/01_fallback_counting
 %{_sysconfdir}/grub.d/README
 %{_userunitdir}/grub-boot-success.timer
 %{_userunitdir}/grub-boot-success.service
@@ -492,6 +491,9 @@ fi
 %endif
 
 %changelog
+* Mon Dec 17 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-66
+- Don't exclude /etc/grub.d/01_fallback_counting anymore
+
 * Tue Dec 11 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-65
 - BLS files should only be copied by grub-switch-to-blscfg if BLS isn't set
   Related: rhbz#1638117
