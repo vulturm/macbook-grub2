@@ -284,12 +284,6 @@ elif [ -f /etc/grub.d/01_users ] && \
     fi
 fi
 
-%post tools
-if [ "$1" = 1 ]; then
-	/sbin/install-info --info-dir=%{_infodir} %{_infodir}/%{name}.info.gz || :
-	/sbin/install-info --info-dir=%{_infodir} %{_infodir}/%{name}-dev.info.gz || :
-fi
-
 %triggerun -- grub2 < 1:1.99-4
 # grub2 < 1.99-4 removed a number of essential files in postun. To fix upgrades
 # from the affected grub2 packages, we first back up the files in triggerun and
@@ -314,12 +308,6 @@ mv -f /boot/grub2.tmp/*.mod \
       /boot/grub2.tmp/device.map \
       /boot/grub2/ &&
 rm -r /boot/grub2.tmp/ || :
-
-%preun tools
-if [ "$1" = 0 ]; then
-	/sbin/install-info --delete --info-dir=%{_infodir} %{_infodir}/%{name}.info.gz || :
-	/sbin/install-info --delete --info-dir=%{_infodir} %{_infodir}/%{name}-dev.info.gz || :
-fi
 
 %files common -f grub.lang
 %dir %{_libdir}/grub/
