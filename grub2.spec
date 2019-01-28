@@ -9,7 +9,6 @@ Epoch:		1
 Version:	2.02
 Release:	66%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
-Group:		System Environment/Base
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
 Obsoletes:	grub < 1:0.98
@@ -71,7 +70,6 @@ hardware devices.\
 
 %package common
 Summary:	grub2 common layout
-Group:		System Environment/Base
 BuildArch:	noarch
 Conflicts:	grubby < 8.40-18
 
@@ -81,7 +79,6 @@ subpackages.
 
 %package tools
 Summary:	Support tools for GRUB.
-Group:		System Environment/Base
 Obsoletes:	%{name}-tools < %{evr}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	gettext os-prober which file
@@ -95,7 +92,6 @@ This subpackage provides tools for support of all platforms.
 %ifarch x86_64
 %package tools-efi
 Summary:	Support tools for GRUB.
-Group:		System Environment/Base
 Requires:	gettext os-prober which file
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-tools < %{evr}
@@ -107,7 +103,6 @@ This subpackage provides tools for support of EFI platforms.
 
 %package tools-minimal
 Summary:	Support tools for GRUB.
-Group:		System Environment/Base
 Requires:	gettext
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-tools < %{evr}
@@ -118,7 +113,6 @@ This subpackage provides tools for support of all platforms.
 
 %package tools-extra
 Summary:	Support tools for GRUB.
-Group:		System Environment/Base
 Requires:	gettext os-prober which file
 Requires:	%{name}-tools-minimal = %{epoch}:%{version}-%{release}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
