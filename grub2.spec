@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	66%{?dist}
+Release:	67%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -473,6 +473,9 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org>
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Mon Dec 17 2018 Javier Martinez Canillas <javierm@redhat.com> - 2.02-66
 - Don't exclude /etc/grub.d/01_fallback_counting anymore
 
