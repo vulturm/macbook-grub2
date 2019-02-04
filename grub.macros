@@ -74,7 +74,7 @@
 
 
 %global efi_only aarch64 %{arm}
-%global efi_arch x86_64 %{ix86} ia64 %{efi_only}
+%global efi_arch x86_64 ia64 %{efi_only}
 %ifarch %{efi_arch}
 %global with_efi_arch 1
 %else

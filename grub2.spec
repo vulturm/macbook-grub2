@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	67%{?dist}
+Release:	68%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -473,6 +473,15 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Mon Feb 04 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-68
+- Don't build the grub2-efi-ia32-* packages on i686 (pjones)
+- Add efi-export-env and efi-load-env commands (pjones)
+- Make it possible to subtract conditions from debug= (pjones)
+- Try to set -fPIE and friends on libgnu.a (pjones)
+- Add more options to blscfg command to make it more flexible
+- Add support for prepend early initrds to the BLS entries
+- Fix grub.cfg-XXX look up when booting over TFTP
+
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org>
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 

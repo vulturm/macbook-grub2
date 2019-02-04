@@ -270,3 +270,11 @@ Patch0269: 0269-Fix-menu-entry-selection-based-on-title.patch
 Patch0270: 0270-BLS-files-should-only-be-copied-by-grub-switch-to-bl.patch
 Patch0271: 0271-Fix-get_entry_number-wrongly-dereferencing-the-tail-.patch
 Patch0272: 0272-Make-grub2-mkconfig-to-honour-GRUB_CMDLINE_LINUX-in-.patch
+Patch0273: 0273-Add-efi-export-env-and-efi-load-env-commands.patch
+Patch0274: 0274-Make-it-possible-to-subtract-conditions-from-debug.patch
+Patch0275: 0275-Export-all-variables-from-the-initial-context-when-c.patch
+Patch0276: 0276-blscfg-store-the-BLS-entries-in-a-sorted-linked-list.patch
+Patch0277: 0277-blscfg-add-more-options-to-blscfg-command-to-make-it.patch
+Patch0278: 0278-blscfg-add-support-for-prepend-early-initrds-to-the-.patch
+Patch0279: 0279-Fix-the-looking-up-grub.cfg-XXX-while-tftp-booting.patch
+Patch0280: 0280-Try-to-set-fPIE-and-friends-on-libgnu.a.patch
