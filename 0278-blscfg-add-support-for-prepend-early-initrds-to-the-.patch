@@ -14,13 +14,13 @@ and use that value to set the early_initrd var when running grub2-mkconfig.
 
 Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
 ---
- grub-core/commands/blscfg.c | 80 +++++++++++++++++++++++++++++++++++++++++++--
+ grub-core/commands/blscfg.c | 79 +++++++++++++++++++++++++++++++++++++++++++--
  util/grub.d/10_linux.in     |  3 ++
  util/grub.d/10_linux_bls.in |  3 ++
- 3 files changed, 84 insertions(+), 2 deletions(-)
+ 3 files changed, 83 insertions(+), 2 deletions(-)
 
 diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
-index aa5bf0d3220..5dcd68b401e 100644
+index aa5bf0d3220..1ef2ae06cff 100644
 --- a/grub-core/commands/blscfg.c
 +++ b/grub-core/commands/blscfg.c
 @@ -660,6 +660,33 @@ static char *expand_val(char *value)
@@ -116,7 +116,7 @@ index aa5bf0d3220..5dcd68b401e 100644
        for (i = 0; initrds != NULL && initrds[i] != NULL; i++)
  	initrd_size += sizeof (" " GRUB_BOOT_DEVICE) \
  		       + grub_strlen (initrds[i]) + 1;
-@@ -736,12 +800,22 @@ static void create_entry (struct bls_entry *entry)
+@@ -736,7 +800,16 @@ static void create_entry (struct bls_entry *entry)
  	}
  
  
@@ -134,13 +134,7 @@ index aa5bf0d3220..5dcd68b401e 100644
        for (i = 0; initrds != NULL && initrds[i] != NULL; i++)
  	{
  	  grub_dprintf ("blscfg", "adding initrd %s\n", initrds[i]);
- 	  tmp = grub_stpcpy (tmp, " " GRUB_BOOT_DEVICE);
- 	  tmp = grub_stpcpy (tmp, initrds[i]);
-+	  grub_free(initrds[i]);
- 	}
-       tmp = grub_stpcpy (tmp, "\n");
-     }
-@@ -759,6 +833,8 @@ static void create_entry (struct bls_entry *entry)
+@@ -759,6 +832,8 @@ static void create_entry (struct bls_entry *entry)
  
  finish:
    grub_free (initrd);
