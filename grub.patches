@@ -280,3 +280,4 @@ Patch0279: 0279-Fix-the-looking-up-grub.cfg-XXX-while-tftp-booting.patch
 Patch0280: 0280-Try-to-set-fPIE-and-friends-on-libgnu.a.patch
 Patch0281: 0281-Don-t-make-grub_strtoull-print-an-error-if-no-conver.patch
 Patch0282: 0282-Set-blsdir-if-the-BLS-directory-path-isn-t-one-of-th.patch
+Patch0283: 0283-Check-if-blsdir-exists-before-attempting-to-get-it-s.patch

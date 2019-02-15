@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	69%{?dist}
+Release:	70%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -473,6 +473,10 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Fri Feb 15 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-70
+- Check if blsdir exists before attempting to get it's real path
+  Resolves: rhbz#1677415
+
 * Wed Feb 13 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-69
 - Don't make grub_strtoull() print an error if no conversion is performed
   Resolves: rhbz#1674512
