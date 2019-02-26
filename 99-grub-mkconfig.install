@@ -17,7 +17,7 @@ COMMAND="$1"
 
 case "$COMMAND" in
     add|remove)
-        grub2-mkconfig -o /boot/grub2/grub.cfg >& /dev/null
+        grub2-mkconfig --no-grubenv-update -o /boot/grub2/grub.cfg >& /dev/null
         ;;
     *)
         ;;
