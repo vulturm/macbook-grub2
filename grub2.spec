@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	70%{?dist}
+Release:	71%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -473,6 +473,16 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Wed Feb 27 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-71
+- 20-grub-install: Replace, rather than overwrite, the existing kernel (pjones)
+  Resolves: rhbz#1642402
+- 99-grub-mkconfig: Don't update grubenv generating entries on ppc64le
+  Related: rhbz#1637875
+- blscfg: fallback to default_kernelopts if BLS option field isn't set
+  Related: rhbz#1625124
+- grub-switch-to-blscfg: copy increment.mod for legacy BIOS and ppc64
+  Resolves: rhbz#1652806
+
 * Fri Feb 15 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-70
 - Check if blsdir exists before attempting to get it's real path
   Resolves: rhbz#1677415
