@@ -16,8 +16,8 @@ KERNEL_DIR="${KERNEL_IMAGE%/*}"
 
 MACHINE_ID=$KERNEL_INSTALL_MACHINE_ID
 
-# Remove it, since for grub2 the images are always installed in /boot
-rm -rf "${BOOT_DIR_ABS%/*}"
+# If ${BOOT_DIR_ABS} exists, some other boot loader is active.
+[[ -d "${BOOT_DIR_ABS}" ]] && exit 0
 
 BLS_DIR="/boot/loader/entries"
 
