@@ -278,6 +278,13 @@ elif [ -f /etc/grub.d/01_users ] && \
     fi
 fi
 
+%post tools
+
+if [ "$1" = 2 ]; then
+    ! grep -q '^GRUB_ENABLE_BLSCFG=false' /etc/default/grub && \
+      /sbin/grub2-switch-to-blscfg --backup-suffix=.rpmsave &>/dev/null || :
+fi
+
 %triggerun -- grub2 < 1:1.99-4
 # grub2 < 1.99-4 removed a number of essential files in postun. To fix upgrades
 # from the affected grub2 packages, we first back up the files in triggerun and
