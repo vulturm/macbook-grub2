@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	71%{?dist}
+Release:	72%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -480,6 +480,12 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Mon Mar 11 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-72
+- Avoid grub2-efi package to overwrite existing /boot/grub2/grubenv file
+  Resolves: rhbz#1687323
+- Switch to BLS in tools package %%post scriptlet
+  Resolves: rhbz#1652806
+
 * Wed Feb 27 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-71
 - 20-grub-install: Replace, rather than overwrite, the existing kernel (pjones)
   Resolves: rhbz#1642402
