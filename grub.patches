@@ -283,3 +283,4 @@ Patch0282: 0282-Set-blsdir-if-the-BLS-directory-path-isn-t-one-of-th.patch
 Patch0283: 0283-Check-if-blsdir-exists-before-attempting-to-get-it-s.patch
 Patch0284: 0284-blscfg-fallback-to-default_kernelopts-if-BLS-option-.patch
 Patch0285: 0285-grub-switch-to-blscfg-copy-increment.mod-for-legacy-.patch
+Patch0286: 0286-Only-set-blsdir-if-boot-loader-entries-is-in-a-btrfs.patch
