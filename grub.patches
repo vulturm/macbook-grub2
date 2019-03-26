@@ -286,3 +286,6 @@ Patch0285: 0285-grub-switch-to-blscfg-copy-increment.mod-for-legacy-.patch
 Patch0286: 0286-Only-set-blsdir-if-boot-loader-entries-is-in-a-btrfs.patch
 Patch0287: 0287-Fix-the-type-of-grub_efi_status_t.patch
 Patch0288: 0288-blscfg-don-t-use-grub_list_t-and-the-GRUB_AS_LIST-ma.patch
+Patch0289: 0289-mkimage-Use-EFI32_HEADER_SIZE-define-in-arm-efi-case.patch
+Patch0290: 0290-mkimage-Align-efi-sections-on-4k-boundary.patch
+Patch0291: 0291-mkimage-Clarify-file-alignment-in-efi-case.patch
