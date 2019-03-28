@@ -289,3 +289,4 @@ Patch0288: 0288-blscfg-don-t-use-grub_list_t-and-the-GRUB_AS_LIST-ma.patch
 Patch0289: 0289-mkimage-Use-EFI32_HEADER_SIZE-define-in-arm-efi-case.patch
 Patch0290: 0290-mkimage-Align-efi-sections-on-4k-boundary.patch
 Patch0291: 0291-mkimage-Clarify-file-alignment-in-efi-case.patch
+Patch0292: 0292-10_linux_bls-don-t-add-users-option-to-generated-men.patch
