@@ -276,9 +276,9 @@ elif [ -f /etc/grub.d/01_users ] && \
     fi
 fi
 
-%post tools
+%posttrans tools
 
-if [ "$1" = 2 ]; then
+if [ -f /etc/default/grub ]; then
     ! grep -q '^GRUB_ENABLE_BLSCFG=false' /etc/default/grub && \
       /sbin/grub2-switch-to-blscfg --backup-suffix=.rpmsave &>/dev/null || :
 fi
