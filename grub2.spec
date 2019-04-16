@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	76%{?dist}
+Release:	77%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -476,6 +476,15 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Thu Apr 18 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-77
+- Never remove boot loader configuration for other boot loaders from the ESP.
+  This would render machines with sd-boot unbootable (zbyszek)
+- Execute grub2-switch-to-blscfg script in %%posttrans instead of %%post
+- grub.d: Split out boot success reset from menu auto hide script (lorbus)
+- HTTP boot: strncmp returns 0 on equal (stephen)
+- Some grub2-emu fixes and make it to not print unnecessary messages
+- Don't assume that boot commands will only return on fail
+
 * Thu Mar 28 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-76
 - 10_linux_bls: don't add --users option to generated menu entries
   Resolves: rhbz#1693515
