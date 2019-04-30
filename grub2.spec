@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	79%{?dist}
+Release:	80%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -132,6 +132,24 @@ This subpackage provides tools for support of all platforms.
 %{expand:%define_legacy_variant %%{legacy_package_arch}}
 %endif
 
+%if 0%{with_emu_arch}
+%package emu
+Summary:	GRUB user-space emulation.
+Requires:	%{name}-tools-minimal = %{epoch}:%{version}-%{release}
+
+%description emu
+%{desc}
+This subpackage provides the GRUB user-space emulation support of all platforms.
+
+%package emu-modules
+Summary:	GRUB user-space emulation modules.
+Requires:	%{name}-tools-minimal = %{epoch}:%{version}-%{release}
+
+%description emu-modules
+%{desc}
+This subpackage provides the GRUB user-space emulation modules.
+%endif
+
 %prep
 %do_common_setup
 %if 0%{with_efi_arch}
@@ -152,6 +170,12 @@ grep -A100000 '# stuff "make" creates' .gitignore > grub-%{grublegacyarch}-%{tar
 cp %{SOURCE4} grub-%{grublegacyarch}-%{tarversion}/unifont.pcf.gz
 git add grub-%{grublegacyarch}-%{tarversion}
 %endif
+%if 0%{with_emu_arch}
+mkdir grub-emu-%{tarversion}
+grep -A100000 '# stuff "make" creates' .gitignore > grub-emu-%{tarversion}/.gitignore
+cp %{SOURCE4} grub-emu-%{tarversion}/unifont.pcf.gz
+git add grub-emu-%{tarversion}
+%endif
 git commit -m "After making subdirs"
 
 %build
@@ -163,6 +187,9 @@ git commit -m "After making subdirs"
 %endif
 %if 0%{with_legacy_arch}
 %{expand:%do_legacy_build %%{grublegacyarch}}
+%endif
+%if 0%{with_emu_arch}
+%{expand:%do_emu_build}
 %endif
 makeinfo --info --no-split -I docs -o docs/grub-dev.info \
 	docs/grub-dev.texi
@@ -186,6 +213,9 @@ rm -fr $RPM_BUILD_ROOT
 %endif
 %if 0%{with_legacy_arch}
 %{expand:%do_legacy_install %%{grublegacyarch} %%{alt_grub_target_name} 0%{with_efi_arch}}
+%endif
+%if 0%{with_emu_arch}
+%{expand:%do_emu_install %%{package_arch}}
 %endif
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir
 ln -s %{name}-set-password ${RPM_BUILD_ROOT}/%{_sbindir}/%{name}-setpassword
@@ -475,7 +505,20 @@ rm -r /boot/grub2.tmp/ || :
 %{expand:%define_legacy_variant_files %%{legacy_package_arch} %%{grublegacyarch}}
 %endif
 
+%if 0%{with_emu_arch}
+%files emu
+%{_bindir}/%{name}-emu*
+%{_datadir}/man/man1/%{name}-emu*
+
+%files emu-modules
+%{_libdir}/grub/%{emuarch}-emu/*
+%exclude %{_libdir}/grub/%{emuarch}-emu/*.module
+%endif
+
 %changelog
+* Fri May 03 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-80
+- Add grub2-emu subpackage
+
 * Fri May 03 2019 Tim Landscheidt <tim@tim-landscheidt.de> - 2.02-79
 - Fix description of grub2-pc
   Resolves: rhbz#1484298

@@ -51,6 +51,8 @@
 %global with_efi_arch 0
 %global with_alt_efi_arch 0
 %global with_legacy_arch 0
+%global with_emu_arch 1
+%global emuarch %{_arch}
 %global grubefiarch %{nil}
 %global grublegacyarch %{nil}
 
@@ -64,6 +66,8 @@
 %endif
 # ppc is always compiled 64 bit
 %ifarch ppc ppc64 ppc64le
+# GRUB emu fails to build on ppc64le
+%global with_emu_arch 0
 %global target_cpu_name %{_arch}
 %global legacy_target_cpu_name powerpc
 %global legacy_package_arch %{_arch}
@@ -137,6 +141,7 @@
 %endif
 
 %ifarch aarch64
+%global emuarch arm64
 %global efiarch aa64
 %global target_cpu_name aarch64
 %global grub_target_name arm64-efi
@@ -417,6 +422,22 @@ make %{?_smp_mflags}						\
 cd ..								\
 %{nil}
 
+%define do_emu_build()						\
+cd grub-emu-%{tarversion}					\
+%configure							\\\
+	%{cc_equals}						\\\
+	--with-platform=emu					\\\
+	--with-grubdir=%{name}					\\\
+	--program-transform-name=s,grub,%{name},		\\\
+	--disable-werror || ( cat config.log ; exit 1 )		\
+git add .							\
+git commit -m "After emu configure"				\
+make %{?_smp_mflags} ascii.h widthspec.h			\
+make %{?_smp_mflags} -C grub-core/gnulib			\
+make %{?_smp_mflags} -C grub-core				\
+cd ..								\
+%{nil}
+
 %define do_alt_efi_install()					\
 cd grub-%{1}-%{tarversion}					\
 install -d -m 755 $RPM_BUILD_ROOT/usr/lib/grub/%{grubaltefiarch}/ \
@@ -478,6 +499,22 @@ fi								\
 if [ %{3} -eq 0 ]; then						\
 	${RPM_BUILD_ROOT}/%{_bindir}/%{name}-editenv		\\\
 		${RPM_BUILD_ROOT}/boot/%{name}/grubenv create	\
+fi								\
+cd ..								\
+%{nil}
+
+%define do_emu_install()					\
+cd grub-emu-%{tarversion}					\
+make DESTDIR=$RPM_BUILD_ROOT install -C grub-core		\
+if [ -f $RPM_BUILD_ROOT%{_infodir}/grub.info ]; then		\
+	rm -f $RPM_BUILD_ROOT%{_infodir}/grub.info		\
+fi								\
+if [ -f $RPM_BUILD_ROOT%{_infodir}/grub-dev.info ]; then	\
+	rm -f $RPM_BUILD_ROOT%{_infodir}/grub-dev.info		\
+fi								\
+if [ -f $RPM_BUILD_ROOT/%{_libdir}/grub/%{1}/grub2.chrp ]; then \
+	mv $RPM_BUILD_ROOT/%{_libdir}/grub/%{1}/grub2.chrp	\\\
+	   $RPM_BUILD_ROOT/%{_libdir}/grub/%{1}/grub.chrp	\
 fi								\
 cd ..								\
 %{nil}

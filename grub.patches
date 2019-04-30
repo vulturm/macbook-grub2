@@ -296,3 +296,4 @@ Patch0295: 0295-Fix-systemctl-kexec-exit-status-check.patch
 Patch0296: 0296-Print-grub-emu-linux-loader-messages-as-debug.patch
 Patch0297: 0297-Don-t-assume-that-boot-commands-will-only-return-on-.patch
 Patch0298: 0298-Add-10_reset_boot_success-to-Makefile.patch
+Patch0299: 0299-Fix-undefined-references-for-fdt-when-building-with-.patch
