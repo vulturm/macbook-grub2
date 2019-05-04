@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	80%{?dist}
+Release:	81%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -33,7 +33,7 @@ BuildRequires:	gcc efi-srpm-macros
 BuildRequires:	flex bison binutils python3
 BuildRequires:	ncurses-devel xz-devel bzip2-devel
 BuildRequires:	freetype-devel libusb-devel
-BuildRequires:	rpm-devel
+BuildRequires:	fuse-devel
 BuildRequires:	rpm-devel rpm-libs
 BuildRequires:	autoconf automake autogen device-mapper-devel
 BuildRequires:	freetype-devel gettext-devel git
@@ -234,6 +234,7 @@ cat << EOF > ${RPM_BUILD_ROOT}%{_sysconfdir}/prelink.conf.d/grub2.conf
 # these have execstack, and break under selinux
 -b /usr/bin/grub2-script-check
 -b /usr/bin/grub2-mkrelpath
+-b /usr/bin/grub2-mount
 -b /usr/bin/grub2-fstest
 -b /usr/sbin/grub2-bios-setup
 -b /usr/sbin/grub2-probe
@@ -375,6 +376,7 @@ rm -r /boot/grub2.tmp/ || :
 %{_sbindir}/%{name}-set*password
 %{_bindir}/%{name}-editenv
 %{_bindir}/%{name}-mkpasswd-pbkdf2
+%{_bindir}/%{name}-mount
 
 %{_datadir}/man/man3/%{name}-get-kernel-settings*
 %{_datadir}/man/man8/%{name}-set-default*
@@ -516,6 +518,10 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Fri May 03 2019 Neal Gompa <ngompa13@gmail.com> - 2.02-81
+- Add grub2-mount to grub2-tools-minimal subpackage
+  Resolves: rhbz#1471267
+
 * Fri May 03 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-80
 - Add grub2-emu subpackage
 

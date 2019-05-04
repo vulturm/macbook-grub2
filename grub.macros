@@ -329,7 +329,6 @@ PYTHON=python3 ./autogen.sh					\
 	--target=%{1}						\\\
 	--with-grubdir=%{name}					\\\
 	--program-transform-name=s,grub,%{name},		\\\
-	--disable-grub-mount					\\\
 	--disable-werror || ( cat config.log ; exit 1 )		\
 git add .							\
 git commit -m "After efi configure"				\
@@ -414,7 +413,6 @@ cd grub-%{1}-%{tarversion}					\
 	--target=%{_target_platform}				\\\
 	--with-grubdir=%{name}					\\\
 	--program-transform-name=s,grub,%{name},		\\\
-	--disable-grub-mount					\\\
 	--disable-werror || ( cat config.log ; exit 1 )		\
 git add .							\
 git commit -m "After legacy configure"					\
