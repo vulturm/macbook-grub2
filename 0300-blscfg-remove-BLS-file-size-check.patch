@@ -1,0 +1,58 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Javier Martinez Canillas <javierm@redhat.com>
+Date: Tue, 7 May 2019 13:54:23 +0200
+Subject: [PATCH] blscfg: remove BLS file size check
+
+The read_entry() function checks the BLS file size and ignores the entry
+if the file size isn't correct. The problem is that it will only work if
+the struct grub_file layout and fields are the same in the GRUB version
+used to build the blscfg.mod, than the one that's installed as GRUB core.
+
+But commit 84a0e9699f8 ("Add progress module to display load progress of
+files.") added a .name field to struct grub_file, and this change landed
+in the GRUB version used by Fedora 21.
+
+Since the GRUB core is never updated when the grub2 package is upgraded,
+the blscfg module won't be compatible with any GRUB that was installed by
+Fedora 20 or eralier.
+
+The blscfg.mod is copied to /boot/grub2/i386-pc/ in legacy BIOS installs
+when the GRUB configuration is switched to BLS, so this will lead to BLS
+files being ignored due grub_file_size() reporting wrong file sizes. This
+is caused by the struct grub_file .size field offset being different in
+Fedora 20 than later releases.
+
+This check is doing more harm than good, so let's just remove it to make
+the blscfg module compatible at least up to GRUB core that was installed
+by Fedora 19.
+
+Related: rhbz#1652806
+
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+---
+ grub-core/commands/blscfg.c | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
+index bb93b7f4904..bd008b04bec 100644
+--- a/grub-core/commands/blscfg.c
++++ b/grub-core/commands/blscfg.c
+@@ -412,7 +412,6 @@ static int read_entry (
+   int rc = 0;
+   char *p = NULL;
+   grub_file_t f = NULL;
+-  grub_off_t sz;
+   struct bls_entry *entry;
+   struct read_entry_info *info = (struct read_entry_info *)data;
+ 
+@@ -442,10 +441,6 @@ static int read_entry (
+ 	goto finish;
+     }
+ 
+-  sz = grub_file_size (f);
+-  if (sz == GRUB_FILE_SIZE_UNKNOWN || sz > 1024*1024)
+-    goto finish;
+-
+   entry = grub_zalloc (sizeof (*entry));
+   if (!entry)
+     goto finish;
