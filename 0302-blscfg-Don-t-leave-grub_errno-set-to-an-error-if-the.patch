@@ -1,0 +1,44 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Javier Martinez Canillas <javierm@redhat.com>
+Date: Wed, 15 May 2019 01:46:00 +0200
+Subject: [PATCH] blscfg: Don't leave grub_errno set to an error if the command
+ succeeded
+
+After a command is executed, the function grub_print_error() is called to
+print any active error messages if these exist.
+
+The blscfg command calls to the grub_strtol() function to try to convert
+the default entry string to a number, in case the default is an index.
+
+If this function is not able to do the conversion, it sets the grub_errno
+variable to GRUB_ERR_BAD_NUMBER. But the blscfg command wrongly left that
+set and so the caller would be confused thinking that the command failed
+and that an error message has to be printed.
+
+This caused the first error in the stack to be printed, polluting the GRUB
+output and preventing the menu to be hidden. So reset the grub_error var
+to GRUB_ERR_NONE again if was set to GRUB_ERR_BAD_NUMBER by grub_strtol().
+
+Resolves: rhbz#1699761
+
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+---
+ grub-core/commands/blscfg.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/grub-core/commands/blscfg.c b/grub-core/commands/blscfg.c
+index bd008b04bec..26dbe873fe4 100644
+--- a/grub-core/commands/blscfg.c
++++ b/grub-core/commands/blscfg.c
+@@ -999,8 +999,10 @@ is_default_entry(const char *def_entry, struct bls_entry *entry, int idx)
+     return true;
+ 
+   def_idx = (int)grub_strtol(def_entry, NULL, 0);
+-  if (grub_errno == GRUB_ERR_BAD_NUMBER)
++  if (grub_errno == GRUB_ERR_BAD_NUMBER) {
++    grub_errno = GRUB_ERR_NONE;
+     return false;
++  }
+ 
+   if (def_idx == idx)
+     return true;

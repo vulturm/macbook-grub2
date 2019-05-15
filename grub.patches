@@ -298,3 +298,5 @@ Patch0297: 0297-Don-t-assume-that-boot-commands-will-only-return-on-.patch
 Patch0298: 0298-Add-10_reset_boot_success-to-Makefile.patch
 Patch0299: 0299-Fix-undefined-references-for-fdt-when-building-with-.patch
 Patch0300: 0300-blscfg-remove-BLS-file-size-check.patch
+Patch0301: 0301-Remove-bogus-load_env-after-blscfg-command-in-10_lin.patch
+Patch0302: 0302-blscfg-Don-t-leave-grub_errno-set-to-an-error-if-the.patch

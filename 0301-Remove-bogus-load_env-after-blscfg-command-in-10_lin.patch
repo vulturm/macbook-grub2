@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Javier Martinez Canillas <javierm@redhat.com>
+Date: Tue, 14 May 2019 20:37:44 +0200
+Subject: [PATCH] Remove bogus load_env after blscfg command in 10_linux
+
+The grubenv is already loaded in the 00_header snippet, so there's
+no need to load it anywhere else.
+
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+---
+ util/grub.d/10_linux.in | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
+index 8f7ecf65df9..350903fa5ab 100644
+--- a/util/grub.d/10_linux.in
++++ b/util/grub.d/10_linux.in
+@@ -162,9 +162,6 @@ set default_kernelopts="root=${linux_root_device_thisversion} ro ${args}"
+ 
+ insmod blscfg
+ blscfg
+-if [ -s \$prefix/grubenv ]; then
+-  load_env
+-fi
+ EOF
+ 
+     if [ "x${GRUB_GRUBENV_UPDATE}" = "xyes" ]; then
