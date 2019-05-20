@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	83%{?dist}
+Release:	84%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -518,6 +518,9 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Mon May 20 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-84
+- Don't try to switch to a BLS config if GRUB_ENABLE_BLSCFG is already set
+
 * Wed May 15 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-83
 - Fix error messages wrongly being printed when executing blscfg command
   Resolves: rhbz#1699761
