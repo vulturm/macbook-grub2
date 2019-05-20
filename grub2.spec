@@ -310,7 +310,7 @@ fi
 %posttrans tools
 
 if [ -f /etc/default/grub ]; then
-    ! grep -q '^GRUB_ENABLE_BLSCFG=false' /etc/default/grub && \
+    ! grep -q '^GRUB_ENABLE_BLSCFG=.*' /etc/default/grub && \
       /sbin/grub2-switch-to-blscfg --backup-suffix=.rpmsave &>/dev/null || :
 fi
 
