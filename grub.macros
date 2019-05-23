@@ -29,24 +29,42 @@
 		-e 's/^/ -fno-strict-aliasing /'		\\\
 		%{nil}
 
-%global host_cflags %{expand:%%(echo %{optflags} | %{cflags_sed})}
-%global target_cflags %{expand:%%(echo %{optflags} | %{cflags_sed})}
+%global host_cflags %{expand:%%(echo %{build_cflags} %{?_hardening_cflags} | %{cflags_sed})}
+%global legacy_host_cflags					\\\
+	%{expand:%%(echo %{host_cflags} |			\\\
+	%{cflags_sed}						\\\
+		-e 's/-m64//g'					\\\
+		-e 's/-mcpu=power[[:alnum:]]\\+/-mcpu=power6/g'	\\\
+	)}
+%global efi_host_cflags %{expand:%%(echo %{host_cflags})}
 
+%global target_cflags %{expand:%%(echo %{build_cflags} | %{cflags_sed})}
 %global legacy_target_cflags					\\\
 	%{expand:%%(echo %{target_cflags} | 			\\\
 	%{cflags_sed}						\\\
 		-e 's/-m64//g'					\\\
 		-e 's/-mcpu=power[[:alnum:]]\\+/-mcpu=power6/g'	\\\
 	)}
-%global legacy_host_cflags					\\\
-	%{expand:%%(echo %{host_cflags} | 			\\\
-	%{cflags_sed}						\\\
-		-e 's/-m64//g'					\\\
-		-e 's/-mcpu=power[[:alnum:]]\\+/-mcpu=power6/g'	\\\
-	)}
-
-%global efi_host_cflags %{expand:%%(echo %{host_cflags})}
 %global efi_target_cflags %{expand:%%(echo %{target_cflags})}
+
+%global ldflags_sed						\\\
+	sed							\\\
+		-e 's/^$//'					\\\
+		%{nil}
+
+%global host_ldflags %{expand:%%(echo %{build_ldflags} %{?_hardening_ldflags} | %{ldflags_sed})}
+%global legacy_host_ldflags					\\\
+	%{expand:%%(echo %{host_ldflags} |			\\\
+	%{ldflags_sed}						\\\
+	)}
+%global efi_host_ldflags %{expand:%%(echo %{host_ldflags})}
+
+%global target_ldflags %{expand:%%(echo %{build_ldflags} -static | %{ldflags_sed})}
+%global legacy_target_ldflags					\\\
+	%{expand:%%(echo %{target_ldflags} | 			\\\
+	%{ldflags_sed}						\\\
+	)}
+%global efi_target_ldflags %{expand:%%(echo %{target_ldflags})}
 
 %global with_efi_arch 0
 %global with_alt_efi_arch 0
@@ -319,11 +337,12 @@ PYTHON=python3 ./autogen.sh					\
 %define do_efi_configure()					\
 %configure							\\\
 	%{cc_equals}						\\\
-	HOST_CFLAGS="%{3} -I$(pwd)"				\\\
-	HOST_CPPFLAGS="${CPPFLAGS} -I$(pwd)"			\\\
-	TARGET_CFLAGS="%{2} -I$(pwd)"				\\\
-	TARGET_CPPFLAGS="${CPPFLAGS} -I$(pwd)"			\\\
-	TARGET_LDFLAGS=-static					\\\
+	HOST_CFLAGS="%{3}"					\\\
+	HOST_CPPFLAGS="-I$(pwd)"				\\\
+	HOST_LDFLAGS="%{efi_host_ldflags}"			\\\
+	TARGET_CFLAGS="%{2}"					\\\
+	TARGET_CPPFLAGS="-I$(pwd)"				\\\
+	TARGET_LDFLAGS="%{efi_target_ldflags}"			\\\
 	--with-platform=efi					\\\
 	--with-utils=host					\\\
 	--target=%{1}						\\\
@@ -405,9 +424,12 @@ cd ..								\
 cd grub-%{1}-%{tarversion}					\
 %configure							\\\
 	%{cc_equals}						\\\
-	HOST_CFLAGS="%{legacy_host_cflags} -I$(pwd)"		\\\
-	TARGET_CFLAGS="%{legacy_target_cflags} -I$(pwd)"	\\\
-	TARGET_LDFLAGS=-static					\\\
+	HOST_CFLAGS="%{legacy_host_cflags}"			\\\
+	HOST_CPPFLAGS="-I$(pwd)"				\\\
+	HOST_LDFLAGS="%{legacy_host_ldflags}"			\\\
+	TARGET_CFLAGS="%{legacy_target_cflags}"			\\\
+	TARGET_CPPFLAGS="-I$(pwd)"				\\\
+	TARGET_LDFLAGS="%{legacy_target_ldflags}"		\\\
 	--with-platform=%{platform}				\\\
 	--with-utils=host					\\\
 	--target=%{_target_platform}				\\\
@@ -415,7 +437,7 @@ cd grub-%{1}-%{tarversion}					\
 	--program-transform-name=s,grub,%{name},		\\\
 	--disable-werror || ( cat config.log ; exit 1 )		\
 git add .							\
-git commit -m "After legacy configure"					\
+git commit -m "After legacy configure"				\
 make %{?_smp_mflags}						\
 cd ..								\
 %{nil}
