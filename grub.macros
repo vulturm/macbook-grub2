@@ -387,17 +387,19 @@ done								\
 
 %define do_efi_build_images()					\
 GRUB_MODULES="	all_video boot blscfg btrfs			\\\
-		cat configfile					\\\
+		cat configfile cryptodisk			\\\
 		echo efi_netfs efifwsetup efinet ext2		\\\
-		fat font gfxmenu gfxterm gzio			\\\
+		fat font gcry_rijndael gcry_rsa gcry_serpent 	\\\
+		gcry_sha256 gcry_twofish gcry_whirlpool   	\\\
+		gfxmenu gfxterm gzio			        \\\
 		halt hfsplus http increment iso9660 jpeg	\\\
-		loadenv loopback linux lvm lsefi lsefimmap	\\\
+		loadenv loopback linux lvm lsefi lsefimmap luks	\\\
 		mdraid09 mdraid1x minicmd net			\\\
 		normal part_apple part_msdos part_gpt		\\\
 		password_pbkdf2 png reboot			\\\
 		search search_fs_uuid search_fs_file		\\\
 		search_label serial sleep syslinuxcfg test tftp	\\\
-		version video xfs"				\
+		verify version video xfs"			\
 GRUB_MODULES+=%{efi_modules}					\
 %{expand:%%{mkimage %{1} %{2} %{3} %{4}}}			\
 %{nil}
