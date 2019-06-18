@@ -17,7 +17,6 @@
 %global cflags_sed						\\\
 	sed							\\\
 		-e 's/-O. //g'					\\\
-		-e 's/-g /-g3 /g'				\\\
 		-e 's/-fplugin=annobin //g'			\\\
 		-e 's,-specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 ,,g' \\\
 		-e 's/-fstack-protector[[:alpha:]-]\\+//g'	\\\
