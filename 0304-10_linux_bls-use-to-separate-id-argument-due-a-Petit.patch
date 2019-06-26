@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Javier Martinez Canillas <javierm@redhat.com>
+Date: Wed, 19 Jun 2019 15:57:17 +0200
+Subject: [PATCH] 10_linux_bls: use '=' to separate --id argument due a
+ Petitboot bug
+
+The GRUB menuentry command allows to separate the arguments for options
+using either a '=' or a ' '. The latter is the convention used when the
+menu entries are defined in the GRUB config file, but this is currently
+not supported by Petitboot.
+
+So as a workaround define the menu entries using '--id=${bls}' instead.
+
+Resolves: rhbz#1721815
+
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+---
+ util/grub.d/10_linux_bls.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/util/grub.d/10_linux_bls.in b/util/grub.d/10_linux_bls.in
+index b8ee9916329..76a5b9d75bc 100644
+--- a/util/grub.d/10_linux_bls.in
++++ b/util/grub.d/10_linux_bls.in
+@@ -180,7 +180,7 @@ populate_menu()
+     for bls in "${files[@]}" ; do
+         read_config "${blsdir}/${bls}.conf"
+ 
+-        menu="${menu}menuentry '${title}' --class ${grub_class} ${grub_arg} --id ${bls} {\n"
++        menu="${menu}menuentry '${title}' --class ${grub_class} ${grub_arg} --id=${bls} {\n"
+         menu="${menu}\t linux ${linux} ${options}\n"
+         if [ -n "${initrd}" ] ; then
+             menu="${menu}\t initrd ${boot_prefix}${initrd}\n"

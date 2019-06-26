@@ -300,3 +300,8 @@ Patch0299: 0299-Fix-undefined-references-for-fdt-when-building-with-.patch
 Patch0300: 0300-blscfg-remove-BLS-file-size-check.patch
 Patch0301: 0301-Remove-bogus-load_env-after-blscfg-command-in-10_lin.patch
 Patch0302: 0302-blscfg-Don-t-leave-grub_errno-set-to-an-error-if-the.patch
+Patch0303: 0303-Fix-bls-directory-option-comment-in-grub2-switch-to-.patch
+Patch0304: 0304-10_linux_bls-use-to-separate-id-argument-due-a-Petit.patch
+Patch0305: 0305-grub-set-bootflag-Print-an-error-if-failing-to-read-.patch
+Patch0306: 0306-10_linux-generate-BLS-section-even-if-no-kernels-are.patch
+Patch0307: 0307-10_linux-don-t-search-for-OSTree-kernels.patch

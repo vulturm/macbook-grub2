@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	88%{?dist}
+Release:	89%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -518,6 +518,15 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Thu Jun 27 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-89
+- Fix --bls-directory option comment in grub2-switch-to-blscfg man page
+  Resolves: rhbz#1714835
+- 10_linux_bls: use '=' to separate --id argument due a Petitboot bug
+- grub-set-bootflag: Print an error if failing to read from grubenv
+  Resolves: rhbz#1702354
+- 10_linux: generate BLS section even if no kernels are found in /boot
+- 10_linux: don't search for OSTree kernels
+
 * Tue Jun 18 2019 Sergio Durigan Junior <sergiodj@redhat.com> - 2.02-88
 - Use '-g' instead of '-g3' when compiling grub2.
   Resolves: rhbz#1708780
