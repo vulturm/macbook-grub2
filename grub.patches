@@ -305,3 +305,9 @@ Patch0304: 0304-10_linux_bls-use-to-separate-id-argument-due-a-Petit.patch
 Patch0305: 0305-grub-set-bootflag-Print-an-error-if-failing-to-read-.patch
 Patch0306: 0306-10_linux-generate-BLS-section-even-if-no-kernels-are.patch
 Patch0307: 0307-10_linux-don-t-search-for-OSTree-kernels.patch
+Patch0308: 0308-Don-t-duplicate-net-name-string-if-not-needed.patch
+Patch0309: 0309-arm-Move-trampolines-into-code-section.patch
+Patch0310: 0310-arm-Align-section-alignment-with-manual-relocation-o.patch
+Patch0311: 0311-grub-core-loader-efi-fdt.c-Do-not-copy-random-memory.patch
+Patch0312: 0312-linux-efi-arm-fdt-break-FDT-extra-allocation-space-o.patch
+Patch0313: 0313-Preserve-multi-device-workflows.patch

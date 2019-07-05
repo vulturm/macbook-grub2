@@ -1,0 +1,133 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yclept Nemo <pscjtwjdjtAhnbjm/dpn>
+Date: Fri, 5 Jul 2019 12:14:51 +0200
+Subject: [PATCH] Preserve multi-device workflows
+
+The BLS patch [1] isn't POSIX-compliant (local shell variables), and
+doesn't support multi-device workflows involving 'grub-probe'. This
+breaks BTRFS RAID over multiple discs and possibly LVM, when /boot is on
+the multi-device partition. The approach of this patch, using global
+variables, is the only possibly approach if you want to maintain a
+backwards-compatible 'prepare_grub_to_access_device' but still handle
+both optional arguments and variadic arguments. Fixes [2].
+
+[1] 0112-Add-BLS-support-to-grub-mkconfig.patch
+[2] https://bugzilla.redhat.com/show_bug.cgi?id=1708389
+---
+ util/grub-mkconfig_lib.in   | 35 ++++++++++++++++++++---------------
+ util/grub.d/10_linux.in     |  4 ++--
+ util/grub.d/10_linux_bls.in |  4 ++--
+ 3 files changed, 24 insertions(+), 19 deletions(-)
+
+diff --git a/util/grub-mkconfig_lib.in b/util/grub-mkconfig_lib.in
+index 1acc1d01c39..bc11df2bd84 100644
+--- a/util/grub-mkconfig_lib.in
++++ b/util/grub-mkconfig_lib.in
+@@ -128,18 +128,23 @@ EOF
+   fi
+ }
+ 
++prepare_grub_to_access_device_with_variable ()
++{
++  device_variable="$1"
++  shift
++  prepare_grub_to_access_device "$@"
++  unset "device_variable"
++}
++
+ prepare_grub_to_access_device ()
+ {
+-  local device=$1 && shift
+-  if [ "$#" -gt 0 ]; then
+-    local variable=$1 && shift
+-  else
+-    local variable=root
++  if [ -z "$device_variable" ]; then
++    device_variable="root"
+   fi
+   old_ifs="$IFS"
+   IFS='
+ '
+-  partmap="`"${grub_probe}" --device ${device} --target=partmap`"
++  partmap="`"${grub_probe}" --device $@ --target=partmap`"
+   for module in ${partmap} ; do
+     case "${module}" in
+       netbsd | openbsd)
+@@ -150,34 +155,34 @@ prepare_grub_to_access_device ()
+   done
+ 
+   # Abstraction modules aren't auto-loaded.
+-  abstraction="`"${grub_probe}" --device ${device} --target=abstraction`"
++  abstraction="`"${grub_probe}" --device $@ --target=abstraction`"
+   for module in ${abstraction} ; do
+     echo "insmod ${module}"
+   done
+ 
+-  fs="`"${grub_probe}" --device ${device} --target=fs`"
++  fs="`"${grub_probe}" --device $@ --target=fs`"
+   for module in ${fs} ; do
+     echo "insmod ${module}"
+   done
+ 
+   if [ x$GRUB_ENABLE_CRYPTODISK = xy ]; then
+-      for uuid in `"${grub_probe}" --device ${device} --target=cryptodisk_uuid`; do
++      for uuid in `"${grub_probe}" --device $@ --target=cryptodisk_uuid`; do
+ 	  echo "cryptomount -u $uuid"
+       done
+   fi
+ 
+   # If there's a filesystem UUID that GRUB is capable of identifying, use it;
+   # otherwise set root as per value in device.map.
+-  fs_hint="`"${grub_probe}" --device ${device} --target=compatibility_hint`"
++  fs_hint="`"${grub_probe}" --device $@ --target=compatibility_hint`"
+   if [ "x$fs_hint" != x ]; then
+-    echo "set ${variable}='$fs_hint'"
++    echo "set ${device_variable}='$fs_hint'"
+   fi
+-  if [ "x$GRUB_DISABLE_UUID" != "xtrue" ] && fs_uuid="`"${grub_probe}" --device ${device} --target=fs_uuid 2> /dev/null`" ; then
+-    hints="`"${grub_probe}" --device ${device} --target=hints_string 2> /dev/null`" || hints=
++  if [ "x$GRUB_DISABLE_UUID" != "xtrue" ] && fs_uuid="`"${grub_probe}" --device $@ --target=fs_uuid 2> /dev/null`" ; then
++    hints="`"${grub_probe}" --device $@ --target=hints_string 2> /dev/null`" || hints=
+     echo "if [ x\$feature_platform_search_hint = xy ]; then"
+-    echo "  search --no-floppy --fs-uuid --set=${variable} ${hints} ${fs_uuid}"
++    echo "  search --no-floppy --fs-uuid --set=${device_variable} ${hints} ${fs_uuid}"
+     echo "else"
+-    echo "  search --no-floppy --fs-uuid --set=${variable} ${fs_uuid}"
++    echo "  search --no-floppy --fs-uuid --set=${device_variable} ${fs_uuid}"
+     echo "fi"
+   fi
+   IFS="$old_ifs"
+diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
+index 9fd5a16fa32..3919b8aff4e 100644
+--- a/util/grub.d/10_linux.in
++++ b/util/grub.d/10_linux.in
+@@ -109,10 +109,10 @@ if [ "x${GRUB_ENABLE_BLSCFG}" = "xtrue" ]; then
+ 
+   if [ -d /sys/firmware/efi ]; then
+       bootefi_device="`${grub_probe} --target=device /boot/efi/`"
+-      prepare_grub_to_access_device ${bootefi_device} boot
++      prepare_grub_to_access_device_with_variable boot ${bootefi_device}
+   else
+       boot_device="`${grub_probe} --target=device /boot/`"
+-      prepare_grub_to_access_device ${boot_device} boot
++      prepare_grub_to_access_device_with_variable boot ${boot_device}
+   fi
+ 
+   populate_header_warn
+diff --git a/util/grub.d/10_linux_bls.in b/util/grub.d/10_linux_bls.in
+index 76a5b9d75bc..1b7536435f1 100644
+--- a/util/grub.d/10_linux_bls.in
++++ b/util/grub.d/10_linux_bls.in
+@@ -216,10 +216,10 @@ linux_entry ()
+ 
+     if [ -d /sys/firmware/efi ]; then
+         bootefi_device="`${grub_probe} --target=device /boot/efi/`"
+-        prepare_grub_to_access_device ${bootefi_device} boot
++        prepare_grub_to_access_device_with_variable boot ${bootefi_device}
+     else
+         boot_device="`${grub_probe} --target=device /boot/`"
+-        prepare_grub_to_access_device ${boot_device} boot
++        prepare_grub_to_access_device_with_variable boot ${boot_device}
+     fi
+ 
+     populate_header_warn

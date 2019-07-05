@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	89%{?dist}
+Release:	90%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -518,6 +518,11 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Fri Jul 05 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-90
+- Fix failure to request grub.cfg over HTTP
+- Some ARM fixes (pbrobinson)
+- Preserve multi-device workflows (Yclept Nemo)
+
 * Thu Jun 27 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-89
 - Fix --bls-directory option comment in grub2-switch-to-blscfg man page
   Resolves: rhbz#1714835
