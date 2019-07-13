@@ -311,3 +311,4 @@ Patch0310: 0310-arm-Align-section-alignment-with-manual-relocation-o.patch
 Patch0311: 0311-grub-core-loader-efi-fdt.c-Do-not-copy-random-memory.patch
 Patch0312: 0312-linux-efi-arm-fdt-break-FDT-extra-allocation-space-o.patch
 Patch0313: 0313-Preserve-multi-device-workflows.patch
+Patch0314: 0314-Revert-Disable-multiboot-multiboot2-and-linux16-modu.patch
