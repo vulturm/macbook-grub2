@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	91%{?dist}
+Release:	92%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -518,6 +518,9 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Tue Jul 16 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-92
+- Cleanup our patchset to reduce the number of patches
+
 * Sat Jul 13 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-91
 - Includes security modules in Grub2 EFI builds (benjamin.doron)
   Resolves: rhbz#1722938

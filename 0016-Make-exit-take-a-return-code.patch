@@ -20,11 +20,11 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  grub-core/kern/mips/arc/init.c       |  2 +-
  grub-core/kern/mips/loongson/init.c  |  2 +-
  grub-core/kern/mips/qemu_mips/init.c |  2 +-
- grub-core/kern/misc.c                |  2 +-
+ grub-core/kern/misc.c                | 11 ++++++++++-
  grub-core/kern/uboot/init.c          |  6 +++---
  grub-core/kern/xen/init.c            |  2 +-
  include/grub/misc.h                  |  2 +-
- 14 files changed, 39 insertions(+), 21 deletions(-)
+ 14 files changed, 48 insertions(+), 21 deletions(-)
 
 diff --git a/grub-core/commands/minicmd.c b/grub-core/commands/minicmd.c
 index a3a11824172..b25ca4b9f17 100644
@@ -191,10 +191,10 @@ index be88b77d22d..8b6c55ffc01 100644
    grub_halt ();
  }
 diff --git a/grub-core/kern/misc.c b/grub-core/kern/misc.c
-index 3b633d51f4c..952411d5dc6 100644
+index 3b633d51f4c..cd63a8cea73 100644
 --- a/grub-core/kern/misc.c
 +++ b/grub-core/kern/misc.c
-@@ -1095,7 +1095,7 @@ grub_abort (void)
+@@ -1095,9 +1095,18 @@ grub_abort (void)
        grub_getkey ();
      }
  
@@ -202,7 +202,18 @@ index 3b633d51f4c..952411d5dc6 100644
 +  grub_exit (1);
  }
  
++#if defined (__clang__) && !defined (GRUB_UTIL)
++/* clang emits references to abort().  */
++void __attribute__ ((noreturn))
++abort (void)
++{
++  grub_abort ();
++}
++#endif
++
  void
+ grub_fatal (const char *fmt, ...)
+ {
 diff --git a/grub-core/kern/uboot/init.c b/grub-core/kern/uboot/init.c
 index 3e338645c57..be2a5be1d07 100644
 --- a/grub-core/kern/uboot/init.c
