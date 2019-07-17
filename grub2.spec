@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	92%{?dist}
+Release:	93%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -371,6 +371,7 @@ rm -r /boot/grub2.tmp/ || :
 %files tools-minimal
 %{_sysconfdir}/prelink.conf.d/grub2.conf
 %{_sbindir}/%{name}-get-kernel-settings
+%{_sbindir}/%{name}-probe
 %attr(4755, root, root) %{_sbindir}/%{name}-set-bootflag
 %{_sbindir}/%{name}-set-default
 %{_sbindir}/%{name}-set*password
@@ -414,7 +415,6 @@ rm -r /boot/grub2.tmp/ || :
 %{_datarootdir}/bash-completion/completions/grub
 %{_sbindir}/%{name}-mkconfig
 %{_sbindir}/%{name}-switch-to-blscfg
-%{_sbindir}/%{name}-probe
 %{_sbindir}/%{name}-rpm-sort
 %{_sbindir}/%{name}-reboot
 %{_bindir}/%{name}-file
@@ -518,6 +518,11 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Wed Jul 17 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-93
+- Add btrfs snapshot submenu when BLS configuration is used
+- Move grub2-probe to the grub2-tools-minimal subpackage
+  Resolves: rhbz#1715994
+
 * Tue Jul 16 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-92
 - Cleanup our patchset to reduce the number of patches
 

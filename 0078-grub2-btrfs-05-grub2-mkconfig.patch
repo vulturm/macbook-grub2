@@ -4,15 +4,13 @@ Date: Thu, 21 Aug 2014 03:39:11 +0000
 Subject: [PATCH] grub2-btrfs-05-grub2-mkconfig
 
 Signed-off-by: Michael Chang <mchang@suse.com>
-[dusty: No more "Bootable Snapshot" submenu in grub.cfg.]
-Signed-off-by: Dusty Mabe <dusty@dustymabe.com>
 ---
  util/grub-mkconfig.in       |  3 ++-
  util/grub-mkconfig_lib.in   |  4 ++++
- util/grub.d/00_header.in    | 12 +++++++++++-
+ util/grub.d/00_header.in    | 25 ++++++++++++++++++++++++-
  util/grub.d/10_linux.in     |  4 ++++
  util/grub.d/20_linux_xen.in |  4 ++++
- 5 files changed, 25 insertions(+), 2 deletions(-)
+ 5 files changed, 38 insertions(+), 2 deletions(-)
 
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
 index 8218f3d477f..4248b9341ab 100644
@@ -45,7 +43,7 @@ index 113a41f9409..b3aae534ddc 100644
  
  is_path_readable_by_grub ()
 diff --git a/util/grub.d/00_header.in b/util/grub.d/00_header.in
-index 858b526c925..8a16fea347e 100644
+index 858b526c925..de727e6ee6b 100644
 --- a/util/grub.d/00_header.in
 +++ b/util/grub.d/00_header.in
 @@ -27,6 +27,14 @@ export TEXTDOMAINDIR="@localedir@"
@@ -74,6 +72,23 @@ index 858b526c925..8a16fea347e 100644
    load_env
  fi
  EOF
+@@ -356,3 +366,16 @@ fi
+ if [ "x${GRUB_BADRAM}" != "x" ] ; then
+   echo "badram ${GRUB_BADRAM}"
+ fi
++
++if [ "x${SUSE_BTRFS_SNAPSHOT_BOOTING}" = "xtrue" ] &&
++   [ "x${GRUB_ENABLE_BLSCFG}" = "xtrue" ] &&
++   [ "x${GRUB_FS}" = "xbtrfs" ] ; then
++    # Note: No $snapshot_num on *read-only* rollback!  (bsc#901487)
++    cat <<EOF
++if [ -n "\$extra_cmdline" ]; then
++  submenu "Bootable snapshot #\$snapshot_num" {
++    menuentry "If OK, run 'snapper rollback' and reboot." { true; }
++  }
++fi
++EOF
++fi
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
 index 4e49ccdf742..d9a05937e46 100644
 --- a/util/grub.d/10_linux.in
