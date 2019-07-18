@@ -89,6 +89,8 @@ case "$COMMAND" in
                     "$(date -u +%Y%m%d%H%M%S -d "$(stat -c '%y' "${KERNEL_DIR}")")" \
                     >"${BLS_TARGET}"
             fi
+            command -v restorecon &>/dev/null && \
+                restorecon -R "${BLS_TARGET}"
 
             LINUX="$(grep '^linux[ \t]' "${BLS_TARGET}" | sed -e 's,^linux[ \t]*,,')"
             INITRD="$(grep '^initrd[ \t]' "${BLS_TARGET}" | sed -e 's,^initrd[ \t]*,,')"

@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	93%{?dist}
+Release:	94%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -518,6 +518,10 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Thu Jul 18 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-94
+- 20-grub-install: Restore default SELinux security contexts for BLS files
+  Resolves: rhbz#1726020
+
 * Wed Jul 17 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-93
 - Add btrfs snapshot submenu when BLS configuration is used
 - Move grub2-probe to the grub2-tools-minimal subpackage
