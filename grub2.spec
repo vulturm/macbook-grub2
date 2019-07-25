@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	94%{?dist}
+Release:	95%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -518,6 +518,9 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org>
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Thu Jul 18 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-94
 - 20-grub-install: Restore default SELinux security contexts for BLS files
   Resolves: rhbz#1726020
