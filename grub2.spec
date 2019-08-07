@@ -7,7 +7,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.02
-Release:	96%{?dist}
+Release:	97%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -518,6 +518,9 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Wed Aug 07 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-97
+- Include regexp module in EFI builds
+
 * Thu Aug 01 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-96
 - Manual build for the Fedora 31 mass rebuild to succeed
 
