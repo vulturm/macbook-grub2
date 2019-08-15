@@ -20,7 +20,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  4 files changed, 78 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/kern/dl.c b/grub-core/kern/dl.c
-index 5028d157c46..eb8b969cded 100644
+index 2e57e5e6829..6a5e7706143 100644
 --- a/grub-core/kern/dl.c
 +++ b/grub-core/kern/dl.c
 @@ -501,6 +501,23 @@ grub_dl_find_section (Elf_Ehdr *e, const char *name)
@@ -95,7 +95,7 @@ index 5028d157c46..eb8b969cded 100644
      {
        grub_dl_unload (mod);
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index bcae7f4699d..a2a732ffc0d 100644
+index 2cf6a5ad526..19054b1465f 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -283,7 +283,7 @@ grub_efi_get_variable (const char *var, const grub_efi_guid_t *guid,
@@ -164,11 +164,11 @@ index 71d2279a0c1..e6183a4c44d 100644
  }
  
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 09a18e56302..570a69361a5 100644
+index 5e2b479daec..8ca3981d7a1 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
-@@ -132,7 +132,7 @@ grub_err_t grub_armxx_efi_linux_check_image(struct linux_armxx_kernel_header *lh
- grub_err_t grub_armxx_efi_linux_boot_image(grub_addr_t addr, char *args);
+@@ -132,7 +132,7 @@ grub_err_t grub_arch_efi_linux_check_image(struct linux_arch_kernel_header *lh);
+ grub_err_t grub_arch_efi_linux_boot_image(grub_addr_t addr, char *args);
  #endif
  
 -grub_addr_t grub_efi_modules_addr (void);

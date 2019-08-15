@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Jeff Mahoney <jeffm@suse.com>
-Date: Wed, 18 Dec 2013 09:57:04 +0000
+Date: Tue, 9 Jul 2019 13:39:45 +0200
 Subject: [PATCH] grub2/btrfs: Add ability to boot from subvolumes
 
 This patch adds the ability to specify a different root on a btrfs
@@ -24,20 +24,20 @@ Signed-off-by: Jeff Mahoney <jeffm@suse.com>
  2 files changed, 533 insertions(+), 20 deletions(-)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index be195448dbe..51ed63d429b 100644
+index 48bd3d04a5e..6823d9765c4 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
-@@ -29,6 +29,9 @@
- #include <minilzo.h>
+@@ -38,6 +38,9 @@
+ #include <zstd.h>
  #include <grub/i18n.h>
  #include <grub/btrfs.h>
 +#include <grub/command.h>
 +#include <grub/env.h>
 +#include <grub/extcmd.h>
+ #include <grub/crypto.h>
+ #include <grub/diskfilter.h>
  
- GRUB_MOD_LICENSE ("GPLv3+");
- 
-@@ -64,9 +67,11 @@ struct grub_btrfs_superblock
+@@ -78,9 +81,11 @@ struct grub_btrfs_superblock
    grub_uint64_t generation;
    grub_uint64_t root_tree;
    grub_uint64_t chunk_tree;
@@ -51,7 +51,7 @@ index be195448dbe..51ed63d429b 100644
    struct grub_btrfs_device this_device;
    char label[0x100];
    grub_uint8_t dummy4[0x100];
-@@ -105,6 +110,7 @@ struct grub_btrfs_data
+@@ -120,6 +125,7 @@ struct grub_btrfs_data
    grub_uint64_t exttree;
    grub_size_t extsize;
    struct grub_btrfs_extent_data *extent;
@@ -59,7 +59,7 @@ index be195448dbe..51ed63d429b 100644
  };
  
  struct grub_btrfs_chunk_item
-@@ -171,6 +177,14 @@ struct grub_btrfs_leaf_descriptor
+@@ -188,6 +194,14 @@ struct grub_btrfs_leaf_descriptor
    } *data;
  };
  
@@ -74,7 +74,7 @@ index be195448dbe..51ed63d429b 100644
  struct grub_btrfs_time
  {
    grub_int64_t sec;
-@@ -215,6 +229,14 @@ struct grub_btrfs_extent_data
+@@ -233,6 +247,14 @@ struct grub_btrfs_extent_data
  
  #define GRUB_BTRFS_OBJECT_ID_CHUNK 0x100
  
@@ -89,7 +89,7 @@ index be195448dbe..51ed63d429b 100644
  static grub_disk_addr_t superblock_sectors[] = { 64 * 2, 64 * 1024 * 2,
    256 * 1048576 * 2, 1048576ULL * 1048576ULL * 2
  };
-@@ -837,6 +859,62 @@ grub_btrfs_read_logical (struct grub_btrfs_data *data, grub_disk_addr_t addr,
+@@ -1153,6 +1175,62 @@ grub_btrfs_read_logical (struct grub_btrfs_data *data, grub_disk_addr_t addr,
    return GRUB_ERR_NONE;
  }
  
@@ -152,7 +152,7 @@ index be195448dbe..51ed63d429b 100644
  static struct grub_btrfs_data *
  grub_btrfs_mount (grub_device_t dev)
  {
-@@ -872,6 +950,13 @@ grub_btrfs_mount (grub_device_t dev)
+@@ -1188,6 +1266,13 @@ grub_btrfs_mount (grub_device_t dev)
    data->devices_attached[0].dev = dev;
    data->devices_attached[0].id = data->sblock.this_device.device_id;
  
@@ -166,7 +166,7 @@ index be195448dbe..51ed63d429b 100644
    return data;
  }
  
-@@ -1232,6 +1317,91 @@ get_root (struct grub_btrfs_data *data, struct grub_btrfs_key *key,
+@@ -1653,6 +1738,91 @@ get_root (struct grub_btrfs_data *data, struct grub_btrfs_key *key,
    return GRUB_ERR_NONE;
  }
  
@@ -258,7 +258,7 @@ index be195448dbe..51ed63d429b 100644
  static grub_err_t
  find_path (struct grub_btrfs_data *data,
  	   const char *path, struct grub_btrfs_key *key,
-@@ -1250,14 +1420,26 @@ find_path (struct grub_btrfs_data *data,
+@@ -1671,14 +1841,26 @@ find_path (struct grub_btrfs_data *data,
    char *origpath = NULL;
    unsigned symlinks_max = 32;
  
@@ -289,7 +289,7 @@ index be195448dbe..51ed63d429b 100644
    while (1)
      {
        while (path[0] == '/')
-@@ -1430,9 +1612,21 @@ find_path (struct grub_btrfs_data *data,
+@@ -1851,9 +2033,21 @@ find_path (struct grub_btrfs_data *data,
  	  path = path_alloc = tmp;
  	  if (path[0] == '/')
  	    {
@@ -314,7 +314,7 @@ index be195448dbe..51ed63d429b 100644
  	    }
  	  continue;
  	}
-@@ -1673,18 +1867,10 @@ grub_btrfs_read (grub_file_t file, char *buf, grub_size_t len)
+@@ -2094,18 +2288,10 @@ grub_btrfs_read (grub_file_t file, char *buf, grub_size_t len)
  				 data->tree, file->offset, buf, len);
  }
  
@@ -336,7 +336,7 @@ index be195448dbe..51ed63d429b 100644
  			  grub_be_to_cpu16 (data->sblock.uuid[0]),
  			  grub_be_to_cpu16 (data->sblock.uuid[1]),
  			  grub_be_to_cpu16 (data->sblock.uuid[2]),
-@@ -1693,6 +1879,20 @@ grub_btrfs_uuid (grub_device_t device, char **uuid)
+@@ -2114,6 +2300,20 @@ grub_btrfs_uuid (grub_device_t device, char **uuid)
  			  grub_be_to_cpu16 (data->sblock.uuid[5]),
  			  grub_be_to_cpu16 (data->sblock.uuid[6]),
  			  grub_be_to_cpu16 (data->sblock.uuid[7]));
@@ -357,7 +357,7 @@ index be195448dbe..51ed63d429b 100644
  
    grub_btrfs_unmount (data);
  
-@@ -1749,6 +1949,242 @@ grub_btrfs_embed (grub_device_t device __attribute__ ((unused)),
+@@ -2170,6 +2370,242 @@ grub_btrfs_embed (grub_device_t device __attribute__ ((unused)),
  }
  #endif
  
@@ -599,8 +599,8 @@ index be195448dbe..51ed63d429b 100644
 +
  static struct grub_fs grub_btrfs_fs = {
    .name = "btrfs",
-   .dir = grub_btrfs_dir,
-@@ -1764,12 +2200,88 @@ static struct grub_fs grub_btrfs_fs = {
+   .fs_dir = grub_btrfs_dir,
+@@ -2185,12 +2621,88 @@ static struct grub_fs grub_btrfs_fs = {
  #endif
  };
  

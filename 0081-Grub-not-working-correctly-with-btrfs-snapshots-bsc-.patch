@@ -8,10 +8,10 @@ Subject: [PATCH] Grub not working correctly with btrfs snapshots (bsc#1026511)
  1 file changed, 238 insertions(+)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index 4a31d39ee74..7002ad81b7e 100644
+index 69c30e62354..ba99d04f8ed 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
-@@ -2446,6 +2446,238 @@ out:
+@@ -2867,6 +2867,238 @@ out:
    return 0;
  }
  
@@ -249,8 +249,8 @@ index 4a31d39ee74..7002ad81b7e 100644
 +
  static struct grub_fs grub_btrfs_fs = {
    .name = "btrfs",
-   .dir = grub_btrfs_dir,
-@@ -2464,6 +2696,7 @@ static struct grub_fs grub_btrfs_fs = {
+   .fs_dir = grub_btrfs_dir,
+@@ -2885,6 +3117,7 @@ static struct grub_fs grub_btrfs_fs = {
  static grub_command_t cmd_info;
  static grub_command_t cmd_mount_subvol;
  static grub_extcmd_t cmd_list_subvols;
@@ -258,7 +258,7 @@ index 4a31d39ee74..7002ad81b7e 100644
  
  static char *
  subvolid_set_env (struct grub_env_var *var __attribute__ ((unused)),
-@@ -2534,6 +2767,11 @@ GRUB_MOD_INIT (btrfs)
+@@ -2955,6 +3188,11 @@ GRUB_MOD_INIT (btrfs)
  					 "[-p|-n] [-o var] DEVICE",
  					 "Print list of BtrFS subvolumes on "
  					 "DEVICE.", options);

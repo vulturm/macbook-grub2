@@ -9,7 +9,7 @@ Subject: [PATCH] Don't use dynamic sized arrays since we don't build with
  1 file changed, 14 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/net/net.c b/grub-core/net/net.c
-index 4be228d9576..fa3e2912643 100644
+index f24f1fd63f6..5366e443d2a 100644
 --- a/grub-core/net/net.c
 +++ b/grub-core/net/net.c
 @@ -1853,14 +1853,25 @@ grub_net_search_configfile (char *config)

@@ -13,7 +13,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 9 insertions(+), 15 deletions(-)
 
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index 5cd9b6e08a8..106eb10a362 100644
+index 5aa3a5dc7dd..3a724a9fcbf 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -65,7 +65,7 @@ grub_chainloader_unload (void)
@@ -34,7 +34,7 @@ index 5cd9b6e08a8..106eb10a362 100644
  
    grub_loader_unset ();
  
-@@ -500,10 +500,9 @@ grub_efi_get_media_file_path (grub_efi_device_path_t *dp)
+@@ -506,10 +506,9 @@ grub_efi_get_media_file_path (grub_efi_device_path_t *dp)
  static grub_efi_boolean_t
  handle_image (void *data, grub_efi_uint32_t datasize)
  {
@@ -46,7 +46,7 @@ index 5cd9b6e08a8..106eb10a362 100644
    char *buffer_aligned = NULL;
    grub_efi_uint32_t i;
    struct grub_pe32_section_table *section;
-@@ -514,8 +513,6 @@ handle_image (void *data, grub_efi_uint32_t datasize)
+@@ -520,8 +519,6 @@ handle_image (void *data, grub_efi_uint32_t datasize)
    int found_entry_point = 0;
    int rc;
  
@@ -55,7 +55,7 @@ index 5cd9b6e08a8..106eb10a362 100644
    rc = read_header (data, datasize, &context);
    if (rc < 0)
      {
-@@ -555,8 +552,8 @@ handle_image (void *data, grub_efi_uint32_t datasize)
+@@ -561,8 +558,8 @@ handle_image (void *data, grub_efi_uint32_t datasize)
    grub_dprintf ("chain", "image size is %08"PRIxGRUB_UINT64_T", datasize is %08x\n",
  	       context.image_size, datasize);
  
@@ -66,7 +66,7 @@ index 5cd9b6e08a8..106eb10a362 100644
  
    if (efi_status != GRUB_EFI_SUCCESS)
      {
-@@ -788,14 +785,14 @@ handle_image (void *data, grub_efi_uint32_t datasize)
+@@ -794,14 +791,14 @@ handle_image (void *data, grub_efi_uint32_t datasize)
  
    grub_dprintf ("chain", "entry_point returned %ld\n", efi_status);
    grub_memcpy (li, &li_bak, sizeof (grub_efi_loaded_image_t));
@@ -83,7 +83,7 @@ index 5cd9b6e08a8..106eb10a362 100644
  
    return 0;
  }
-@@ -803,10 +800,7 @@ error_exit:
+@@ -809,10 +806,7 @@ error_exit:
  static grub_err_t
  grub_secureboot_chainloader_unload (void)
  {
@@ -95,7 +95,7 @@ index 5cd9b6e08a8..106eb10a362 100644
    grub_free (file_path);
    grub_free (cmdline);
    cmdline = 0;
-@@ -1073,7 +1067,7 @@ fail:
+@@ -1079,7 +1073,7 @@ fail:
    grub_free (file_path);
  
    if (address)

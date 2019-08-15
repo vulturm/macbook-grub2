@@ -12,7 +12,7 @@ https://bugzilla.redhat.com/show_bug.cgi?id=973205
  3 files changed, 12 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/kern/ieee1275/cmain.c b/grub-core/kern/ieee1275/cmain.c
-index 3e12e6b24e1..3e14f539368 100644
+index 20cbbd761ec..04df9d2c667 100644
 --- a/grub-core/kern/ieee1275/cmain.c
 +++ b/grub-core/kern/ieee1275/cmain.c
 @@ -90,7 +90,10 @@ grub_ieee1275_find_options (void)
@@ -48,14 +48,14 @@ index 17a3dbbb575..b8e4b3feb32 100644
  
  GRUB_MOD_FINI(ieee1275_fb)
 diff --git a/include/grub/ieee1275/ieee1275.h b/include/grub/ieee1275/ieee1275.h
-index 2310f33dbc2..ca08bd96681 100644
+index 0a599607f31..b5a1d49bbc3 100644
 --- a/include/grub/ieee1275/ieee1275.h
 +++ b/include/grub/ieee1275/ieee1275.h
-@@ -146,6 +146,8 @@ enum grub_ieee1275_flag
-   GRUB_IEEE1275_FLAG_BROKEN_REPEAT,
- 
+@@ -148,6 +148,8 @@ enum grub_ieee1275_flag
    GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN,
-+
+ 
+   GRUB_IEEE1275_FLAG_RAW_DEVNAMES,
++  
 +  GRUB_IEEE1275_FLAG_DISABLE_VIDEO_SUPPORT
  };
  

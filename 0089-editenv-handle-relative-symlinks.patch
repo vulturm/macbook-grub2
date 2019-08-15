@@ -14,7 +14,7 @@ Signed-off-by: Jonathan Lebon <jlebon@redhat.com>
  1 file changed, 14 insertions(+), 2 deletions(-)
 
 diff --git a/util/editenv.c b/util/editenv.c
-index d8d1dad6ab9..41bc7cb1c9a 100644
+index e61dc1283a4..1f7f6f3ae18 100644
 --- a/util/editenv.c
 +++ b/util/editenv.c
 @@ -28,6 +28,7 @@
@@ -25,7 +25,7 @@ index d8d1dad6ab9..41bc7cb1c9a 100644
  
  #define DEFAULT_ENVBLK_SIZE	1024
  
-@@ -87,9 +88,20 @@ grub_util_create_envblk_file (const char *name)
+@@ -88,9 +89,20 @@ grub_util_create_envblk_file (const char *name)
  	  continue;
  	}
  

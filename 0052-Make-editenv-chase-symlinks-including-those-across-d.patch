@@ -16,10 +16,10 @@ Reviewed-by: Adam Jackson <ajax@redhat.com>
  2 files changed, 55 insertions(+), 2 deletions(-)
 
 diff --git a/Makefile.util.def b/Makefile.util.def
-index c7b775bce73..3efc5718ae8 100644
+index 8717774d510..1f298d05f3d 100644
 --- a/Makefile.util.def
 +++ b/Makefile.util.def
-@@ -231,8 +231,19 @@ program = {
+@@ -240,8 +240,19 @@ program = {
  
    common = util/grub-editenv.c;
    common = util/editenv.c;
@@ -40,7 +40,7 @@ index c7b775bce73..3efc5718ae8 100644
    ldadd = libgrubgcry.a;
    ldadd = libgrubkern.a;
 diff --git a/util/editenv.c b/util/editenv.c
-index c6f8d2298c3..d8d1dad6ab9 100644
+index eb2d0c03a98..e61dc1283a4 100644
 --- a/util/editenv.c
 +++ b/util/editenv.c
 @@ -37,6 +37,7 @@ grub_util_create_envblk_file (const char *name)
@@ -51,7 +51,7 @@ index c6f8d2298c3..d8d1dad6ab9 100644
  
    buf = xmalloc (DEFAULT_ENVBLK_SIZE);
  
-@@ -59,7 +60,48 @@ grub_util_create_envblk_file (const char *name)
+@@ -60,7 +61,48 @@ grub_util_create_envblk_file (const char *name)
    free (buf);
    fclose (fp);
  

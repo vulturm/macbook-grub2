@@ -31,7 +31,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 7795baeb654..c7b0e6a9c46 100644
+index 1f4bb9b8c5a..bf9c1ba64c9 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -37,7 +37,7 @@ grub_script.yy.c: grub_script.yy.h

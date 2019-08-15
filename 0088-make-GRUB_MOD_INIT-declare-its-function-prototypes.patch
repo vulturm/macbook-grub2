@@ -8,7 +8,7 @@ Subject: [PATCH] make GRUB_MOD_INIT() declare its function prototypes.
  1 file changed, 2 insertions(+)
 
 diff --git a/include/grub/dl.h b/include/grub/dl.h
-index 2bca56ce0e8..b1ed3c33317 100644
+index f03c03561a1..90dc9bb1017 100644
 --- a/include/grub/dl.h
 +++ b/include/grub/dl.h
 @@ -54,6 +54,7 @@ grub_mod_fini (void)

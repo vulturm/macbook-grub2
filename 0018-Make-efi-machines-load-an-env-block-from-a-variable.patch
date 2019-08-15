@@ -10,10 +10,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 34 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index e92a7ef322f..f8065388213 100644
+index eb1088fd654..41b5e16a3ce 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -191,6 +191,7 @@ kernel = {
+@@ -203,6 +203,7 @@ kernel = {
    efi = term/efi/console.c;
    efi = kern/acpi.c;
    efi = kern/efi/acpi.c;

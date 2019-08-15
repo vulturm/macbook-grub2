@@ -312,7 +312,12 @@ This subpackage provides optional components of grub used with removeable media 
 %setup -q -n grub-%{tarversion}					\
 rm -fv docs/*.info						\
 cp %{SOURCE6} .gitignore					\
-cp %{SOURCE8} ./grub-core/tests/strtoull_test.c			\
+cp %{SOURCE7} bootstrap						\
+cp %{SOURCE8} bootstrap.conf					\
+cp %{SOURCE9} ./grub-core/tests/strtoull_test.c			\
+cp %{SOURCE12} gnulib-%{gnulibversion}.tar.gz			\
+tar -zxf gnulib-%{gnulibversion}.tar.gz				\
+mv gnulib-%{gnulibversion} gnulib				\
 git init							\
 echo '![[:digit:]][[:digit:]]_*.in' > util/grub.d/.gitignore	\
 echo '!*.[[:digit:]]' > util/.gitignore				\
@@ -323,14 +328,12 @@ git config gc.auto 0						\
 rm -f configure							\
 git add .							\
 git commit -a -q -m "%{tarversion} baseline."			\
-git apply --index --whitespace=nowarn %{SOURCE3}		\
-git commit -a -q -m "%{tarversion} master."			\
+#git apply --index --whitespace=nowarn %{SOURCE3}		\
+#git commit -a -q -m "%{tarversion} master."			\
 git am --whitespace=nowarn %%{patches} </dev/null		\
-autoreconf -vi							\
+./bootstrap							\
 git add .							\
-git commit -a -q -m "autoreconf"				\
-autoconf							\
-PYTHON=python3 ./autogen.sh					\
+git commit -a -q -m "bootstrap"					\
 %{nil}
 
 %define do_efi_configure()					\
@@ -391,15 +394,15 @@ GRUB_MODULES="	all_video boot blscfg btrfs			\\\
 		echo efi_netfs efifwsetup efinet ext2		\\\
 		fat font gcry_rijndael gcry_rsa gcry_serpent 	\\\
 		gcry_sha256 gcry_twofish gcry_whirlpool   	\\\
-		gfxmenu gfxterm gzio			        \\\
+		gfxmenu gfxterm gzio				\\\
 		halt hfsplus http increment iso9660 jpeg	\\\
 		loadenv loopback linux lvm lsefi lsefimmap luks	\\\
 		mdraid09 mdraid1x minicmd net			\\\
 		normal part_apple part_msdos part_gpt		\\\
-		password_pbkdf2 png reboot			\\\
+		password_pbkdf2 pgp png reboot			\\\
 		regexp search search_fs_uuid search_fs_file	\\\
 		search_label serial sleep syslinuxcfg test tftp	\\\
-		verify version video xfs"			\
+		version video xfs"				\
 GRUB_MODULES+=%{efi_modules}					\
 %{expand:%%{mkimage %{1} %{2} %{3} %{4}}}			\
 %{nil}
@@ -454,7 +457,7 @@ cd grub-emu-%{tarversion}					\
 git add .							\
 git commit -m "After emu configure"				\
 make %{?_smp_mflags} ascii.h widthspec.h			\
-make %{?_smp_mflags} -C grub-core/gnulib			\
+make %{?_smp_mflags} -C grub-core/lib/gnulib			\
 make %{?_smp_mflags} -C grub-core				\
 cd ..								\
 %{nil}

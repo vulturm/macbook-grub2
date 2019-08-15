@@ -1,33 +1,42 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
-Date: Tue, 8 Aug 2017 12:48:04 -0400
+Date: Mon, 8 Jul 2019 12:55:29 +0200
 Subject: [PATCH] re-write .gitignore
 
 ---
- .gitignore                        | 357 +++++++++++++-------------------------
- build-aux/.gitignore              |   9 +
- docs/.gitignore                   |   4 +
- grub-core/.gitignore              |  15 ++
- grub-core/gnulib/.gitignore       |  22 +++
+ .gitignore                        | 366 +++++++++++++++-----------------------
+ docs/.gitignore                   |   5 +
+ grub-core/.gitignore              |  16 ++
  grub-core/lib/.gitignore          |   1 +
  include/grub/gcrypt/.gitignore    |   2 +
- po/.gitignore                     |   4 +
- util/bash-completion.d/.gitignore |   1 +
- 9 files changed, 175 insertions(+), 240 deletions(-)
- create mode 100644 build-aux/.gitignore
+ po/.gitignore                     |   5 +
+ util/bash-completion.d/.gitignore |   2 +
+ 7 files changed, 171 insertions(+), 226 deletions(-)
  create mode 100644 docs/.gitignore
  create mode 100644 grub-core/.gitignore
- create mode 100644 grub-core/gnulib/.gitignore
  create mode 100644 grub-core/lib/.gitignore
  create mode 100644 include/grub/gcrypt/.gitignore
  create mode 100644 po/.gitignore
  create mode 100644 util/bash-completion.d/.gitignore
 
 diff --git a/.gitignore b/.gitignore
-index eca17bec9b8..43f04d47277 100644
+index 819cd185d44..b45a633f3d1 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -1,249 +1,126 @@
+@@ -1,237 +1,151 @@
++# things ./autogen.sh will create
++/Makefile.utilgcry.def
++/ABOUT-NLS
++/aclocal.m4
++/autom4te.cache
++/build-aux
++/configure
++/gnulib
++/grub-core/lib/gnulib/
++/Makefile
++
++# things very common editors create that we never want
+ *~
 -00_header
 -10_*
 -20_linux_xen
@@ -36,11 +45,13 @@ index eca17bec9b8..43f04d47277 100644
 -41_custom
 -*.1
 -*.8
+-ABOUT-NLS
 -aclocal.m4
 -ahci_test
 -ascii.bitmaps
 -ascii.h
 -autom4te.cache
+-build-aux
 -build-grub-gen-asciih
 -build-grub-gen-widthspec
 -build-grub-mkfont
@@ -64,26 +75,18 @@ index eca17bec9b8..43f04d47277 100644
 -example_grub_script_test
 -example_scripted_test
 -example_unit_test
-+# things ./autogen.sh will create
-+/Makefile.utilgcry.def
-+/aclocal.m4
-+/autom4te.cache
-+/configure
-+Makefile
-+# we want to enable building in a subdirectory, but we don't want to exclude
-+# /build-aux so explicitly don't ignore it.
-+/build*/
-+!/build-aux/
-+
-+# things very common editors create that we never want
-+*~
 +.*.sw?
 +*.patch
++
++# stuff you're likely to make while building test trees
++grub.cfg
++/build*/
 +
 +# built objects across the whole tree
 +Makefile.in
 +*.a
 +*.am
++*.efi
  *.exec
 -*.exec.exe
 -fddboot_test
@@ -92,6 +95,7 @@ index eca17bec9b8..43f04d47277 100644
 -gentrigtables
 -gentrigtables.exe
 -gettext_strings_test
+-/gnulib
 -grub-bin2h
 -/grub-bios-setup
 -/grub-bios-setup.exe
@@ -184,6 +188,7 @@ index eca17bec9b8..43f04d47277 100644
 -*.image.exe
 -include/grub/cpu
 -include/grub/machine
+-INSTALL.grub
 -install-sh
 -lib/libgcrypt-grub
 -libgrub_a_init.c
@@ -194,6 +199,7 @@ index eca17bec9b8..43f04d47277 100644
 -lzocompress_test
  *.marker
 -Makefile
+ /m4
  *.mod
 -mod-*.c
 -missing
@@ -208,7 +214,11 @@ index eca17bec9b8..43f04d47277 100644
 -*.pp
 -po/*.mo
 -po/grub.pot
+-po/Makefile.in.in
+-po/Makevars
+-po/Makevars.template
 -po/POTFILES
+-po/Rules-quot
 -po/stamp-po
 -printf_test
 -priority_queue_unit_test
@@ -259,25 +269,7 @@ index eca17bec9b8..43f04d47277 100644
 -grub-core/*.pp
 -grub-core/kernel.img.bin
 -util/bash-completion.d/grub
--grub-core/gnulib/alloca.h
--grub-core/gnulib/arg-nonnull.h
--grub-core/gnulib/c++defs.h
--grub-core/gnulib/charset.alias
--grub-core/gnulib/configmake.h
--grub-core/gnulib/float.h
--grub-core/gnulib/getopt.h
--grub-core/gnulib/langinfo.h
--grub-core/gnulib/ref-add.sed
--grub-core/gnulib/ref-del.sed
--grub-core/gnulib/stdio.h
--grub-core/gnulib/stdlib.h
--grub-core/gnulib/string.h
--grub-core/gnulib/strings.h
--grub-core/gnulib/sys
--grub-core/gnulib/unistd.h
--grub-core/gnulib/warn-on-use.h
--grub-core/gnulib/wchar.h
--grub-core/gnulib/wctype.h
+-grub-core/lib/gnulib
 -grub-core/rs_decoder.h
 -widthspec.bin
 -widthspec.h
@@ -296,10 +288,6 @@ index eca17bec9b8..43f04d47277 100644
 -/grub-render-label
 -/grub-glue-efi.exe
 -/grub-render-label.exe
--grub-core/gnulib/locale.h
--grub-core/gnulib/unitypes.h
--grub-core/gnulib/uniwidth.h
--build-aux/test-driver
 +
 +# next are things you get if you do ./configure in the topdir (for e.g.
 +# "make dist" invocation.
@@ -307,9 +295,16 @@ index eca17bec9b8..43f04d47277 100644
 +/config.h
 +/include/grub/cpu
 +/include/grub/machine
++/INSTALL
++/INSTALL.grub
++/po/Makefile.in.in
++/po/Makevars
++/po/Makevars.template
 +/po/POTFILES
++/po/Rules-quot
 +/stamp-h
 +/stamp-h1
++bootstrap.log
 +config.log
 +config.status
 +
@@ -338,6 +333,8 @@ index eca17bec9b8..43f04d47277 100644
 +/grub*-fs-tester
 +/grub*-fstest
 +/grub*-fstest.1
++/grub*-get-kernel-settings
++/grub*-get-kernel-settings.3
 +/grub*-glue-efi
 +/grub*-glue-efi.1
 +/grub*-install
@@ -348,6 +345,8 @@ index eca17bec9b8..43f04d47277 100644
 +/grub*-macbless.8
 +/grub*-menulst2cfg
 +/grub*-menulst2cfg.1
++/grub*-mount
++/grub*-mount.1
 +/grub*-mkconfig
 +/grub*-mkconfig.8
 +/grub*-mkconfig_lib
@@ -375,16 +374,24 @@ index eca17bec9b8..43f04d47277 100644
 +/grub*-reboot.8
 +/grub*-render-label
 +/grub*-render-label.1
++/grub*-rpm-sort
++/grub*-rpm-sort.8
 +/grub*-script-check
 +/grub*-script-check.1
++/grub*-set-bootflag
++/grub*-set-bootflag.1
 +/grub*-set-default
 +/grub*-set-default.8
++/grub*-set-password
++/grub*-set-password.8
 +/grub*-shell
 +/grub*-shell-tester
 +/grub*-sparc64-setup
 +/grub*-sparc64-setup.8
 +/grub*-syslinux2cfg
 +/grub*-syslinux2cfg.1
++/grub*-switch-to-blscfg
++/grub*-switch-to-blscfg.8
 +/grub_fstest.pp
 +/grub_fstest_init.c
 +/grub_fstest_init.lst
@@ -394,38 +401,25 @@ index eca17bec9b8..43f04d47277 100644
 +/libgrub_a_init.lst
 +/stamp-h.in
 +/widthspec.h
-diff --git a/build-aux/.gitignore b/build-aux/.gitignore
-new file mode 100644
-index 00000000000..f2f17aab9ff
---- /dev/null
-+++ b/build-aux/.gitignore
-@@ -0,0 +1,9 @@
-+/compile
-+/config.guess
-+/config.sub
-+/depcomp
-+/install-sh
-+/mdate-sh
-+/missing
-+/test-driver
-+/texinfo.tex
 diff --git a/docs/.gitignore b/docs/.gitignore
 new file mode 100644
-index 00000000000..91aee84d3e9
+index 00000000000..e1d849ef95b
 --- /dev/null
 +++ b/docs/.gitignore
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,5 @@
 +/*.in
++/Makefile
 +/stamp-1
 +/stamp-vti
 +/version*.texi
 diff --git a/grub-core/.gitignore b/grub-core/.gitignore
 new file mode 100644
-index 00000000000..c738ac6c649
+index 00000000000..2acce281159
 --- /dev/null
 +++ b/grub-core/.gitignore
-@@ -0,0 +1,15 @@
+@@ -0,0 +1,16 @@
 +/*.lst
++/Makefile
 +/Makefile.gcry.def
 +/unidata.c
 +/build-grub-module-verifier
@@ -440,34 +434,6 @@ index 00000000000..c738ac6c649
 +/symlist.c
 +/symlist.h
 +/trigtables.c
-diff --git a/grub-core/gnulib/.gitignore b/grub-core/gnulib/.gitignore
-new file mode 100644
-index 00000000000..29e199c2db4
---- /dev/null
-+++ b/grub-core/gnulib/.gitignore
-@@ -0,0 +1,22 @@
-+/alloca.h
-+/arg-nonnull.h
-+/c++defs.h
-+/charset.alias
-+/configmake.h
-+/getopt.h
-+/langinfo.h
-+/libgnu.a
-+/locale.h
-+/ref-add.sed
-+/ref-del.sed
-+/stdio.h
-+/stdlib.h
-+/string.h
-+/strings.h
-+/sys/
-+/unistd.h
-+/unitypes.h
-+/uniwidth.h
-+/warn-on-use.h
-+/wchar.h
-+/wctype.h
 diff --git a/grub-core/lib/.gitignore b/grub-core/lib/.gitignore
 new file mode 100644
 index 00000000000..68154591404
@@ -485,18 +451,20 @@ index 00000000000..8fbf5646246
 +gcrypt.h
 diff --git a/po/.gitignore b/po/.gitignore
 new file mode 100644
-index 00000000000..97b679c3138
+index 00000000000..f507e7741e3
 --- /dev/null
 +++ b/po/.gitignore
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,5 @@
++/Makefile
 +/POTFILES*.in
 +/grub.pot
 +/remove-potcdate.sed
 +/stamp-po
 diff --git a/util/bash-completion.d/.gitignore b/util/bash-completion.d/.gitignore
 new file mode 100644
-index 00000000000..b7e1eb12428
+index 00000000000..6813a527ad3
 --- /dev/null
 +++ b/util/bash-completion.d/.gitignore
-@@ -0,0 +1 @@
+@@ -0,0 +1,2 @@
++Makefile
 +grub

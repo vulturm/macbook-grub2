@@ -9,7 +9,7 @@ Subject: [PATCH] Don't say "GNU/Linux" in generated menus.
  2 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 3a5aa0f8dc9..6299836b5cd 100644
+index ceb413fc2e3..2b402d85a52 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -29,9 +29,9 @@ export TEXTDOMAINDIR="@localedir@"
@@ -25,7 +25,7 @@ index 3a5aa0f8dc9..6299836b5cd 100644
  fi
  
 diff --git a/util/grub.d/20_linux_xen.in b/util/grub.d/20_linux_xen.in
-index e8143b079dc..972a4b5a03d 100644
+index 96179ea613c..47e0d3f5cd6 100644
 --- a/util/grub.d/20_linux_xen.in
 +++ b/util/grub.d/20_linux_xen.in
 @@ -29,9 +29,9 @@ export TEXTDOMAINDIR="@localedir@"

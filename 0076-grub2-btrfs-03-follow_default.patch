@@ -8,10 +8,10 @@ Subject: [PATCH] grub2-btrfs-03-follow_default
  1 file changed, 76 insertions(+), 31 deletions(-)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index 88d727d161f..a47d297567f 100644
+index 2d099b18ea1..2db89f71ea5 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
-@@ -920,6 +920,7 @@ grub_btrfs_mount (grub_device_t dev)
+@@ -1236,6 +1236,7 @@ grub_btrfs_mount (grub_device_t dev)
  {
    struct grub_btrfs_data *data;
    grub_err_t err;
@@ -19,7 +19,7 @@ index 88d727d161f..a47d297567f 100644
  
    if (!dev->disk)
      {
-@@ -950,11 +951,14 @@ grub_btrfs_mount (grub_device_t dev)
+@@ -1266,11 +1267,14 @@ grub_btrfs_mount (grub_device_t dev)
    data->devices_attached[0].dev = dev;
    data->devices_attached[0].id = data->sblock.this_device.device_id;
  
@@ -38,7 +38,7 @@ index 88d727d161f..a47d297567f 100644
      }
  
    return data;
-@@ -1414,24 +1418,39 @@ find_path (struct grub_btrfs_data *data,
+@@ -1835,24 +1839,39 @@ find_path (struct grub_btrfs_data *data,
    grub_size_t allocated = 0;
    struct grub_btrfs_dir_item *direl = NULL;
    struct grub_btrfs_key key_out;
@@ -85,7 +85,7 @@ index 88d727d161f..a47d297567f 100644
      }
    else
      {
-@@ -1442,15 +1461,23 @@ find_path (struct grub_btrfs_data *data,
+@@ -1863,15 +1882,23 @@ find_path (struct grub_btrfs_data *data,
  
    while (1)
      {
@@ -118,7 +118,7 @@ index 88d727d161f..a47d297567f 100644
  
        if (*type != GRUB_BTRFS_DIR_ITEM_TYPE_DIRECTORY)
  	{
-@@ -1461,7 +1488,9 @@ find_path (struct grub_btrfs_data *data,
+@@ -1882,7 +1909,9 @@ find_path (struct grub_btrfs_data *data,
  
        if (ctokenlen == 1 && ctoken[0] == '.')
  	{
@@ -129,7 +129,7 @@ index 88d727d161f..a47d297567f 100644
  	  continue;
  	}
        if (ctokenlen == 2 && ctoken[0] == '.' && ctoken[1] == '.')
-@@ -1492,8 +1521,9 @@ find_path (struct grub_btrfs_data *data,
+@@ -1913,8 +1942,9 @@ find_path (struct grub_btrfs_data *data,
  	  *type = GRUB_BTRFS_DIR_ITEM_TYPE_DIRECTORY;
  	  key->object_id = key_out.offset;
  
@@ -141,7 +141,7 @@ index 88d727d161f..a47d297567f 100644
  	  continue;
  	}
  
-@@ -1562,7 +1592,9 @@ find_path (struct grub_btrfs_data *data,
+@@ -1983,7 +2013,9 @@ find_path (struct grub_btrfs_data *data,
  	  return err;
  	}
  
@@ -152,7 +152,7 @@ index 88d727d161f..a47d297567f 100644
        if (cdirel->type == GRUB_BTRFS_DIR_ITEM_TYPE_SYMLINK)
  	{
  	  struct grub_btrfs_inode inode;
-@@ -1612,14 +1644,26 @@ find_path (struct grub_btrfs_data *data,
+@@ -2033,14 +2065,26 @@ find_path (struct grub_btrfs_data *data,
  	  path = path_alloc = tmp;
  	  if (path[0] == '/')
  	    {
@@ -186,7 +186,7 @@ index 88d727d161f..a47d297567f 100644
  		}
  	      else
  		{
-@@ -2275,6 +2319,7 @@ GRUB_MOD_INIT (btrfs)
+@@ -2696,6 +2740,7 @@ GRUB_MOD_INIT (btrfs)
                                 subvolid_set_env);
    grub_env_export ("btrfs_subvol");
    grub_env_export ("btrfs_subvolid");

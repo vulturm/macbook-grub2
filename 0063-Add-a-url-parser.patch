@@ -20,10 +20,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  create mode 100644 include/grub/net/url.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 8bd220a41ba..d0c8a8b1908 100644
+index 57e253ab1a1..99466b1e47e 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -2188,6 +2188,7 @@ module = {
+@@ -2284,6 +2284,7 @@ module = {
    common = net/ethernet.c;
    common = net/arp.c;
    common = net/netbuff.c;
@@ -923,7 +923,7 @@ index 00000000000..146858284cd
 +}
 +#endif
 diff --git a/include/grub/misc.h b/include/grub/misc.h
-index 83fd69f4ada..fcaf1201e39 100644
+index f9135b62e35..b4339222ecb 100644
 --- a/include/grub/misc.h
 +++ b/include/grub/misc.h
 @@ -85,6 +85,7 @@ int EXPORT_FUNC(grub_strncmp) (const char *s1, const char *s2, grub_size_t n);

@@ -41,7 +41,7 @@ index 9cad0c4485c..8ab7794c47b 100644
      }
  
 diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
-index 249e19bc788..759c475c4d9 100644
+index 222e239c1be..394bfbea868 100644
 --- a/grub-core/normal/main.c
 +++ b/grub-core/normal/main.c
 @@ -338,7 +338,30 @@ grub_cmd_normal (struct grub_command *cmd __attribute__ ((unused)),
@@ -59,7 +59,7 @@ index 249e19bc788..759c475c4d9 100644
 +	    {
 +	      grub_file_t file;
 +
-+	      file = grub_file_open (config);
++	      file = grub_file_open (config, GRUB_FILE_TYPE_CONFIG);
 +	      if (file)
 +		{
 +		  grub_file_close (file);

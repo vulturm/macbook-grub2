@@ -47,7 +47,7 @@ index 636f97e1ba1..e758ab3416d 100644
        grub_printf ("%s:%d: ", file, line);
        va_start (args, fmt);
 diff --git a/include/grub/misc.h b/include/grub/misc.h
-index fcaf1201e39..0f5abc4638e 100644
+index b4339222ecb..4a4f485a5f6 100644
 --- a/include/grub/misc.h
 +++ b/include/grub/misc.h
 @@ -367,6 +367,7 @@ grub_puts (const char *s)

@@ -12,7 +12,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 58 insertions(+), 27 deletions(-)
 
 diff --git a/grub-core/normal/menu.c b/grub-core/normal/menu.c
-index e7a83c2d6e2..d2f64b05e0a 100644
+index d5e0c79a70e..9175ad297d8 100644
 --- a/grub-core/normal/menu.c
 +++ b/grub-core/normal/menu.c
 @@ -163,16 +163,41 @@ grub_menu_set_timeout (int timeout)

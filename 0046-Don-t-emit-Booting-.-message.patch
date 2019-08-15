@@ -14,10 +14,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/normal/menu.c b/grub-core/normal/menu.c
-index d2f64b05e0a..5e2f5283d3d 100644
+index 9175ad297d8..783bde55b9e 100644
 --- a/grub-core/normal/menu.c
 +++ b/grub-core/normal/menu.c
-@@ -838,12 +838,14 @@ run_menu (grub_menu_t menu, int nested, int *auto_boot)
+@@ -839,12 +839,14 @@ run_menu (grub_menu_t menu, int nested, int *auto_boot)
  
  /* Callback invoked immediately before a menu entry is executed.  */
  static void

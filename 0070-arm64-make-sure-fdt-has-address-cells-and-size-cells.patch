@@ -14,10 +14,10 @@ make sure they exist.
  1 file changed, 15 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index a1ac7a38867..93b5cd306eb 100644
+index 04994d5c67d..4c0a09c06de 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
-@@ -80,7 +80,21 @@ finalize_params_linux (void)
+@@ -81,7 +81,21 @@ finalize_params_linux (void)
  
    node = grub_fdt_find_subnode (fdt, 0, "chosen");
    if (node < 0)

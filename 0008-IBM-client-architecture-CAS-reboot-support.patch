@@ -25,10 +25,10 @@ parameters
  4 files changed, 91 insertions(+)
 
 diff --git a/grub-core/kern/ieee1275/openfw.c b/grub-core/kern/ieee1275/openfw.c
-index 62929d983bf..2d53c0e8608 100644
+index 4d493ab7661..3a6689abb11 100644
 --- a/grub-core/kern/ieee1275/openfw.c
 +++ b/grub-core/kern/ieee1275/openfw.c
-@@ -588,3 +588,66 @@ grub_ieee1275_get_boot_dev (void)
+@@ -591,3 +591,66 @@ grub_ieee1275_get_boot_dev (void)
  
    return bootpath;
  }
@@ -96,7 +96,7 @@ index 62929d983bf..2d53c0e8608 100644
 +  return 0;
 +}
 diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
-index 78a70a8bf47..249e19bc788 100644
+index 1b03dfd57b9..222e239c1be 100644
 --- a/grub-core/normal/main.c
 +++ b/grub-core/normal/main.c
 @@ -33,6 +33,9 @@
@@ -133,20 +133,20 @@ index 78a70a8bf47..249e19bc788 100644
        grub_errno = GRUB_ERR_NONE;
      }
 diff --git a/grub-core/script/execute.c b/grub-core/script/execute.c
-index a8502d90711..ab78ca87f90 100644
+index ee299fd0ea6..0d05d6b0709 100644
 --- a/grub-core/script/execute.c
 +++ b/grub-core/script/execute.c
-@@ -27,6 +27,9 @@
- #include <grub/normal.h>
+@@ -28,6 +28,9 @@
  #include <grub/extcmd.h>
  #include <grub/i18n.h>
+ #include <grub/verify.h>
 +#ifdef GRUB_MACHINE_IEEE1275
 +#include <grub/ieee1275/ieee1275.h>
 +#endif
  
  /* Max digits for a char is 3 (0xFF is 255), similarly for an int it
     is sizeof (int) * 3, and one extra for a possible -ve sign.  */
-@@ -877,6 +880,10 @@ grub_script_execute_sourcecode (const char *source)
+@@ -878,6 +881,10 @@ grub_script_execute_sourcecode (const char *source)
    grub_err_t ret = 0;
    struct grub_script *parsed_script;
  
@@ -158,10 +158,10 @@ index a8502d90711..ab78ca87f90 100644
      {
        char *line;
 diff --git a/include/grub/ieee1275/ieee1275.h b/include/grub/ieee1275/ieee1275.h
-index 8868f3a756f..2310f33dbc2 100644
+index 73e2f464475..0a599607f31 100644
 --- a/include/grub/ieee1275/ieee1275.h
 +++ b/include/grub/ieee1275/ieee1275.h
-@@ -252,6 +252,8 @@ int EXPORT_FUNC(grub_ieee1275_devalias_next) (struct grub_ieee1275_devalias *ali
+@@ -254,6 +254,8 @@ int EXPORT_FUNC(grub_ieee1275_devalias_next) (struct grub_ieee1275_devalias *ali
  void EXPORT_FUNC(grub_ieee1275_children_peer) (struct grub_ieee1275_devalias *alias);
  void EXPORT_FUNC(grub_ieee1275_children_first) (const char *devpath,
  						struct grub_ieee1275_devalias *alias);

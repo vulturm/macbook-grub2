@@ -30,7 +30,7 @@ The count of zero with __builtin_clz can be 22. (clz counts the number of one bi
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/grub-core/net/drivers/ieee1275/ofnet.c b/grub-core/net/drivers/ieee1275/ofnet.c
-index 002446be1c3..3df75357a70 100644
+index ac4e62a95c9..3860b6f78d8 100644
 --- a/grub-core/net/drivers/ieee1275/ofnet.c
 +++ b/grub-core/net/drivers/ieee1275/ofnet.c
 @@ -220,8 +220,7 @@ grub_ieee1275_parse_bootpath (const char *devpath, char *bootpath,

@@ -10,3 +10,4 @@ kojilogs
 tmp/
 .*.sw?
 results_grub2/
+/gnulib-*.tar.?z

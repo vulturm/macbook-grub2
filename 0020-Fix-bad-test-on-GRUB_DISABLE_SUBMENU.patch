@@ -20,7 +20,7 @@ Resolves: rhbz#1063414
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 61ebd7dc714..87a7da34982 100644
+index 4532266be68..58defdbd83f 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -261,7 +261,11 @@ while [ "x$list" != "x" ] ; do

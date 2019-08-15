@@ -122,10 +122,10 @@ Replace a bunch of machine generated ones with ones that look nicer.
  create mode 100644 util/grub-sparc64-setup.8
 
 diff --git a/configure.ac b/configure.ac
-index 783118ccdcd..d5db2803ec4 100644
+index d283af64c8c..8df400e0a8b 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -70,6 +70,29 @@ grub_TRANSFORM([grub-set-default])
+@@ -74,6 +74,29 @@ grub_TRANSFORM([grub-set-default])
  grub_TRANSFORM([grub-sparc64-setup])
  grub_TRANSFORM([grub-render-label])
  grub_TRANSFORM([grub-file])
@@ -156,7 +156,7 @@ index 783118ccdcd..d5db2803ec4 100644
  # Optimization flag.  Allow user to override.
  if test "x$TARGET_CFLAGS" = x; then
 diff --git a/conf/Makefile.extra-dist b/conf/Makefile.extra-dist
-index b16bd925320..39eb94bded6 100644
+index 46c4e95e2fa..58d7d9540be 100644
 --- a/conf/Makefile.extra-dist
 +++ b/conf/Makefile.extra-dist
 @@ -11,7 +11,6 @@ EXTRA_DIST += unicode
@@ -498,10 +498,10 @@ index ad25c8ab753..00000000000
 -[SEE ALSO]
 -.BR grub-menulst2cfg (8)
 diff --git a/gentpl.py b/gentpl.py
-index da67965a41a..bf8439fa743 100644
+index 387588c0589..f05812eace3 100644
 --- a/gentpl.py
 +++ b/gentpl.py
-@@ -802,10 +802,7 @@ def manpage(defn, adddeps):
+@@ -805,10 +805,7 @@ def manpage(defn, adddeps):
  
      output("if COND_MAN_PAGES\n")
      gvar_add("man_MANS", name + "." + mansection)

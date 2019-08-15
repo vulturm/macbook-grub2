@@ -1,28 +1,32 @@
 %undefine _hardened_build
 
-%global tarversion 2.02
+%global tarversion 2.04
 %undefine _missing_build_ids_terminate_build
 %global _configure_gnuconfig_hack 0
 
+%global gnulibversion fixes
+
 Name:		grub2
 Epoch:		1
-Version:	2.02
-Release:	97%{?dist}
+Version:	2.04
+Release:	1%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
 Obsoletes:	grub < 1:0.98
-Source0:	ftp://alpha.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
-#Source0:	ftp://ftp.gnu.org/gnu/grub/grub-%%{tarversion}.tar.xz
+Source0:	https://ftp.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
 Source1:	grub.macros
 Source2:	grub.patches
-Source3:	release-to-master.patch
+#Source3:	release-to-master.patch
 Source4:	http://unifoundry.com/unifont-5.1.20080820.pcf.gz
 Source5:	theme.tar.bz2
 Source6:	gitignore
-Source8:	strtoull_test.c
-Source9:	20-grub.install
-Source13:	99-grub-mkconfig.install
+Source7:	bootstrap
+Source8:	bootstrap.conf
+Source9:	strtoull_test.c
+Source10:	20-grub.install
+Source11:	99-grub-mkconfig.install
+Source12:	gnulib-%{gnulibversion}.tar.gz
 
 %include %{SOURCE1}
 
@@ -243,8 +247,8 @@ EOF
 
 # Install kernel-install scripts
 install -d -m 0755 %{buildroot}%{_prefix}/lib/kernel/install.d/
-install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE9}
-install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE13}
+install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE10}
+install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE11}
 install -d -m 0755 %{buildroot}%{_sysconfdir}/kernel/install.d/
 # Install systemd user service to set the boot_success flag
 install -D -m 0755 -t %{buildroot}%{_userunitdir} \
@@ -518,6 +522,10 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Thu Aug 15 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.04-1
+- Update to 2.04
+  Resolves: rhbz#1727279
+
 * Wed Aug 07 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.02-97
 - Include regexp module in EFI builds
 

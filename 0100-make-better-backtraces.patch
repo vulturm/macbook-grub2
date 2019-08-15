@@ -1,12 +1,12 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
-Date: Mon, 6 Nov 2017 18:31:56 -0500
+Date: Tue, 9 Jul 2019 17:05:03 +0200
 Subject: [PATCH] make better backtraces
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
 ---
  Makefile.util.def                       |   6 ++
- grub-core/Makefile.core.def             |  15 ++--
+ grub-core/Makefile.core.def             |  16 ++--
  grub-core/{lib => commands}/backtrace.c |   2 +-
  grub-core/gdb/cstub.c                   |   1 -
  grub-core/kern/arm64/backtrace.c        |  94 ++++++++++++++++++++++++
@@ -29,7 +29,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  grub-core/kern/ia64/efi/startup.S       |   3 +-
  grub-core/kern/sparc64/ieee1275/crt0.S  |   3 +-
  grub-core/Makefile.am                   |   1 +
- 24 files changed, 414 insertions(+), 166 deletions(-)
+ 24 files changed, 414 insertions(+), 167 deletions(-)
  rename grub-core/{lib => commands}/backtrace.c (98%)
  create mode 100644 grub-core/kern/arm64/backtrace.c
  create mode 100644 grub-core/kern/backtrace.c
@@ -38,7 +38,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  delete mode 100644 grub-core/lib/i386/backtrace.c
 
 diff --git a/Makefile.util.def b/Makefile.util.def
-index aa59418ff2c..4e722ab766b 100644
+index f55473c76aa..c13ca685ce1 100644
 --- a/Makefile.util.def
 +++ b/Makefile.util.def
 @@ -49,6 +49,12 @@ library = {
@@ -55,10 +55,10 @@ index aa59418ff2c..4e722ab766b 100644
  
  library = {
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index e70558a800a..63b33490b11 100644
+index 528f76a8c8e..49c5dc4c3b7 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -129,6 +129,12 @@ kernel = {
+@@ -140,6 +140,12 @@ kernel = {
    common = kern/rescue_parser.c;
    common = kern/rescue_reader.c;
    common = kern/term.c;
@@ -71,7 +71,7 @@ index e70558a800a..63b33490b11 100644
  
    noemu = kern/compiler-rt.c;
    noemu = kern/mm.c;
-@@ -175,9 +181,6 @@ kernel = {
+@@ -186,9 +192,6 @@ kernel = {
  
    softdiv = lib/division.c;
  
@@ -80,17 +80,19 @@ index e70558a800a..63b33490b11 100644
 -
    i386 = kern/i386/dl.c;
    i386_xen = kern/i386/dl.c;
- 
-@@ -2279,13 +2282,11 @@ module = {
+   i386_xen_pvh = kern/i386/dl.c;
+@@ -2376,15 +2379,12 @@ module = {
  
  module = {
    name = backtrace;
 -  x86 = lib/i386/backtrace.c;
+-  i386_xen_pvh = lib/i386/backtrace.c;
 -  i386_xen = lib/i386/backtrace.c;
 -  x86_64_xen = lib/i386/backtrace.c;
 -  common = lib/backtrace.c;
 +  common = commands/backtrace.c;
    enable = x86;
+   enable = i386_xen_pvh;
    enable = i386_xen;
    enable = x86_64_xen;
 +  enable = arm64;
@@ -329,7 +331,7 @@ index 00000000000..4a82e865cc6
 +    grub_backtrace (skip + 1);
 +}
 diff --git a/grub-core/kern/dl.c b/grub-core/kern/dl.c
-index 621070918d4..5028d157c46 100644
+index d7718d26abc..2e57e5e6829 100644
 --- a/grub-core/kern/dl.c
 +++ b/grub-core/kern/dl.c
 @@ -124,6 +124,50 @@ grub_dl_resolve_symbol (const char *name)
@@ -545,10 +547,10 @@ index 27bc68b8a53..b51d0abfa6e 100644
    /* Initialize the console as early as possible.  */
    grub_console_init ();
 diff --git a/grub-core/kern/ieee1275/init.c b/grub-core/kern/ieee1275/init.c
-index e01bc6eab19..e731a57a47b 100644
+index 0cd2a627231..937c1bc44cb 100644
 --- a/grub-core/kern/ieee1275/init.c
 +++ b/grub-core/kern/ieee1275/init.c
-@@ -60,7 +60,6 @@
+@@ -63,7 +63,6 @@
  #define HEAP_MAX_ADDR		(unsigned long) (32 * 1024 * 1024)
  #endif
  
@@ -785,10 +787,10 @@ index 395519762f0..275cf85e2d3 100644
  
  #endif
 diff --git a/include/grub/dl.h b/include/grub/dl.h
-index b1ed3c33317..7b5bfb07ce6 100644
+index 90dc9bb1017..4fe2b524f73 100644
 --- a/include/grub/dl.h
 +++ b/include/grub/dl.h
-@@ -244,6 +244,8 @@ grub_dl_get (const char *name)
+@@ -257,6 +257,8 @@ grub_dl_is_persistent (grub_dl_t mod)
  
  #endif
  
@@ -798,10 +800,10 @@ index b1ed3c33317..7b5bfb07ce6 100644
  				    int isfunc, grub_dl_t mod);
  
 diff --git a/include/grub/kernel.h b/include/grub/kernel.h
-index ecd88ca72c6..ae69218af20 100644
+index 133a37c8d03..e5a5f436709 100644
 --- a/include/grub/kernel.h
 +++ b/include/grub/kernel.h
-@@ -108,6 +108,9 @@ grub_addr_t grub_modules_get_end (void);
+@@ -110,6 +110,9 @@ grub_addr_t grub_modules_get_end (void);
  
  #endif
  
@@ -895,7 +897,7 @@ index 03b916f0534..701bf63abcf 100644
  	ba	codestart
  	 mov  %o4, %o0
 diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
-index 0108c0d4233..f36200bd688 100644
+index 5ff3afd62fa..d9ad30052f1 100644
 --- a/grub-core/Makefile.am
 +++ b/grub-core/Makefile.am
 @@ -66,6 +66,7 @@ CLEANFILES += grub_script.yy.c grub_script.yy.h

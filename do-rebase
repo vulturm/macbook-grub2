@@ -155,9 +155,21 @@ fi
 unset LC_ALL
 git rm -q 0*.patch
 
-> release-to-master.patch
-othergit diff --full-index --binary $diff_ops grub-2.02..refs/remotes/rhboot/master > release-to-master.patch
-git add release-to-master.patch
+# No need for this patch anymore, the package is rebased on latest release now.
+#> release-to-master.patch
+#othergit diff --full-index --binary $diff_ops grub-2.04..refs/remotes/rhboot/master > release-to-master.patch
+#git add release-to-master.patch
+
+fedpkg sources
+curl -L https://github.com/rhboot/gnulib/archive/fixes.tar.gz > gnulib-fixes.tar.gz.new
+if cmp -s gnulib-fixes.tar.gz gnulib-fixes.tar.gz.new; then
+    rm gnulib-fixes.tar.gz.new
+else
+    mv gnulib-fixes.tar.gz.new gnulib-fixes.tar.gz
+    sed -i -e '/gnulib-/d' sources
+    fedpkg upload gnulib-fixes.tar.gz
+    git add sources
+fi
 
 > grub.patches
 patches=$(formatpatch refs/remotes/rhboot/master..refs/remotes/rhboot/${releasever})

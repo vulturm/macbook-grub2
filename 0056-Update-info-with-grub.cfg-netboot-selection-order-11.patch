@@ -12,7 +12,7 @@ Resolves rhbz#1148650
  1 file changed, 42 insertions(+)
 
 diff --git a/docs/grub.texi b/docs/grub.texi
-index 2fd32608c01..a7155c22ffe 100644
+index 6f524305085..221064b5679 100644
 --- a/docs/grub.texi
 +++ b/docs/grub.texi
 @@ -2493,6 +2493,48 @@ grub-mknetdir --net-directory=/srv/tftp --subdir=/boot/grub -d /usr/lib/grub/i38

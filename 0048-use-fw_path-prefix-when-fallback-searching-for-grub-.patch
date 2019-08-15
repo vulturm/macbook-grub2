@@ -17,7 +17,7 @@ Signed-off-by: Mark Salter <msalter@redhat.com>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
-index 7f295e3946b..231f3f86371 100644
+index 7f61c5b618b..8add30e605f 100644
 --- a/grub-core/normal/main.c
 +++ b/grub-core/normal/main.c
 @@ -349,7 +349,7 @@ grub_cmd_normal (struct grub_command *cmd __attribute__ ((unused)),

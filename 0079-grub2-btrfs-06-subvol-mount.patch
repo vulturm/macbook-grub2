@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
-Date: Fri, 22 May 2015 11:45:25 +0000
+Date: Tue, 9 Jul 2019 13:56:16 +0200
 Subject: [PATCH] grub2-btrfs-06-subvol-mount
 
 ---
@@ -11,18 +11,18 @@ Subject: [PATCH] grub2-btrfs-06-subvol-mount
  4 files changed, 392 insertions(+), 5 deletions(-)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index a47d297567f..2e36ac47e8a 100644
+index 2db89f71ea5..162723423ca 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
-@@ -32,6 +32,7 @@
+@@ -41,6 +41,7 @@
  #include <grub/command.h>
  #include <grub/env.h>
  #include <grub/extcmd.h>
 +#include <grub/list.h>
+ #include <grub/crypto.h>
+ #include <grub/diskfilter.h>
  
- GRUB_MOD_LICENSE ("GPLv3+");
- 
-@@ -245,6 +246,12 @@ static grub_err_t
+@@ -263,6 +264,12 @@ static grub_err_t
  grub_btrfs_read_logical (struct grub_btrfs_data *data,
  			 grub_disk_addr_t addr, void *buf, grub_size_t size,
  			 int recursion_depth);
@@ -35,7 +35,7 @@ index a47d297567f..2e36ac47e8a 100644
  
  static grub_err_t
  read_sblock (grub_disk_t disk, struct grub_btrfs_superblock *sb)
-@@ -887,9 +894,26 @@ lookup_root_by_name(struct grub_btrfs_data *data, const char *path)
+@@ -1203,9 +1210,26 @@ lookup_root_by_name(struct grub_btrfs_data *data, const char *path)
    grub_err_t err;
    grub_uint64_t tree = 0;
    grub_uint8_t type;
@@ -62,7 +62,7 @@ index a47d297567f..2e36ac47e8a 100644
    if (err)
        return grub_error(GRUB_ERR_FILE_NOT_FOUND, "couldn't locate %s\n", path);
  
-@@ -1758,11 +1782,20 @@ grub_btrfs_dir (grub_device_t device, const char *path,
+@@ -2179,11 +2203,20 @@ grub_btrfs_dir (grub_device_t device, const char *path,
    int r = 0;
    grub_uint64_t tree;
    grub_uint8_t type;
@@ -84,7 +84,7 @@ index a47d297567f..2e36ac47e8a 100644
    if (err)
      {
        grub_btrfs_unmount (data);
-@@ -1864,11 +1897,21 @@ grub_btrfs_open (struct grub_file *file, const char *name)
+@@ -2285,11 +2318,21 @@ grub_btrfs_open (struct grub_file *file, const char *name)
    struct grub_btrfs_inode inode;
    grub_uint8_t type;
    struct grub_btrfs_key key_in;
@@ -107,7 +107,7 @@ index a47d297567f..2e36ac47e8a 100644
    if (err)
      {
        grub_btrfs_unmount (data);
-@@ -2039,6 +2082,150 @@ grub_cmd_btrfs_info (grub_command_t cmd __attribute__ ((unused)), int argc,
+@@ -2460,6 +2503,150 @@ grub_cmd_btrfs_info (grub_command_t cmd __attribute__ ((unused)), int argc,
    return 0;
  }
  
@@ -258,7 +258,7 @@ index a47d297567f..2e36ac47e8a 100644
  static grub_err_t
  get_fs_root(struct grub_btrfs_data *data, grub_uint64_t tree,
              grub_uint64_t objectid, grub_uint64_t offset,
-@@ -2245,6 +2432,7 @@ static struct grub_fs grub_btrfs_fs = {
+@@ -2666,6 +2853,7 @@ static struct grub_fs grub_btrfs_fs = {
  };
  
  static grub_command_t cmd_info;
@@ -266,7 +266,7 @@ index a47d297567f..2e36ac47e8a 100644
  static grub_extcmd_t cmd_list_subvols;
  
  static char *
-@@ -2308,6 +2496,9 @@ GRUB_MOD_INIT (btrfs)
+@@ -2729,6 +2917,9 @@ GRUB_MOD_INIT (btrfs)
    cmd_info = grub_register_command("btrfs-info", grub_cmd_btrfs_info,
  				   "DEVICE",
  				   "Print BtrFS info about DEVICE.");
@@ -460,10 +460,10 @@ index 5d50dd6f8dc..4c5a13022dc 100644
  grub_make_system_path_relative_to_its_root_os (const char *path)
  {
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 4375c161955..a0ad99729fd 100644
+index 0e807b09c36..3e718b9e3fb 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
-@@ -1535,6 +1535,55 @@ main (int argc, char *argv[])
+@@ -1561,6 +1561,55 @@ main (int argc, char *argv[])
        prefix_drive = xasprintf ("(%s)", grub_drives[0]);
      }
  

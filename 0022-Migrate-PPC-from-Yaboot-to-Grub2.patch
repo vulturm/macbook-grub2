@@ -12,10 +12,10 @@ maximum screen size so that text is not overwritten.
  create mode 100644 util/grub.d/20_ppc_terminfo.in
 
 diff --git a/Makefile.util.def b/Makefile.util.def
-index 3180ac880a9..c7b775bce73 100644
+index 969d32f0097..8717774d510 100644
 --- a/Makefile.util.def
 +++ b/Makefile.util.def
-@@ -487,6 +487,13 @@ script = {
+@@ -496,6 +496,13 @@ script = {
    condition = COND_HOST_LINUX;
  };
  

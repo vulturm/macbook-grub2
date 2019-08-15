@@ -8,7 +8,7 @@ Subject: [PATCH] Add .eh_frame to list of relocations stripped
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/conf/Makefile.common b/conf/Makefile.common
-index 311da61c6c5..044ab3abe88 100644
+index 6cd71cbb2ab..4ba729e14d8 100644
 --- a/conf/Makefile.common
 +++ b/conf/Makefile.common
 @@ -38,7 +38,7 @@ CFLAGS_KERNEL = $(CFLAGS_PLATFORM) -ffreestanding

@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
-Date: Fri, 6 May 2016 18:43:08 -0400
+Date: Tue, 9 Jul 2019 12:59:58 +0200
 Subject: [PATCH] Make our info pages say "grub2" where appropriate.
 
 This needs to be hooked up to --program-transform=, but I haven't had
@@ -13,7 +13,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  2 files changed, 161 insertions(+), 161 deletions(-)
 
 diff --git a/docs/grub-dev.texi b/docs/grub-dev.texi
-index a9f4de6318c..3ce827ab726 100644
+index ee389fd83c3..e3fed7312a3 100644
 --- a/docs/grub-dev.texi
 +++ b/docs/grub-dev.texi
 @@ -1,7 +1,7 @@
@@ -35,7 +35,7 @@ index a9f4de6318c..3ce827ab726 100644
  
  @setchapternewpage odd
 diff --git a/docs/grub.texi b/docs/grub.texi
-index a7155c22ffe..2b7b7faf847 100644
+index 221064b5679..960e5f3ba41 100644
 --- a/docs/grub.texi
 +++ b/docs/grub.texi
 @@ -1,7 +1,7 @@
@@ -609,7 +609,7 @@ index a7155c22ffe..2b7b7faf847 100644
  @samp{GRUB_SAVEDEFAULT} (@pxref{Simple configuration}).
  
  
-@@ -4396,7 +4396,7 @@ Translate @var{string} into the current language.
+@@ -4398,7 +4398,7 @@ Translate @var{string} into the current language.
  
  The current language code is stored in the @samp{lang} variable in GRUB's
  environment (@pxref{lang}).  Translation files in MO format are read from
@@ -618,7 +618,7 @@ index a7155c22ffe..2b7b7faf847 100644
  @end deffn
  
  
-@@ -4791,7 +4791,7 @@ Define a user named @var{user} with password @var{clear-password}.
+@@ -4793,7 +4793,7 @@ Define a user named @var{user} with password @var{clear-password}.
  
  @deffn Command password_pbkdf2 user hashed-password
  Define a user named @var{user} with password hash @var{hashed-password}.
@@ -627,7 +627,7 @@ index a7155c22ffe..2b7b7faf847 100644
  to generate password hashes.  @xref{Security}.
  @end deffn
  
-@@ -5614,8 +5614,8 @@ The @samp{password} (@pxref{password}) and @samp{password_pbkdf2}
+@@ -5651,8 +5651,8 @@ The @samp{password} (@pxref{password}) and @samp{password_pbkdf2}
  which has an associated password.  @samp{password} sets the password in
  plain text, requiring @file{grub.cfg} to be secure; @samp{password_pbkdf2}
  sets the password hashed using the Password-Based Key Derivation Function
@@ -638,7 +638,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  In order to enable authentication support, the @samp{superusers} environment
  variable must be set to a list of usernames, separated by any of spaces,
-@@ -5659,7 +5659,7 @@ menuentry "May be run by user1 or a superuser" --users user1 @{
+@@ -5696,7 +5696,7 @@ menuentry "May be run by user1 or a superuser" --users user1 @{
  @end group
  @end example
  
@@ -647,7 +647,7 @@ index a7155c22ffe..2b7b7faf847 100644
  generating configuration files with authentication.  You can use
  @file{/etc/grub.d/40_custom} to add simple superuser authentication, by
  adding @kbd{set superusers=} and @kbd{password} or @kbd{password_pbkdf2}
-@@ -5684,15 +5684,15 @@ verified with a public key currently trusted by GRUB
+@@ -5721,15 +5721,15 @@ verified with a public key currently trusted by GRUB
  validation fails, then file @file{foo} cannot be opened.  This failure
  may halt or otherwise impact the boot process.
  
@@ -668,7 +668,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  GRUB uses GPG-style detached signatures (meaning that a file
  @file{foo.sig} will be produced when file @file{foo} is signed), and
-@@ -5712,8 +5712,8 @@ gpg --detach-sign /path/to/file
+@@ -5749,8 +5749,8 @@ gpg --detach-sign /path/to/file
  For successful validation of all of GRUB's subcomponents and the
  loaded OS kernel, they must all be signed.  One way to accomplish this
  is the following (after having already produced the desired
@@ -679,7 +679,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  @example
  @group
-@@ -5735,7 +5735,7 @@ See also: @ref{check_signatures}, @ref{verify_detached}, @ref{trust},
+@@ -5772,7 +5772,7 @@ See also: @ref{check_signatures}, @ref{verify_detached}, @ref{trust},
  Note that internally signature enforcement is controlled by setting
  the environment variable @code{check_signatures} equal to
  @code{enforce}.  Passing one or more @code{--pubkey} options to
@@ -688,7 +688,7 @@ index a7155c22ffe..2b7b7faf847 100644
  equal to @code{enforce} in @file{core.img} prior to processing any
  configuration files.
  
-@@ -6092,10 +6092,10 @@ Required files are:
+@@ -6189,10 +6189,10 @@ Required files are:
  
  GRUB's normal start-up procedure involves setting the @samp{prefix}
  environment variable to a value set in the core image by
@@ -701,7 +701,7 @@ index a7155c22ffe..2b7b7faf847 100644
  things GRUB is supposed to do.
  
  If, instead, you only get a rescue shell, this usually means that GRUB
-@@ -6121,8 +6121,8 @@ normal
+@@ -6218,8 +6218,8 @@ normal
  
  However, any problem that leaves you in the rescue shell probably means that
  GRUB was not correctly installed.  It may be more useful to try to reinstall
@@ -712,7 +712,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  @itemize @bullet{}
  @item
-@@ -6134,7 +6134,7 @@ is usually better to use UUIDs or file system labels and avoid depending on
+@@ -6231,7 +6231,7 @@ is usually better to use UUIDs or file system labels and avoid depending on
  drive ordering entirely.
  
  @item
@@ -721,8 +721,8 @@ index a7155c22ffe..2b7b7faf847 100644
  to a partition but GRUB has already been installed in the master boot
  record, then the GRUB installation in the partition will be ignored.
  
-@@ -6154,21 +6154,21 @@ support has not yet been added to GRUB.
- @end itemize
+@@ -6262,21 +6262,21 @@ entry which claims partition start at block 0. This change will not hamper
+ bootability on other machines.
  
  
 -@node Invoking grub-install
@@ -749,7 +749,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  @table @option
  @item --help
-@@ -6184,13 +6184,13 @@ separate partition or a removable disk.
+@@ -6292,13 +6292,13 @@ separate partition or a removable disk.
  If this option is not specified then it defaults to @file{/boot}, so
  
  @example
@@ -765,7 +765,7 @@ index a7155c22ffe..2b7b7faf847 100644
  @end example
  
  Here is an example in which you have a separate @dfn{boot} partition which is 
-@@ -6198,16 +6198,16 @@ mounted on
+@@ -6306,16 +6306,16 @@ mounted on
  @file{/mnt/boot}:
  
  @example
@@ -785,7 +785,7 @@ index a7155c22ffe..2b7b7faf847 100644
  extra space in the bootloader embedding area for Reed-Solomon
  error-correcting codes. This enables GRUB to still boot successfully
  if some blocks are corrupted.  The exact amount of protection offered
-@@ -6220,17 +6220,17 @@ installation}) where GRUB does not reside in any unpartitioned space
+@@ -6328,17 +6328,17 @@ installation}) where GRUB does not reside in any unpartitioned space
  outside of the MBR.  Disable the Reed-Solomon codes with this option.
  @end table
  
@@ -808,7 +808,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  @table @option
  @item --help
-@@ -6246,17 +6246,17 @@ it to standard output.
+@@ -6354,17 +6354,17 @@ it to standard output.
  @end table
  
  
@@ -830,7 +830,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  @table @option
  @item -c @var{number}
-@@ -6274,23 +6274,23 @@ Length of the salt.  Defaults to 64.
+@@ -6382,23 +6382,23 @@ Length of the salt.  Defaults to 64.
  @end table
  
  
@@ -860,7 +860,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  @table @option
  @item --help
-@@ -6301,17 +6301,17 @@ Print the version number of GRUB and exit.
+@@ -6409,17 +6409,17 @@ Print the version number of GRUB and exit.
  @end table
  
  
@@ -882,7 +882,7 @@ index a7155c22ffe..2b7b7faf847 100644
  passed on directly to @command{xorriso} in @command{mkisofs} emulation mode.
  Options passed to @command{xorriso} will normally be interpreted as
  @command{mkisofs} options; if the option @samp{--} is used, then anything
-@@ -6326,7 +6326,7 @@ mkdir -p disk/boot/grub
+@@ -6434,7 +6434,7 @@ mkdir -p disk/boot/grub
  grub-mkrescue -o grub.iso disk
  @end example
  
@@ -891,7 +891,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  @table @option
  @item --help
-@@ -6354,15 +6354,15 @@ Use @var{file} as the @command{xorriso} program, rather than the built-in
+@@ -6462,15 +6462,15 @@ Use @var{file} as the @command{xorriso} program, rather than the built-in
  default.
  
  @item --grub-mkimage=@var{file}
@@ -911,7 +911,7 @@ index a7155c22ffe..2b7b7faf847 100644
  system or file system image that GRUB understands, using GRUB's file system
  drivers via FUSE.  (It is only available if FUSE development files were
  present when GRUB was built.)  This has a number of uses:
-@@ -6394,13 +6394,13 @@ even if nobody has yet written a FUSE module specifically for that file
+@@ -6502,13 +6502,13 @@ even if nobody has yet written a FUSE module specifically for that file
  system type.
  @end itemize
  
@@ -927,7 +927,7 @@ index a7155c22ffe..2b7b7faf847 100644
  non-option arguments (if it is given more than one image, it will treat them
  as a RAID set), and also accepts the following options:
  
-@@ -6422,13 +6422,13 @@ Show debugging output for conditions matching @var{string}.
+@@ -6530,13 +6530,13 @@ Show debugging output for conditions matching @var{string}.
  @item -K prompt|@var{file}
  @itemx --zfs-key=prompt|@var{file}
  Load a ZFS encryption key.  If you use @samp{prompt} as the argument,
@@ -943,7 +943,7 @@ index a7155c22ffe..2b7b7faf847 100644
  root of the supplied file system.
  
  If @var{device} is just a number, then it will be treated as a partition
-@@ -6446,10 +6446,10 @@ Print verbose messages.
+@@ -6554,10 +6554,10 @@ Print verbose messages.
  @end table
  
  
@@ -957,7 +957,7 @@ index a7155c22ffe..2b7b7faf847 100644
  or device.
  
  @example
-@@ -6457,7 +6457,7 @@ grub-probe --target=fs /boot/grub
+@@ -6565,7 +6565,7 @@ grub-probe --target=fs /boot/grub
  grub-probe --target=drive --device /dev/sda1
  @end example
  
@@ -966,7 +966,7 @@ index a7155c22ffe..2b7b7faf847 100644
  argument, and also accepts the following options:
  
  @table @option
-@@ -6470,16 +6470,16 @@ Print the version number of GRUB and exit.
+@@ -6578,16 +6578,16 @@ Print the version number of GRUB and exit.
  @item -d
  @itemx --device
  If this option is given, then the non-option argument is a system device
@@ -986,7 +986,7 @@ index a7155c22ffe..2b7b7faf847 100644
  
  @item -t @var{target}
  @itemx --target=@var{target}
-@@ -6532,19 +6532,19 @@ Print verbose messages.
+@@ -6640,19 +6640,19 @@ Print verbose messages.
  @end table
  
  

@@ -16,10 +16,10 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 1 insertion(+), 11 deletions(-)
 
 diff --git a/util/grub-install.c b/util/grub-install.c
-index a0ad99729fd..16f137ca854 100644
+index 3e718b9e3fb..37fcdac12cc 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
-@@ -1159,18 +1159,8 @@ main (int argc, char *argv[])
+@@ -1182,18 +1182,8 @@ main (int argc, char *argv[])
  	  char *d;
  
  	  is_guess = 1;

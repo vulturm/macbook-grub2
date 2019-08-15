@@ -9,19 +9,18 @@ Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
 Signed-off-by: Jan Hlavac <jhlavac@redhat.com>
 ---
  Makefile.util.def             |   7 +
- .gitignore                    |   2 +
  util/grub-set-password.in     |   2 +-
  util/grub-switch-to-blscfg.8  |  33 +++++
  util/grub-switch-to-blscfg.in | 314 ++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 357 insertions(+), 1 deletion(-)
+ 4 files changed, 355 insertions(+), 1 deletion(-)
  create mode 100644 util/grub-switch-to-blscfg.8
  create mode 100644 util/grub-switch-to-blscfg.in
 
 diff --git a/Makefile.util.def b/Makefile.util.def
-index c16c2ca545a..aa59418ff2c 100644
+index a61613656d1..f55473c76aa 100644
 --- a/Makefile.util.def
 +++ b/Makefile.util.def
-@@ -1355,6 +1355,13 @@ program = {
+@@ -1364,6 +1364,13 @@ program = {
    ldadd = '$(LIBINTL) $(LIBDEVMAPPER) $(LIBZFS) $(LIBNVPAIR) $(LIBGEOM)';
  };
  
@@ -35,19 +34,6 @@ index c16c2ca545a..aa59418ff2c 100644
  program = {
    name = grub-glue-efi;
    mansection = 1;
-diff --git a/.gitignore b/.gitignore
-index 096eeff7de8..7aaae594d51 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -121,6 +121,8 @@ grub-*.tar.*
- /grub*-sparc64-setup.8
- /grub*-syslinux2cfg
- /grub*-syslinux2cfg.1
-+/grub*-switch-to-blscfg
-+/grub*-switch-to-blscfg.8
- /grub_fstest.pp
- /grub_fstest_init.c
- /grub_fstest_init.lst
 diff --git a/util/grub-set-password.in b/util/grub-set-password.in
 index 5ebf50576d6..c0b5ebbfdc5 100644
 --- a/util/grub-set-password.in

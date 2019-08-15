@@ -32,10 +32,10 @@ Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
  create mode 100644 util/grub.d/10_linux_bls.in
 
 diff --git a/Makefile.util.def b/Makefile.util.def
-index c39b3ce6aa9..c16c2ca545a 100644
+index 2215cc759c0..a61613656d1 100644
 --- a/Makefile.util.def
 +++ b/Makefile.util.def
-@@ -490,6 +490,13 @@ script = {
+@@ -499,6 +499,13 @@ script = {
    condition = COND_HOST_LINUX;
  };
  
@@ -64,7 +64,7 @@ index a2d1f577b9b..434fa4deda4 100644
  .SH SEE ALSO
  .BR "info grub"
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index 4248b9341ab..5e643e16973 100644
+index 4649e92eb0f..2601bdc0711 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -50,6 +50,8 @@ grub_get_kernel_settings="${sbindir}/@grub_get_kernel_settings@"
@@ -157,7 +157,7 @@ index b3aae534ddc..bc11df2bd84 100644
    fi
    IFS="$old_ifs"
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index d9a05937e46..3919b8aff4e 100644
+index 5cab299dc08..301594a0c9e 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -82,6 +82,67 @@ case x"$GRUB_FS" in

@@ -17,18 +17,17 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  configure.ac              |  29 +++++
  Makefile.util.def         |  16 +++
  util/grub-rpm-sort.c      | 281 ++++++++++++++++++++++++++++++++++++++++++++++
- .gitignore                |   2 +
  util/grub-mkconfig_lib.in |  11 +-
  util/grub-rpm-sort.8      |  12 ++
- 6 files changed, 350 insertions(+), 1 deletion(-)
+ 5 files changed, 348 insertions(+), 1 deletion(-)
  create mode 100644 util/grub-rpm-sort.c
  create mode 100644 util/grub-rpm-sort.8
 
 diff --git a/configure.ac b/configure.ac
-index d5db2803ec4..00f1db29b1a 100644
+index 8df400e0a8b..6927615819b 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -65,6 +65,7 @@ grub_TRANSFORM([grub-mkrelpath])
+@@ -69,6 +69,7 @@ grub_TRANSFORM([grub-mkrelpath])
  grub_TRANSFORM([grub-mkrescue])
  grub_TRANSFORM([grub-probe])
  grub_TRANSFORM([grub-reboot])
@@ -36,7 +35,7 @@ index d5db2803ec4..00f1db29b1a 100644
  grub_TRANSFORM([grub-script-check])
  grub_TRANSFORM([grub-set-default])
  grub_TRANSFORM([grub-sparc64-setup])
-@@ -88,6 +89,7 @@ grub_TRANSFORM([grub-mkrescue.1])
+@@ -92,6 +93,7 @@ grub_TRANSFORM([grub-mkrescue.1])
  grub_TRANSFORM([grub-mkstandalone.3])
  grub_TRANSFORM([grub-ofpathname.3])
  grub_TRANSFORM([grub-probe.3])
@@ -44,7 +43,7 @@ index d5db2803ec4..00f1db29b1a 100644
  grub_TRANSFORM([grub-reboot.3])
  grub_TRANSFORM([grub-render-label.3])
  grub_TRANSFORM([grub-script-check.3])
-@@ -1790,6 +1792,33 @@ fi
+@@ -1802,6 +1804,33 @@ fi
  
  AC_SUBST([LIBDEVMAPPER])
  
@@ -79,10 +78,10 @@ index d5db2803ec4..00f1db29b1a 100644
  if test x$host_kernel = xkfreebsd; then
    AC_CHECK_LIB([geom], [geom_gettree], [],
 diff --git a/Makefile.util.def b/Makefile.util.def
-index 3efc5718ae8..bb21c87c8ed 100644
+index 1f298d05f3d..843ce092b94 100644
 --- a/Makefile.util.def
 +++ b/Makefile.util.def
-@@ -687,6 +687,22 @@ program = {
+@@ -696,6 +696,22 @@ program = {
    ldadd = '$(LIBINTL) $(LIBDEVMAPPER) $(LIBUTIL) $(LIBZFS) $(LIBNVPAIR) $(LIBGEOM)';
  };
  
@@ -97,8 +96,8 @@ index 3efc5718ae8..bb21c87c8ed 100644
 +  common = util/misc.c;
 +  common = util/grub-rpm-sort.c;
 +
-+  ldadd = grub-core/gnulib/libgnu.a;
 +  ldadd = libgrubkern.a;
++  ldadd = grub-core/lib/gnulib/libgnu.a;
 +  ldadd = '$(LIBDEVMAPPER) $(LIBRPM)';
 +};
 +
@@ -392,19 +391,6 @@ index 00000000000..f33bd1ed568
 +
 +  return 0;
 +}
-diff --git a/.gitignore b/.gitignore
-index 43f04d47277..fa2e5b609b1 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -105,6 +105,8 @@ grub-*.tar.*
- /grub*-reboot.8
- /grub*-render-label
- /grub*-render-label.1
-+/grub*-rpm-sort
-+/grub*-rpm-sort.8
- /grub*-script-check
- /grub*-script-check.1
- /grub*-set-default
 diff --git a/util/grub-mkconfig_lib.in b/util/grub-mkconfig_lib.in
 index 1a4a57898f9..113a41f9409 100644
 --- a/util/grub-mkconfig_lib.in

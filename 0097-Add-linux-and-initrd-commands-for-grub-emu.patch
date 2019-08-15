@@ -18,10 +18,10 @@ to the kexec command line tool, to allow booting the selected menu entry.
  create mode 100644 grub-core/loader/emu/linux.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 8bb5eb0f47f..e70558a800a 100644
+index ebc558019cd..528f76a8c8e 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
-@@ -1712,7 +1712,6 @@ module = {
+@@ -1802,7 +1802,6 @@ module = {
  
    common = loader/linux.c;
    common = lib/cmdline.c;
@@ -52,10 +52,10 @@ index 55ea5a11ccd..846fe9715ec 100644
      case ARGP_KEY_ARG:
        {
 diff --git a/grub-core/kern/emu/misc.c b/grub-core/kern/emu/misc.c
-index 82012a72fcb..3d3a4a4a975 100644
+index 19cd007d448..245b69cab51 100644
 --- a/grub-core/kern/emu/misc.c
 +++ b/grub-core/kern/emu/misc.c
-@@ -37,6 +37,7 @@
+@@ -39,6 +39,7 @@
  #include <grub/emu/misc.h>
  
  int verbosity;
@@ -63,7 +63,7 @@ index 82012a72fcb..3d3a4a4a975 100644
  
  void
  grub_util_warn (const char *fmt, ...)
-@@ -80,7 +81,7 @@ grub_util_error (const char *fmt, ...)
+@@ -82,7 +83,7 @@ grub_util_error (const char *fmt, ...)
    vfprintf (stderr, fmt, ap);
    va_end (ap);
    fprintf (stderr, ".\n");
@@ -72,7 +72,7 @@ index 82012a72fcb..3d3a4a4a975 100644
  }
  
  void *
-@@ -140,6 +141,9 @@ void
+@@ -142,6 +143,9 @@ void
  __attribute__ ((noreturn))
  grub_exit (int rc)
  {
@@ -82,7 +82,7 @@ index 82012a72fcb..3d3a4a4a975 100644
    exit (rc < 0 ? 1 : rc);
  }
  #endif
-@@ -201,3 +205,15 @@ grub_util_load_image (const char *path, char *buf)
+@@ -203,3 +207,15 @@ grub_util_load_image (const char *path, char *buf)
  
    fclose (fp);
  }
@@ -299,7 +299,7 @@ index d1073ef86af..1b61b4a2e5d 100644
  grub_util_exec_redirect (const char *const *argv, const char *stdin_file,
  			 const char *stdout_file);
 diff --git a/include/grub/emu/hostfile.h b/include/grub/emu/hostfile.h
-index 8e37d5acb42..12c937a1af9 100644
+index cfb1e2b5661..a61568e36e9 100644
 --- a/include/grub/emu/hostfile.h
 +++ b/include/grub/emu/hostfile.h
 @@ -22,6 +22,7 @@
@@ -320,12 +320,12 @@ index 8e37d5acb42..12c937a1af9 100644
  char *
  grub_util_path_concat (size_t n, ...);
 diff --git a/include/grub/emu/misc.h b/include/grub/emu/misc.h
-index df6085bcb7c..a653132e36a 100644
+index ce464cfd007..5ef4f79e689 100644
 --- a/include/grub/emu/misc.h
 +++ b/include/grub/emu/misc.h
-@@ -60,6 +60,9 @@ void EXPORT_FUNC(grub_util_warn) (const char *fmt, ...) __attribute__ ((format (
- void EXPORT_FUNC(grub_util_info) (const char *fmt, ...) __attribute__ ((format (__printf__, 1, 2)));
- void EXPORT_FUNC(grub_util_error) (const char *fmt, ...) __attribute__ ((format (__printf__, 1, 2), noreturn));
+@@ -56,6 +56,9 @@ void EXPORT_FUNC(grub_util_warn) (const char *fmt, ...) __attribute__ ((format (
+ void EXPORT_FUNC(grub_util_info) (const char *fmt, ...) __attribute__ ((format (GNU_PRINTF, 1, 2)));
+ void EXPORT_FUNC(grub_util_error) (const char *fmt, ...) __attribute__ ((format (GNU_PRINTF, 1, 2), noreturn));
  
 +void EXPORT_FUNC(grub_util_set_kexecute) (void);
 +int EXPORT_FUNC(grub_util_get_kexecute) (void) WARN_UNUSED_RESULT;
@@ -334,10 +334,10 @@ index df6085bcb7c..a653132e36a 100644
  
  #ifdef HAVE_DEVICE_MAPPER
 diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
-index 9c69aa88626..0108c0d4233 100644
+index c6ba5b2d763..5ff3afd62fa 100644
 --- a/grub-core/Makefile.am
 +++ b/grub-core/Makefile.am
-@@ -274,6 +274,7 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/emu/net.h
+@@ -304,6 +304,7 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/emu/net.h
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/emu/hostdisk.h
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/emu/hostfile.h
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/extcmd.h

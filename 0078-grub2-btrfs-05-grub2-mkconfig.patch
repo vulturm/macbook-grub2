@@ -13,7 +13,7 @@ Signed-off-by: Michael Chang <mchang@suse.com>
  5 files changed, 38 insertions(+), 2 deletions(-)
 
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index 8218f3d477f..4248b9341ab 100644
+index 6247a0ba850..4649e92eb0f 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -258,7 +258,8 @@ export GRUB_DEFAULT \
@@ -90,7 +90,7 @@ index 858b526c925..de727e6ee6b 100644
 +EOF
 +fi
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 4e49ccdf742..d9a05937e46 100644
+index 55f4aa783cf..5cab299dc08 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -66,10 +66,14 @@ fi
@@ -109,7 +109,7 @@ index 4e49ccdf742..d9a05937e46 100644
      xzfs)
  	rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
 diff --git a/util/grub.d/20_linux_xen.in b/util/grub.d/20_linux_xen.in
-index 972a4b5a03d..bcdc3ceac02 100644
+index 47e0d3f5cd6..1519ec692fe 100644
 --- a/util/grub.d/20_linux_xen.in
 +++ b/util/grub.d/20_linux_xen.in
 @@ -73,10 +73,14 @@ fi

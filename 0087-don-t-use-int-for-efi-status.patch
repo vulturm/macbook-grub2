@@ -8,7 +8,7 @@ Subject: [PATCH] don't use int for efi status
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index 562d6887e0e..bcae7f4699d 100644
+index a1af9b46559..2cf6a5ad526 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -166,7 +166,7 @@ grub_reboot (void)

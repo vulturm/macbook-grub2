@@ -42,7 +42,7 @@ index 5c2d2039d0b..0e89c483d5e 100644
  
  int
 diff --git a/include/grub/misc.h b/include/grub/misc.h
-index 0f5abc4638e..de9016ab709 100644
+index 4a4f485a5f6..960097fbd06 100644
 --- a/include/grub/misc.h
 +++ b/include/grub/misc.h
 @@ -372,6 +372,8 @@ void EXPORT_FUNC(grub_real_dprintf) (const char *file,

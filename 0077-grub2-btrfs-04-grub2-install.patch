@@ -94,10 +94,10 @@ index ebcdd8f5e22..f044a880a76 100644
  			sizeof ("GRUB_DISTRIBUTOR=") - 1) == 0)
  	{
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 78d0138cb0a..4375c161955 100644
+index 8a55ad4b8dc..0e807b09c36 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
-@@ -816,6 +816,8 @@ fill_core_services (const char *core_services)
+@@ -819,6 +819,8 @@ fill_core_services (const char *core_services)
    free (sysv_plist);
  }
  
@@ -106,7 +106,7 @@ index 78d0138cb0a..4375c161955 100644
  int
  main (int argc, char *argv[])
  {
-@@ -849,6 +851,9 @@ main (int argc, char *argv[])
+@@ -852,6 +854,9 @@ main (int argc, char *argv[])
  
    grub_util_load_config (&config);
  
@@ -116,7 +116,7 @@ index 78d0138cb0a..4375c161955 100644
    if (!bootloader_id && config.grub_distributor)
      {
        char *ptr;
-@@ -1321,6 +1326,16 @@ main (int argc, char *argv[])
+@@ -1344,6 +1349,16 @@ main (int argc, char *argv[])
        fprintf (load_cfg_f, "set debug='%s'\n",
  	      debug_image);
      }

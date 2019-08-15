@@ -13,21 +13,20 @@ Resolves: rhbz#1226325
 ---
  configure.ac                                   |  2 +
  Makefile.util.def                              |  7 ++
- .gitignore                                     |  2 +
  util/bash-completion.d/grub-completion.bash.in | 22 +++++++
  util/grub-get-kernel-settings.3                | 20 ++++++
  util/grub-get-kernel-settings.in               | 88 ++++++++++++++++++++++++++
  util/grub-mkconfig.in                          |  3 +
  util/grub.d/10_linux.in                        | 23 +++++--
- 8 files changed, 162 insertions(+), 5 deletions(-)
+ 7 files changed, 160 insertions(+), 5 deletions(-)
  create mode 100644 util/grub-get-kernel-settings.3
  create mode 100644 util/grub-get-kernel-settings.in
 
 diff --git a/configure.ac b/configure.ac
-index 1cb6a9615db..2a6fde5be81 100644
+index 68501662e8d..fc3c2b44d60 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -58,6 +58,7 @@ grub_TRANSFORM([grub-install])
+@@ -62,6 +62,7 @@ grub_TRANSFORM([grub-install])
  grub_TRANSFORM([grub-mkconfig])
  grub_TRANSFORM([grub-mkfont])
  grub_TRANSFORM([grub-mkimage])
@@ -35,7 +34,7 @@ index 1cb6a9615db..2a6fde5be81 100644
  grub_TRANSFORM([grub-glue-efi])
  grub_TRANSFORM([grub-mklayout])
  grub_TRANSFORM([grub-mkpasswd-pbkdf2])
-@@ -75,6 +76,7 @@ grub_TRANSFORM([grub-file])
+@@ -79,6 +80,7 @@ grub_TRANSFORM([grub-file])
  grub_TRANSFORM([grub-bios-setup.3])
  grub_TRANSFORM([grub-editenv.1])
  grub_TRANSFORM([grub-fstest.3])
@@ -44,10 +43,10 @@ index 1cb6a9615db..2a6fde5be81 100644
  grub_TRANSFORM([grub-install.1])
  grub_TRANSFORM([grub-kbdcomp.3])
 diff --git a/Makefile.util.def b/Makefile.util.def
-index 7729e65c607..c39b3ce6aa9 100644
+index e50436a4987..2215cc759c0 100644
 --- a/Makefile.util.def
 +++ b/Makefile.util.def
-@@ -716,6 +716,13 @@ script = {
+@@ -725,6 +725,13 @@ script = {
    installdir = sbin;
  };
  
@@ -61,19 +60,6 @@ index 7729e65c607..c39b3ce6aa9 100644
  script = {
    name = grub-set-default;
    common = util/grub-set-default.in;
-diff --git a/.gitignore b/.gitignore
-index 141684867d1..096eeff7de8 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -68,6 +68,8 @@ grub-*.tar.*
- /grub*-fs-tester
- /grub*-fstest
- /grub*-fstest.1
-+/grub*-get-kernel-settings
-+/grub*-get-kernel-settings.3
- /grub*-glue-efi
- /grub*-glue-efi.1
- /grub*-install
 diff --git a/util/bash-completion.d/grub-completion.bash.in b/util/bash-completion.d/grub-completion.bash.in
 index 44bf135b9f8..5c4acd496d4 100644
 --- a/util/bash-completion.d/grub-completion.bash.in
@@ -228,7 +214,7 @@ index 00000000000..7e87dfccc0e
 +    echo export GRUB_UPDATE_DEFAULT_KERNEL
 +fi
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index bdb9982aefb..8218f3d477f 100644
+index 4e7a875309e..6247a0ba850 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -45,6 +45,7 @@ grub_probe="${sbindir}/@grub_probe@"
@@ -249,7 +235,7 @@ index bdb9982aefb..8218f3d477f 100644
    if [ -z "$GRUB_DEVICE_UUID" ]; then
      GRUB_DEVICE_UUID="$GRUB_DEVICE_UUID_GENERATED"
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index a8a8e2cf325..4e49ccdf742 100644
+index 12a20c9ad73..55f4aa783cf 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -111,7 +111,8 @@ linux_entry ()
