@@ -94,7 +94,7 @@
 %endif
 
 
-%global efi_only aarch64 %{arm}
+%global efi_only aarch64 %{arm} riscv64
 %global efi_arch x86_64 ia64 %{efi_only}
 %ifarch %{efi_arch}
 %global with_efi_arch 1
@@ -112,13 +112,13 @@
 %{?with_efi_only:%global without_efi_only 1}
 
 ### fixme
-%ifarch aarch64 %{arm}
+%ifarch aarch64 %{arm} riscv64
 %global efi_modules " "
 %else
 %global efi_modules " backtrace chain usb usbserial_common usbserial_pl2303 usbserial_ftdi usbserial_usbdebug "
 %endif
 
-%ifarch aarch64 %{arm}
+%ifarch aarch64 %{arm} riscv64
 %global legacy_provides -l
 %endif
 
@@ -163,6 +163,14 @@
 %global target_cpu_name aarch64
 %global grub_target_name arm64-efi
 %global package_arch efi-aa64
+%endif
+
+%ifarch riscv64
+%global emuarch riscv64
+%global efiarch riscv64
+%global target_cpu_name riscv64
+%global grub_target_name riscv64-efi
+%global package_arch efi-riscv64
 %endif
 
 %ifarch %{arm}
@@ -362,7 +370,7 @@ for x in grub-mkimage ; do					\\\
 done								\
 %{nil}
 
-%ifarch x86_64 aarch64 %{arm}
+%ifarch x86_64 aarch64 %{arm} riscv64
 %define mkimage()						\
 %{4}./grub-mkimage -O %{1} -o %{2}.orig				\\\
 	-p /EFI/%{efi_vendor} -d grub-core ${GRUB_MODULES}	\
