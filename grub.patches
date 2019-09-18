@@ -176,3 +176,7 @@ Patch0175: 0175-Do-better-in-bootstrap.conf.patch
 Patch0176: 0176-Use-git-to-apply-gnulib-patches.patch
 Patch0177: 0177-autogen.sh-use-find-wholename-for-long-path-matches.patch
 Patch0178: 0178-bootstrap.conf-don-t-clobber-AM_CFLAGS-here.patch
+Patch0179: 0179-Fix-build-error-with-the-fdt-module-on-risc-v.patch
+Patch0180: 0180-RISC-V-Fix-computation-of-pc-relative-relocation-off.patch
+Patch0181: 0181-blscfg-Add-support-for-the-devicetree-field.patch
+Patch0182: 0182-Set-a-devicetree-var-in-a-BLS-config-if-GRUB_DEFAULT.patch

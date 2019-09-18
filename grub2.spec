@@ -9,7 +9,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.04
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -311,13 +311,6 @@ elif [ -f /etc/grub.d/01_users ] && \
     fi
 fi
 
-%posttrans tools
-
-if [ -f /etc/default/grub ]; then
-    ! grep -q '^GRUB_ENABLE_BLSCFG=.*' /etc/default/grub && \
-      /sbin/grub2-switch-to-blscfg --backup-suffix=.rpmsave &>/dev/null || :
-fi
-
 %triggerun -- grub2 < 1:1.99-4
 # grub2 < 1.99-4 removed a number of essential files in postun. To fix upgrades
 # from the affected grub2 packages, we first back up the files in triggerun and
@@ -522,6 +515,12 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Wed Sep 18 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.04-2
+- A couple of RISC-V fixes
+- Remove grub2-tools %%posttrans scriptlet that migrates to a BLS config
+- Add blscfg device tree support
+  Resolves: rhbz#1751307
+
 * Thu Aug 15 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.04-1
 - Update to 2.04
   Resolves: rhbz#1727279
