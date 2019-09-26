@@ -307,7 +307,7 @@ cp %{SOURCE6} .gitignore					\
 cp %{SOURCE7} bootstrap						\
 cp %{SOURCE8} bootstrap.conf					\
 cp %{SOURCE9} ./grub-core/tests/strtoull_test.c			\
-cp %{SOURCE12} gnulib-%{gnulibversion}.tar.gz			\
+cp %{SOURCE2} gnulib-%{gnulibversion}.tar.gz			\
 tar -zxf gnulib-%{gnulibversion}.tar.gz				\
 mv gnulib-%{gnulibversion} gnulib				\
 git init							\

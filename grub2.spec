@@ -16,8 +16,8 @@ URL:		http://www.gnu.org/software/grub/
 Obsoletes:	grub < 1:0.98
 Source0:	https://ftp.gnu.org/gnu/grub/grub-%{tarversion}.tar.xz
 Source1:	grub.macros
-Source2:	grub.patches
-#Source3:	release-to-master.patch
+Source2:	gnulib-%{gnulibversion}.tar.gz
+Source3:	99-grub-mkconfig.install
 Source4:	http://unifoundry.com/unifont-5.1.20080820.pcf.gz
 Source5:	theme.tar.bz2
 Source6:	gitignore
@@ -25,13 +25,9 @@ Source7:	bootstrap
 Source8:	bootstrap.conf
 Source9:	strtoull_test.c
 Source10:	20-grub.install
-Source11:	99-grub-mkconfig.install
-Source12:	gnulib-%{gnulibversion}.tar.gz
+Source11:	grub.patches
 
 %include %{SOURCE1}
-
-# generate with do-rebase
-%include %{SOURCE2}
 
 BuildRequires:	gcc efi-srpm-macros
 BuildRequires:	flex bison binutils python3
@@ -68,6 +64,9 @@ customizable bootloader with modular architecture.  It supports a rich \
 variety of kernel formats, file systems, computer architectures and \
 hardware devices.\
 %{nil}
+
+# generate with do-rebase
+%include %{SOURCE11}
 
 %description
 %{desc}
@@ -248,7 +247,7 @@ EOF
 # Install kernel-install scripts
 install -d -m 0755 %{buildroot}%{_prefix}/lib/kernel/install.d/
 install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE10}
-install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE11}
+install -D -m 0755 -t %{buildroot}%{_prefix}/lib/kernel/install.d/ %{SOURCE3}
 install -d -m 0755 %{buildroot}%{_sysconfdir}/kernel/install.d/
 # Install systemd user service to set the boot_success flag
 install -D -m 0755 -t %{buildroot}%{_userunitdir} \
