@@ -43,7 +43,6 @@ version ${kernelver}${debugid}
 linux /vmlinuz-${kernelver}
 initrd /initramfs-${kernelver}.img
 options \$kernelopts
-id ${ID}-${datetime}-${kernelver}
 grub_users \$grub_users
 grub_arg --unrestricted
 grub_class kernel${flavor}
