@@ -9,7 +9,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.04
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -515,6 +515,16 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Thu Oct 17 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.04-3
+- 20-grub-install: Don't add an id field to generated BLS snippets
+- 99-grub-mkconfig: Disable BLS usage for Xen machines
+  Resolves: rhbz#1703700
+- Don't add a class option to menu entries generated for ppc64le
+  Resolves: rhbz#1758225
+- 10_linux.in: Also use GRUB_CMDLINE_LINUX_DEFAULT to set kernelopts
+- blscfg: Don't hardcode an env var as fallback for the BLS options field
+  Resolves: rhbz#1710483
+
 * Wed Sep 18 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.04-2
 - A couple of RISC-V fixes
 - Remove grub2-tools %%posttrans scriptlet that migrates to a BLS config

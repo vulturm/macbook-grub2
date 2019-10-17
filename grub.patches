@@ -180,3 +180,6 @@ Patch0179: 0179-Fix-build-error-with-the-fdt-module-on-risc-v.patch
 Patch0180: 0180-RISC-V-Fix-computation-of-pc-relative-relocation-off.patch
 Patch0181: 0181-blscfg-Add-support-for-the-devicetree-field.patch
 Patch0182: 0182-Set-a-devicetree-var-in-a-BLS-config-if-GRUB_DEFAULT.patch
+Patch0183: 0183-Don-t-add-a-class-option-to-menu-entries-generated-f.patch
+Patch0184: 0184-10_linux.in-Also-use-GRUB_CMDLINE_LINUX_DEFAULT-to-s.patch
+Patch0185: 0185-blscfg-Don-t-hardcode-an-env-var-as-fallback-for-the.patch
