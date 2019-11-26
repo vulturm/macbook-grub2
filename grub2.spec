@@ -9,7 +9,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.04
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -515,6 +515,11 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Tue Nov 26 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.04-4
+- grub-set-bootflag: Write new env to tmpfile and then rename (hdegoede)
+  Resolves: CVE-2019-14865
+  Resolves: rhbz#1776580
+
 * Thu Oct 17 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.04-3
 - 20-grub-install: Don't add an id field to generated BLS snippets
 - 99-grub-mkconfig: Disable BLS usage for Xen machines
