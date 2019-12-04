@@ -354,13 +354,9 @@ rm -r /boot/grub2.tmp/ || :
 %exclude /boot/grub2/*
 %dir %attr(0700,root,root) %{efi_esp_dir}
 %exclude %{efi_esp_dir}/*
-%license COPYING
 %ghost %config(noreplace) /boot/grub2/grubenv
-%doc INSTALL
-%doc NEWS
-%doc README
+%license COPYING
 %doc THANKS
-%doc TODO
 %doc docs/grub.html
 %doc docs/grub-dev.html
 %doc docs/font_char_metrics.png
@@ -384,10 +380,12 @@ rm -r /boot/grub2.tmp/ || :
 
 %ifarch x86_64
 %files tools-efi
-%{_sbindir}/%{name}-macbless
+%{_bindir}/%{name}-glue-efi
 %{_bindir}/%{name}-render-label
-%{_datadir}/man/man8/%{name}-macbless*
+%{_sbindir}/%{name}-macbless
+%{_datadir}/man/man1/%{name}-glue-efi*
 %{_datadir}/man/man1/%{name}-render-label*
+%{_datadir}/man/man8/%{name}-macbless*
 %endif
 
 %files tools
@@ -423,7 +421,6 @@ rm -r /boot/grub2.tmp/ || :
 
 # exclude man pages from tools-extra
 %exclude %{_datadir}/man/man8/%{name}-sparc64-setup*
-%exclude %{_datadir}/man/man8/%{name}-install*
 %exclude %{_datadir}/man/man1/%{name}-fstest*
 %exclude %{_datadir}/man/man1/%{name}-glue-efi*
 %exclude %{_datadir}/man/man1/%{name}-kbdcomp*
@@ -466,32 +463,33 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %files tools-extra
-%{_sbindir}/%{name}-sparc64-setup
-%{_sbindir}/%{name}-ofpathname
 %{_bindir}/%{name}-fstest
-%{_bindir}/%{name}-glue-efi
 %{_bindir}/%{name}-kbdcomp
 %{_bindir}/%{name}-mkfont
 %{_bindir}/%{name}-mklayout
 %{_bindir}/%{name}-mknetdir
 %ifnarch %{sparc}
 %{_bindir}/%{name}-mkrescue
+%{_datadir}/man/man1/%{name}-mkrescue*
+%else
+%exclude %{_datadir}/man/man1/%{name}-mkrescue*
 %endif
 %{_bindir}/%{name}-mkstandalone
 %{_bindir}/%{name}-syslinux2cfg
 %{_sysconfdir}/sysconfig/grub
-%{_datadir}/man/man8/%{name}-sparc64-setup*
-%{_datadir}/man/man8/%{name}-install*
 %{_datadir}/man/man1/%{name}-fstest*
-%{_datadir}/man/man1/%{name}-glue-efi*
 %{_datadir}/man/man1/%{name}-kbdcomp*
 %{_datadir}/man/man1/%{name}-mkfont*
 %{_datadir}/man/man1/%{name}-mklayout*
 %{_datadir}/man/man1/%{name}-mknetdir*
-%{_datadir}/man/man1/%{name}-mkrescue*
 %{_datadir}/man/man1/%{name}-mkstandalone*
-%{_datadir}/man/man8/%{name}-ofpathname*
 %{_datadir}/man/man1/%{name}-syslinux2cfg*
+%exclude %{_bindir}/%{name}-glue-efi
+%exclude %{_sbindir}/%{name}-sparc64-setup
+%exclude %{_sbindir}/%{name}-ofpathname
+%exclude %{_datadir}/man/man1/%{name}-glue-efi*
+%exclude %{_datadir}/man/man8/%{name}-ofpathname*
+%exclude %{_datadir}/man/man8/%{name}-sparc64-setup*
 %exclude %{_datarootdir}/grub/themes/starfield
 
 %if 0%{with_efi_arch}

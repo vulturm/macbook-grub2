@@ -224,7 +224,6 @@
 %define define_legacy_variant()						\
 %{expand:%%package %%{1}}						\
 Summary:	Bootloader with support for Linux, Multiboot, and more	\
-Group:		System Environment/Base					\
 Provides:	%{name} = %{evr}					\
 Obsoletes:	%{name} < %{evr}					\
 Requires:	%{name}-common = %{evr}					\
@@ -243,7 +242,6 @@ This subpackage provides support for %{1} systems.			\
 %{expand:%%if 0%%{with_legacy_modules}					\
 %%package %%{1}-modules							\
 Summary:	Modules used to build custom grub images		\
-Group:		System Environment/Base					\
 BuildArch:	noarch							\
 Requires:	%%{name}-common = %%{evr}				\
 %%description %%{1}-modules						\
@@ -255,7 +253,6 @@ This subpackage provides support for rebuilding your own grub.efi.	\
 %{expand:%%{?!buildsubdir:%%define buildsubdir grub-%%{1}-%{tarversion}}}\
 %{expand:%%package %%{1}-tools}						\
 Summary:	Support tools for GRUB.					\
-Group:		System Environment/Base					\
 Requires:	gettext os-prober which file system-logos		\
 Requires:	%{name}-common = %{evr}					\
 Requires:	%{name}-tools-minimal = %{evr}				\
@@ -270,11 +267,9 @@ This subpackage provides tools for support of %%{1} platforms.		\
 %define define_efi_variant(o)						\
 %{expand:%%package %{1}}						\
 Summary:	GRUB for EFI systems.					\
-Group:		System Environment/Base					\
 Requires:	efi-filesystem						\
 Requires:	%{name}-common = %{evr}					\
 Requires:	%{name}-tools-minimal >= %{evr}				\
-Requires:	%{name}-tools-extra = %{evr}				\
 Requires:	%{name}-tools = %{evr}					\
 Provides:	%{name}-efi = %{evr}					\
 %{?legacy_provides:Provides:	%{name} = %{evr}}			\
@@ -288,7 +283,6 @@ This subpackage provides support for %{1} systems.			\
 %{expand:%if 0%{?with_efi_modules}					\
 %{expand:%%package %{1}-modules}					\
 Summary:	Modules used to build custom grub.efi images		\
-Group:		System Environment/Base					\
 BuildArch:	noarch							\
 Requires:	%{name}-common = %{evr}					\
 Provides:	%{name}-efi-modules = %{evr}				\
@@ -300,7 +294,6 @@ This subpackage provides support for rebuilding your own grub.efi.	\
 									\
 %{expand:%%package %{1}-cdboot}						\
 Summary:	Files used to boot removeable media with EFI		\
-Group:		System Environment/Base					\
 Requires:	%{name}-common = %{evr}					\
 Provides:	%{name}-efi-cdboot = %{evr}				\
 %{expand:%%description %{1}-cdboot}					\
