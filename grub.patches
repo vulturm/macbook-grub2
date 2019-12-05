@@ -187,3 +187,4 @@ Patch0186: 0186-grub-set-bootflag-Update-comment-about-running-as-ro.patch
 Patch0187: 0187-grub-set-bootflag-Write-new-env-to-tmpfile-and-then-.patch
 Patch0188: 0188-blscfg-add-a-space-char-when-appending-fields-for-va.patch
 Patch0189: 0189-grub.d-Fix-boot_indeterminate-getting-set-on-boot_su.patch
+Patch0190: 0190-blscfg-Add-support-for-sorting-the-plus-higher-than-.patch
