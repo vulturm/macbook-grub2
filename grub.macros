@@ -230,7 +230,6 @@ Requires:	%{name}-common = %{evr}					\
 Requires:	%{name}-tools-minimal = %{evr}				\
 Requires:	%{name}-%{1}-modules = %{evr}				\
 Requires:	gettext which file					\
-Requires:	%{name}-tools-extra = %{evr}				\
 Requires:	%{name}-tools = %{evr}					\
 Requires(pre):	dracut							\
 Requires(post): dracut							\
