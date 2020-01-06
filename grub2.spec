@@ -9,7 +9,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.04
-Release:	6%{?dist}
+Release:	7%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -512,6 +512,10 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Mon Jan 06 2020 Peter Jones <pjones@redhat.com> - 2.04-7
+- Add zstd to the EFI module list.
+  Related: rhbz#1418336
+
 * Thu Dec 05 2019 Javier Martinez Canillas <javierm@redhat.com> - 2.04-6
 - Various grub2 cleanups (pbrobinson)
 - Another fix for blscfg variable expansion support

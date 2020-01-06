@@ -394,7 +394,7 @@ GRUB_MODULES="	all_video boot blscfg btrfs			\\\
 		password_pbkdf2 pgp png reboot			\\\
 		regexp search search_fs_uuid search_fs_file	\\\
 		search_label serial sleep syslinuxcfg test tftp	\\\
-		version video xfs"				\
+		version video xfs zstd "			\
 GRUB_MODULES+=%{efi_modules}					\
 %{expand:%%{mkimage %{1} %{2} %{3} %{4}}}			\
 %{nil}
