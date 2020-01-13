@@ -9,7 +9,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.04
-Release:	7%{?dist}
+Release:	8%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -512,6 +512,10 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Mon Jan 13 2020 Javier Martinez Canillas <javierm@redhat.com> - 2.04-8
+- Make the blscfg module honour the GRUB_SAVEDEFAULT option (fritz)
+  Resolves: rhbz#1704926
+
 * Mon Jan 06 2020 Peter Jones <pjones@redhat.com> - 2.04-7
 - Add zstd to the EFI module list.
   Related: rhbz#1418336
