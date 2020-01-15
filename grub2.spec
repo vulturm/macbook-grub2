@@ -9,7 +9,7 @@
 Name:		grub2
 Epoch:		1
 Version:	2.04
-Release:	8%{?dist}
+Release:	9%{?dist}
 Summary:	Bootloader with support for Linux, Multiboot and more
 License:	GPLv3+
 URL:		http://www.gnu.org/software/grub/
@@ -512,6 +512,11 @@ rm -r /boot/grub2.tmp/ || :
 %endif
 
 %changelog
+* Thu Jan 16 2020 Javier Martinez Canillas <javierm@redhat.com> - 2.04-9
+- Add riscv64 support to grub.macros and RISC-V build fixes (davidlt)
+- blscfg: Always use the root variable to search for BLS snippets
+- bootstrap.conf: Force autogen.sh to use python3
+
 * Mon Jan 13 2020 Javier Martinez Canillas <javierm@redhat.com> - 2.04-8
 - Make the blscfg module honour the GRUB_SAVEDEFAULT option (fritz)
   Resolves: rhbz#1704926

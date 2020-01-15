@@ -189,3 +189,10 @@ Patch0188: 0188-blscfg-add-a-space-char-when-appending-fields-for-va.patch
 Patch0189: 0189-grub.d-Fix-boot_indeterminate-getting-set-on-boot_su.patch
 Patch0190: 0190-blscfg-Add-support-for-sorting-the-plus-higher-than-.patch
 Patch0191: 0191-Fix-savedefault-with-blscfg.patch
+Patch0192: 0192-Also-define-GRUB_EFI_MAX_ALLOCATION_ADDRESS-for-RISC.patch
+Patch0193: 0193-chainloader-Define-machine-types-for-RISC-V.patch
+Patch0194: 0194-Add-start-symbol-for-RISC-V.patch
+Patch0195: 0195-RISC-V-Add-__clzdi2-symbol.patch
+Patch0196: 0196-grub-install-Define-default-platform-for-RISC-V.patch
+Patch0197: 0197-blscfg-Always-use-the-root-variable-to-search-for-BL.patch
+Patch0198: 0198-bootstrap.conf-Force-autogen.sh-to-use-python3.patch
