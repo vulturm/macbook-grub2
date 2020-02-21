@@ -196,3 +196,4 @@ Patch0195: 0195-RISC-V-Add-__clzdi2-symbol.patch
 Patch0196: 0196-grub-install-Define-default-platform-for-RISC-V.patch
 Patch0197: 0197-blscfg-Always-use-the-root-variable-to-search-for-BL.patch
 Patch0198: 0198-bootstrap.conf-Force-autogen.sh-to-use-python3.patch
+Patch0981: 0981-apple-applesetos.patch
